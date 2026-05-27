@@ -4,6 +4,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-display: 'Archivo Black', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-ink: #0a0a0a;
+  --color-carbon: #141414;
+  --color-steel: #1f1f1f;
+  --color-bone: #f5f3ee;
+  --color-acid: #facc15;
+}
+
 /*
  * Design system definition.
  *
@@ -138,7 +151,30 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: #0a0a0a;
+    color: #f5f3ee;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
+  html { scroll-behavior: smooth; }
+}
+
+@layer utilities {
+  .font-display { font-family: 'Archivo Black', system-ui, sans-serif; letter-spacing: -0.02em; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .text-acid { color: #facc15; }
+  .bg-ink { background-color: #0a0a0a; }
+  .bg-carbon { background-color: #141414; }
+  .bg-steel { background-color: #1f1f1f; }
+  .border-acid { border-color: #facc15; }
+  .grain::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.is-visible { opacity: 1; transform: none; }
 }
