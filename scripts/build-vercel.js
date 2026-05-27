@@ -50,14 +50,11 @@ const { build } = await import("esbuild");
 await build({
   entryPoints: [path.join(distServer, "server.js")],
   bundle: true,
-  splitting: true,
-  outdir: funcOut,
-  format: "esm",
+  splitting: false,
+  outfile: path.join(funcOut, "server.js"),
+  format: "cjs",
   platform: "node",
   target: "node20",
-  banner: {
-    js: "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\n",
-  },
   // Keep Node.js built-ins external — everything else gets inlined
   external: ["node:*"],
   // Silence noisy "unused import" warnings from TanStack packages
@@ -106,16 +103,16 @@ for (const entry of fs.readdirSync(funcOut)) {
   }
 }
 
-// ESM package.json — required so Node.js treats handler.js as ES modules
-fs.writeFileSync(path.join(funcOut, "package.json"), JSON.stringify({ type: "module" }, null, 2));
+// CommonJS package.json — ensure Node treats handler.js and server.js as CJS
+fs.writeFileSync(path.join(funcOut, "package.json"), JSON.stringify({ type: "commonjs" }, null, 2));
 
 // Node.js ↔ Web Fetch API adapter
 // Vercel Node.js runtime calls handler(req, res), but server.js exports
 // a Web fetch handler: server.fetch(request, env, ctx)
 const adapterCode = `
-import server from './server.js';
+const server = require('./server.js');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const protocol = req.headers['x-forwarded-proto'] || 'https';
   const host = req.headers['x-forwarded-host'] || req.headers['host'] || 'localhost';
   const url = new URL(req.url, protocol + '://' + host);
@@ -165,7 +162,7 @@ export default async function handler(req, res) {
     }
   }
   res.end();
-}
+};
 `;
 fs.writeFileSync(path.join(funcOut, "handler.js"), adapterCode.trimStart());
 
