@@ -1,4 +1,22 @@
-export function renderErrorPage(): string {
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function formatErrorDetails(error: unknown): string {
+  if (!error) return "";
+  const err = error instanceof Error ? error : new Error(String(error));
+  const content = escapeHtml(err.stack ?? err.message ?? String(err));
+  return `
+      <pre style="text-align: left; background: #1e293b; color: #f1f5f9; padding: 1rem; border-radius: 6px; overflow-x: auto; font-family: monospace; border: 1px solid #334155; margin-top: 1.5rem; max-width: 100%; white-space: pre-wrap; word-break: break-all;">${content}</pre>`;
+}
+
+export function renderErrorPage(error?: unknown): string {
+  const errorDetails = formatErrorDetails(error);
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -20,6 +38,7 @@ export function renderErrorPage(): string {
     <div class="card">
       <h1>This page didn't load</h1>
       <p>Something went wrong on our end. You can try refreshing or head back home.</p>
+      ${errorDetails}
       <div class="actions">
         <button class="primary" onclick="location.reload()">Try again</button>
         <a class="secondary" href="/">Go home</a>
