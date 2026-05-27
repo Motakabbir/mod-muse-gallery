@@ -1,6 +1,6 @@
-import server from './server.js';
+const server = require('./server.js');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const protocol = req.headers['x-forwarded-proto'] || 'https';
   const host = req.headers['x-forwarded-host'] || req.headers['host'] || 'localhost';
   const url = new URL(req.url, protocol + '://' + host);
@@ -50,4 +50,4 @@ export default async function handler(req, res) {
     }
   }
   res.end();
-}
+};
