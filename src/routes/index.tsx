@@ -7,7 +7,7 @@ import pillarPartners from "../assets/pillar-partners.jpg";
 import pillarExperience from "../assets/pillar-experience.jpg";
 import carbonTexture from "../assets/carbon-texture.jpg";
 import buildProcess from "../assets/build-process.jpg";
-import heroVideo from "../assets/hero.mp4.asset.json";
+import heroVideo from "../assets/video.mp4";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -94,9 +94,8 @@ function Nav() {
   }, []);
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-ink/85 backdrop-blur border-b border-white/5" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-ink/85 backdrop-blur border-b border-white/5" : "bg-transparent"
+        }`}
     >
       <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-3">
@@ -127,7 +126,7 @@ function Hero() {
   return (
     <section id="top" className="relative h-screen min-h-[720px] w-full overflow-hidden grain">
       <video
-        src={heroVideo.url}
+        src={heroVideo}
         autoPlay
         muted
         loop
@@ -138,7 +137,7 @@ function Hero() {
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <div className="inline-flex items-center gap-2 border border-acid/40 rounded-full px-5 py-2 mb-8 backdrop-blur-sm bg-ink/30">
           <span className="h-1.5 w-1.5 rounded-full bg-acid animate-pulse" />
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">Vision148</span>
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">SYNDICATED RESTOMOD BUILDS</span>
         </div>
         <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-5xl">
           Be Part of the
@@ -209,7 +208,7 @@ function Pillars() {
   return (
     <section className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
-        <SectionLabel kicker="Why Vision148" title={<>Built on three pillars.</>} />
+        <SectionLabel kicker="Why Syndicate Build" title={<>Built on three pillars.</>} />
         <div className="grid md:grid-cols-3 gap-8">
           {PILLARS.map((p) => (
             <article key={p.n} className="reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-colors">
@@ -330,7 +329,7 @@ function Partners() {
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Partners" title={<>Built with <span className="text-acid">specialists.</span></>} />
         <p className="reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed">
-          The Vision148 RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing,
+          The Syndicate Restomod Build is created with leading experts in coachbuilding, digital engineering, additive manufacturing,
           and specialist car builds.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10">
