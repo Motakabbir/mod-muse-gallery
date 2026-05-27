@@ -110,7 +110,8 @@ fs.writeFileSync(path.join(funcOut, "package.json"), JSON.stringify({ type: "com
 // Vercel Node.js runtime calls handler(req, res), but server.js exports
 // a Web fetch handler: server.fetch(request, env, ctx)
 const adapterCode = `
-const server = require('./server.js');
+const serverModule = require('./server.js');
+const server = serverModule?.default ?? serverModule;
 
 module.exports = async function handler(req, res) {
   const protocol = req.headers['x-forwarded-proto'] || 'https';
