@@ -1,9 +1,9 @@
 import {
   renderErrorPage
-} from "./chunk-U4TNIV2Z.js";
+} from "./chunk-BSXXPDNC.js";
 import {
   createMiddleware
-} from "./chunk-TVBJ3E42.js";
+} from "./chunk-6LRFDVMH.js";
 import "./chunk-EF2KJFQN.js";
 import {
   require_jsx_runtime,
@@ -13,7 +13,7 @@ import {
   __toESM
 } from "./chunk-QGM4M3NI.js";
 
-// dist/server/assets/start-DFsKAVeD.js
+// dist/server/assets/start-BY2tfpE9.js
 import "node:async_hooks";
 var import_react = __toESM(require_react(), 1);
 var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
@@ -48,7 +48,7 @@ var errorMiddleware = createMiddleware().server(async ({ next }) => {
       throw error;
     }
     console.error(error);
-    return new Response(renderErrorPage(typeof error !== 'undefined' ? error : (typeof err !== 'undefined' ? err : undefined)), {
+    return new Response(renderErrorPage(error), {
       status: 500,
       headers: { "content-type": "text/html; charset=utf-8" }
     });

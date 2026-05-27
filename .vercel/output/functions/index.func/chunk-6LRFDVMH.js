@@ -25845,7 +25845,7 @@ var require_server_node = __commonJS({
   }
 });
 
-// dist/server/assets/server-lCThZ5ow.js
+// dist/server/assets/server-C63NeOAH.js
 import { AsyncLocalStorage } from "node:async_hooks";
 
 // node_modules/rou3/dist/index.mjs
@@ -27161,7 +27161,7 @@ function transformStreamWithRouter(router, appStream, opts) {
   return stream;
 }
 
-// dist/server/assets/server-lCThZ5ow.js
+// dist/server/assets/server-C63NeOAH.js
 var import_react = __toESM(require_react(), 1);
 var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
 
@@ -27233,7 +27233,7 @@ var renderRouterToStream = async ({ request, router, responseHeaders, children }
   throw new Error("No renderToReadableStream or renderToPipeableStream found in react-dom/server. Ensure you are using a version of react-dom that supports streaming.");
 };
 
-// dist/server/assets/server-lCThZ5ow.js
+// dist/server/assets/server-C63NeOAH.js
 function StartServer(props) {
   return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RouterProvider, { router: props.router });
 }
@@ -28405,7 +28405,7 @@ var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
     import("./router-PUJflp5v-H73B5P25.js"),
-    import("./start-DFsKAVeD-HT5CMWYH.js"),
+    import("./start-BY2tfpE9-UW37ATSH.js"),
     import("./empty-plugin-adapters-BFgPZ6_d-RNT6N45B.js")
   ]);
   return {
