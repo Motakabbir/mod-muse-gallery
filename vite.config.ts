@@ -4,8 +4,6 @@ export default defineConfig({
   cloudflare: false,
   tanstackStart: {
     server: { entry: "server" },
-  },
-  vite: {
     nitro: {
       preset: "vercel",
       vercel: {
