@@ -37,11 +37,26 @@ copyDir(distClient, staticOut);
 console.log("Building serverless function...");
 fs.mkdirSync(funcOut, { recursive: true });
 
-// Copy the entire server build into the function directory
-copyDir(distServer, funcOut);
+// Bundle the server + all npm dependencies into a single self-contained file.
+// We can't copy dist/server/ raw because it references node_modules packages
+// (h3-v2, @tanstack/router-core, etc.) which won't exist in the function dir.
+console.log("Bundling server with esbuild...");
+const { build } = await import("esbuild");
 
-// ESM package.json — required so Node.js treats .js files as ES modules
-// (server.js uses `import`/`export` syntax)
+await build({
+  entryPoints: [path.join(distServer, "server.js")],
+  bundle: true,
+  outfile: path.join(funcOut, "server.js"),
+  format: "esm",
+  platform: "node",
+  target: "node22",
+  // Keep Node.js built-ins external — everything else gets inlined
+  external: ["node:*"],
+  // Silence noisy "unused import" warnings from TanStack packages
+  logLevel: "error",
+});
+
+// ESM package.json — required so Node.js treats handler.js as ES modules
 fs.writeFileSync(
   path.join(funcOut, "package.json"),
   JSON.stringify({ type: "module" }, null, 2)
