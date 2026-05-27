@@ -15,6 +15,11 @@ const out = path.join(root, ".vercel/output");
 const staticOut = path.join(out, "static");
 const funcOut = path.join(out, "functions/index.func");
 
+// Clean previous build output
+fs.rmSync(out, { recursive: true, force: true });
+fs.mkdirSync(out, { recursive: true });
+
+
 // ── helpers ────────────────────────────────────────────────────────────────
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
@@ -46,7 +51,8 @@ const { build } = await import("esbuild");
 await build({
   entryPoints: [path.join(distServer, "server.js")],
   bundle: true,
-  outfile: path.join(funcOut, "server.js"),
+  splitting: true,
+  outdir: funcOut,
   format: "esm",
   platform: "node",
   target: "node22",
@@ -160,4 +166,18 @@ fs.writeFileSync(
   )
 );
 
+function printDir(dir, prefix = "") {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    console.log(`${prefix}├── ${entry.name}${entry.isDirectory() ? "/" : ""}`);
+    if (entry.isDirectory()) {
+      printDir(fullPath, prefix + "│   ");
+    }
+  }
+}
+
+console.log("Generated .vercel/output structure:");
+printDir(out);
+
 console.log("✓ .vercel/output built successfully");
+
