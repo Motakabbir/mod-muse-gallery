@@ -54,7 +54,10 @@ await build({
   outdir: funcOut,
   format: "esm",
   platform: "node",
-  target: "node22",
+  target: "node20",
+  banner: {
+    js: "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\n",
+  },
   // Keep Node.js built-ins external — everything else gets inlined
   external: ["node:*"],
   // Silence noisy "unused import" warnings from TanStack packages
@@ -68,7 +71,7 @@ for (const entry of fs.readdirSync(funcOut)) {
     const filePath = path.join(funcOut, entry);
     let content = fs.readFileSync(filePath, "utf8");
     let modified = false;
-    
+
     // Replace the definition of renderErrorPage
     if (content.includes("function renderErrorPage() {")) {
       console.log(`  Modifying renderErrorPage definition in ${entry}...`);
@@ -76,27 +79,27 @@ for (const entry of fs.readdirSync(funcOut)) {
         "function renderErrorPage() {",
         `function renderErrorPage(err) {
   const error = err || (typeof consumeLastCapturedError !== "undefined" ? consumeLastCapturedError() : undefined);
-  const errorDetails = error ? \`<pre style="text-align: left; background: #1e293b; color: #f1f5f9; padding: 1rem; border-radius: 6px; overflow-x: auto; font-family: monospace; border: 1px solid #334155; margin-top: 1.5rem; max-width: 100%; white-space: pre-wrap; word-break: break-all;">\${error.stack || error.message || String(error)}</pre>\` : "";`
+  const errorDetails = error ? \`<pre style="text-align: left; background: #1e293b; color: #f1f5f9; padding: 1rem; border-radius: 6px; overflow-x: auto; font-family: monospace; border: 1px solid #334155; margin-top: 1.5rem; max-width: 100%; white-space: pre-wrap; word-break: break-all;">\${error.stack || error.message || String(error)}</pre>\` : "";`,
       );
-      
+
       // Also insert errorDetails into the returned HTML template
       content = content.replace(
         `<p>Something went wrong on our end. You can try refreshing or head back home.</p>`,
-        `<p>Something went wrong on our end. You can try refreshing or head back home.</p>\n      \${errorDetails}`
+        `<p>Something went wrong on our end. You can try refreshing or head back home.</p>\n      \${errorDetails}`,
       );
       modified = true;
     }
-    
+
     // Replace the call sites
     if (content.includes("renderErrorPage()")) {
       console.log(`  Replacing renderErrorPage() call sites in ${entry}...`);
       content = content.replace(
         /renderErrorPage\(\)/g,
-        "renderErrorPage(typeof error !== 'undefined' ? error : (typeof err !== 'undefined' ? err : undefined))"
+        "renderErrorPage(typeof error !== 'undefined' ? error : (typeof err !== 'undefined' ? err : undefined))",
       );
       modified = true;
     }
-    
+
     if (modified) {
       fs.writeFileSync(filePath, content, "utf8");
     }
@@ -104,10 +107,7 @@ for (const entry of fs.readdirSync(funcOut)) {
 }
 
 // ESM package.json — required so Node.js treats handler.js as ES modules
-fs.writeFileSync(
-  path.join(funcOut, "package.json"),
-  JSON.stringify({ type: "module" }, null, 2)
-);
+fs.writeFileSync(path.join(funcOut, "package.json"), JSON.stringify({ type: "module" }, null, 2));
 
 // Node.js ↔ Web Fetch API adapter
 // Vercel Node.js runtime calls handler(req, res), but server.js exports
@@ -174,12 +174,12 @@ fs.writeFileSync(
   path.join(funcOut, ".vc-config.json"),
   JSON.stringify(
     {
-      runtime: "nodejs22.x",
+      runtime: "nodejs20.x",
       handler: "handler.js",
     },
     null,
-    2
-  )
+    2,
+  ),
 );
 
 // ── 3. Vercel output config ─────────────────────────────────────────────────
@@ -203,8 +203,8 @@ fs.writeFileSync(
       ],
     },
     null,
-    2
-  )
+    2,
+  ),
 );
 
 function printDir(dir, prefix = "") {
