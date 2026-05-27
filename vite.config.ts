@@ -5,17 +5,6 @@ export default defineConfig({
   tanstackStart: {
     server: {
       entry: "server",
-      preset: "vercel",
-      vercel: {
-        functions: {
-          runtime: "nodejs22.x",
-        },
-      },
-      output: {
-        dir: ".vercel/output",
-        serverDir: ".vercel/output/functions/__server.func",
-        publicDir: ".vercel/output/static",
-      },
     },
   },
 });
