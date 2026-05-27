@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
-import rs500Hero from "../assets/rs500-hero.jpg";
 import pillarOne from "../assets/pillar-one-of-one.jpg";
 import pillarPartners from "../assets/pillar-partners.jpg";
 import pillarExperience from "../assets/pillar-experience.jpg";
@@ -15,8 +14,10 @@ export const Route = createFileRoute("/")({
 
 const NAV = [
   { label: "About", href: "#intro" },
+  { label: "Syndicates", href: "#syndicates" },
   { label: "The Car", href: "#car" },
   { label: "Build", href: "#build" },
+  { label: "Events", href: "#events" },
   { label: "Partners", href: "#partners" },
 ];
 
@@ -73,6 +74,77 @@ const BENEFITS = [
   { icon: "◈", title: "Knowledge", items: ["Learn the build", "Understand the engineering"] },
 ];
 
+const LIVE_SYNDICATES = [
+  {
+    title: "Ferrari F430 V8 Manual",
+    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/bWxqEoY9-1.webp",
+    allocation: "£5,000 per allocation",
+    stats: "27 Allocations • 10 remaining",
+    return: "Potential Returns 77.1%*",
+  },
+  {
+    title: "Audi R8 V10 Manual",
+    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/dLWiUa3S.jpeg",
+    allocation: "£2,000 per allocation",
+    stats: "31 Allocations • 17 remaining",
+    return: "Potential Returns 63.90%*",
+  },
+  {
+    title: "Mercedes SLS AMG",
+    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/odprkXVG.webp",
+    allocation: "£5,000 per allocation",
+    stats: "39 Allocations • 32 remaining",
+    return: "Potential Returns 87.2%*",
+  },
+];
+
+const RECENTLY_FUNDED = [
+  {
+    title: "Lamborghini Gallardo SE",
+    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/GallardSE.webp",
+    date: "Funded Date — Dec 25",
+    val: "Funded Value — £82,000",
+    members: "Syndicate Members — 14",
+  },
+  {
+    title: "Aston Martin V12 Vantage",
+    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/1764967417_v12amv.png",
+    date: "Funded Date — Sep 25",
+    val: "Funded Value — £66,000",
+    members: "Syndicate Members — 21",
+  },
+  {
+    title: "Porsche 996 GT3 RS",
+    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/9hB7p1Hg.webp",
+    date: "Funded Date — May 25",
+    val: "Funded Value — £165,000",
+    members: "Syndicate Members — 22",
+  },
+];
+
+const EVENTS = [
+  {
+    type: "Casual Meet Up",
+    title: "London Meet Up, May",
+    tag: "INVITE ONLY",
+    date: "May 2026",
+  },
+  {
+    type: "Cars & Coffee",
+    title: "Alex’s Wish Charity Event",
+    tag: "Third Party Event",
+    date: "June 2026",
+  },
+  {
+    type: "Supercar Driver",
+    title: "Secret Meet 2026",
+    tag: "Third Party Event",
+    date: "July 2026",
+  },
+];
+
+const rs500HeroUrl = "https://thecarcrowd.uk/wp-content/uploads/2026/02/1764953707_1-min.webp";
+
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll(".reveal");
@@ -94,8 +166,9 @@ function Nav() {
   }, []);
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-ink/85 backdrop-blur border-b border-white/5" : "bg-transparent"
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? "bg-ink/85 backdrop-blur border-b border-white/5" : "bg-transparent"
+      }`}
     >
       <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-3">
@@ -112,7 +185,7 @@ function Nav() {
           ))}
           <a
             href="#apply"
-            className="px-5 py-2 border-2 border-acid text-acid text-sm uppercase tracking-widest font-semibold rounded-full hover:bg-acid hover:text-ink transition-colors"
+            className="px-5 py-2 border-2 border-acid text-acid text-sm uppercase tracking-widest font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300"
           >
             Apply
           </a>
@@ -133,36 +206,36 @@ function Hero() {
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/40 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/40 to-ink" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <div className="inline-flex items-center gap-2 border border-acid/40 rounded-full px-5 py-2 mb-8 backdrop-blur-sm bg-ink/30">
+        <div className="inline-flex items-center gap-2 border border-acid/40 rounded-full px-5 py-2 mb-8 backdrop-blur-sm bg-ink/30 animate-in fade-in slide-in-from-bottom duration-1000">
           <span className="h-1.5 w-1.5 rounded-full bg-acid animate-pulse" />
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">SYNDICATED RESTOMOD BUILDS</span>
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">Vision148</span>
         </div>
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-5xl">
+        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-5xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100">
           Be Part of the
           <br />
           <span className="text-acid">Creation of an Icon</span>
         </h1>
-        <p className="mt-8 text-bone/70 text-lg md:text-xl max-w-xl">
+        <p className="mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200">
           Syndicated Restomod Builds — powered by TheCarCrowd.
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
           <a
             href="#apply"
-            className="px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors"
+            className="px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors duration-300"
           >
             Apply for Allocation
           </a>
           <a
             href="#intro"
-            className="px-8 py-4 border border-white/30 text-bone uppercase tracking-widest text-sm rounded-full hover:border-acid hover:text-acid transition-colors"
+            className="px-8 py-4 border border-white/30 text-bone uppercase tracking-widest text-sm rounded-full hover:border-acid hover:text-acid transition-colors duration-300"
           >
             Explore Vision
           </a>
         </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 font-mono text-xs text-bone/40 tracking-[0.3em] uppercase">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 font-mono text-xs text-bone/40 tracking-[0.3em] uppercase animate-bounce">
         Scroll
       </div>
     </section>
@@ -204,14 +277,34 @@ function Intro() {
   );
 }
 
+function Stats() {
+  return (
+    <section className="relative py-24 px-6 border-y border-white/5 bg-carbon/50">
+      <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-8">
+        {[
+          { n: "110+", label: "Curated Assets" },
+          { n: "6,000+", label: "Registered Members" },
+          { n: "12.6%", label: "Annual Rate of Return" },
+          { n: "£2,000", label: "Low Entry Barrier" },
+        ].map((st, i) => (
+          <div key={st.label} className="reveal text-center">
+            <div className="font-display text-4xl md:text-5xl lg:text-6xl text-acid mb-2">{st.n}</div>
+            <div className="font-mono text-xs tracking-widest uppercase text-bone/50">{st.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Pillars() {
   return (
     <section className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
-        <SectionLabel kicker="Why Syndicate Build" title={<>Built on three pillars.</>} />
+        <SectionLabel kicker="Why Vision148" title={<>Built on three pillars.</>} />
         <div className="grid md:grid-cols-3 gap-8">
           {PILLARS.map((p) => (
-            <article key={p.n} className="reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-colors">
+            <article key={p.n} className="reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300">
               <div className="aspect-[4/5] overflow-hidden relative">
                 <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute top-4 left-4 font-mono text-xs tracking-[0.3em] text-acid">PILLAR {p.n}</div>
@@ -234,7 +327,7 @@ function TheCar() {
       <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-7 reveal">
           <div className="relative overflow-hidden border border-white/10">
-            <img src={rs500Hero} alt="Ford Sierra Cosworth RS500 reimagined" loading="lazy" className="w-full h-auto" />
+            <img src={rs500HeroUrl} alt="Ford Sierra Cosworth RS500 reimagined" loading="lazy" className="w-full h-auto object-cover hover:scale-102 transition-transform duration-700" />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6">
               <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid">VRS500 Reimagined</div>
             </div>
@@ -262,6 +355,92 @@ function TheCar() {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LiveSyndicates() {
+  return (
+    <section id="syndicates" className="relative py-32 px-6 bg-carbon">
+      <div className="mx-auto max-w-7xl">
+        <SectionLabel
+          kicker="Active Opportunities"
+          title={<>Live Syndicates. <span className="text-acid">Open Allocations.</span></>}
+        />
+        <div className="grid md:grid-cols-3 gap-8">
+          {LIVE_SYNDICATES.map((s) => (
+            <article key={s.title} className="reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300 flex flex-col justify-between">
+              <div className="aspect-[16/10] overflow-hidden relative">
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold">
+                  Live
+                </div>
+              </div>
+              <div className="p-8 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-display text-2xl mb-2">{s.title}</h3>
+                  <div className="font-mono text-sm text-acid mb-6">{s.allocation}</div>
+                  <ul className="space-y-2 text-bone/60 text-sm border-t border-white/5 pt-4">
+                    <li>{s.stats}</li>
+                    <li className="text-bone/80 font-semibold">{s.return}</li>
+                  </ul>
+                </div>
+                <div className="mt-8">
+                  <a
+                    href="#apply"
+                    className="w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300"
+                  >
+                    Request Details
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RecentlyFunded() {
+  return (
+    <section className="relative py-32 px-6">
+      <div className="mx-auto max-w-7xl">
+        <SectionLabel
+          kicker="Track Record"
+          title={<>Recently Funded <span className="text-acid">Syndicates.</span></>}
+        />
+        <div className="grid md:grid-cols-3 gap-8">
+          {RECENTLY_FUNDED.map((rf) => (
+            <div key={rf.title} className="reveal group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300">
+              <div className="aspect-[16/10] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                <img
+                  src={rf.img}
+                  alt={rf.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md text-bone/90 px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase">
+                  Fully Funded
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="font-display text-xl mb-4">{rf.title}</h3>
+                <ul className="space-y-1.5 text-bone/50 text-xs font-mono">
+                  <li>— {rf.date}</li>
+                  <li>— {rf.val}</li>
+                  <li>— {rf.members}</li>
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -323,13 +502,50 @@ function BuildProcess() {
   );
 }
 
+function Events() {
+  return (
+    <section id="events" className="relative py-32 px-6">
+      <div className="mx-auto max-w-7xl">
+        <SectionLabel
+          kicker="Syndicate Community"
+          title={<>Upcoming Events & <span className="text-acid">Experiences.</span></>}
+        />
+        <div className="grid md:grid-cols-3 gap-8">
+          {EVENTS.map((e) => (
+            <div key={e.title} className="reveal border border-white/10 bg-carbon p-8 flex flex-col justify-between hover:border-acid transition-all duration-300">
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <span className="font-mono text-xs text-acid tracking-widest uppercase">{e.type}</span>
+                  <span className="bg-white/5 border border-white/10 px-2 py-0.5 rounded font-mono text-[9px] text-bone/60 tracking-wider">
+                    {e.tag}
+                  </span>
+                </div>
+                <h3 className="font-display text-xl mb-2">{e.title}</h3>
+                <div className="font-mono text-xs text-bone/40">{e.date}</div>
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/5">
+                <a
+                  href="#apply"
+                  className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-acid hover:text-bone transition-colors"
+                >
+                  Request Invite <span className="font-sans text-sm">→</span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Partners() {
   return (
     <section id="partners" className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Partners" title={<>Built with <span className="text-acid">specialists.</span></>} />
         <p className="reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed">
-          The Syndicate Restomod Build is created with leading experts in coachbuilding, digital engineering, additive manufacturing,
+          The Vision148 RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing,
           and specialist car builds.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10">
@@ -458,10 +674,14 @@ function Index() {
       <Nav />
       <Hero />
       <Intro />
+      <Stats />
       <Pillars />
       <TheCar />
+      <LiveSyndicates />
+      <RecentlyFunded />
       <Partnership />
       <BuildProcess />
+      <Events />
       <Partners />
       <Benefits />
       <Value />
