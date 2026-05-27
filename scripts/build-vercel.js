@@ -40,6 +40,13 @@ fs.mkdirSync(funcOut, { recursive: true });
 // Copy the entire server build into the function directory
 copyDir(distServer, funcOut);
 
+// ESM package.json — required so Node.js treats .js files as ES modules
+// (server.js uses `import`/`export` syntax)
+fs.writeFileSync(
+  path.join(funcOut, "package.json"),
+  JSON.stringify({ type: "module" }, null, 2)
+);
+
 // Node.js ↔ Web Fetch API adapter
 // Vercel Node.js runtime calls handler(req, res), but server.js exports
 // a Web fetch handler: server.fetch(request, env, ctx)
@@ -107,7 +114,6 @@ fs.writeFileSync(
     {
       runtime: "nodejs22.x",
       handler: "handler.js",
-      launchTarget: "handler.js",
     },
     null,
     2
