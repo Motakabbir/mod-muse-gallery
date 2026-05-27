@@ -61,6 +61,48 @@ await build({
   logLevel: "error",
 });
 
+// Post-process the generated files to expose the SSR error stack trace in the browser
+console.log("Post-processing bundled files to expose error stack traces...");
+for (const entry of fs.readdirSync(funcOut)) {
+  if (entry.endsWith(".js")) {
+    const filePath = path.join(funcOut, entry);
+    let content = fs.readFileSync(filePath, "utf8");
+    let modified = false;
+    
+    // Replace the definition of renderErrorPage
+    if (content.includes("function renderErrorPage() {")) {
+      console.log(`  Modifying renderErrorPage definition in ${entry}...`);
+      content = content.replace(
+        "function renderErrorPage() {",
+        `function renderErrorPage(err) {
+  const error = err || (typeof consumeLastCapturedError !== "undefined" ? consumeLastCapturedError() : undefined);
+  const errorDetails = error ? \`<pre style="text-align: left; background: #1e293b; color: #f1f5f9; padding: 1rem; border-radius: 6px; overflow-x: auto; font-family: monospace; border: 1px solid #334155; margin-top: 1.5rem; max-width: 100%; white-space: pre-wrap; word-break: break-all;">\${error.stack || error.message || String(error)}</pre>\` : "";`
+      );
+      
+      // Also insert errorDetails into the returned HTML template
+      content = content.replace(
+        `<p>Something went wrong on our end. You can try refreshing or head back home.</p>`,
+        `<p>Something went wrong on our end. You can try refreshing or head back home.</p>\n      \${errorDetails}`
+      );
+      modified = true;
+    }
+    
+    // Replace the call sites
+    if (content.includes("renderErrorPage()")) {
+      console.log(`  Replacing renderErrorPage() call sites in ${entry}...`);
+      content = content.replace(
+        /renderErrorPage\(\)/g,
+        "renderErrorPage(typeof error !== 'undefined' ? error : (typeof err !== 'undefined' ? err : undefined))"
+      );
+      modified = true;
+    }
+    
+    if (modified) {
+      fs.writeFileSync(filePath, content, "utf8");
+    }
+  }
+}
+
 // ESM package.json — required so Node.js treats handler.js as ES modules
 fs.writeFileSync(
   path.join(funcOut, "package.json"),

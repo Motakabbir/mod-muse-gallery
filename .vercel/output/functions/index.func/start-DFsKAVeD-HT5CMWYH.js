@@ -48,7 +48,7 @@ var errorMiddleware = createMiddleware().server(async ({ next }) => {
       throw error;
     }
     console.error(error);
-    return new Response(renderErrorPage(), {
+    return new Response(renderErrorPage(typeof error !== 'undefined' ? error : (typeof err !== 'undefined' ? err : undefined)), {
       status: 500,
       headers: { "content-type": "text/html; charset=utf-8" }
     });

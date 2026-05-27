@@ -21,7 +21,9 @@ function consumeLastCapturedError() {
   lastCapturedError = void 0;
   return error;
 }
-function renderErrorPage() {
+function renderErrorPage(err) {
+  const error = err || (typeof consumeLastCapturedError !== "undefined" ? consumeLastCapturedError() : undefined);
+  const errorDetails = error ? `<pre style="text-align: left; background: #1e293b; color: #f1f5f9; padding: 1rem; border-radius: 6px; overflow-x: auto; font-family: monospace; border: 1px solid #334155; margin-top: 1.5rem; max-width: 100%; white-space: pre-wrap; word-break: break-all;">${error.stack || error.message || String(error)}</pre>` : "";
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -43,6 +45,7 @@ function renderErrorPage() {
     <div class="card">
       <h1>This page didn't load</h1>
       <p>Something went wrong on our end. You can try refreshing or head back home.</p>
+      ${errorDetails}
       <div class="actions">
         <button class="primary" onclick="location.reload()">Try again</button>
         <a class="secondary" href="/">Go home</a>
@@ -61,7 +64,7 @@ async function getServerEntry() {
   return serverEntryPromise;
 }
 function brandedErrorResponse() {
-  return new Response(renderErrorPage(), {
+  return new Response(renderErrorPage(typeof error !== 'undefined' ? error : (typeof err !== 'undefined' ? err : undefined)), {
     status: 500,
     headers: { "content-type": "text/html; charset=utf-8" }
   });
