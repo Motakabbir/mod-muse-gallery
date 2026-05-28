@@ -7,8 +7,9 @@ const NAV = [
   { label: "The Car", to: "/" as const, hash: "car" },
   { label: "The Build", to: "/the-build" as const },
   { label: "Gallery", to: "/design-gallery" as const },
-  { label: "Partners", to: "/" as const, hash: "partners" },
-  { label: "Events", to: "/" as const, hash: "events" },
+  { label: "About", to: "/about" as const },
+  { label: "Events", to: "/events" as const },
+  { label: "Contact", to: "/contact" as const },
 ];
 
 export function useReveal() {
