@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
+import { BuildGallery } from "@/components/build-gallery";
 import buildStrip from "../assets/build-strip.jpg";
 import buildScan from "../assets/build-scan.jpg";
 import buildPrint from "../assets/build-print.jpg";
