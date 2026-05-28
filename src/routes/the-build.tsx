@@ -116,6 +116,8 @@ function TheBuildPage() {
         </div>
       </section>
 
+      <BuildGallery />
+
       <section className="py-32 px-6 bg-carbon border-y border-white/10">
         <div className="mx-auto max-w-5xl">
           <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">Specification</div>
