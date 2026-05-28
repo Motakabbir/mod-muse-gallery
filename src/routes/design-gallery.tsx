@@ -12,9 +12,9 @@ import g8 from "../assets/pillar-one-of-one.jpg";
 export const Route = createFileRoute("/design-gallery")({
   head: () => ({
     meta: [
-      { title: "Design Gallery | Vision148 RS500" },
-      { name: "description", content: "A visual reference library for the Vision148 RS500 build — renders, details, materials, and process imagery." },
-      { property: "og:title", content: "Design Gallery | Vision148" },
+      { title: "Design Gallery | Syndicate RS500" },
+      { name: "description", content: "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery." },
+      { property: "og:title", content: "Design Gallery | Syndicate" },
       { property: "og:description", content: "Renders, details, materials, process imagery." },
     ],
   }),
@@ -41,7 +41,7 @@ function GalleryPage() {
       <PageHero
         kicker="Design Gallery"
         title={<>A Library of <span className="text-acid">Intent.</span></>}
-        subtitle="Renders, scans, details, materials, and process imagery from the Vision148 design phase — a living archive of the build as it develops."
+        subtitle="Renders, scans, details, materials, and process imagery from the Syndicate design phase — a living archive of the build as it develops."
         image={g1}
       />
 

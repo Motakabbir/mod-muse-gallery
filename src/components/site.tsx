@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo/logo-4.jpeg";
 
 const NAV = [
-  { label: "Vision", to: "/" as const, hash: "intro" },
+  { label: "Syndicate", to: "/" as const, hash: "intro" },
   { label: "The Car", to: "/" as const, hash: "car" },
   { label: "The Build", to: "/the-build" as const },
   { label: "Gallery", to: "/design-gallery" as const },
@@ -34,9 +34,8 @@ export function Nav() {
   }, []);
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "glass border-b border-white/5" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "glass border-b border-white/5" : "bg-transparent"
+        }`}
     >
       <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
@@ -102,7 +101,7 @@ export function Footer() {
         <div className="flex whitespace-nowrap scroll-marquee">
           {Array.from({ length: 2 }).map((_, i) => (
             <div key={i} className="flex items-center gap-12 px-6 font-display text-4xl md:text-6xl text-bone/10">
-              <span>VISION 148</span><span className="text-acid/30">★</span>
+              <span>Syndicate</span><span className="text-acid/30">★</span>
               <span>SYNDICATED RESTOMOD</span><span className="text-acid/30">★</span>
               <span>ONE OF ONE</span><span className="text-acid/30">★</span>
               <span>BUILT IN THE OPEN</span><span className="text-acid/30">★</span>
@@ -117,7 +116,7 @@ export function Footer() {
             <div>
               <div className="font-display text-lg">Syndicated Restomod</div>
               <div className="font-mono text-[10px] text-bone/40 uppercase tracking-[0.25em]">
-                Vision148 • Powered by TheCarCrowd
+                Syndicate • Powered by TheCarCrowd
               </div>
             </div>
           </div>
@@ -140,7 +139,7 @@ export function Footer() {
           <div className="flex flex-col gap-3 text-sm text-bone/70">
             <Link to="/contact" className="hover:text-acid transition-colors">Contact</Link>
             <Link to="/apply" className="hover:text-acid transition-colors">Apply</Link>
-            <a href="mailto:hello@vision148.com" className="hover:text-acid transition-colors">hello@vision148.com</a>
+            <a href="mailto:hello@Syndicate.com" className="hover:text-acid transition-colors">hello@Syndicate.com</a>
           </div>
         </div>
       </div>

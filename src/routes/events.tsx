@@ -5,10 +5,10 @@ import { useState } from "react";
 export const Route = createFileRoute("/events")({
   head: () => ({
     meta: [
-      { title: "Events & FAQ — Vision148 | Syndicated Restomod Build" },
-      { name: "description", content: "Upcoming Vision148 syndicate events, track days, build open-days, and answers to frequently asked questions." },
-      { property: "og:title", content: "Events & FAQ — Vision148 | Syndicated Restomod Build" },
-      { property: "og:description", content: "Upcoming Vision148 syndicate events, track days, build open-days, and answers to frequently asked questions." },
+      { title: "Events & FAQ — Syndicate | Syndicated Restomod Build" },
+      { name: "description", content: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions." },
+      { property: "og:title", content: "Events & FAQ — Syndicate | Syndicated Restomod Build" },
+      { property: "og:description", content: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions." },
     ],
   }),
   component: EventsPage,
@@ -25,7 +25,7 @@ const EVENTS = [
   {
     date: "JUN 2026",
     title: "Goodwood Members' Meeting",
-    desc: "Vision148 will have a dedicated paddock presence. Syndicate members receive hospitality passes and grid walk access.",
+    desc: "Syndicate will have a dedicated paddock presence. Syndicate members receive hospitality passes and grid walk access.",
     location: "Goodwood Circuit, UK",
     status: "Public + Members",
   },
@@ -48,11 +48,11 @@ const EVENTS = [
 const FAQS = [
   {
     q: "What is a syndicated restomod?",
-    a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset — all managed by Vision148.",
+    a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset — all managed by Syndicate.",
   },
   {
     q: "How much does allocation cost?",
-    a: "Syndicate slots start at £48,000 per share for the Vision148 RS500 build. This covers your proportional build cost, insurance, storage, maintenance, and event access for the first 24 months.",
+    a: "Syndicate slots start at £48,000 per share for the Syndicate RS500 build. This covers your proportional build cost, insurance, storage, maintenance, and event access for the first 24 months.",
   },
   {
     q: "How many shares are available?",
@@ -60,11 +60,11 @@ const FAQS = [
   },
   {
     q: "Can I sell my share?",
-    a: "Yes. Shares can be transferred to approved buyers through Vision148 at any time. We handle the valuation, documentation, and introduction to the buyer pool.",
+    a: "Yes. Shares can be transferred to approved buyers through Syndicate at any time. We handle the valuation, documentation, and introduction to the buyer pool.",
   },
   {
     q: "What happens if the build goes over budget?",
-    a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Vision148 and our partner network. Your share price will not change post-commitment.",
+    a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Syndicate and our partner network. Your share price will not change post-commitment.",
   },
   {
     q: "Do I get to drive the car?",

@@ -17,7 +17,7 @@ type MediaItem =
   | { kind: "video"; src: string; poster: string; title: string; caption: string; phase: string };
 
 const MEDIA: MediaItem[] = [
-  { kind: "video", src: heroVideo, poster: rs500Hero, title: "Vision148 — Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
+  { kind: "video", src: heroVideo, poster: rs500Hero, title: "Syndicate — Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
   { kind: "image", src: buildStrip, title: "Bare Shell", caption: "Car #148 stripped to bare metal. Every component catalogued.", phase: "Phase 01" },
   { kind: "image", src: buildScan, title: "Digital Twin", caption: "Sub-millimetre 3D scan of the original shell.", phase: "Phase 02" },
   { kind: "image", src: gallery1, title: "CAD Surfacing", caption: "Aero and structural geometry refined in CAD.", phase: "Phase 02" },
@@ -84,11 +84,10 @@ export function BuildGallery() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-full font-mono text-[10px] uppercase tracking-[0.25em] border transition-all ${
-                filter === f
+              className={`px-4 py-2 rounded-full font-mono text-[10px] uppercase tracking-[0.25em] border transition-all ${filter === f
                   ? "border-acid bg-acid text-ink"
                   : "border-white/10 text-bone/60 hover:border-acid/60 hover:text-acid"
-              }`}
+                }`}
             >
               {f}
             </button>
@@ -102,9 +101,8 @@ export function BuildGallery() {
               <button
                 key={m.src + i}
                 onClick={() => setOpenIndex(i)}
-                className={`reveal group relative overflow-hidden rounded-xl border border-white/10 bg-ink hover-lift text-left ${
-                  isBig ? "col-span-2 row-span-2" : ""
-                }`}
+                className={`reveal group relative overflow-hidden rounded-xl border border-white/10 bg-ink hover-lift text-left ${isBig ? "col-span-2 row-span-2" : ""
+                  }`}
               >
                 <img
                   src={m.kind === "video" ? m.poster : m.src}

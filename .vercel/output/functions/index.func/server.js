@@ -38976,16 +38976,16 @@ var init_server4 = __esm({
   }
 });
 
-// dist/server/assets/_tanstack-start-manifest_v-DE37-zUH.js
-var tanstack_start_manifest_v_DE37_zUH_exports = {};
-__export(tanstack_start_manifest_v_DE37_zUH_exports, {
+// dist/server/assets/_tanstack-start-manifest_v-ubxXfiF6.js
+var tanstack_start_manifest_v_ubxXfiF6_exports = {};
+__export(tanstack_start_manifest_v_ubxXfiF6_exports, {
   tsrStartManifest: () => tsrStartManifest
 });
 var tsrStartManifest;
-var init_tanstack_start_manifest_v_DE37_zUH = __esm({
-  "dist/server/assets/_tanstack-start-manifest_v-DE37-zUH.js"() {
+var init_tanstack_start_manifest_v_ubxXfiF6 = __esm({
+  "dist/server/assets/_tanstack-start-manifest_v-ubxXfiF6.js"() {
     "use strict";
-    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-hWCbPfdi.js"] }, "/": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-CWKO7jxw.js", "/assets/pillar-one-of-one-C-tPTKkE.js", "/assets/video-C3zcWsov.js", "/assets/site-B0iARvhV.js"] }, "/about": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-Ddc4Df6V.js", "/assets/site-B0iARvhV.js"] }, "/apply": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-WmaeEQBg.js", "/assets/site-B0iARvhV.js", "/assets/rs500-hero-e1hbtRkb.js"] }, "/contact": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-DWD9R9EJ.js", "/assets/site-B0iARvhV.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-Btxa8Hb9.js", "/assets/site-B0iARvhV.js", "/assets/gallery-4-Cs_m4l1W.js", "/assets/rs500-hero-e1hbtRkb.js", "/assets/pillar-one-of-one-C-tPTKkE.js"] }, "/events": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-BLT6UAZC.js", "/assets/site-B0iARvhV.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-CoRO_nEc.js", "/assets/site-B0iARvhV.js", "/assets/gallery-4-Cs_m4l1W.js", "/assets/video-C3zcWsov.js", "/assets/rs500-hero-e1hbtRkb.js"] } }, clientEntry: "/assets/index-hWCbPfdi.js" });
+    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-DPUguAWr.js"] }, "/": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-DGFte6KP.js", "/assets/pillar-one-of-one-C-tPTKkE.js", "/assets/video-C3zcWsov.js", "/assets/site-aYgtBh75.js"] }, "/about": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-CXUBXCwH.js", "/assets/site-aYgtBh75.js"] }, "/apply": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-Dht8lOsq.js", "/assets/site-aYgtBh75.js", "/assets/rs500-hero-e1hbtRkb.js"] }, "/contact": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-DX1X56Hr.js", "/assets/site-aYgtBh75.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-h6knpQLJ.js", "/assets/site-aYgtBh75.js", "/assets/gallery-4-Cs_m4l1W.js", "/assets/rs500-hero-e1hbtRkb.js", "/assets/pillar-one-of-one-C-tPTKkE.js"] }, "/events": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-B9m1fREd.js", "/assets/site-aYgtBh75.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-CIOPXM5l.js", "/assets/site-aYgtBh75.js", "/assets/gallery-4-Cs_m4l1W.js", "/assets/video-C3zcWsov.js", "/assets/rs500-hero-e1hbtRkb.js"] } }, clientEntry: "/assets/index-DPUguAWr.js" });
   }
 });
 
@@ -41178,7 +41178,7 @@ var init_modern2 = __esm({
   }
 });
 
-// dist/server/assets/site-CPX5Ueov.js
+// dist/server/assets/site-DlTlb9ZS.js
 function useReveal() {
   (0, import_react10.useEffect)(() => {
     const els = document.querySelectorAll(".reveal");
@@ -41270,7 +41270,7 @@ function Footer() {
   return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("footer", { className: "relative border-t border-white/10 bg-carbon overflow-hidden", children: [
     /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "absolute inset-0 noise-bg opacity-60 pointer-events-none" }),
     /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "relative overflow-hidden py-6 border-b border-white/5", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "flex whitespace-nowrap scroll-marquee", children: Array.from({ length: 2 }).map((_3, i2) => /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "flex items-center gap-12 px-6 font-display text-4xl md:text-6xl text-bone/10", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { children: "VISION 148" }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { children: "Syndicate" }),
       /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
       /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { children: "SYNDICATED RESTOMOD" }),
       /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
@@ -41285,7 +41285,7 @@ function Footer() {
           /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("img", { src: logo, alt: "Syn Mod Build", className: "h-12 w-12" }),
           /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { children: [
             /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "font-display text-lg", children: "Syndicated Restomod" }),
-            /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "font-mono text-[10px] text-bone/40 uppercase tracking-[0.25em]", children: "Vision148 \u2022 Powered by TheCarCrowd" })
+            /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "font-mono text-[10px] text-bone/40 uppercase tracking-[0.25em]", children: "Syndicate \u2022 Powered by TheCarCrowd" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("p", { className: "text-bone/60 text-sm max-w-md leading-relaxed", children: "A new model for collective ownership of a singular hand-built restomod. Engineered in the open with the world's leading specialists." })
@@ -41304,7 +41304,7 @@ function Footer() {
         /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "flex flex-col gap-3 text-sm text-bone/70", children: [
           /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Link, { to: "/contact", className: "hover:text-acid transition-colors", children: "Contact" }),
           /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Link, { to: "/apply", className: "hover:text-acid transition-colors", children: "Apply" }),
-          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("a", { href: "mailto:hello@vision148.com", className: "hover:text-acid transition-colors", children: "hello@vision148.com" })
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("a", { href: "mailto:hello@Syndicate.com", className: "hover:text-acid transition-colors", children: "hello@Syndicate.com" })
         ] })
       ] })
     ] }),
@@ -41352,15 +41352,15 @@ function PageHero({
   ] });
 }
 var import_jsx_runtime17, import_react10, logo, NAV;
-var init_site_CPX5Ueov = __esm({
-  "dist/server/assets/site-CPX5Ueov.js"() {
+var init_site_DlTlb9ZS = __esm({
+  "dist/server/assets/site-DlTlb9ZS.js"() {
     "use strict";
     import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     import_react10 = __toESM(require_react(), 1);
-    logo = "/assets/logo-JuYtgJGG.png";
+    logo = "/assets/logo-4-BrrnFFbn.jpeg";
     NAV = [
-      { label: "Vision", to: "/", hash: "intro" },
+      { label: "Syndicate", to: "/", hash: "intro" },
       { label: "The Car", to: "/", hash: "car" },
       { label: "The Build", to: "/the-build" },
       { label: "Gallery", to: "/design-gallery" },
@@ -41405,9 +41405,9 @@ var init_rs500_hero_C00dfrgd = __esm({
   }
 });
 
-// dist/server/assets/the-build-D26qWVzT.js
-var the_build_D26qWVzT_exports = {};
-__export(the_build_D26qWVzT_exports, {
+// dist/server/assets/the-build-DiG5DvG9.js
+var the_build_DiG5DvG9_exports = {};
+__export(the_build_DiG5DvG9_exports, {
   component: () => TheBuildPage
 });
 function BuildGallery() {
@@ -41623,12 +41623,12 @@ function TheBuildPage() {
   ] });
 }
 var import_jsx_runtime18, import_react11, buildStrip, buildScan, MEDIA, FILTERS, PHASES, SPECS;
-var init_the_build_D26qWVzT = __esm({
-  "dist/server/assets/the-build-D26qWVzT.js"() {
+var init_the_build_DiG5DvG9 = __esm({
+  "dist/server/assets/the-build-DiG5DvG9.js"() {
     "use strict";
     import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CPX5Ueov();
+    init_site_DlTlb9ZS();
     import_react11 = __toESM(require_react(), 1);
     init_gallery_4_B77v6cv7();
     init_video_DGl1YphU();
@@ -41636,7 +41636,7 @@ var init_the_build_D26qWVzT = __esm({
     buildStrip = "/assets/build-strip-BMlk6c2t.jpg";
     buildScan = "/assets/build-scan-CdtWldBl.jpg";
     MEDIA = [
-      { kind: "video", src: heroVideo, poster: heroImg, title: "Vision148 \u2014 Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
+      { kind: "video", src: heroVideo, poster: heroImg, title: "Syndicate \u2014 Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
       { kind: "image", src: buildStrip, title: "Bare Shell", caption: "Car #148 stripped to bare metal. Every component catalogued.", phase: "Phase 01" },
       { kind: "image", src: buildScan, title: "Digital Twin", caption: "Sub-millimetre 3D scan of the original shell.", phase: "Phase 02" },
       { kind: "image", src: g1, title: "CAD Surfacing", caption: "Aero and structural geometry refined in CAD.", phase: "Phase 02" },
@@ -41700,9 +41700,9 @@ var init_the_build_D26qWVzT = __esm({
   }
 });
 
-// dist/server/assets/events-Bl_kvtVe.js
-var events_Bl_kvtVe_exports = {};
-__export(events_Bl_kvtVe_exports, {
+// dist/server/assets/events-DJxeGSsN.js
+var events_DJxeGSsN_exports = {};
+__export(events_DJxeGSsN_exports, {
   component: () => EventsPage
 });
 function EventsPage() {
@@ -41764,12 +41764,12 @@ function EventsPage() {
   ] });
 }
 var import_jsx_runtime19, import_react12, EVENTS, FAQS;
-var init_events_Bl_kvtVe = __esm({
-  "dist/server/assets/events-Bl_kvtVe.js"() {
+var init_events_DJxeGSsN = __esm({
+  "dist/server/assets/events-DJxeGSsN.js"() {
     "use strict";
     import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CPX5Ueov();
+    init_site_DlTlb9ZS();
     import_react12 = __toESM(require_react(), 1);
     EVENTS = [{
       date: "MAR 2026",
@@ -41780,7 +41780,7 @@ var init_events_Bl_kvtVe = __esm({
     }, {
       date: "JUN 2026",
       title: "Goodwood Members' Meeting",
-      desc: "Vision148 will have a dedicated paddock presence. Syndicate members receive hospitality passes and grid walk access.",
+      desc: "Syndicate will have a dedicated paddock presence. Syndicate members receive hospitality passes and grid walk access.",
       location: "Goodwood Circuit, UK",
       status: "Public + Members"
     }, {
@@ -41798,19 +41798,19 @@ var init_events_Bl_kvtVe = __esm({
     }];
     FAQS = [{
       q: "What is a syndicated restomod?",
-      a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset \u2014 all managed by Vision148."
+      a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset \u2014 all managed by Syndicate."
     }, {
       q: "How much does allocation cost?",
-      a: "Syndicate slots start at \xA348,000 per share for the Vision148 RS500 build. This covers your proportional build cost, insurance, storage, maintenance, and event access for the first 24 months."
+      a: "Syndicate slots start at \xA348,000 per share for the Syndicate RS500 build. This covers your proportional build cost, insurance, storage, maintenance, and event access for the first 24 months."
     }, {
       q: "How many shares are available?",
       a: "Each build is strictly capped at 12 shares. This ensures meaningful access for every member while preserving the exclusivity that makes these cars special."
     }, {
       q: "Can I sell my share?",
-      a: "Yes. Shares can be transferred to approved buyers through Vision148 at any time. We handle the valuation, documentation, and introduction to the buyer pool."
+      a: "Yes. Shares can be transferred to approved buyers through Syndicate at any time. We handle the valuation, documentation, and introduction to the buyer pool."
     }, {
       q: "What happens if the build goes over budget?",
-      a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Vision148 and our partner network. Your share price will not change post-commitment."
+      a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Syndicate and our partner network. Your share price will not change post-commitment."
     }, {
       q: "Do I get to drive the car?",
       a: "Absolutely. Every member receives an annual allocation of drive days, track sessions, and road tours. The schedule is coordinated democratically through the member portal."
@@ -41833,9 +41833,9 @@ var init_pillar_one_of_one_DvC5spsE = __esm({
   }
 });
 
-// dist/server/assets/design-gallery-DYfKewyu.js
-var design_gallery_DYfKewyu_exports = {};
-__export(design_gallery_DYfKewyu_exports, {
+// dist/server/assets/design-gallery-D5F5a-w8.js
+var design_gallery_D5F5a_w8_exports = {};
+__export(design_gallery_D5F5a_w8_exports, {
   component: () => GalleryPage
 });
 function GalleryPage() {
@@ -41845,7 +41845,7 @@ function GalleryPage() {
     /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(PageHero, { kicker: "Design Gallery", title: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(import_jsx_runtime20.Fragment, { children: [
       "A Library of ",
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "text-acid", children: "Intent." })
-    ] }), subtitle: "Renders, scans, details, materials, and process imagery from the Vision148 design phase \u2014 a living archive of the build as it develops.", image: g1 }),
+    ] }), subtitle: "Renders, scans, details, materials, and process imagery from the Syndicate design phase \u2014 a living archive of the build as it develops.", image: g1 }),
     /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("section", { className: "py-24 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "mx-auto max-w-7xl", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "grid md:grid-cols-4 grid-cols-2 auto-rows-[16rem] gap-4", children: ITEMS.map((it2, i2) => /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("figure", { className: `reveal relative overflow-hidden border border-white/10 group bg-ink ${it2.span ?? ""}`, children: [
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("img", { src: it2.img, alt: it2.t, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" }),
@@ -41870,12 +41870,12 @@ function GalleryPage() {
   ] });
 }
 var import_jsx_runtime20, import_react13, ITEMS;
-var init_design_gallery_DYfKewyu = __esm({
-  "dist/server/assets/design-gallery-DYfKewyu.js"() {
+var init_design_gallery_D5F5a_w8 = __esm({
+  "dist/server/assets/design-gallery-D5F5a-w8.js"() {
     "use strict";
     import_jsx_runtime20 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CPX5Ueov();
+    init_site_DlTlb9ZS();
     init_gallery_4_B77v6cv7();
     init_rs500_hero_C00dfrgd();
     init_pillar_one_of_one_DvC5spsE();
@@ -41919,9 +41919,9 @@ var init_design_gallery_DYfKewyu = __esm({
   }
 });
 
-// dist/server/assets/contact-CIcQQV4Q.js
-var contact_CIcQQV4Q_exports = {};
-__export(contact_CIcQQV4Q_exports, {
+// dist/server/assets/contact-DjxINe9B.js
+var contact_DjxINe9B_exports = {};
+__export(contact_DjxINe9B_exports, {
   component: () => ContactPage
 });
 function ContactPage() {
@@ -41976,7 +41976,7 @@ function ContactPage() {
         /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "mt-12 pt-8 border-t border-white/10", children: [
           /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-3", children: "Workshop" }),
           /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("p", { className: "text-bone/70 leading-relaxed", children: [
-            "Vision148 Build Facility",
+            "Syndicate Build Facility",
             /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("br", {}),
             "Unit 7, Silverstone Park",
             /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("br", {}),
@@ -42035,26 +42035,26 @@ function ContactPage() {
     /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("section", { className: "py-24 px-6 grain relative", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "mx-auto max-w-7xl text-center reveal", children: [
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "Questions?" }),
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("h2", { className: "font-display text-4xl md:text-5xl mb-6", children: "Common Questions" }),
-      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("p", { className: "text-bone/70 text-lg max-w-2xl mx-auto mb-10", children: "Everything you need to know about joining the Vision148 syndicate, from allocation to ownership structure." }),
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("p", { className: "text-bone/70 text-lg max-w-2xl mx-auto mb-10", children: "Everything you need to know about joining the Syndicate syndicate, from allocation to ownership structure." }),
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("a", { href: "/events", className: "inline-block px-10 py-4 border-2 border-white/20 text-bone text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:border-acid hover:text-acid transition-all duration-300", children: "View FAQ & Events" })
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Footer, {})
   ] });
 }
 var import_jsx_runtime21, import_react14, contactHero;
-var init_contact_CIcQQV4Q = __esm({
-  "dist/server/assets/contact-CIcQQV4Q.js"() {
+var init_contact_DjxINe9B = __esm({
+  "dist/server/assets/contact-DjxINe9B.js"() {
     "use strict";
     import_jsx_runtime21 = __toESM(require_jsx_runtime(), 1);
-    init_site_CPX5Ueov();
+    init_site_DlTlb9ZS();
     import_react14 = __toESM(require_react(), 1);
     contactHero = "/assets/contact-hero-C7pgigwY.jpg";
   }
 });
 
-// dist/server/assets/apply-cmsd06of.js
-var apply_cmsd06of_exports = {};
-__export(apply_cmsd06of_exports, {
+// dist/server/assets/apply-BLPwbbqi.js
+var apply_BLPwbbqi_exports = {};
+__export(apply_BLPwbbqi_exports, {
   component: () => ApplyPage
 });
 function ApplyPage() {
@@ -42107,7 +42107,7 @@ function ApplyPage() {
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
           /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("label", { className: "block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2", children: "Tell Us About You" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("textarea", { name: "message", rows: 5, className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors resize-none", placeholder: "Your background, what drew you to Vision148, any questions\u2026" })
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("textarea", { name: "message", rows: 5, className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors resize-none", placeholder: "Your background, what drew you to Syndicate, any questions\u2026" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("button", { type: "submit", className: "w-full px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors", children: "Submit Application" }),
         /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "text-bone/40 text-xs font-mono uppercase tracking-[0.2em] text-center", children: "Your information is handled confidentially." })
@@ -42132,13 +42132,13 @@ function Field({
   ] });
 }
 var import_jsx_runtime22, import_react15, STEPS;
-var init_apply_cmsd06of = __esm({
-  "dist/server/assets/apply-cmsd06of.js"() {
+var init_apply_BLPwbbqi = __esm({
+  "dist/server/assets/apply-BLPwbbqi.js"() {
     "use strict";
     import_jsx_runtime22 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     import_react15 = __toESM(require_react(), 1);
-    init_site_CPX5Ueov();
+    init_site_DlTlb9ZS();
     init_rs500_hero_C00dfrgd();
     STEPS = [{
       n: "01",
@@ -42155,14 +42155,14 @@ var init_apply_cmsd06of = __esm({
     }, {
       n: "04",
       t: "Secure Position",
-      b: "Sign and fund. You're in. Welcome to Vision148."
+      b: "Sign and fund. You're in. Welcome to Syndicate."
     }];
   }
 });
 
-// dist/server/assets/about-kcC7mYsF.js
-var about_kcC7mYsF_exports = {};
-__export(about_kcC7mYsF_exports, {
+// dist/server/assets/about-DP_o4eqP.js
+var about_DP_o4eqP_exports = {};
+__export(about_DP_o4eqP_exports, {
   component: () => AboutPage
 });
 function AboutPage() {
@@ -42177,7 +42177,7 @@ function AboutPage() {
       "Engineered To ",
       /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-acid", children: "Last" }),
       "."
-    ] }), subtitle: "Vision148 is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore.", image: aboutHero }),
+    ] }), subtitle: "Syndicate is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore.", image: aboutHero }),
     /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "mx-auto max-w-7xl grid md:grid-cols-2 gap-16 items-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "reveal", children: [
         /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Mission" }),
@@ -42186,7 +42186,7 @@ function AboutPage() {
           /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("br", {}),
           "Restomod Can Be"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Vision148 builds on it. We take iconic rally-bred silhouettes and infuse them with modern carbon engineering, additive manufacturing, and motorsport-grade safety \u2014 without losing the analog soul that makes these cars magical." }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred silhouettes and infuse them with modern carbon engineering, additive manufacturing, and motorsport-grade safety \u2014 without losing the analog soul that makes these cars magical." }),
         /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed", children: "Every weld, every panel, every line of code in the ECU is obsessively considered. The result is not a replica. It is a rebirth." })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "reveal", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("img", { src: aboutDetail, alt: "Precision engineering detail", className: "w-full h-[500px] object-cover rounded-lg border border-white/10", loading: "lazy", width: 1024, height: 1024 }) })
@@ -42255,25 +42255,25 @@ function AboutPage() {
   ] });
 }
 var import_jsx_runtime23, import_react16, aboutHero, aboutDetail;
-var init_about_kcC7mYsF = __esm({
-  "dist/server/assets/about-kcC7mYsF.js"() {
+var init_about_DP_o4eqP = __esm({
+  "dist/server/assets/about-DP_o4eqP.js"() {
     "use strict";
     import_jsx_runtime23 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CPX5Ueov();
+    init_site_DlTlb9ZS();
     import_react16 = __toESM(require_react(), 1);
     aboutHero = "/assets/about-hero-7--oaZ8z.jpg";
     aboutDetail = "/assets/about-detail-BqasUOoI.jpg";
   }
 });
 
-// dist/server/assets/index-DeRIoADL.js
-var index_DeRIoADL_exports = {};
-__export(index_DeRIoADL_exports, {
+// dist/server/assets/index-D_38RkTs.js
+var index_D_38RkTs_exports = {};
+__export(index_D_38RkTs_exports, {
   component: () => Index
 });
 function Hero() {
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("section", { id: "top", className: "relative h-screen min-h-[720px] w-full overflow-hidden grain", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("section", { id: "top", className: "relative min-h-screen w-full overflow-hidden grain flex items-center justify-center py-24 md:pt-28 md:pb-20", children: [
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("video", { src: heroVideo, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 noise-bg" }),
@@ -42281,10 +42281,10 @@ function Hero() {
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow", style: {
       animationDelay: "2s"
     } }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "relative z-10 h-full flex flex-col items-center justify-center text-center px-6", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "relative z-10 w-full flex flex-col items-center justify-center text-center px-6", children: [
       /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "inline-flex items-center gap-2 glass-acid rounded-full px-5 py-2 mb-8 animate-in fade-in slide-in-from-bottom duration-1000", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-acid animate-pulse" }),
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: "Vision148 \xB7 Now Forming" })
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: "Syndicate \xB7 Now Forming" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("h1", { className: "font-display text-6xl md:text-8xl lg:text-9xl leading-[0.9] max-w-6xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "text-gradient-bone", children: "Be Part of the" }),
@@ -42294,7 +42294,7 @@ function Hero() {
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200", children: "Syndicated Restomod Builds \u2014 engineered in the open, owned together, driven for life." }),
       /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Link, { to: "/apply", className: "btn-acid", children: "Apply for Allocation \u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("a", { href: "#intro", className: "btn-ghost", children: "Explore Vision" })
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("a", { href: "#intro", className: "btn-ghost", children: "Explore Syndicate" })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500", children: [{
         k: "Car",
@@ -42374,7 +42374,7 @@ function Pillars() {
   return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("section", { className: "relative py-32 px-6 bg-carbon overflow-hidden", children: [
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(SectionLabel, { kicker: "Why Vision148", title: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_jsx_runtime24.Fragment, { children: "Built on three pillars." }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(SectionLabel, { kicker: "Why Syndicate", title: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_jsx_runtime24.Fragment, { children: "Built on three pillars." }) }),
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: PILLARS.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("article", { className: "reveal group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "aspect-[4/5] overflow-hidden relative", children: [
           /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("img", { src: p3.img, alt: p3.title, loading: "lazy", className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }),
@@ -42539,7 +42539,7 @@ function Partners() {
       "Built with ",
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "text-acid", children: "specialists." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed", children: "The Vision148 RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing, and specialist car builds." }),
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed", children: "The Syndicate RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing, and specialist car builds." }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: PARTNERS.map((p3, i2) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
       /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: [
         "Partner ",
@@ -42638,14 +42638,14 @@ function Index() {
   ] });
 }
 var import_jsx_runtime24, import_react17, pillarPartners, pillarExperience, PILLARS, PROCESS, PARTNERS, SYNDICATE_STEPS, BENEFITS, LIVE_SYNDICATES, RECENTLY_FUNDED, EVENTS2, rs500HeroUrl;
-var init_index_DeRIoADL = __esm({
-  "dist/server/assets/index-DeRIoADL.js"() {
+var init_index_D_38RkTs = __esm({
+  "dist/server/assets/index-D_38RkTs.js"() {
     "use strict";
     import_jsx_runtime24 = __toESM(require_jsx_runtime(), 1);
     init_pillar_one_of_one_DvC5spsE();
     init_video_DGl1YphU();
     init_esm5();
-    init_site_CPX5Ueov();
+    init_site_DlTlb9ZS();
     import_react17 = __toESM(require_react(), 1);
     pillarPartners = "/assets/pillar-partners-DAa51pVo.jpg";
     pillarExperience = "/assets/pillar-experience-BiUq9AxC.jpg";
@@ -42799,9 +42799,9 @@ var init_index_DeRIoADL = __esm({
   }
 });
 
-// dist/server/assets/router-BuUVpvmy.js
-var router_BuUVpvmy_exports = {};
-__export(router_BuUVpvmy_exports, {
+// dist/server/assets/router-gFKmXs7N.js
+var router_gFKmXs7N_exports = {};
+__export(router_gFKmXs7N_exports, {
   getRouter: () => getRouter
 });
 function NotFoundComponent() {
@@ -42862,22 +42862,22 @@ function RootComponent() {
   return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Outlet, {}) });
 }
 var import_jsx_runtime25, appCss, Route$7, $$splitComponentImporter$6, Route$6, $$splitComponentImporter$5, Route$5, $$splitComponentImporter$4, Route$4, $$splitComponentImporter$3, Route$3, $$splitComponentImporter$2, Route$2, $$splitComponentImporter$1, Route$1, $$splitComponentImporter, Route2, TheBuildRoute, EventsRoute, DesignGalleryRoute, ContactRoute, ApplyRoute, AboutRoute, IndexRoute, rootRouteChildren, routeTree, getRouter;
-var init_router_BuUVpvmy = __esm({
-  "dist/server/assets/router-BuUVpvmy.js"() {
+var init_router_gFKmXs7N = __esm({
+  "dist/server/assets/router-gFKmXs7N.js"() {
     "use strict";
     init_modern2();
     init_esm5();
     import_jsx_runtime25 = __toESM(require_jsx_runtime(), 1);
-    appCss = "/assets/styles-CIxwIH5v.css";
+    appCss = "/assets/styles-Dbks98-a.css";
     Route$7 = createRootRouteWithContext()({
       head: () => ({
         meta: [
           { charSet: "utf-8" },
           { name: "viewport", content: "width=device-width, initial-scale=1" },
-          { title: "Vision148 | Syndicated Restomod Build" },
+          { title: "Syndicate | Syndicated Restomod Build" },
           { name: "description", content: "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open." },
           { name: "author", content: "Syndicated Restomod" },
-          { property: "og:title", content: "Vision148 | Syndicated Restomod Build" },
+          { property: "og:title", content: "Syndicate | Syndicated Restomod Build" },
           { property: "og:description", content: "Syndicated restomod builds powered by TheCarCrowd." },
           { property: "og:type", content: "website" },
           { name: "twitter:card", content: "summary" },
@@ -42895,17 +42895,17 @@ var init_router_BuUVpvmy = __esm({
       notFoundComponent: NotFoundComponent,
       errorComponent: ErrorComponent2
     });
-    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_D26qWVzT(), the_build_D26qWVzT_exports));
+    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_DiG5DvG9(), the_build_DiG5DvG9_exports));
     Route$6 = createFileRoute("/the-build")({
       head: () => ({
         meta: [{
-          title: "The Build | Vision148 RS500 Restomod"
+          title: "The Build | Syndicate RS500 Restomod"
         }, {
           name: "description",
-          content: "Four phases of the Vision148 build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open."
+          content: "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open."
         }, {
           property: "og:title",
-          content: "The Build | Vision148"
+          content: "The Build | Syndicate"
         }, {
           property: "og:description",
           content: "Engineered in the open. Every stage documented."
@@ -42913,35 +42913,35 @@ var init_router_BuUVpvmy = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$6, "component")
     });
-    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_Bl_kvtVe(), events_Bl_kvtVe_exports));
+    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_DJxeGSsN(), events_DJxeGSsN_exports));
     Route$5 = createFileRoute("/events")({
       head: () => ({
         meta: [{
-          title: "Events & FAQ \u2014 Vision148 | Syndicated Restomod Build"
+          title: "Events & FAQ \u2014 Syndicate | Syndicated Restomod Build"
         }, {
           name: "description",
-          content: "Upcoming Vision148 syndicate events, track days, build open-days, and answers to frequently asked questions."
+          content: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions."
         }, {
           property: "og:title",
-          content: "Events & FAQ \u2014 Vision148 | Syndicated Restomod Build"
+          content: "Events & FAQ \u2014 Syndicate | Syndicated Restomod Build"
         }, {
           property: "og:description",
-          content: "Upcoming Vision148 syndicate events, track days, build open-days, and answers to frequently asked questions."
+          content: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions."
         }]
       }),
       component: lazyRouteComponent($$splitComponentImporter$5, "component")
     });
-    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_DYfKewyu(), design_gallery_DYfKewyu_exports));
+    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_D5F5a_w8(), design_gallery_D5F5a_w8_exports));
     Route$4 = createFileRoute("/design-gallery")({
       head: () => ({
         meta: [{
-          title: "Design Gallery | Vision148 RS500"
+          title: "Design Gallery | Syndicate RS500"
         }, {
           name: "description",
-          content: "A visual reference library for the Vision148 RS500 build \u2014 renders, details, materials, and process imagery."
+          content: "A visual reference library for the Syndicate RS500 build \u2014 renders, details, materials, and process imagery."
         }, {
           property: "og:title",
-          content: "Design Gallery | Vision148"
+          content: "Design Gallery | Syndicate"
         }, {
           property: "og:description",
           content: "Renders, details, materials, process imagery."
@@ -42949,61 +42949,61 @@ var init_router_BuUVpvmy = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$4, "component")
     });
-    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_CIcQQV4Q(), contact_CIcQQV4Q_exports));
+    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_DjxINe9B(), contact_DjxINe9B_exports));
     Route$3 = createFileRoute("/contact")({
       head: () => ({
         meta: [{
-          title: "Contact \u2014 Vision148 | Syndicated Restomod Build"
+          title: "Contact \u2014 Syndicate | Syndicated Restomod Build"
         }, {
           name: "description",
-          content: "Get in touch with the Vision148 team. Press, partnership, and syndicate inquiries welcome."
+          content: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome."
         }, {
           property: "og:title",
-          content: "Contact \u2014 Vision148 | Syndicated Restomod Build"
+          content: "Contact \u2014 Syndicate | Syndicated Restomod Build"
         }, {
           property: "og:description",
-          content: "Get in touch with the Vision148 team. Press, partnership, and syndicate inquiries welcome."
+          content: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome."
         }]
       }),
       component: lazyRouteComponent($$splitComponentImporter$3, "component")
     });
-    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_cmsd06of(), apply_cmsd06of_exports));
+    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_BLPwbbqi(), apply_BLPwbbqi_exports));
     Route$2 = createFileRoute("/apply")({
       head: () => ({
         meta: [{
-          title: "Apply for Allocation | Vision148"
+          title: "Apply for Allocation | Syndicate"
         }, {
           name: "description",
-          content: "Apply for a syndicate allocation in the Vision148 Ford Sierra Cosworth RS500 restomod build. Limited positions available."
+          content: "Apply for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available."
         }, {
           property: "og:title",
-          content: "Apply for Allocation | Vision148"
+          content: "Apply for Allocation | Syndicate"
         }, {
           property: "og:description",
-          content: "Limited syndicate positions for the Vision148 RS500 build."
+          content: "Limited syndicate positions for the Syndicate RS500 build."
         }]
       }),
       component: lazyRouteComponent($$splitComponentImporter$2, "component")
     });
-    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_kcC7mYsF(), about_kcC7mYsF_exports));
+    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_DP_o4eqP(), about_DP_o4eqP_exports));
     Route$1 = createFileRoute("/about")({
       head: () => ({
         meta: [{
-          title: "About Us \u2014 Vision148 | Syndicated Restomod Build"
+          title: "About Us \u2014 Syndicate | Syndicated Restomod Build"
         }, {
           name: "description",
-          content: "Meet the team behind Vision148. A syndicated restomod build powered by passion, precision engineering, and world-class partners."
+          content: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners."
         }, {
           property: "og:title",
-          content: "About Us \u2014 Vision148 | Syndicated Restomod Build"
+          content: "About Us \u2014 Syndicate | Syndicated Restomod Build"
         }, {
           property: "og:description",
-          content: "Meet the team behind Vision148. A syndicated restomod build powered by passion, precision engineering, and world-class partners."
+          content: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners."
         }]
       }),
       component: lazyRouteComponent($$splitComponentImporter$1, "component")
     });
-    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_DeRIoADL(), index_DeRIoADL_exports));
+    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_D_38RkTs(), index_D_38RkTs_exports));
     Route2 = createFileRoute("/")({
       component: lazyRouteComponent($$splitComponentImporter, "component")
     });
@@ -43065,9 +43065,9 @@ var init_router_BuUVpvmy = __esm({
   }
 });
 
-// dist/server/assets/start-Bbup5WHx.js
-var start_Bbup5WHx_exports = {};
-__export(start_Bbup5WHx_exports, {
+// dist/server/assets/start-CGgKLdx3.js
+var start_CGgKLdx3_exports = {};
+__export(start_CGgKLdx3_exports, {
   startInstance: () => startInstance
 });
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
@@ -43080,10 +43080,10 @@ function dedupeSerializationAdapters(deduped, serializationAdapters) {
   }
 }
 var import_node_async_hooks, import_react18, import_jsx_runtime26, createStart, errorMiddleware, startInstance;
-var init_start_Bbup5WHx = __esm({
-  "dist/server/assets/start-Bbup5WHx.js"() {
+var init_start_CGgKLdx3 = __esm({
+  "dist/server/assets/start-CGgKLdx3.js"() {
     "use strict";
-    init_server_B1ElRYfP();
+    init_server_BLmIQ7ez();
     init_server5();
     import_node_async_hooks = require("node:async_hooks");
     init_production();
@@ -43138,9 +43138,9 @@ var init_empty_plugin_adapters_BFgPZ6_d = __esm({
   }
 });
 
-// dist/server/assets/server-B1ElRYfP.js
-var server_B1ElRYfP_exports = {};
-__export(server_B1ElRYfP_exports, {
+// dist/server/assets/server-BLmIQ7ez.js
+var server_BLmIQ7ez_exports = {};
+__export(server_BLmIQ7ez_exports, {
   c: () => createMiddleware,
   s: () => server
 });
@@ -43197,7 +43197,7 @@ function getResponse() {
   return getH3Event().res;
 }
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_DE37_zUH(), tanstack_start_manifest_v_DE37_zUH_exports));
+  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_ubxXfiF6(), tanstack_start_manifest_v_ubxXfiF6_exports));
   const startManifest = tsrStartManifest2();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -44016,8 +44016,8 @@ function getStartResponseHeaders(opts) {
 }
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    Promise.resolve().then(() => (init_router_BuUVpvmy(), router_BuUVpvmy_exports)),
-    Promise.resolve().then(() => (init_start_Bbup5WHx(), start_Bbup5WHx_exports)),
+    Promise.resolve().then(() => (init_router_gFKmXs7N(), router_gFKmXs7N_exports)),
+    Promise.resolve().then(() => (init_start_CGgKLdx3(), start_CGgKLdx3_exports)),
     Promise.resolve().then(() => (init_empty_plugin_adapters_BFgPZ6_d(), empty_plugin_adapters_BFgPZ6_d_exports))
   ]);
   return {
@@ -44310,8 +44310,8 @@ function createServerEntry(entry) {
   } };
 }
 var import_node_async_hooks2, import_react19, import_jsx_runtime27, defaultStreamHandler, GLOBAL_EVENT_STORAGE_KEY, globalObj$1, eventStorage, HEADERS, manifest, TSS_FORMDATA_CONTEXT, TSS_SERVER_FUNCTION, X_TSS_SERIALIZED, X_TSS_RAW_RESPONSE, TSS_CONTENT_TYPE_FRAMED, FrameType, FRAME_HEADER_SIZE, TSS_CONTENT_TYPE_FRAMED_VERSIONED, GLOBAL_STORAGE_KEY, globalObj, startStorage, getStartOptions, createMiddleware, innerCreateCsrfMiddleware, createCsrfMiddleware, textEncoder2, EMPTY_PAYLOAD, serovalPlugins, FORM_DATA_CONTENT_TYPES, MAX_PAYLOAD_SIZE, handleServerAction, LINK_PARAM_TOKEN_RE, PRELOAD_AS_VALUES, ServerFunctionSerializationAdapter, entriesPromise, defaultCsrfMiddleware, getCachedBaseManifest, getProdBaseManifest, getBaseManifest, createEarlyHintsForRequest, ROUTER_BASEPATH, SERVER_FN_BASE, IS_PRERENDERING, IS_SHELL_ENV, ERR_NO_RESPONSE, ERR_NO_DEFER, fetch2, server_default, server;
-var init_server_B1ElRYfP = __esm({
-  "dist/server/assets/server-B1ElRYfP.js"() {
+var init_server_BLmIQ7ez = __esm({
+  "dist/server/assets/server-BLmIQ7ez.js"() {
     "use strict";
     import_node_async_hooks2 = require("node:async_hooks");
     init_node2();
@@ -44701,7 +44701,7 @@ function renderErrorPage(error) {
 }
 async function getServerEntry() {
   if (!serverEntryPromise) {
-    serverEntryPromise = Promise.resolve().then(() => (init_server_B1ElRYfP(), server_B1ElRYfP_exports)).then((n2) => n2.s).then(
+    serverEntryPromise = Promise.resolve().then(() => (init_server_BLmIQ7ez(), server_BLmIQ7ez_exports)).then((n2) => n2.s).then(
       (m3) => m3.default ?? m3
     );
   }

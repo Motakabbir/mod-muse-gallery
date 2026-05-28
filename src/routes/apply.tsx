@@ -6,10 +6,10 @@ import heroImg from "../assets/rs500-hero.jpg";
 export const Route = createFileRoute("/apply")({
   head: () => ({
     meta: [
-      { title: "Apply for Allocation | Vision148" },
-      { name: "description", content: "Apply for a syndicate allocation in the Vision148 Ford Sierra Cosworth RS500 restomod build. Limited positions available." },
-      { property: "og:title", content: "Apply for Allocation | Vision148" },
-      { property: "og:description", content: "Limited syndicate positions for the Vision148 RS500 build." },
+      { title: "Apply for Allocation | Syndicate" },
+      { name: "description", content: "Apply for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available." },
+      { property: "og:title", content: "Apply for Allocation | Syndicate" },
+      { property: "og:description", content: "Limited syndicate positions for the Syndicate RS500 build." },
     ],
   }),
   component: ApplyPage,
@@ -19,7 +19,7 @@ const STEPS = [
   { n: "01", t: "Register Interest", b: "Submit the form below. We respond within 48 hours." },
   { n: "02", t: "Discovery Call", b: "A 30-min call to walk through the syndicate model and answer questions." },
   { n: "03", t: "Allocation Offer", b: "Receive a formal allocation document outlining cost, structure, and timeline." },
-  { n: "04", t: "Secure Position", b: "Sign and fund. You're in. Welcome to Vision148." },
+  { n: "04", t: "Secure Position", b: "Sign and fund. You're in. Welcome to Syndicate." },
 ];
 
 function ApplyPage() {
@@ -107,7 +107,7 @@ function ApplyPage() {
                   name="message"
                   rows={5}
                   className="w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors resize-none"
-                  placeholder="Your background, what drew you to Vision148, any questions…"
+                  placeholder="Your background, what drew you to Syndicate, any questions…"
                 />
               </div>
               <button

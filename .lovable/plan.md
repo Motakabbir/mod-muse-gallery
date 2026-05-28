@@ -1,10 +1,10 @@
 
-# Vision148 — Syndicated Restomod Replica
+# Syndicate — Syndicated Restomod Replica
 
 A cinematic, dark-luxury single-page site replicating syndicatedrestomod.vercel.app, with richer visuals (AI-generated car imagery, hero video) and a sharpened modern design system.
 
 ## Stack
-- Scaffold a new `web_app:vision148` (TanStack Start + Tailwind, default Lovable template).
+- Scaffold a new `web_app:Syndicate` (TanStack Start + Tailwind, default Lovable template).
 - No backend needed (static marketing site). Forms link to a simple "Apply" section.
 
 ## Design system
@@ -14,7 +14,7 @@ A cinematic, dark-luxury single-page site replicating syndicatedrestomod.vercel.
 - Sticky transparent nav that gains background on scroll.
 
 ## Sections (single landing page)
-1. **Hero** — Full-screen looping background video of a carbon-fiber RS500 panel, animated kicker `● VISION148`, headline "Be Part of the Creation of an Icon", subline, primary "Apply for Allocation" + ghost "Explore Vision" CTAs.
+1. **Hero** — Full-screen looping background video of a carbon-fiber RS500 panel, animated kicker `● Syndicate`, headline "Be Part of the Creation of an Icon", subline, primary "Apply for Allocation" + ghost "Explore Syndicate" CTAs.
 2. **Intro** — "Not Just Ownership. Participation." with large editorial copy.
 3. **Three Pillars** — 3-card grid (One-of-One Build / World-Class Partners / Exclusive Access) with generated images and pillar numbers.
 4. **The Car** — Split layout, large RS500 reimagined image + key highlights list (1-of-1, engineering-led, heritage, road/track).

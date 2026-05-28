@@ -138,7 +138,7 @@ const rs500HeroUrl = "https://thecarcrowd.uk/wp-content/uploads/2026/02/17649537
 
 function Hero() {
   return (
-    <section id="top" className="relative h-screen min-h-[720px] w-full overflow-hidden grain">
+    <section id="top" className="relative min-h-screen w-full overflow-hidden grain flex items-center justify-center py-24 md:pt-28 md:pb-20">
       <video
         src={heroVideo}
         autoPlay
@@ -151,10 +151,10 @@ function Hero() {
       <div className="absolute inset-0 noise-bg" />
       <div className="absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" />
       <div className="absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow" style={{ animationDelay: "2s" }} />
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+      <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-6">
         <div className="inline-flex items-center gap-2 glass-acid rounded-full px-5 py-2 mb-8 animate-in fade-in slide-in-from-bottom duration-1000">
           <span className="h-1.5 w-1.5 rounded-full bg-acid animate-pulse" />
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">Vision148 · Now Forming</span>
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">Syndicate · Now Forming</span>
         </div>
         <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.9] max-w-6xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100">
           <span className="text-gradient-bone">Be Part of the</span>
@@ -166,7 +166,7 @@ function Hero() {
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
           <Link to="/apply" className="btn-acid">Apply for Allocation →</Link>
-          <a href="#intro" className="btn-ghost">Explore Vision</a>
+          <a href="#intro" className="btn-ghost">Explore Syndicate</a>
         </div>
         <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500">
           {[
@@ -249,7 +249,7 @@ function Pillars() {
     <section className="relative py-32 px-6 bg-carbon overflow-hidden">
       <div className="absolute inset-0 noise-bg pointer-events-none" />
       <div className="mx-auto max-w-7xl">
-        <SectionLabel kicker="Why Vision148" title={<>Built on three pillars.</>} />
+        <SectionLabel kicker="Why Syndicate" title={<>Built on three pillars.</>} />
         <div className="grid md:grid-cols-3 gap-8">
           {PILLARS.map((p) => (
             <article key={p.n} className="reveal group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift">
@@ -495,7 +495,7 @@ function Partners() {
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Partners" title={<>Built with <span className="text-acid">specialists.</span></>} />
         <p className="reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed">
-          The Vision148 RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing,
+          The Syndicate RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing,
           and specialist car builds.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10">

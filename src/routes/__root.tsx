@@ -72,10 +72,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Vision148 | Syndicated Restomod Build" },
+      { title: "Syndicate | Syndicated Restomod Build" },
       { name: "description", content: "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open." },
       { name: "author", content: "Syndicated Restomod" },
-      { property: "og:title", content: "Vision148 | Syndicated Restomod Build" },
+      { property: "og:title", content: "Syndicate | Syndicated Restomod Build" },
       { property: "og:description", content: "Syndicated restomod builds powered by TheCarCrowd." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

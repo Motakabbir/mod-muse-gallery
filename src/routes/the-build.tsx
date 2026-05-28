@@ -10,9 +10,9 @@ import heroImg from "../assets/build-process.jpg";
 export const Route = createFileRoute("/the-build")({
   head: () => ({
     meta: [
-      { title: "The Build | Vision148 RS500 Restomod" },
-      { name: "description", content: "Four phases of the Vision148 build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open." },
-      { property: "og:title", content: "The Build | Vision148" },
+      { title: "The Build | Syndicate RS500 Restomod" },
+      { name: "description", content: "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open." },
+      { property: "og:title", content: "The Build | Syndicate" },
       { property: "og:description", content: "Engineered in the open. Every stage documented." },
     ],
   }),

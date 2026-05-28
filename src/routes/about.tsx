@@ -7,10 +7,10 @@ import aboutDetail from "../assets/about-detail.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Vision148 | Syndicated Restomod Build" },
-      { name: "description", content: "Meet the team behind Vision148. A syndicated restomod build powered by passion, precision engineering, and world-class partners." },
-      { property: "og:title", content: "About Us — Vision148 | Syndicated Restomod Build" },
-      { property: "og:description", content: "Meet the team behind Vision148. A syndicated restomod build powered by passion, precision engineering, and world-class partners." },
+      { title: "About Us — Syndicate | Syndicated Restomod Build" },
+      { name: "description", content: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners." },
+      { property: "og:title", content: "About Us — Syndicate | Syndicated Restomod Build" },
+      { property: "og:description", content: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners." },
     ],
   }),
   component: AboutPage,
@@ -29,7 +29,7 @@ function AboutPage() {
             Engineered To <span className="text-acid">Last</span>.
           </>
         }
-        subtitle="Vision148 is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore."
+        subtitle="Syndicate is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore."
         image={aboutHero}
       />
 
@@ -42,7 +42,7 @@ function AboutPage() {
               Reimagine What A<br />Restomod Can Be
             </h2>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
-              Traditional restorations preserve the past. Vision148 builds on it. We take iconic rally-bred
+              Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred
               silhouettes and infuse them with modern carbon engineering, additive manufacturing, and
               motorsport-grade safety — without losing the analog soul that makes these cars magical.
             </p>

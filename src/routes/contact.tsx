@@ -6,10 +6,10 @@ import { useState } from "react";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Vision148 | Syndicated Restomod Build" },
-      { name: "description", content: "Get in touch with the Vision148 team. Press, partnership, and syndicate inquiries welcome." },
-      { property: "og:title", content: "Contact — Vision148 | Syndicated Restomod Build" },
-      { property: "og:description", content: "Get in touch with the Vision148 team. Press, partnership, and syndicate inquiries welcome." },
+      { title: "Contact — Syndicate | Syndicated Restomod Build" },
+      { name: "description", content: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome." },
+      { property: "og:title", content: "Contact — Syndicate | Syndicated Restomod Build" },
+      { property: "og:description", content: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome." },
     ],
   }),
   component: ContactPage,
@@ -70,7 +70,7 @@ function ContactPage() {
             <div className="mt-12 pt-8 border-t border-white/10">
               <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-3">Workshop</div>
               <p className="text-bone/70 leading-relaxed">
-                Vision148 Build Facility<br />
+                Syndicate Build Facility<br />
                 Unit 7, Silverstone Park<br />
                 Northamptonshire, NN12 8TN<br />
                 United Kingdom
@@ -159,7 +159,7 @@ function ContactPage() {
           <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">Questions?</div>
           <h2 className="font-display text-4xl md:text-5xl mb-6">Common Questions</h2>
           <p className="text-bone/70 text-lg max-w-2xl mx-auto mb-10">
-            Everything you need to know about joining the Vision148 syndicate, from allocation to ownership structure.
+            Everything you need to know about joining the Syndicate syndicate, from allocation to ownership structure.
           </p>
           <a
             href="/events"
