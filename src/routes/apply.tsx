@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import heroImg from "../assets/rs500-hero.jpg";
+import heroVideo from "../assets/video.mp4";
 
 export const Route = createFileRoute("/apply")({
   head: () => ({
@@ -33,7 +34,7 @@ function ApplyPage() {
         kicker="Syndicate Availability"
         title={<>Apply for <span className="text-acid">Allocation.</span></>}
         subtitle="A fixed number of syndicate positions. Strict allocation structure. Early applicants prioritised. Once filled, the opportunity closes."
-        image={heroImg}
+        video={heroVideo}
       />
 
       <section className="py-24 px-6 bg-carbon border-b border-white/10">

@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import aboutHero from "../assets/about-hero.jpg";
 import aboutDetail from "../assets/about-detail.jpg";
+import videoPillarOne from "../assets/10825391-hd_1920_1080_24fps.mp4";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -30,7 +31,7 @@ function AboutPage() {
           </>
         }
         subtitle="Syndicate is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore."
-        image={aboutHero}
+        video={videoPillarOne}
       />
 
       {/* Mission */}

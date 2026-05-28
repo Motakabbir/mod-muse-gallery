@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import { useState } from "react";
+import videoPillarThree from "../assets/14209297_3840_2160_24fps.mp4";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -95,7 +96,7 @@ function EventsPage() {
           </>
         }
         subtitle="Join us at the track, in the workshop, and everywhere in between. Every question answered below."
-        image="/src/assets/pillar-experience.jpg"
+        video={videoPillarThree}
       />
 
       {/* Events */}

@@ -158,20 +158,33 @@ export function PageHero({
   title,
   subtitle,
   image,
+  video,
 }: {
   kicker: string;
   title: React.ReactNode;
   subtitle?: string;
-  image: string;
+  image?: string;
+  video?: string;
 }) {
   return (
     <section className="relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10">
-      <img
-        src={image}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-40 scale-110"
-        loading="eager"
-      />
+      {video ? (
+        <video
+          src={video}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover opacity-30"
+        />
+      ) : image ? (
+        <img
+          src={image}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-40 scale-110"
+          loading="eager"
+        />
+      ) : null}
       <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/80 to-ink" />
       <div className="absolute inset-0 noise-bg" />
       <div className="absolute top-1/3 right-10 h-72 w-72 rounded-full bg-acid/10 blur-[120px] float-slow" />

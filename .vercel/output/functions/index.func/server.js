@@ -4639,8 +4639,8 @@ var init_constants = __esm({
 });
 
 // node_modules/seroval/dist/esm/production/index.mjs
-function c(e, r, t, n2, a, s, i2, u2, l2, g7, S, d2) {
-  return { t: e, i: r, s: t, c: n2, m: a, p: s, e: i2, a: u2, f: l2, b: g7, o: S, l: d2 };
+function c(e, r, t, n2, a, s, i2, u2, l2, g8, S, d2) {
+  return { t: e, i: r, s: t, c: n2, m: a, p: s, e: i2, a: u2, f: l2, b: g8, o: S, l: d2 };
 }
 function B(e) {
   return c(2, o, e, o, o, o, o, o, o, o, o, o);
@@ -5632,8 +5632,8 @@ function Wo(e, r, t, n2, a) {
   let s = e.base, i2 = f(e, a), u2 = Number(n2), l2 = u2 >= 0 && u2.toString() === n2 || Mr(n2);
   if (F(s, a)) l2 && u2 !== u2 ? jr(e, r.i, n2, i2) : Ne(e, r.i, l2 ? n2 : '"' + n2 + '"', i2);
   else {
-    let g7 = s.assignments;
-    s.assignments = t, l2 && u2 !== u2 ? jr(e, r.i, n2, i2) : Ne(e, r.i, l2 ? n2 : '"' + n2 + '"', i2), s.assignments = g7;
+    let g8 = s.assignments;
+    s.assignments = t, l2 && u2 !== u2 ? jr(e, r.i, n2, i2) : Ne(e, r.i, l2 ? n2 : '"' + n2 + '"', i2), s.assignments = g8;
   }
 }
 function Go(e, r, t, n2, a) {
@@ -5722,10 +5722,10 @@ function tn(e, r, t, n2, a) {
 function Xo(e, r) {
   let t = ho, n2 = r.e.k, a = n2.length, s = r.i, i2 = r.f, u2 = m(e, i2.i), l2 = e.base;
   if (a > 0) {
-    let g7 = r.e.v;
+    let g8 = r.e.v;
     l2.stack.push(s);
-    let S = tn(e, s, n2[0], g7[0], u2);
-    for (let d2 = 1, G2 = S; d2 < a; d2++) G2 = tn(e, s, n2[d2], g7[d2], u2), S += (G2 && S && ",") + G2;
+    let S = tn(e, s, n2[0], g8[0], u2);
+    for (let d2 = 1, G2 = S; d2 < a; d2++) G2 = tn(e, s, n2[d2], g8[d2], u2), S += (G2 && S && ",") + G2;
     l2.stack.pop(), S && (t += "([" + S + "])");
   }
   return i2.t === 26 && (w(l2, i2.i), t = "(" + f(e, i2) + "," + t + ")"), t;
@@ -5923,8 +5923,8 @@ function fr(e, r) {
   if (n2 == null) return t;
   let a = sn(e.base), s = m(e, n2), i2 = e.state.scopeId, u2 = i2 == null ? "" : le, l2 = a ? "(" + t + "," + a + s + ")" : t;
   if (u2 === "") return r.t === 10 && !a ? "(" + l2 + ")" : l2;
-  let g7 = i2 == null ? "()" : "(" + le + '["' + y(i2) + '"])';
-  return "(" + ir([u2], l2) + ")" + g7;
+  let g8 = i2 == null ? "()" : "(" + le + '["' + y(i2) + '"])';
+  return "(" + ir([u2], l2) + ")" + g8;
 }
 function va(e) {
   return { alive: true, pending: 0, initial: true, buffer: [], onParse: e.onParse, onError: e.onError, onDone: e.onDone };
@@ -6333,12 +6333,12 @@ var init_production = __esm({
     bt = An.toString();
     vt = En.toString();
     Pr = () => {
-      let e = [], r = [], t = true, n2 = false, a = 0, s = (l2, g7, S) => {
-        for (S = 0; S < a; S++) r[S] && r[S][g7](l2);
-      }, i2 = (l2, g7, S, d2) => {
-        for (g7 = 0, S = e.length; g7 < S; g7++) d2 = e[g7], !t && g7 === S - 1 ? l2[n2 ? "return" : "throw"](d2) : l2.next(d2);
-      }, u2 = (l2, g7) => (t && (g7 = a++, r[g7] = l2), i2(l2), () => {
-        t && (r[g7] = r[a], r[a--] = void 0);
+      let e = [], r = [], t = true, n2 = false, a = 0, s = (l2, g8, S) => {
+        for (S = 0; S < a; S++) r[S] && r[S][g8](l2);
+      }, i2 = (l2, g8, S, d2) => {
+        for (g8 = 0, S = e.length; g8 < S; g8++) d2 = e[g8], !t && g8 === S - 1 ? l2[n2 ? "return" : "throw"](d2) : l2.next(d2);
+      }, u2 = (l2, g8) => (t && (g8 = a++, r[g8] = l2), i2(l2), () => {
+        t && (r[g8] = r[a], r[a--] = void 0);
       });
       return { __SEROVAL_STREAM__: true, on: (l2) => u2(l2), next: (l2) => {
         t && (e.push(l2), s(l2, "next"));
@@ -6373,7 +6373,7 @@ var init_production = __esm({
         let d2 = u2.shift();
         d2 && d2.s({ done: true, value: S }), l2(), a = i2.length, i2.push(S);
       } });
-      let g7 = { [e]: () => g7, next: () => {
+      let g8 = { [e]: () => g8, next: () => {
         if (a === -1) {
           let G2 = n2++;
           if (G2 >= i2.length) {
@@ -6388,7 +6388,7 @@ var init_production = __esm({
         if (s) throw d2;
         return { done: true, value: d2 };
       } };
-      return g7;
+      return g8;
     };
     Et = Tr.toString();
     Or = (e) => {
@@ -38976,16 +38976,16 @@ var init_server4 = __esm({
   }
 });
 
-// dist/server/assets/_tanstack-start-manifest_v-ubxXfiF6.js
-var tanstack_start_manifest_v_ubxXfiF6_exports = {};
-__export(tanstack_start_manifest_v_ubxXfiF6_exports, {
+// dist/server/assets/_tanstack-start-manifest_v-BgIRWuDf.js
+var tanstack_start_manifest_v_BgIRWuDf_exports = {};
+__export(tanstack_start_manifest_v_BgIRWuDf_exports, {
   tsrStartManifest: () => tsrStartManifest
 });
 var tsrStartManifest;
-var init_tanstack_start_manifest_v_ubxXfiF6 = __esm({
-  "dist/server/assets/_tanstack-start-manifest_v-ubxXfiF6.js"() {
+var init_tanstack_start_manifest_v_BgIRWuDf = __esm({
+  "dist/server/assets/_tanstack-start-manifest_v-BgIRWuDf.js"() {
     "use strict";
-    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-DPUguAWr.js"] }, "/": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-DGFte6KP.js", "/assets/pillar-one-of-one-C-tPTKkE.js", "/assets/video-C3zcWsov.js", "/assets/site-aYgtBh75.js"] }, "/about": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-CXUBXCwH.js", "/assets/site-aYgtBh75.js"] }, "/apply": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-Dht8lOsq.js", "/assets/site-aYgtBh75.js", "/assets/rs500-hero-e1hbtRkb.js"] }, "/contact": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-DX1X56Hr.js", "/assets/site-aYgtBh75.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-h6knpQLJ.js", "/assets/site-aYgtBh75.js", "/assets/gallery-4-Cs_m4l1W.js", "/assets/rs500-hero-e1hbtRkb.js", "/assets/pillar-one-of-one-C-tPTKkE.js"] }, "/events": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-B9m1fREd.js", "/assets/site-aYgtBh75.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-CIOPXM5l.js", "/assets/site-aYgtBh75.js", "/assets/gallery-4-Cs_m4l1W.js", "/assets/video-C3zcWsov.js", "/assets/rs500-hero-e1hbtRkb.js"] } }, clientEntry: "/assets/index-DPUguAWr.js" });
+    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-UHyjAwJo.js"] }, "/": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-B1vtqfPE.js", "/assets/pillar-one-of-one-C-tPTKkE.js", "/assets/carbon-texture-DZdQdLDm.js", "/assets/video-CgAy-CTL.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js", "/assets/site-Dg-grhno.js"] }, "/about": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/about.tsx", children: void 0, preloads: ["/assets/about--e4yl0IS.js", "/assets/site-Dg-grhno.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js"] }, "/apply": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-BZqqzxXn.js", "/assets/site-Dg-grhno.js", "/assets/video-CgAy-CTL.js"] }, "/contact": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-BwEnrk0w.js", "/assets/site-Dg-grhno.js", "/assets/video-CgAy-CTL.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-kCnBLXFF.js", "/assets/site-Dg-grhno.js", "/assets/gallery-4-BgsoQP7W.js", "/assets/pillar-one-of-one-C-tPTKkE.js", "/assets/video-CgAy-CTL.js"] }, "/events": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-DJ62CAD4.js", "/assets/site-Dg-grhno.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-Cw5WiEkT.js", "/assets/site-Dg-grhno.js", "/assets/gallery-4-BgsoQP7W.js", "/assets/carbon-texture-DZdQdLDm.js", "/assets/video-CgAy-CTL.js"] } }, clientEntry: "/assets/index-UHyjAwJo.js" });
   }
 });
 
@@ -41178,7 +41178,7 @@ var init_modern2 = __esm({
   }
 });
 
-// dist/server/assets/site-DlTlb9ZS.js
+// dist/server/assets/site-CobXpVdH.js
 function useReveal() {
   (0, import_react10.useEffect)(() => {
     const els = document.querySelectorAll(".reveal");
@@ -41322,10 +41322,21 @@ function PageHero({
   kicker,
   title,
   subtitle,
-  image
+  image,
+  video
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("section", { className: "relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+    video ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+      "video",
+      {
+        src: video,
+        autoPlay: true,
+        muted: true,
+        loop: true,
+        playsInline: true,
+        className: "absolute inset-0 h-full w-full object-cover opacity-30"
+      }
+    ) : image ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
       "img",
       {
         src: image,
@@ -41333,7 +41344,7 @@ function PageHero({
         className: "absolute inset-0 h-full w-full object-cover opacity-40 scale-110",
         loading: "eager"
       }
-    ),
+    ) : null,
     /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/80 to-ink" }),
     /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "absolute inset-0 noise-bg" }),
     /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "absolute top-1/3 right-10 h-72 w-72 rounded-full bg-acid/10 blur-[120px] float-slow" }),
@@ -41352,8 +41363,8 @@ function PageHero({
   ] });
 }
 var import_jsx_runtime17, import_react10, logo, NAV;
-var init_site_DlTlb9ZS = __esm({
-  "dist/server/assets/site-DlTlb9ZS.js"() {
+var init_site_CobXpVdH = __esm({
+  "dist/server/assets/site-CobXpVdH.js"() {
     "use strict";
     import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
@@ -41371,13 +41382,14 @@ var init_site_DlTlb9ZS = __esm({
   }
 });
 
-// dist/server/assets/gallery-4-B77v6cv7.js
-var g6, g5, g1, g2, g3, g4;
-var init_gallery_4_B77v6cv7 = __esm({
-  "dist/server/assets/gallery-4-B77v6cv7.js"() {
+// dist/server/assets/gallery-4-C4GIQ6w3.js
+var g6, g5, g7, g1, g2, g3, g4;
+var init_gallery_4_C4GIQ6w3 = __esm({
+  "dist/server/assets/gallery-4-C4GIQ6w3.js"() {
     "use strict";
     g6 = "/assets/build-print-BrmnBX8p.jpg";
     g5 = "/assets/build-finish-lYLn3Dae.jpg";
+    g7 = "/assets/rs500-hero-wS5GBslM.jpg";
     g1 = "/assets/gallery-1-DPJcoFdt.jpg";
     g2 = "/assets/gallery-2-D4Z8mTrB.jpg";
     g3 = "/assets/gallery-3-CD6kuC2Y.jpg";
@@ -41385,29 +41397,27 @@ var init_gallery_4_B77v6cv7 = __esm({
   }
 });
 
-// dist/server/assets/video-DGl1YphU.js
-var buildProcess, carbonTexture, heroVideo;
-var init_video_DGl1YphU = __esm({
-  "dist/server/assets/video-DGl1YphU.js"() {
+// dist/server/assets/carbon-texture-Dj-_C2wt.js
+var carbonTexture;
+var init_carbon_texture_Dj_C2wt = __esm({
+  "dist/server/assets/carbon-texture-Dj-_C2wt.js"() {
     "use strict";
-    buildProcess = "/assets/build-process-CmYP-Wwp.jpg";
     carbonTexture = "/assets/carbon-texture-DkFX5VY6.jpg";
-    heroVideo = "/assets/video-CEQfNafy.mp4";
   }
 });
 
-// dist/server/assets/rs500-hero-C00dfrgd.js
-var heroImg;
-var init_rs500_hero_C00dfrgd = __esm({
-  "dist/server/assets/rs500-hero-C00dfrgd.js"() {
+// dist/server/assets/video-btH4iMvl.js
+var videoCarSection;
+var init_video_btH4iMvl = __esm({
+  "dist/server/assets/video-btH4iMvl.js"() {
     "use strict";
-    heroImg = "/assets/rs500-hero-wS5GBslM.jpg";
+    videoCarSection = "/assets/video-CEQfNafy.mp4";
   }
 });
 
-// dist/server/assets/the-build-DiG5DvG9.js
-var the_build_DiG5DvG9_exports = {};
-__export(the_build_DiG5DvG9_exports, {
+// dist/server/assets/the-build-GZ9eR7rp.js
+var the_build_GZ9eR7rp_exports = {};
+__export(the_build_GZ9eR7rp_exports, {
   component: () => TheBuildPage
 });
 function BuildGallery() {
@@ -41579,7 +41589,7 @@ function TheBuildPage() {
     /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(PageHero, { kicker: "The Build Process", title: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_jsx_runtime18.Fragment, { children: [
       "Engineered ",
       /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: "text-acid", children: "In The Open." })
-    ] }), subtitle: "Every stage documented. Every decision visible. From bare shell to first ignition, syndicate members travel with the build from day one.", image: buildProcess }),
+    ] }), subtitle: "Every stage documented. Every decision visible. From bare shell to first ignition, syndicate members travel with the build from day one.", video: videoCarSection }),
     /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("section", { className: "py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "mx-auto max-w-7xl space-y-32", children: PHASES.map((p3, i2) => /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("article", { className: `reveal grid lg:grid-cols-12 gap-12 items-center ${i2 % 2 ? "lg:[&>*:first-child]:order-2" : ""}`, children: [
       /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "lg:col-span-7", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "overflow-hidden border border-white/10 group", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("img", { src: p3.img, alt: p3.t, loading: "lazy", className: "w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" }) }) }),
       /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "lg:col-span-5", children: [
@@ -41622,21 +41632,22 @@ function TheBuildPage() {
     /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime18, import_react11, buildStrip, buildScan, MEDIA, FILTERS, PHASES, SPECS;
-var init_the_build_DiG5DvG9 = __esm({
-  "dist/server/assets/the-build-DiG5DvG9.js"() {
+var import_jsx_runtime18, import_react11, buildStrip, buildScan, buildProcess, MEDIA, FILTERS, PHASES, SPECS;
+var init_the_build_GZ9eR7rp = __esm({
+  "dist/server/assets/the-build-GZ9eR7rp.js"() {
     "use strict";
     import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DlTlb9ZS();
+    init_site_CobXpVdH();
     import_react11 = __toESM(require_react(), 1);
-    init_gallery_4_B77v6cv7();
-    init_video_DGl1YphU();
-    init_rs500_hero_C00dfrgd();
+    init_gallery_4_C4GIQ6w3();
+    init_carbon_texture_Dj_C2wt();
+    init_video_btH4iMvl();
     buildStrip = "/assets/build-strip-BMlk6c2t.jpg";
     buildScan = "/assets/build-scan-CdtWldBl.jpg";
+    buildProcess = "/assets/build-process-CmYP-Wwp.jpg";
     MEDIA = [
-      { kind: "video", src: heroVideo, poster: heroImg, title: "Syndicate \u2014 Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
+      { kind: "video", src: videoCarSection, poster: g7, title: "Syndicate \u2014 Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
       { kind: "image", src: buildStrip, title: "Bare Shell", caption: "Car #148 stripped to bare metal. Every component catalogued.", phase: "Phase 01" },
       { kind: "image", src: buildScan, title: "Digital Twin", caption: "Sub-millimetre 3D scan of the original shell.", phase: "Phase 02" },
       { kind: "image", src: g1, title: "CAD Surfacing", caption: "Aero and structural geometry refined in CAD.", phase: "Phase 02" },
@@ -41700,9 +41711,18 @@ var init_the_build_DiG5DvG9 = __esm({
   }
 });
 
-// dist/server/assets/events-DJxeGSsN.js
-var events_DJxeGSsN_exports = {};
-__export(events_DJxeGSsN_exports, {
+// dist/server/assets/14209297_3840_2160_24fps-BgWRjoqf.js
+var videoPillarThree;
+var init_fps_BgWRjoqf = __esm({
+  "dist/server/assets/14209297_3840_2160_24fps-BgWRjoqf.js"() {
+    "use strict";
+    videoPillarThree = "/assets/14209297_3840_2160_24fps-DVxx643l.mp4";
+  }
+});
+
+// dist/server/assets/events-CqkwP6Qb.js
+var events_CqkwP6Qb_exports = {};
+__export(events_CqkwP6Qb_exports, {
   component: () => EventsPage
 });
 function EventsPage() {
@@ -41714,7 +41734,7 @@ function EventsPage() {
       "Events & ",
       /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("span", { className: "text-acid", children: "Answers" }),
       "."
-    ] }), subtitle: "Join us at the track, in the workshop, and everywhere in between. Every question answered below.", image: "/src/assets/pillar-experience.jpg" }),
+    ] }), subtitle: "Join us at the track, in the workshop, and everywhere in between. Every question answered below.", video: videoPillarThree }),
     /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
       /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "reveal flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { children: [
@@ -41764,13 +41784,14 @@ function EventsPage() {
   ] });
 }
 var import_jsx_runtime19, import_react12, EVENTS, FAQS;
-var init_events_DJxeGSsN = __esm({
-  "dist/server/assets/events-DJxeGSsN.js"() {
+var init_events_CqkwP6Qb = __esm({
+  "dist/server/assets/events-CqkwP6Qb.js"() {
     "use strict";
     import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DlTlb9ZS();
+    init_site_CobXpVdH();
     import_react12 = __toESM(require_react(), 1);
+    init_fps_BgWRjoqf();
     EVENTS = [{
       date: "MAR 2026",
       title: "Build Facility Open Day",
@@ -41833,9 +41854,9 @@ var init_pillar_one_of_one_DvC5spsE = __esm({
   }
 });
 
-// dist/server/assets/design-gallery-D5F5a-w8.js
-var design_gallery_D5F5a_w8_exports = {};
-__export(design_gallery_D5F5a_w8_exports, {
+// dist/server/assets/design-gallery-C0wg5q1t.js
+var design_gallery_C0wg5q1t_exports = {};
+__export(design_gallery_C0wg5q1t_exports, {
   component: () => GalleryPage
 });
 function GalleryPage() {
@@ -41845,7 +41866,7 @@ function GalleryPage() {
     /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(PageHero, { kicker: "Design Gallery", title: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(import_jsx_runtime20.Fragment, { children: [
       "A Library of ",
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "text-acid", children: "Intent." })
-    ] }), subtitle: "Renders, scans, details, materials, and process imagery from the Syndicate design phase \u2014 a living archive of the build as it develops.", image: g1 }),
+    ] }), subtitle: "Renders, scans, details, materials, and process imagery from the Syndicate design phase \u2014 a living archive of the build as it develops.", video: videoCarSection }),
     /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("section", { className: "py-24 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "mx-auto max-w-7xl", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "grid md:grid-cols-4 grid-cols-2 auto-rows-[16rem] gap-4", children: ITEMS.map((it2, i2) => /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("figure", { className: `reveal relative overflow-hidden border border-white/10 group bg-ink ${it2.span ?? ""}`, children: [
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("img", { src: it2.img, alt: it2.t, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
       /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" }),
@@ -41870,15 +41891,15 @@ function GalleryPage() {
   ] });
 }
 var import_jsx_runtime20, import_react13, ITEMS;
-var init_design_gallery_D5F5a_w8 = __esm({
-  "dist/server/assets/design-gallery-D5F5a-w8.js"() {
+var init_design_gallery_C0wg5q1t = __esm({
+  "dist/server/assets/design-gallery-C0wg5q1t.js"() {
     "use strict";
     import_jsx_runtime20 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DlTlb9ZS();
-    init_gallery_4_B77v6cv7();
-    init_rs500_hero_C00dfrgd();
+    init_site_CobXpVdH();
+    init_gallery_4_C4GIQ6w3();
     init_pillar_one_of_one_DvC5spsE();
+    init_video_btH4iMvl();
     import_react13 = __toESM(require_react(), 1);
     ITEMS = [{
       img: g1,
@@ -41907,7 +41928,7 @@ var init_design_gallery_D5F5a_w8 = __esm({
       t: "Composite Layup",
       tag: "Manufacturing"
     }, {
-      img: heroImg,
+      img: g7,
       t: "Workshop Capture",
       tag: "On Set",
       span: "md:col-span-2"
@@ -41919,9 +41940,9 @@ var init_design_gallery_D5F5a_w8 = __esm({
   }
 });
 
-// dist/server/assets/contact-DjxINe9B.js
-var contact_DjxINe9B_exports = {};
-__export(contact_DjxINe9B_exports, {
+// dist/server/assets/contact-C1RoL7ls.js
+var contact_C1RoL7ls_exports = {};
+__export(contact_C1RoL7ls_exports, {
   component: () => ContactPage
 });
 function ContactPage() {
@@ -41950,7 +41971,7 @@ function ContactPage() {
       "Let's ",
       /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("span", { className: "text-acid", children: "Talk" }),
       "."
-    ] }), subtitle: "Press inquiries, partnership proposals, or questions about the syndicate \u2014 we read every message personally.", image: contactHero }),
+    ] }), subtitle: "Press inquiries, partnership proposals, or questions about the syndicate \u2014 we read every message personally.", video: videoCarSection }),
     /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "mx-auto max-w-7xl grid md:grid-cols-2 gap-16", children: [
       /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "reveal", children: [
         /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Direct Lines" }),
@@ -42041,20 +42062,20 @@ function ContactPage() {
     /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime21, import_react14, contactHero;
-var init_contact_DjxINe9B = __esm({
-  "dist/server/assets/contact-DjxINe9B.js"() {
+var import_jsx_runtime21, import_react14;
+var init_contact_C1RoL7ls = __esm({
+  "dist/server/assets/contact-C1RoL7ls.js"() {
     "use strict";
     import_jsx_runtime21 = __toESM(require_jsx_runtime(), 1);
-    init_site_DlTlb9ZS();
+    init_site_CobXpVdH();
     import_react14 = __toESM(require_react(), 1);
-    contactHero = "/assets/contact-hero-C7pgigwY.jpg";
+    init_video_btH4iMvl();
   }
 });
 
-// dist/server/assets/apply-BLPwbbqi.js
-var apply_BLPwbbqi_exports = {};
-__export(apply_BLPwbbqi_exports, {
+// dist/server/assets/apply-DC6JK--s.js
+var apply_DC6JK_s_exports = {};
+__export(apply_DC6JK_s_exports, {
   component: () => ApplyPage
 });
 function ApplyPage() {
@@ -42065,7 +42086,7 @@ function ApplyPage() {
     /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(PageHero, { kicker: "Syndicate Availability", title: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
       "Apply for ",
       /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "text-acid", children: "Allocation." })
-    ] }), subtitle: "A fixed number of syndicate positions. Strict allocation structure. Early applicants prioritised. Once filled, the opportunity closes.", image: heroImg }),
+    ] }), subtitle: "A fixed number of syndicate positions. Strict allocation structure. Early applicants prioritised. Once filled, the opportunity closes.", video: videoCarSection }),
     /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("section", { className: "py-24 px-6 bg-carbon border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
       /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-12 reveal", children: "How It Works" }),
       /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "grid md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: STEPS.map((s) => /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
@@ -42132,14 +42153,14 @@ function Field({
   ] });
 }
 var import_jsx_runtime22, import_react15, STEPS;
-var init_apply_BLPwbbqi = __esm({
-  "dist/server/assets/apply-BLPwbbqi.js"() {
+var init_apply_DC6JK_s = __esm({
+  "dist/server/assets/apply-DC6JK--s.js"() {
     "use strict";
     import_jsx_runtime22 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     import_react15 = __toESM(require_react(), 1);
-    init_site_DlTlb9ZS();
-    init_rs500_hero_C00dfrgd();
+    init_site_CobXpVdH();
+    init_video_btH4iMvl();
     STEPS = [{
       n: "01",
       t: "Register Interest",
@@ -42160,9 +42181,18 @@ var init_apply_BLPwbbqi = __esm({
   }
 });
 
-// dist/server/assets/about-DP_o4eqP.js
-var about_DP_o4eqP_exports = {};
-__export(about_DP_o4eqP_exports, {
+// dist/server/assets/10825391-hd_1920_1080_24fps-DsLk95nk.js
+var videoPillarOne;
+var init_hd_1920_1080_24fps_DsLk95nk = __esm({
+  "dist/server/assets/10825391-hd_1920_1080_24fps-DsLk95nk.js"() {
+    "use strict";
+    videoPillarOne = "/assets/10825391-hd_1920_1080_24fps-DwLB906H.mp4";
+  }
+});
+
+// dist/server/assets/about-CM7wtYmL.js
+var about_CM7wtYmL_exports = {};
+__export(about_CM7wtYmL_exports, {
   component: () => AboutPage
 });
 function AboutPage() {
@@ -42177,7 +42207,7 @@ function AboutPage() {
       "Engineered To ",
       /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-acid", children: "Last" }),
       "."
-    ] }), subtitle: "Syndicate is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore.", image: aboutHero }),
+    ] }), subtitle: "Syndicate is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore.", video: videoPillarOne }),
     /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "mx-auto max-w-7xl grid md:grid-cols-2 gap-16 items-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "reveal", children: [
         /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Mission" }),
@@ -42254,27 +42284,27 @@ function AboutPage() {
     /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime23, import_react16, aboutHero, aboutDetail;
-var init_about_DP_o4eqP = __esm({
-  "dist/server/assets/about-DP_o4eqP.js"() {
+var import_jsx_runtime23, import_react16, aboutDetail;
+var init_about_CM7wtYmL = __esm({
+  "dist/server/assets/about-CM7wtYmL.js"() {
     "use strict";
     import_jsx_runtime23 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DlTlb9ZS();
+    init_site_CobXpVdH();
+    init_hd_1920_1080_24fps_DsLk95nk();
     import_react16 = __toESM(require_react(), 1);
-    aboutHero = "/assets/about-hero-7--oaZ8z.jpg";
     aboutDetail = "/assets/about-detail-BqasUOoI.jpg";
   }
 });
 
-// dist/server/assets/index-D_38RkTs.js
-var index_D_38RkTs_exports = {};
-__export(index_D_38RkTs_exports, {
+// dist/server/assets/index-Bv01sJS2.js
+var index_Bv01sJS2_exports = {};
+__export(index_Bv01sJS2_exports, {
   component: () => Index
 });
 function Hero() {
   return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("section", { id: "top", className: "relative min-h-screen w-full overflow-hidden grain flex items-center justify-center py-24 md:pt-28 md:pb-20", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("video", { src: heroVideo, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover" }),
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 noise-bg" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" }),
@@ -42375,9 +42405,9 @@ function Pillars() {
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(SectionLabel, { kicker: "Why Syndicate", title: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_jsx_runtime24.Fragment, { children: "Built on three pillars." }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: PILLARS.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("article", { className: "reveal group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: PILLARS.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("article", { className: "group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "aspect-[4/5] overflow-hidden relative", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("img", { src: p3.img, alt: p3.title, loading: "lazy", className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }),
+          p3.video ? /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("video", { src: p3.video, autoPlay: true, muted: true, loop: true, playsInline: true, className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }) : /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("img", { src: p3.img, alt: p3.title, loading: "lazy", className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }),
           /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" }),
           /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-acid", children: [
             "PILLAR ",
@@ -42395,8 +42425,8 @@ function Pillars() {
 }
 function TheCar() {
   return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("section", { id: "car", className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 items-center", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "lg:col-span-7 reveal", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "relative overflow-hidden border border-white/10", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("img", { src: rs500HeroUrl, alt: "Ford Sierra Cosworth RS500 reimagined", loading: "lazy", className: "w-full h-auto object-cover hover:scale-102 transition-transform duration-700" }),
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "lg:col-span-7 reveal", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "relative overflow-hidden border border-white/10 aspect-video", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "w-full h-full object-cover hover:scale-102 transition-transform duration-700" }),
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: "VRS500 Reimagined" }) })
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "lg:col-span-5 reveal", children: [
@@ -42419,7 +42449,7 @@ function LiveSyndicates() {
       "Live Syndicates. ",
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "text-acid", children: "Open Allocations." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: LIVE_SYNDICATES.map((s) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("article", { className: "reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300 flex flex-col justify-between", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: LIVE_SYNDICATES.map((s) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("article", { className: "group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300 flex flex-col justify-between", children: [
       /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "aspect-[16/10] overflow-hidden relative", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("img", { src: s.img, alt: s.title, loading: "lazy", className: "h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold", children: "Live" })
@@ -42444,7 +42474,7 @@ function RecentlyFunded() {
       "Recently Funded ",
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "text-acid", children: "Syndicates." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: RECENTLY_FUNDED.map((rf) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "reveal group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: RECENTLY_FUNDED.map((rf) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300", children: [
       /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "aspect-[16/10] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("img", { src: rf.img, alt: rf.title, loading: "lazy", className: "h-full w-full object-cover" }),
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute top-4 right-4 bg-white/10 backdrop-blur-md text-bone/90 px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase", children: "Fully Funded" })
@@ -42489,14 +42519,14 @@ function Partnership() {
 }
 function BuildProcess() {
   return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("section", { id: "build", className: "relative py-32 px-6 overflow-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("img", { src: buildProcess, alt: "", loading: "lazy", className: "absolute inset-0 h-full w-full object-cover opacity-20" }),
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover opacity-15 pointer-events-none" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-ink" }),
     /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "relative mx-auto max-w-7xl", children: [
       /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(SectionLabel, { kicker: "The Build Process", title: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(import_jsx_runtime24.Fragment, { children: [
         "Engineered ",
         /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "text-acid", children: "in the open." })
       ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "grid md:grid-cols-2 lg:grid-cols-4 gap-8", children: PROCESS.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "reveal border-t-2 border-acid pt-6", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "reveal-stagger grid md:grid-cols-2 lg:grid-cols-4 gap-8", children: PROCESS.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "border-t-2 border-acid pt-6", children: [
         /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-2", children: [
           "Phase ",
           p3.n
@@ -42637,21 +42667,25 @@ function Index() {
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime24, import_react17, pillarPartners, pillarExperience, PILLARS, PROCESS, PARTNERS, SYNDICATE_STEPS, BENEFITS, LIVE_SYNDICATES, RECENTLY_FUNDED, EVENTS2, rs500HeroUrl;
-var init_index_D_38RkTs = __esm({
-  "dist/server/assets/index-D_38RkTs.js"() {
+var import_jsx_runtime24, import_react17, pillarPartners, pillarExperience, PILLARS, PROCESS, PARTNERS, SYNDICATE_STEPS, BENEFITS, LIVE_SYNDICATES, RECENTLY_FUNDED, EVENTS2;
+var init_index_Bv01sJS2 = __esm({
+  "dist/server/assets/index-Bv01sJS2.js"() {
     "use strict";
     import_jsx_runtime24 = __toESM(require_jsx_runtime(), 1);
     init_pillar_one_of_one_DvC5spsE();
-    init_video_DGl1YphU();
+    init_carbon_texture_Dj_C2wt();
+    init_video_btH4iMvl();
+    init_hd_1920_1080_24fps_DsLk95nk();
+    init_fps_BgWRjoqf();
     init_esm5();
-    init_site_DlTlb9ZS();
+    init_site_CobXpVdH();
     import_react17 = __toESM(require_react(), 1);
     pillarPartners = "/assets/pillar-partners-DAa51pVo.jpg";
     pillarExperience = "/assets/pillar-experience-BiUq9AxC.jpg";
     PILLARS = [{
       n: "01",
       title: "One of One Build",
+      video: videoPillarOne,
       img: pillarOne,
       body: "There will never be another. Car #148 \u2014 the 148th of 500 RS500s ever built \u2014 reborn as a unique, documented, investment-grade restomod."
     }, {
@@ -42662,6 +42696,7 @@ var init_index_D_38RkTs = __esm({
     }, {
       n: "03",
       title: "Exclusive Access & Experience",
+      video: videoPillarThree,
       img: pillarExperience,
       body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations."
     }];
@@ -42795,13 +42830,12 @@ var init_index_D_38RkTs = __esm({
       tag: "Third Party Event",
       date: "July 2026"
     }];
-    rs500HeroUrl = "https://thecarcrowd.uk/wp-content/uploads/2026/02/1764953707_1-min.webp";
   }
 });
 
-// dist/server/assets/router-gFKmXs7N.js
-var router_gFKmXs7N_exports = {};
-__export(router_gFKmXs7N_exports, {
+// dist/server/assets/router-CAJpnEKt.js
+var router_CAJpnEKt_exports = {};
+__export(router_CAJpnEKt_exports, {
   getRouter: () => getRouter
 });
 function NotFoundComponent() {
@@ -42862,13 +42896,13 @@ function RootComponent() {
   return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Outlet, {}) });
 }
 var import_jsx_runtime25, appCss, Route$7, $$splitComponentImporter$6, Route$6, $$splitComponentImporter$5, Route$5, $$splitComponentImporter$4, Route$4, $$splitComponentImporter$3, Route$3, $$splitComponentImporter$2, Route$2, $$splitComponentImporter$1, Route$1, $$splitComponentImporter, Route2, TheBuildRoute, EventsRoute, DesignGalleryRoute, ContactRoute, ApplyRoute, AboutRoute, IndexRoute, rootRouteChildren, routeTree, getRouter;
-var init_router_gFKmXs7N = __esm({
-  "dist/server/assets/router-gFKmXs7N.js"() {
+var init_router_CAJpnEKt = __esm({
+  "dist/server/assets/router-CAJpnEKt.js"() {
     "use strict";
     init_modern2();
     init_esm5();
     import_jsx_runtime25 = __toESM(require_jsx_runtime(), 1);
-    appCss = "/assets/styles-Dbks98-a.css";
+    appCss = "/assets/styles-D9pE5nSV.css";
     Route$7 = createRootRouteWithContext()({
       head: () => ({
         meta: [
@@ -42895,7 +42929,7 @@ var init_router_gFKmXs7N = __esm({
       notFoundComponent: NotFoundComponent,
       errorComponent: ErrorComponent2
     });
-    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_DiG5DvG9(), the_build_DiG5DvG9_exports));
+    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_GZ9eR7rp(), the_build_GZ9eR7rp_exports));
     Route$6 = createFileRoute("/the-build")({
       head: () => ({
         meta: [{
@@ -42913,7 +42947,7 @@ var init_router_gFKmXs7N = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$6, "component")
     });
-    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_DJxeGSsN(), events_DJxeGSsN_exports));
+    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_CqkwP6Qb(), events_CqkwP6Qb_exports));
     Route$5 = createFileRoute("/events")({
       head: () => ({
         meta: [{
@@ -42931,7 +42965,7 @@ var init_router_gFKmXs7N = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$5, "component")
     });
-    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_D5F5a_w8(), design_gallery_D5F5a_w8_exports));
+    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_C0wg5q1t(), design_gallery_C0wg5q1t_exports));
     Route$4 = createFileRoute("/design-gallery")({
       head: () => ({
         meta: [{
@@ -42949,7 +42983,7 @@ var init_router_gFKmXs7N = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$4, "component")
     });
-    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_DjxINe9B(), contact_DjxINe9B_exports));
+    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_C1RoL7ls(), contact_C1RoL7ls_exports));
     Route$3 = createFileRoute("/contact")({
       head: () => ({
         meta: [{
@@ -42967,7 +43001,7 @@ var init_router_gFKmXs7N = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$3, "component")
     });
-    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_BLPwbbqi(), apply_BLPwbbqi_exports));
+    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_DC6JK_s(), apply_DC6JK_s_exports));
     Route$2 = createFileRoute("/apply")({
       head: () => ({
         meta: [{
@@ -42985,7 +43019,7 @@ var init_router_gFKmXs7N = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$2, "component")
     });
-    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_DP_o4eqP(), about_DP_o4eqP_exports));
+    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_CM7wtYmL(), about_CM7wtYmL_exports));
     Route$1 = createFileRoute("/about")({
       head: () => ({
         meta: [{
@@ -43003,7 +43037,7 @@ var init_router_gFKmXs7N = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$1, "component")
     });
-    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_D_38RkTs(), index_D_38RkTs_exports));
+    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_Bv01sJS2(), index_Bv01sJS2_exports));
     Route2 = createFileRoute("/")({
       component: lazyRouteComponent($$splitComponentImporter, "component")
     });
@@ -43065,9 +43099,9 @@ var init_router_gFKmXs7N = __esm({
   }
 });
 
-// dist/server/assets/start-CGgKLdx3.js
-var start_CGgKLdx3_exports = {};
-__export(start_CGgKLdx3_exports, {
+// dist/server/assets/start-CC0zbhmf.js
+var start_CC0zbhmf_exports = {};
+__export(start_CC0zbhmf_exports, {
   startInstance: () => startInstance
 });
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
@@ -43080,10 +43114,10 @@ function dedupeSerializationAdapters(deduped, serializationAdapters) {
   }
 }
 var import_node_async_hooks, import_react18, import_jsx_runtime26, createStart, errorMiddleware, startInstance;
-var init_start_CGgKLdx3 = __esm({
-  "dist/server/assets/start-CGgKLdx3.js"() {
+var init_start_CC0zbhmf = __esm({
+  "dist/server/assets/start-CC0zbhmf.js"() {
     "use strict";
-    init_server_BLmIQ7ez();
+    init_server_C5fpLss5();
     init_server5();
     import_node_async_hooks = require("node:async_hooks");
     init_production();
@@ -43138,9 +43172,9 @@ var init_empty_plugin_adapters_BFgPZ6_d = __esm({
   }
 });
 
-// dist/server/assets/server-BLmIQ7ez.js
-var server_BLmIQ7ez_exports = {};
-__export(server_BLmIQ7ez_exports, {
+// dist/server/assets/server-C5fpLss5.js
+var server_C5fpLss5_exports = {};
+__export(server_C5fpLss5_exports, {
   c: () => createMiddleware,
   s: () => server
 });
@@ -43197,7 +43231,7 @@ function getResponse() {
   return getH3Event().res;
 }
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_ubxXfiF6(), tanstack_start_manifest_v_ubxXfiF6_exports));
+  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_BgIRWuDf(), tanstack_start_manifest_v_BgIRWuDf_exports));
   const startManifest = tsrStartManifest2();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -44016,8 +44050,8 @@ function getStartResponseHeaders(opts) {
 }
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    Promise.resolve().then(() => (init_router_gFKmXs7N(), router_gFKmXs7N_exports)),
-    Promise.resolve().then(() => (init_start_CGgKLdx3(), start_CGgKLdx3_exports)),
+    Promise.resolve().then(() => (init_router_CAJpnEKt(), router_CAJpnEKt_exports)),
+    Promise.resolve().then(() => (init_start_CC0zbhmf(), start_CC0zbhmf_exports)),
     Promise.resolve().then(() => (init_empty_plugin_adapters_BFgPZ6_d(), empty_plugin_adapters_BFgPZ6_d_exports))
   ]);
   return {
@@ -44310,8 +44344,8 @@ function createServerEntry(entry) {
   } };
 }
 var import_node_async_hooks2, import_react19, import_jsx_runtime27, defaultStreamHandler, GLOBAL_EVENT_STORAGE_KEY, globalObj$1, eventStorage, HEADERS, manifest, TSS_FORMDATA_CONTEXT, TSS_SERVER_FUNCTION, X_TSS_SERIALIZED, X_TSS_RAW_RESPONSE, TSS_CONTENT_TYPE_FRAMED, FrameType, FRAME_HEADER_SIZE, TSS_CONTENT_TYPE_FRAMED_VERSIONED, GLOBAL_STORAGE_KEY, globalObj, startStorage, getStartOptions, createMiddleware, innerCreateCsrfMiddleware, createCsrfMiddleware, textEncoder2, EMPTY_PAYLOAD, serovalPlugins, FORM_DATA_CONTENT_TYPES, MAX_PAYLOAD_SIZE, handleServerAction, LINK_PARAM_TOKEN_RE, PRELOAD_AS_VALUES, ServerFunctionSerializationAdapter, entriesPromise, defaultCsrfMiddleware, getCachedBaseManifest, getProdBaseManifest, getBaseManifest, createEarlyHintsForRequest, ROUTER_BASEPATH, SERVER_FN_BASE, IS_PRERENDERING, IS_SHELL_ENV, ERR_NO_RESPONSE, ERR_NO_DEFER, fetch2, server_default, server;
-var init_server_BLmIQ7ez = __esm({
-  "dist/server/assets/server-BLmIQ7ez.js"() {
+var init_server_C5fpLss5 = __esm({
+  "dist/server/assets/server-C5fpLss5.js"() {
     "use strict";
     import_node_async_hooks2 = require("node:async_hooks");
     init_node2();
@@ -44701,7 +44735,7 @@ function renderErrorPage(error) {
 }
 async function getServerEntry() {
   if (!serverEntryPromise) {
-    serverEntryPromise = Promise.resolve().then(() => (init_server_BLmIQ7ez(), server_BLmIQ7ez_exports)).then((n2) => n2.s).then(
+    serverEntryPromise = Promise.resolve().then(() => (init_server_C5fpLss5(), server_C5fpLss5_exports)).then((n2) => n2.s).then(
       (m3) => m3.default ?? m3
     );
   }

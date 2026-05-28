@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import contactHero from "../assets/contact-hero.jpg";
 import { useState } from "react";
+import heroVideo from "../assets/video.mp4";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -38,7 +39,7 @@ function ContactPage() {
           </>
         }
         subtitle="Press inquiries, partnership proposals, or questions about the syndicate — we read every message personally."
-        image={contactHero}
+        video={heroVideo}
       />
 
       {/* Contact Grid */}

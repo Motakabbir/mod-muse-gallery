@@ -5,8 +5,12 @@ import pillarExperience from "../assets/pillar-experience.jpg";
 import carbonTexture from "../assets/carbon-texture.jpg";
 import buildProcess from "../assets/build-process.jpg";
 import heroVideo from "../assets/video.mp4";
+import videoPillarOne from "../assets/10825391-hd_1920_1080_24fps.mp4";
+import videoCarSection from "../assets/video.mp4";
+import videoPillarThree from "../assets/14209297_3840_2160_24fps.mp4";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal } from "@/components/site";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -16,6 +20,7 @@ const PILLARS = [
   {
     n: "01",
     title: "One of One Build",
+    video: videoPillarOne,
     img: pillarOne,
     body: "There will never be another. Car #148 — the 148th of 500 RS500s ever built — reborn as a unique, documented, investment-grade restomod.",
   },
@@ -28,6 +33,7 @@ const PILLARS = [
   {
     n: "03",
     title: "Exclusive Access & Experience",
+    video: videoPillarThree,
     img: pillarExperience,
     body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations.",
   },
@@ -250,11 +256,22 @@ function Pillars() {
       <div className="absolute inset-0 noise-bg pointer-events-none" />
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Why Syndicate" title={<>Built on three pillars.</>} />
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="reveal-stagger grid md:grid-cols-3 gap-8">
           {PILLARS.map((p) => (
-            <article key={p.n} className="reveal group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift">
+            <article key={p.n} className="group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift">
               <div className="aspect-[4/5] overflow-hidden relative">
-                <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                {p.video ? (
+                  <video
+                    src={p.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                  />
+                ) : (
+                  <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
                 <div className="absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-acid">PILLAR {p.n}</div>
               </div>
@@ -276,8 +293,15 @@ function TheCar() {
     <section id="car" className="relative py-32 px-6">
       <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-7 reveal">
-          <div className="relative overflow-hidden border border-white/10">
-            <img src={rs500HeroUrl} alt="Ford Sierra Cosworth RS500 reimagined" loading="lazy" className="w-full h-auto object-cover hover:scale-102 transition-transform duration-700" />
+          <div className="relative overflow-hidden border border-white/10 aspect-video">
+            <video
+              src={videoCarSection}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover hover:scale-102 transition-transform duration-700"
+            />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6">
               <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid">VRS500 Reimagined</div>
             </div>
@@ -319,9 +343,9 @@ function LiveSyndicates() {
           kicker="Active Opportunities"
           title={<>Live Syndicates. <span className="text-acid">Open Allocations.</span></>}
         />
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="reveal-stagger grid md:grid-cols-3 gap-8">
           {LIVE_SYNDICATES.map((s) => (
-            <article key={s.title} className="reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300 flex flex-col justify-between">
+            <article key={s.title} className="group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300 flex flex-col justify-between">
               <div className="aspect-[16/10] overflow-hidden relative">
                 <img
                   src={s.img}
@@ -367,9 +391,9 @@ function RecentlyFunded() {
           kicker="Track Record"
           title={<>Recently Funded <span className="text-acid">Syndicates.</span></>}
         />
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="reveal-stagger grid md:grid-cols-3 gap-8">
           {RECENTLY_FUNDED.map((rf) => (
-            <div key={rf.title} className="reveal group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300">
+            <div key={rf.title} className="group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300">
               <div className="aspect-[16/10] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
                 <img
                   src={rf.img}
@@ -427,13 +451,20 @@ function Partnership() {
 function BuildProcess() {
   return (
     <section id="build" className="relative py-32 px-6 overflow-hidden">
-      <img src={buildProcess} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-20" />
+      <video
+        src={videoCarSection}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover opacity-15 pointer-events-none"
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-ink" />
       <div className="relative mx-auto max-w-7xl">
         <SectionLabel kicker="The Build Process" title={<>Engineered <span className="text-acid">in the open.</span></>} />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="reveal-stagger grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {PROCESS.map((p) => (
-            <div key={p.n} className="reveal border-t-2 border-acid pt-6">
+            <div key={p.n} className="border-t-2 border-acid pt-6">
               <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-2">Phase {p.n}</div>
               <h3 className="font-display text-xl mb-6 leading-tight">{p.title}</h3>
               <ul className="space-y-2 text-bone/70 text-sm">

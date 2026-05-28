@@ -8,6 +8,7 @@ import g5 from "../assets/build-finish.jpg";
 import g6 from "../assets/build-print.jpg";
 import g7 from "../assets/rs500-hero.jpg";
 import g8 from "../assets/pillar-one-of-one.jpg";
+import videoCarSection from "../assets/video.mp4";
 
 export const Route = createFileRoute("/design-gallery")({
   head: () => ({
@@ -42,7 +43,7 @@ function GalleryPage() {
         kicker="Design Gallery"
         title={<>A Library of <span className="text-acid">Intent.</span></>}
         subtitle="Renders, scans, details, materials, and process imagery from the Syndicate design phase — a living archive of the build as it develops."
-        image={g1}
+        video={videoCarSection}
       />
 
       <section className="py-24 px-6 bg-carbon">

@@ -6,6 +6,7 @@ import buildScan from "../assets/build-scan.jpg";
 import buildPrint from "../assets/build-print.jpg";
 import buildFinish from "../assets/build-finish.jpg";
 import heroImg from "../assets/build-process.jpg";
+import videoCarSection from "../assets/video.mp4";
 
 export const Route = createFileRoute("/the-build")({
   head: () => ({
@@ -73,7 +74,7 @@ function TheBuildPage() {
         kicker="The Build Process"
         title={<>Engineered <span className="text-acid">In The Open.</span></>}
         subtitle="Every stage documented. Every decision visible. From bare shell to first ignition, syndicate members travel with the build from day one."
-        image={heroImg}
+        video={videoCarSection}
       />
 
       <section className="py-32 px-6">
