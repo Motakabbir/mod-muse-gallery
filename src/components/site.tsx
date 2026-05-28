@@ -83,8 +83,11 @@ export function Footer() {
           </div>
         </div>
         <div className="flex gap-6 text-bone/50 text-xs font-mono uppercase tracking-[0.2em]">
+          <Link to="/about" className="hover:text-acid">About</Link>
           <Link to="/the-build" className="hover:text-acid">The Build</Link>
           <Link to="/design-gallery" className="hover:text-acid">Gallery</Link>
+          <Link to="/events" className="hover:text-acid">Events</Link>
+          <Link to="/contact" className="hover:text-acid">Contact</Link>
           <Link to="/apply" className="hover:text-acid">Apply</Link>
         </div>
         <div className="text-bone/40 text-xs font-mono uppercase tracking-[0.2em]">
