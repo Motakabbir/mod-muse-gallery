@@ -26,6 +26,7 @@ export function useReveal() {
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
@@ -34,64 +35,119 @@ export function Nav() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-ink/85 backdrop-blur border-b border-white/5" : "bg-transparent"
+        scrolled ? "glass border-b border-white/5" : "bg-transparent"
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3">
-          <img src={logo} alt="Syn Mod Build" className="h-10 w-10" width={40} height={40} />
-          <span className="font-mono text-xs tracking-[0.2em] uppercase text-bone/80 leading-tight">
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="relative">
+            <div className="absolute inset-0 bg-acid/30 blur-xl group-hover:bg-acid/50 transition-all rounded-full" />
+            <img src={logo} alt="Syn Mod Build" className="relative h-10 w-10" width={40} height={40} />
+          </div>
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-bone/80 leading-tight hidden sm:block">
             Syndicated<br />Restomod
           </span>
         </Link>
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-8">
           {NAV.map((n) => {
             const href = n.hash ? `/#${n.hash}` : n.to;
             return (
               <a
                 key={n.label}
                 href={href}
-                className="text-sm text-bone/70 hover:text-acid transition-colors uppercase tracking-widest"
+                className="relative text-xs text-bone/70 hover:text-acid transition-colors uppercase tracking-[0.25em] font-medium after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:h-px after:w-0 after:bg-acid hover:after:w-full after:transition-all after:duration-300"
               >
                 {n.label}
               </a>
             );
           })}
-          <Link
-            to="/apply"
-            className="px-5 py-2 border-2 border-acid text-acid text-sm uppercase tracking-widest font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300"
-          >
-            Apply
+          <Link to="/apply" className="btn-acid !py-2.5 !px-5 !text-[11px]">
+            Apply <span aria-hidden>→</span>
           </Link>
         </nav>
+        <button
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+          className="lg:hidden h-10 w-10 flex flex-col items-center justify-center gap-1.5 border border-white/10 rounded-full"
+        >
+          <span className={`h-px w-4 bg-bone transition-all ${open ? "rotate-45 translate-y-1" : ""}`} />
+          <span className={`h-px w-4 bg-bone transition-all ${open ? "-rotate-45 -translate-y-0.5" : ""}`} />
+        </button>
       </div>
+      {open && (
+        <div className="lg:hidden glass border-t border-white/5 px-6 py-6 flex flex-col gap-4">
+          {NAV.map((n) => {
+            const href = n.hash ? `/#${n.hash}` : n.to;
+            return (
+              <a key={n.label} href={href} onClick={() => setOpen(false)}
+                className="text-sm text-bone/80 hover:text-acid uppercase tracking-[0.25em] py-2 border-b border-white/5">
+                {n.label}
+              </a>
+            );
+          })}
+          <Link to="/apply" onClick={() => setOpen(false)} className="btn-acid justify-center">
+            Apply Now →
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 py-12 px-6 bg-carbon">
-      <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-8 items-start">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="Syn Mod Build" className="h-10 w-10" width={40} height={40} />
-          <div>
-            <div className="font-display text-sm">Syndicated Restomod</div>
-            <div className="font-mono text-xs text-bone/40 uppercase tracking-[0.2em]">
-              Vision148 • Powered by TheCarCrowd
+    <footer className="relative border-t border-white/10 bg-carbon overflow-hidden">
+      <div className="absolute inset-0 noise-bg opacity-60 pointer-events-none" />
+      <div className="relative overflow-hidden py-6 border-b border-white/5">
+        <div className="flex whitespace-nowrap scroll-marquee">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="flex items-center gap-12 px-6 font-display text-4xl md:text-6xl text-bone/10">
+              <span>VISION 148</span><span className="text-acid/30">★</span>
+              <span>SYNDICATED RESTOMOD</span><span className="text-acid/30">★</span>
+              <span>ONE OF ONE</span><span className="text-acid/30">★</span>
+              <span>BUILT IN THE OPEN</span><span className="text-acid/30">★</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="relative mx-auto max-w-7xl px-6 py-16 grid lg:grid-cols-4 gap-10">
+        <div className="lg:col-span-2">
+          <div className="flex items-center gap-3 mb-6">
+            <img src={logo} alt="Syn Mod Build" className="h-12 w-12" />
+            <div>
+              <div className="font-display text-lg">Syndicated Restomod</div>
+              <div className="font-mono text-[10px] text-bone/40 uppercase tracking-[0.25em]">
+                Vision148 • Powered by TheCarCrowd
+              </div>
             </div>
           </div>
+          <p className="text-bone/60 text-sm max-w-md leading-relaxed">
+            A new model for collective ownership of a singular hand-built restomod.
+            Engineered in the open with the world's leading specialists.
+          </p>
         </div>
-        <div className="flex gap-6 text-bone/50 text-xs font-mono uppercase tracking-[0.2em]">
-          <Link to="/about" className="hover:text-acid">About</Link>
-          <Link to="/the-build" className="hover:text-acid">The Build</Link>
-          <Link to="/design-gallery" className="hover:text-acid">Gallery</Link>
-          <Link to="/events" className="hover:text-acid">Events</Link>
-          <Link to="/contact" className="hover:text-acid">Contact</Link>
-          <Link to="/apply" className="hover:text-acid">Apply</Link>
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4">Explore</div>
+          <div className="flex flex-col gap-3 text-sm text-bone/70">
+            <Link to="/about" className="hover:text-acid transition-colors">About</Link>
+            <Link to="/the-build" className="hover:text-acid transition-colors">The Build</Link>
+            <Link to="/design-gallery" className="hover:text-acid transition-colors">Gallery</Link>
+            <Link to="/events" className="hover:text-acid transition-colors">Events</Link>
+          </div>
         </div>
-        <div className="text-bone/40 text-xs font-mono uppercase tracking-[0.2em]">
-          © {new Date().getFullYear()} Syn Mod Build. All rights reserved.
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4">Connect</div>
+          <div className="flex flex-col gap-3 text-sm text-bone/70">
+            <Link to="/contact" className="hover:text-acid transition-colors">Contact</Link>
+            <Link to="/apply" className="hover:text-acid transition-colors">Apply</Link>
+            <a href="mailto:hello@vision148.com" className="hover:text-acid transition-colors">hello@vision148.com</a>
+          </div>
+        </div>
+      </div>
+      <div className="relative border-t border-white/5 py-6 px-6">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-3 text-bone/40 text-[11px] font-mono uppercase tracking-[0.25em]">
+          <div>© {new Date().getFullYear()} Syn Mod Build — All rights reserved</div>
+          <div>Built in the open · Driven for life</div>
         </div>
       </div>
     </footer>
@@ -110,25 +166,31 @@ export function PageHero({
   image: string;
 }) {
   return (
-    <section className="relative pt-40 pb-24 px-6 overflow-hidden grain border-b border-white/10">
+    <section className="relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10">
       <img
         src={image}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-30"
+        className="absolute inset-0 h-full w-full object-cover opacity-40 scale-110"
         loading="eager"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/70 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/80 to-ink" />
+      <div className="absolute inset-0 noise-bg" />
+      <div className="absolute top-1/3 right-10 h-72 w-72 rounded-full bg-acid/10 blur-[120px] float-slow" />
       <div className="relative mx-auto max-w-7xl">
-        <div className="inline-flex items-center gap-2 border border-acid/40 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm bg-ink/40">
+        <div className="inline-flex items-center gap-2 glass-acid rounded-full px-4 py-1.5 mb-8">
           <span className="h-1.5 w-1.5 rounded-full bg-acid animate-pulse" />
           <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">{kicker}</span>
         </div>
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-5xl">
+        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.92] max-w-5xl text-gradient-bone">
           {title}
         </h1>
         {subtitle && (
           <p className="mt-8 text-bone/70 text-lg md:text-xl max-w-2xl leading-relaxed">{subtitle}</p>
         )}
+        <div className="mt-12 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
+          <div className="h-px w-12 bg-acid/60" />
+          Scroll to explore
+        </div>
       </div>
     </section>
   );

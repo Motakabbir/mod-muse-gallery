@@ -147,37 +147,42 @@ function Hero() {
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/40 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" />
+      <div className="absolute inset-0 noise-bg" />
+      <div className="absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" />
+      <div className="absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow" style={{ animationDelay: "2s" }} />
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <div className="inline-flex items-center gap-2 border border-acid/40 rounded-full px-5 py-2 mb-8 backdrop-blur-sm bg-ink/30 animate-in fade-in slide-in-from-bottom duration-1000">
+        <div className="inline-flex items-center gap-2 glass-acid rounded-full px-5 py-2 mb-8 animate-in fade-in slide-in-from-bottom duration-1000">
           <span className="h-1.5 w-1.5 rounded-full bg-acid animate-pulse" />
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">Vision148</span>
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">Vision148 · Now Forming</span>
         </div>
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-5xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100">
-          Be Part of the
+        <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.9] max-w-6xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100">
+          <span className="text-gradient-bone">Be Part of the</span>
           <br />
-          <span className="text-acid">Creation of an Icon</span>
+          <span className="text-gradient-acid">Creation of an Icon</span>
         </h1>
         <p className="mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200">
-          Syndicated Restomod Builds — powered by TheCarCrowd.
+          Syndicated Restomod Builds — engineered in the open, owned together, driven for life.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
-          <a
-            href="#apply"
-            className="px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors duration-300"
-          >
-            Apply for Allocation
-          </a>
-          <a
-            href="#intro"
-            className="px-8 py-4 border border-white/30 text-bone uppercase tracking-widest text-sm rounded-full hover:border-acid hover:text-acid transition-colors duration-300"
-          >
-            Explore Vision
-          </a>
+          <Link to="/apply" className="btn-acid">Apply for Allocation →</Link>
+          <a href="#intro" className="btn-ghost">Explore Vision</a>
+        </div>
+        <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500">
+          {[
+            { k: "Car", v: "#148 / 500" },
+            { k: "Allocations", v: "Limited" },
+            { k: "Status", v: "Forming" },
+          ].map((s) => (
+            <div key={s.k} className="text-center">
+              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 mb-1">{s.k}</div>
+              <div className="font-display text-sm md:text-base text-acid">{s.v}</div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 font-mono text-xs text-bone/40 tracking-[0.3em] uppercase animate-bounce">
-        Scroll
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 font-mono text-[10px] text-bone/40 tracking-[0.3em] uppercase">
+        <span className="h-px w-8 bg-acid/60" />Scroll<span className="h-px w-8 bg-acid/60" />
       </div>
     </section>
   );
@@ -220,17 +225,18 @@ function Intro() {
 
 function Stats() {
   return (
-    <section className="relative py-24 px-6 border-y border-white/5 bg-carbon/50">
-      <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section className="relative py-24 px-6 border-y border-white/5 bg-carbon/50 overflow-hidden">
+      <div className="absolute inset-0 noise-bg pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5">
         {[
           { n: "110+", label: "Curated Assets" },
           { n: "6,000+", label: "Registered Members" },
           { n: "12.6%", label: "Annual Rate of Return" },
           { n: "£2,000", label: "Low Entry Barrier" },
-        ].map((st, i) => (
-          <div key={st.label} className="reveal text-center">
-            <div className="font-display text-4xl md:text-5xl lg:text-6xl text-acid mb-2">{st.n}</div>
-            <div className="font-mono text-xs tracking-widest uppercase text-bone/50">{st.label}</div>
+        ].map((st) => (
+          <div key={st.label} className="reveal text-center py-6 bg-ink/60 hover:bg-ink transition-colors group">
+            <div className="font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform">{st.n}</div>
+            <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-bone/50">{st.label}</div>
           </div>
         ))}
       </div>
@@ -240,19 +246,22 @@ function Stats() {
 
 function Pillars() {
   return (
-    <section className="relative py-32 px-6 bg-carbon">
+    <section className="relative py-32 px-6 bg-carbon overflow-hidden">
+      <div className="absolute inset-0 noise-bg pointer-events-none" />
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Why Vision148" title={<>Built on three pillars.</>} />
         <div className="grid md:grid-cols-3 gap-8">
           {PILLARS.map((p) => (
-            <article key={p.n} className="reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300">
+            <article key={p.n} className="reveal group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift">
               <div className="aspect-[4/5] overflow-hidden relative">
-                <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute top-4 left-4 font-mono text-xs tracking-[0.3em] text-acid">PILLAR {p.n}</div>
+                <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+                <div className="absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-acid">PILLAR {p.n}</div>
               </div>
-              <div className="p-8">
-                <h3 className="font-display text-2xl mb-4">{p.title}</h3>
+              <div className="p-8 -mt-16 relative">
+                <h3 className="font-display text-2xl mb-4 text-gradient-bone">{p.title}</h3>
                 <p className="text-bone/60 leading-relaxed">{p.body}</p>
+                <div className="mt-6 h-px w-12 bg-acid/60 group-hover:w-24 transition-all duration-500" />
               </div>
             </article>
           ))}
