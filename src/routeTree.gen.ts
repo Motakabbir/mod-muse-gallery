@@ -9,8 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TheBuildRouteImport } from './routes/the-build'
+import { Route as DesignGalleryRouteImport } from './routes/design-gallery'
+import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TheBuildRoute = TheBuildRouteImport.update({
+  id: '/the-build',
+  path: '/the-build',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignGalleryRoute = DesignGalleryRouteImport.update({
+  id: '/design-gallery',
+  path: '/design-gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplyRoute = ApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +37,61 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/apply': typeof ApplyRoute
+  '/design-gallery': typeof DesignGalleryRoute
+  '/the-build': typeof TheBuildRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/apply': typeof ApplyRoute
+  '/design-gallery': typeof DesignGalleryRoute
+  '/the-build': typeof TheBuildRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/apply': typeof ApplyRoute
+  '/design-gallery': typeof DesignGalleryRoute
+  '/the-build': typeof TheBuildRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/apply' | '/design-gallery' | '/the-build'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/apply' | '/design-gallery' | '/the-build'
+  id: '__root__' | '/' | '/apply' | '/design-gallery' | '/the-build'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApplyRoute: typeof ApplyRoute
+  DesignGalleryRoute: typeof DesignGalleryRoute
+  TheBuildRoute: typeof TheBuildRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/the-build': {
+      id: '/the-build'
+      path: '/the-build'
+      fullPath: '/the-build'
+      preLoaderRoute: typeof TheBuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-gallery': {
+      id: '/design-gallery'
+      path: '/design-gallery'
+      fullPath: '/design-gallery'
+      preLoaderRoute: typeof DesignGalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apply': {
+      id: '/apply'
+      path: '/apply'
+      fullPath: '/apply'
+      preLoaderRoute: typeof ApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApplyRoute: ApplyRoute,
+  DesignGalleryRoute: DesignGalleryRoute,
+  TheBuildRoute: TheBuildRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
