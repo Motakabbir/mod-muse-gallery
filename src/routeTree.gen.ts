@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheBuildRouteImport } from './routes/the-build'
+import { Route as DesignGalleryRouteImport } from './routes/design-gallery'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TheBuildRoute = TheBuildRouteImport.update({
   id: '/the-build',
   path: '/the-build',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignGalleryRoute = DesignGalleryRouteImport.update({
+  id: '/design-gallery',
+  path: '/design-gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApplyRoute = ApplyRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/design-gallery': typeof DesignGalleryRoute
   '/the-build': typeof TheBuildRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/design-gallery': typeof DesignGalleryRoute
   '/the-build': typeof TheBuildRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/design-gallery': typeof DesignGalleryRoute
   '/the-build': typeof TheBuildRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/apply' | '/the-build'
+  fullPaths: '/' | '/apply' | '/design-gallery' | '/the-build'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apply' | '/the-build'
-  id: '__root__' | '/' | '/apply' | '/the-build'
+  to: '/' | '/apply' | '/design-gallery' | '/the-build'
+  id: '__root__' | '/' | '/apply' | '/design-gallery' | '/the-build'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApplyRoute: typeof ApplyRoute
+  DesignGalleryRoute: typeof DesignGalleryRoute
   TheBuildRoute: typeof TheBuildRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/the-build'
       fullPath: '/the-build'
       preLoaderRoute: typeof TheBuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-gallery': {
+      id: '/design-gallery'
+      path: '/design-gallery'
+      fullPath: '/design-gallery'
+      preLoaderRoute: typeof DesignGalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/apply': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApplyRoute: ApplyRoute,
+  DesignGalleryRoute: DesignGalleryRoute,
   TheBuildRoute: TheBuildRoute,
 }
 export const routeTree = rootRouteImport
