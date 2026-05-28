@@ -4,9 +4,12 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import type { Transition } from "framer-motion";
 
 import appCss from "../styles.css?url";
 
@@ -73,7 +76,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Syndicate | Syndicated Restomod Build" },
-      { name: "description", content: "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open." },
+      {
+        name: "description",
+        content:
+          "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open.",
+      },
       { name: "author", content: "Syndicated Restomod" },
       { property: "og:title", content: "Syndicate | Syndicated Restomod Build" },
       { property: "og:description", content: "Syndicated restomod builds powered by TheCarCrowd." },
@@ -110,10 +117,33 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const shouldReduceMotion = useReducedMotion();
+
+  const transition: Transition = shouldReduceMotion
+    ? { duration: 0 }
+    : { type: "tween", duration: 0.22, ease: "easeOut" };
+
+  const variants = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -8 },
+  } as const;
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={pathname}
+          variants={variants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={transition}
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
     </QueryClientProvider>
   );
 }
