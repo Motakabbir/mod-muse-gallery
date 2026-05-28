@@ -1,25 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import logo from "../assets/logo.png";
 import pillarOne from "../assets/pillar-one-of-one.jpg";
 import pillarPartners from "../assets/pillar-partners.jpg";
 import pillarExperience from "../assets/pillar-experience.jpg";
 import carbonTexture from "../assets/carbon-texture.jpg";
 import buildProcess from "../assets/build-process.jpg";
 import heroVideo from "../assets/video.mp4";
+import { Link } from "@tanstack/react-router";
+import { Nav, Footer, useReveal } from "@/components/site";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
-
-const NAV = [
-  { label: "About", href: "#intro" },
-  { label: "Syndicates", href: "#syndicates" },
-  { label: "The Car", href: "#car" },
-  { label: "Build", href: "#build" },
-  { label: "Events", href: "#events" },
-  { label: "Partners", href: "#partners" },
-];
 
 const PILLARS = [
   {
