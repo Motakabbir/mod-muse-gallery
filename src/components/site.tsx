@@ -7,8 +7,9 @@ const NAV = [
   { label: "The Car", to: "/" as const, hash: "car" },
   { label: "The Build", to: "/the-build" as const },
   { label: "Gallery", to: "/design-gallery" as const },
-  { label: "Partners", to: "/" as const, hash: "partners" },
-  { label: "Events", to: "/" as const, hash: "events" },
+  { label: "About", to: "/about" as const },
+  { label: "Events", to: "/events" as const },
+  { label: "Contact", to: "/contact" as const },
 ];
 
 export function useReveal() {
@@ -82,8 +83,11 @@ export function Footer() {
           </div>
         </div>
         <div className="flex gap-6 text-bone/50 text-xs font-mono uppercase tracking-[0.2em]">
+          <Link to="/about" className="hover:text-acid">About</Link>
           <Link to="/the-build" className="hover:text-acid">The Build</Link>
           <Link to="/design-gallery" className="hover:text-acid">Gallery</Link>
+          <Link to="/events" className="hover:text-acid">Events</Link>
+          <Link to="/contact" className="hover:text-acid">Contact</Link>
           <Link to="/apply" className="hover:text-acid">Apply</Link>
         </div>
         <div className="text-bone/40 text-xs font-mono uppercase tracking-[0.2em]">
