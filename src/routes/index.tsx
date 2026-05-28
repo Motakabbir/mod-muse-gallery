@@ -589,25 +589,6 @@ function Apply() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-white/10 py-12 px-6 bg-carbon">
-      <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-8 items-start">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="Syn Mod Build" className="h-10 w-10" width={40} height={40} />
-          <div>
-            <div className="font-display text-sm">Syndicated Restomod</div>
-            <div className="font-mono text-xs text-bone/40 uppercase tracking-[0.2em]">Vision148 • Powered by TheCarCrowd</div>
-          </div>
-        </div>
-        <div className="text-bone/40 text-xs font-mono uppercase tracking-[0.2em]">
-          © {new Date().getFullYear()} Syn Mod Build. All rights reserved.
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 function Index() {
   useReveal();
   return (
