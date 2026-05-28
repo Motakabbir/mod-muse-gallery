@@ -136,56 +136,6 @@ const EVENTS = [
 
 const rs500HeroUrl = "https://thecarcrowd.uk/wp-content/uploads/2026/02/1764953707_1-min.webp";
 
-function useReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("is-visible")),
-      { threshold: 0.12 }
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-}
-
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-ink/85 backdrop-blur border-b border-white/5" : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3">
-          <img src={logo} alt="Syn Mod Build" className="h-10 w-10" width={40} height={40} />
-          <span className="font-mono text-xs tracking-[0.2em] uppercase text-bone/80 leading-tight">
-            Syndicated<br />Restomod
-          </span>
-        </a>
-        <nav className="hidden md:flex items-center gap-10">
-          {NAV.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm text-bone/70 hover:text-acid transition-colors uppercase tracking-widest">
-              {n.label}
-            </a>
-          ))}
-          <a
-            href="#apply"
-            className="px-5 py-2 border-2 border-acid text-acid text-sm uppercase tracking-widest font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300"
-          >
-            Apply
-          </a>
-        </nav>
-      </div>
-    </header>
-  );
-}
-
 function Hero() {
   return (
     <section id="top" className="relative h-screen min-h-[720px] w-full overflow-hidden grain">
