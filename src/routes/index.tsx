@@ -225,17 +225,18 @@ function Intro() {
 
 function Stats() {
   return (
-    <section className="relative py-24 px-6 border-y border-white/5 bg-carbon/50">
-      <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section className="relative py-24 px-6 border-y border-white/5 bg-carbon/50 overflow-hidden">
+      <div className="absolute inset-0 noise-bg pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5">
         {[
           { n: "110+", label: "Curated Assets" },
           { n: "6,000+", label: "Registered Members" },
           { n: "12.6%", label: "Annual Rate of Return" },
           { n: "£2,000", label: "Low Entry Barrier" },
-        ].map((st, i) => (
-          <div key={st.label} className="reveal text-center">
-            <div className="font-display text-4xl md:text-5xl lg:text-6xl text-acid mb-2">{st.n}</div>
-            <div className="font-mono text-xs tracking-widest uppercase text-bone/50">{st.label}</div>
+        ].map((st) => (
+          <div key={st.label} className="reveal text-center py-6 bg-ink/60 hover:bg-ink transition-colors group">
+            <div className="font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform">{st.n}</div>
+            <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-bone/50">{st.label}</div>
           </div>
         ))}
       </div>
@@ -245,19 +246,22 @@ function Stats() {
 
 function Pillars() {
   return (
-    <section className="relative py-32 px-6 bg-carbon">
+    <section className="relative py-32 px-6 bg-carbon overflow-hidden">
+      <div className="absolute inset-0 noise-bg pointer-events-none" />
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Why Vision148" title={<>Built on three pillars.</>} />
         <div className="grid md:grid-cols-3 gap-8">
           {PILLARS.map((p) => (
-            <article key={p.n} className="reveal group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300">
+            <article key={p.n} className="reveal group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift">
               <div className="aspect-[4/5] overflow-hidden relative">
-                <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute top-4 left-4 font-mono text-xs tracking-[0.3em] text-acid">PILLAR {p.n}</div>
+                <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+                <div className="absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-acid">PILLAR {p.n}</div>
               </div>
-              <div className="p-8">
-                <h3 className="font-display text-2xl mb-4">{p.title}</h3>
+              <div className="p-8 -mt-16 relative">
+                <h3 className="font-display text-2xl mb-4 text-gradient-bone">{p.title}</h3>
                 <p className="text-bone/60 leading-relaxed">{p.body}</p>
+                <div className="mt-6 h-px w-12 bg-acid/60 group-hover:w-24 transition-all duration-500" />
               </div>
             </article>
           ))}
