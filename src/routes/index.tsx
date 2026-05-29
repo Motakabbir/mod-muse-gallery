@@ -98,21 +98,21 @@ const LIVE_SYNDICATES = [
 const RECENTLY_FUNDED = [
   {
     title: "Lamborghini Gallardo SE",
-    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/GallardSE.webp",
+    img: buildProcess,
     date: "Funded Date — Dec 25",
     val: "Funded Value — £82,000",
     members: "Syndicate Members — 14",
   },
   {
     title: "Aston Martin V12 Vantage",
-    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/1764967417_v12amv.png",
+    img: buildProcess,
     date: "Funded Date — Sep 25",
     val: "Funded Value — £66,000",
     members: "Syndicate Members — 21",
   },
   {
     title: "Porsche 996 GT3 RS",
-    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/9hB7p1Hg.webp",
+    img: buildProcess,
     date: "Funded Date — May 25",
     val: "Funded Value — £165,000",
     members: "Syndicate Members — 22",
