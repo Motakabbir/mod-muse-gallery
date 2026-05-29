@@ -74,21 +74,21 @@ const BENEFITS = [
 const LIVE_SYNDICATES = [
   {
     title: "Ferrari F430 V8 Manual",
-    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/bWxqEoY9-1.webp",
+    img: buildProcess,
     allocation: "£5,000 per allocation",
     stats: "27 Allocations • 10 remaining",
     return: "Potential Returns 77.1%*",
   },
   {
     title: "Audi R8 V10 Manual",
-    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/dLWiUa3S.jpeg",
+    img: buildProcess,
     allocation: "£2,000 per allocation",
     stats: "31 Allocations • 17 remaining",
     return: "Potential Returns 63.90%*",
   },
   {
     title: "Mercedes SLS AMG",
-    img: "https://thecarcrowd.uk/wp-content/uploads/2026/02/odprkXVG.webp",
+    img: buildProcess,
     allocation: "£5,000 per allocation",
     stats: "39 Allocations • 32 remaining",
     return: "Potential Returns 87.2%*",
