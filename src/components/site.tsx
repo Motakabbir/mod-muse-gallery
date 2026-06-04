@@ -140,6 +140,11 @@ export function Footer() {
             <Link to="/contact" className="hover:text-acid transition-colors">Contact</Link>
             <Link to="/apply" className="hover:text-acid transition-colors">Apply</Link>
             <a href="mailto:hello@Syndicate.com" className="hover:text-acid transition-colors">hello@Syndicate.com</a>
+            
+            <div className="h-px w-6 bg-white/10 my-1" />
+            
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">Instagram</a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">LinkedIn</a>
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@ const PHASES = [
     img: buildFinish,
     body: "Engine rebuild, paint, and final assembly come together. The car is validated on road and track before final sign-off and the first syndicate drive day.",
     bullets: ["Engine rebuild", "Paint & livery", "Road & track testing", "Final sign-off"],
-    partner: "MAHLE Group • Cornerstone",
+    partner: "MAHLE Group • DMC",
   },
 ];
 
@@ -59,7 +59,7 @@ const SPECS = [
   { l: "Base", v: "1987 Ford Sierra Cosworth RS500 #148" },
   { l: "Engine", v: "Reworked YB 2.0L turbocharged inline-4" },
   { l: "Target Power", v: "550+ bhp" },
-  { l: "Bodywork", v: "Carbon composite + hand-formed steel" },
+  { l: "Bodywork", v: "Coachbuilt Aluminium + Composite" },
   { l: "Chassis", v: "Reinforced shell, modern suspension geometry" },
   { l: "Production", v: "1 of 1" },
 ];
