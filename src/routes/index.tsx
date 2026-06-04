@@ -233,16 +233,22 @@ function Stats() {
   return (
     <section className="relative py-24 px-6 border-y border-white/5 bg-carbon/50 overflow-hidden">
       <div className="absolute inset-0 noise-bg pointer-events-none" />
-      <div className="relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5">
+      <div className="relative mx-auto max-w-7xl mb-12 text-center reveal">
+        <h2 className="font-mono text-xs md:text-sm tracking-[0.3em] uppercase text-bone/60">
+          Powered By <span className="text-bone">TheCarCrowd</span>
+        </h2>
+      </div>
+      <div className="relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-5 gap-px bg-white/5">
         {[
-          { n: "110+", label: "Curated Assets" },
-          { n: "6,000+", label: "Registered Members" },
-          { n: "12.6%", label: "Annual Rate of Return" },
-          { n: "£2,000", label: "Low Entry Barrier" },
+          { n: "110", label: "CURATED ASSETS" },
+          { n: "6000", label: "REGISTERED MEMBERS" },
+          { n: "12.6", label: "ANNUAL RATE OF RETURN SINCE 2021" },
+          { n: "2020", label: "FIRST CAR LAUNCHED" },
+          { n: "60", label: "YEARS OF EXPERIENCE" },
         ].map((st) => (
-          <div key={st.label} className="reveal text-center py-6 bg-ink/60 hover:bg-ink transition-colors group">
+          <div key={st.label} className="reveal text-center py-6 px-2 bg-ink/60 hover:bg-ink transition-colors group flex flex-col justify-center items-center">
             <div className="font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform">{st.n}</div>
-            <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-bone/50">{st.label}</div>
+            <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-bone/50 text-center">{st.label}</div>
           </div>
         ))}
       </div>
