@@ -4,6 +4,7 @@ import pillarPartners from "../assets/pillar-partners.jpg";
 import pillarExperience from "../assets/pillar-experience.jpg";
 import carbonTexture from "../assets/carbon-texture.jpg";
 import buildProcess from "../assets/build-process.jpg";
+import placeholderLogo from "../assets/logo/logo-4.jpeg";
 import heroVideo from "../assets/video.mp4";
 import videoPillarOne from "../assets/10825391-hd_1920_1080_24fps.mp4";
 import videoCarSection from "../assets/video.mp4";
@@ -53,7 +54,7 @@ const PARTNERS = [
   { name: "DMC Silverstone", role: "Assembly & Digital Manufacturing" },
   { name: "BAMD Composites", role: "Composite Structures" },
   { name: "MAHLE Group", role: "Engine Rebuild & Performance" },
-  { name: "Cornerstone", role: "Non-structural Skillsets" },
+  { name: "Cornerstone Technologies", role: "Non-structural Skillsets" },
   { name: "HGL / VenueServe", role: "Membership Platform & Fan Portal" },
 ];
 
@@ -65,7 +66,7 @@ const SYNDICATE_STEPS = [
 ];
 
 const BENEFITS = [
-  { icon: "⚙", title: "Build Access", items: ["Workshop visits", "Engineering insight"] },
+  { icon: "⬡", title: "Build Access", items: ["Workshop visits", "Engineering insight"] },
   { icon: "◎", title: "Driving Access", items: ["Road drives", "Track sessions"] },
   { icon: "✦", title: "Events", items: ["Launch", "Private experiences"] },
   { icon: "◈", title: "Knowledge", items: ["Learn the build", "Understand the engineering"] },
@@ -73,25 +74,28 @@ const BENEFITS = [
 
 const LIVE_SYNDICATES = [
   {
-    title: "Ferrari F430 V8 Manual",
-    img: buildProcess,
+    title: "Vision148 Sierra Cosworth RS500",
+    img: placeholderLogo,
     allocation: "£5,000 per allocation",
-    stats: "27 Allocations • 10 remaining",
+    stats: "25 Allocations • 10 remaining",
     return: "Potential Returns 77.1%*",
   },
   {
-    title: "Audi R8 V10 Manual",
-    img: buildProcess,
+    title: "Next Build being assessed for Syndication",
+    img: placeholderLogo,
     allocation: "£2,000 per allocation",
     stats: "31 Allocations • 17 remaining",
     return: "Potential Returns 63.90%*",
+    isPlaceholder: false,
+    waitlist: true,
   },
   {
     title: "Mercedes SLS AMG",
-    img: buildProcess,
+    img: placeholderLogo,
     allocation: "£5,000 per allocation",
     stats: "39 Allocations • 32 remaining",
     return: "Potential Returns 87.2%*",
+    isPlaceholder: false,
   },
 ];
 
@@ -351,17 +355,26 @@ function LiveSyndicates() {
         />
         <div className="reveal-stagger grid md:grid-cols-3 gap-8">
           {LIVE_SYNDICATES.map((s) => (
-            <article key={s.title} className="group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300 flex flex-col justify-between">
-              <div className="aspect-[16/10] overflow-hidden relative">
+            <article key={s.title} className={`group border ${s.isPlaceholder ? 'border-white/5' : 'border-white/10 hover:border-acid'} bg-ink overflow-hidden transition-all duration-300 flex flex-col justify-between`}>
+              <div className="aspect-[16/10] overflow-hidden relative bg-carbon">
                 <img
                   src={s.img}
                   alt={s.title}
                   loading="lazy"
-                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className={`h-full w-full object-cover transition-transform duration-700 ${s.isPlaceholder ? 'blur-md opacity-30 grayscale scale-110' : 'group-hover:scale-105'}`}
                 />
-                <div className="absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold">
-                  Live
-                </div>
+                {!s.isPlaceholder && (
+                  <div className="absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold">
+                    Live
+                  </div>
+                )}
+                {s.isPlaceholder && (
+                  <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
+                    <span className="bg-ink/60 backdrop-blur-md border border-white/10 text-bone/80 px-4 py-2 font-mono text-[10px] tracking-widest uppercase rounded">
+                      Assessing for Syndication
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="p-8 flex-1 flex flex-col justify-between">
                 <div>
@@ -373,16 +386,61 @@ function LiveSyndicates() {
                   </ul>
                 </div>
                 <div className="mt-8">
-                  <a
-                    href="#apply"
-                    className="w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300"
-                  >
-                    Request Details
-                  </a>
+                  {s.waitlist ? (
+                    <form className="flex flex-col gap-2" onSubmit={(e) => e.preventDefault()}>
+                      <input
+                        type="email"
+                        placeholder="Email for waitlist"
+                        required
+                        className="bg-carbon border border-white/10 px-4 py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full transition-colors text-xs text-center"
+                      />
+                      <button
+                        type="submit"
+                        className="w-full text-center py-3 border border-acid text-acid uppercase tracking-widest text-xs rounded-full hover:bg-acid/10 transition-all duration-300 font-semibold"
+                      >
+                        Join Waitlist
+                      </button>
+                    </form>
+                  ) : (
+                    <a
+                      href="#apply"
+                      className="w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300"
+                    >
+                      Request Details
+                    </a>
+                  )}
                 </div>
               </div>
             </article>
           ))}
+        </div>
+
+        {/* Briefing PDF CTA */}
+        <div className="mt-20 reveal border border-white/10 bg-ink p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-acid/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+          <div className="relative z-10 lg:max-w-xl text-center lg:text-left">
+            <div className="font-mono text-[10px] text-acid tracking-widest uppercase mb-3">Learn the process</div>
+            <h3 className="font-display text-2xl md:text-3xl mb-3">Want the full picture?</h3>
+            <p className="text-bone/60 text-sm md:text-base leading-relaxed">
+              Download our comprehensive Briefing Document to dive deeper into our acquisition strategy, engineering standards, and projected returns.
+            </p>
+          </div>
+          <div className="relative z-10 w-full lg:w-auto flex-shrink-0">
+            <form className="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                required
+                className="bg-carbon border border-white/20 px-6 py-4 sm:py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full sm:min-w-[280px] transition-colors text-sm"
+              />
+              <button
+                type="submit"
+                className="bg-acid text-ink font-semibold uppercase tracking-widest text-xs px-8 py-4 sm:py-3 rounded-full hover:bg-bone transition-colors whitespace-nowrap"
+              >
+                Get Briefing PDF
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -646,7 +704,7 @@ function Index() {
       <Pillars />
       <TheCar />
       <LiveSyndicates />
-      <RecentlyFunded />
+      {/* <RecentlyFunded /> Disabled until Vision148 momentum */}
       <Partnership />
       <BuildProcess />
       <Events />
