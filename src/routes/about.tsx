@@ -44,7 +44,7 @@ function AboutPage() {
             </h2>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
               Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred
-              silhouettes and infuse them with modern carbon engineering, additive manufacturing, and
+              silhouettes and infuse them with modern coach building engineering, additive manufacturing, and
               motorsport-grade safety — without losing the analog soul that makes these cars magical.
             </p>
             <p className="text-bone/70 text-lg leading-relaxed">
@@ -109,10 +109,10 @@ function AboutPage() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { name: "Marcus Hale", role: "Founder & Build Director", bio: "20 years in motorsport fabrication. Ex-WRC team lead. Obsessed with panel gaps." },
-              { name: "Elena Voss", role: "Chief Designer", bio: "Former automotive concept artist. Designed three factory concept cars before going independent." },
-              { name: "James Okonkwo", role: "Powertrain Lead", bio: "Turbocharger specialist. Built championship-winning rally engines across three continents." },
-              { name: "Sarah Chen", role: "Syndicate Director", bio: "Community architect. Connects collectors, engineers, and events into something greater than the sum." },
+              { name: "Marcus Hale", role: "Founder & Build Director", bio: "30 years experience in automotive & Fintech business" },
+              { name: "Simon Kiero Watson", role: "Commercial & Finance Oversight", bio: "Highly experienced Corporate Finance and Exchange Expert." },
+              { name: "Al Yasid Oozeear", role: "Digital Visualisor & Designer", bio: "Independent Automotive designer specialising in bespoke car design" },
+              { name: "Stuart Peach", role: "Project Co Founder", bio: "Investor and partner in the Vision148 project and original custodian of #148" },
             ].map((p) => (
               <div key={p.name} className="reveal bg-carbon border border-white/10 rounded-lg p-6 text-center hover:border-acid/30 transition-colors duration-500">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-steel border border-white/10 flex items-center justify-center">
