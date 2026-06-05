@@ -125,22 +125,25 @@ const RECENTLY_FUNDED = [
 
 const EVENTS = [
   {
-    type: "Casual Meet Up",
-    title: "London Meet Up, May",
+    type: "Syndicate Member Invitation",
+    title: "Coventry Metalcraft",
     tag: "INVITE ONLY",
-    date: "May 2026",
+    description: "An opportunity to meet the UK's leading coach building company and Vision148 build partner",
+    date: "TBA",
   },
   {
-    type: "Cars & Coffee",
-    title: "Alex’s Wish Charity Event",
-    tag: "Third Party Event",
-    date: "June 2026",
+    type: "Syndicate Member Invitation",
+    title: "Digital Manufacturing Centre - Silverstone",
+    tag: "INVITE ONLY",
+    description: "Emersion in Additive Manufacturing at this bleeding edge manufacturing facility in the heart of motorsport",
+    date: "TBA",
   },
   {
-    type: "Supercar Driver",
+    type: "THE CARCROWD SYNDICATE GATHERING",
     title: "Secret Meet 2026",
-    tag: "Third Party Event",
-    date: "July 2026",
+    tag: "INVITE ONLY",
+    description: "",
+    date: "TBA",
   },
 ];
 
@@ -567,6 +570,11 @@ function Events() {
                 </div>
                 <h3 className="font-display text-xl mb-2">{e.title}</h3>
                 <div className="font-mono text-xs text-bone/40">{e.date}</div>
+                {e.description && (
+                  <p className="mt-4 text-sm text-bone/60 leading-relaxed">
+                    {e.description}
+                  </p>
+                )}
               </div>
               <div className="mt-8 pt-6 border-t border-white/5">
                 <a
