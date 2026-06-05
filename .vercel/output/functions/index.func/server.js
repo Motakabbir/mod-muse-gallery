@@ -39010,16 +39010,16 @@ var init_server4 = __esm({
   }
 });
 
-// dist/server/assets/_tanstack-start-manifest_v-C8gx5qwb.js
-var tanstack_start_manifest_v_C8gx5qwb_exports = {};
-__export(tanstack_start_manifest_v_C8gx5qwb_exports, {
+// dist/server/assets/_tanstack-start-manifest_v-Cj3Mk0Iw.js
+var tanstack_start_manifest_v_Cj3Mk0Iw_exports = {};
+__export(tanstack_start_manifest_v_Cj3Mk0Iw_exports, {
   tsrStartManifest: () => tsrStartManifest
 });
 var tsrStartManifest;
-var init_tanstack_start_manifest_v_C8gx5qwb = __esm({
-  "dist/server/assets/_tanstack-start-manifest_v-C8gx5qwb.js"() {
+var init_tanstack_start_manifest_v_Cj3Mk0Iw = __esm({
+  "dist/server/assets/_tanstack-start-manifest_v-Cj3Mk0Iw.js"() {
     "use strict";
-    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-BvGoPUqa.js"] }, "/": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-Dgxt0i32.js", "/assets/pillar-one-of-one-CNlA5F64.js", "/assets/carbon-texture-BzyWj2o0.js", "/assets/video-CgAy-CTL.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js", "/assets/site-CaXTIvox.js"] }, "/about": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-DeGRV7h1.js", "/assets/site-CaXTIvox.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js"] }, "/apply": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-BNbWjfWj.js", "/assets/site-CaXTIvox.js", "/assets/video-CgAy-CTL.js"] }, "/contact": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-DuoYkP7n.js", "/assets/site-CaXTIvox.js", "/assets/video-CgAy-CTL.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-BGNfBF_F.js", "/assets/site-CaXTIvox.js", "/assets/gallery-4-DPW8Iuoe.js", "/assets/pillar-one-of-one-CNlA5F64.js", "/assets/video-CgAy-CTL.js"] }, "/events": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-C9P-NLXK.js", "/assets/site-CaXTIvox.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/mod-muse-gallery/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-Dv6keehJ.js", "/assets/site-CaXTIvox.js", "/assets/gallery-4-DPW8Iuoe.js", "/assets/carbon-texture-BzyWj2o0.js", "/assets/video-CgAy-CTL.js"] } }, clientEntry: "/assets/index-BvGoPUqa.js" });
+    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/syndicate/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-_jw9VWCd.js"] }, "/": { filePath: "/media/dolar/office/projects/syndicate/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-CJQFoZLu.js", "/assets/pillar-one-of-one-CNlA5F64.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/site-BaOQlNlK.js", "/assets/video-CgAy-CTL.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js"] }, "/about": { filePath: "/media/dolar/office/projects/syndicate/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-BGCXc1AU.js", "/assets/site-BaOQlNlK.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js"] }, "/apply": { filePath: "/media/dolar/office/projects/syndicate/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-PqTdhQaR.js", "/assets/site-BaOQlNlK.js", "/assets/video-CgAy-CTL.js"] }, "/contact": { filePath: "/media/dolar/office/projects/syndicate/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-D42x-xXh.js", "/assets/site-BaOQlNlK.js", "/assets/video-CgAy-CTL.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/syndicate/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-D1WOani3.js", "/assets/site-BaOQlNlK.js", "/assets/gallery-4-DPW8Iuoe.js", "/assets/pillar-one-of-one-CNlA5F64.js", "/assets/video-CgAy-CTL.js"] }, "/events": { filePath: "/media/dolar/office/projects/syndicate/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-CGxujuaU.js", "/assets/site-BaOQlNlK.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/syndicate/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-DtUiOG3R.js", "/assets/site-BaOQlNlK.js", "/assets/gallery-4-DPW8Iuoe.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/video-CgAy-CTL.js"] } }, clientEntry: "/assets/index-_jw9VWCd.js" });
   }
 });
 
@@ -51825,7 +51825,7 @@ var init_es3 = __esm({
   }
 });
 
-// dist/server/assets/site-CobXpVdH.js
+// dist/server/assets/site-DZylOCQT.js
 function useReveal() {
   (0, import_react35.useEffect)(() => {
     const els = document.querySelectorAll(".reveal");
@@ -51854,7 +51854,7 @@ function Nav() {
           /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(Link, { to: "/", className: "flex items-center gap-3 group", children: [
             /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "relative", children: [
               /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "absolute inset-0 bg-acid/30 blur-xl group-hover:bg-acid/50 transition-all rounded-full" }),
-              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("img", { src: logo, alt: "Syn Mod Build", className: "relative h-10 w-10", width: 40, height: 40 })
+              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("img", { src: placeholderLogo, alt: "Syn Mod Build", className: "relative h-10 w-10", width: 40, height: 40 })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("span", { className: "font-mono text-[10px] tracking-[0.25em] uppercase text-bone/80 leading-tight hidden sm:block", children: [
               "Syndicated",
@@ -51929,7 +51929,7 @@ function Footer() {
     /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "relative mx-auto max-w-7xl px-6 py-16 grid lg:grid-cols-4 gap-10", children: [
       /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "lg:col-span-2", children: [
         /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "flex items-center gap-3 mb-6", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("img", { src: logo, alt: "Syn Mod Build", className: "h-12 w-12" }),
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("img", { src: placeholderLogo, alt: "Syn Mod Build", className: "h-12 w-12" }),
           /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
             /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-display text-lg", children: "Syndicated Restomod" }),
             /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-mono text-[10px] text-bone/40 uppercase tracking-[0.25em]", children: "Syndicate \u2022 Powered by TheCarCrowd" })
@@ -51951,7 +51951,10 @@ function Footer() {
         /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "flex flex-col gap-3 text-sm text-bone/70", children: [
           /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/contact", className: "hover:text-acid transition-colors", children: "Contact" }),
           /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/apply", className: "hover:text-acid transition-colors", children: "Apply" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("a", { href: "mailto:hello@Syndicate.com", className: "hover:text-acid transition-colors", children: "hello@Syndicate.com" })
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("a", { href: "mailto:hello@Syndicate.com", className: "hover:text-acid transition-colors", children: "hello@Syndicate.com" }),
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "h-px w-6 bg-white/10 my-1" }),
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("a", { href: "https://instagram.com", target: "_blank", rel: "noreferrer", className: "hover:text-acid transition-colors", children: "Instagram" }),
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("a", { href: "https://linkedin.com", target: "_blank", rel: "noreferrer", className: "hover:text-acid transition-colors", children: "LinkedIn" })
         ] })
       ] })
     ] }),
@@ -52009,14 +52012,14 @@ function PageHero({
     ] })
   ] });
 }
-var import_jsx_runtime22, import_react35, logo, NAV;
-var init_site_CobXpVdH = __esm({
-  "dist/server/assets/site-CobXpVdH.js"() {
+var import_jsx_runtime22, import_react35, placeholderLogo, NAV;
+var init_site_DZylOCQT = __esm({
+  "dist/server/assets/site-DZylOCQT.js"() {
     "use strict";
     import_jsx_runtime22 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     import_react35 = __toESM(require_react(), 1);
-    logo = "/assets/logo-4-BrrnFFbn.jpeg";
+    placeholderLogo = "/assets/logo-4-BrrnFFbn.jpeg";
     NAV = [
       { label: "Syndicate", to: "/", hash: "intro" },
       { label: "The Car", to: "/", hash: "car" },
@@ -52044,12 +52047,11 @@ var init_gallery_4_B_0I7K_V = __esm({
   }
 });
 
-// dist/server/assets/carbon-texture-qtvMXoo4.js
-var buildProcess, carbonTexture;
-var init_carbon_texture_qtvMXoo4 = __esm({
-  "dist/server/assets/carbon-texture-qtvMXoo4.js"() {
+// dist/server/assets/carbon-texture-CrF_2aOK.js
+var carbonTexture;
+var init_carbon_texture_CrF_2aOK = __esm({
+  "dist/server/assets/carbon-texture-CrF_2aOK.js"() {
     "use strict";
-    buildProcess = "/assets/gallery-1-BNSHI9Rh.jpg";
     carbonTexture = "/assets/gallery-1-BNSHI9Rh.jpg";
   }
 });
@@ -52063,9 +52065,9 @@ var init_video_btH4iMvl = __esm({
   }
 });
 
-// dist/server/assets/the-build-BtVFE9Hb.js
-var the_build_BtVFE9Hb_exports = {};
-__export(the_build_BtVFE9Hb_exports, {
+// dist/server/assets/the-build-JiGRFvjY.js
+var the_build_JiGRFvjY_exports = {};
+__export(the_build_JiGRFvjY_exports, {
   component: () => TheBuildPage
 });
 function BuildGallery() {
@@ -52280,17 +52282,18 @@ function TheBuildPage() {
     /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime23, import_react36, buildStrip, buildScan, MEDIA, FILTERS, PHASES, SPECS;
-var init_the_build_BtVFE9Hb = __esm({
-  "dist/server/assets/the-build-BtVFE9Hb.js"() {
+var import_jsx_runtime23, import_react36, buildProcess, buildStrip, buildScan, MEDIA, FILTERS, PHASES, SPECS;
+var init_the_build_JiGRFvjY = __esm({
+  "dist/server/assets/the-build-JiGRFvjY.js"() {
     "use strict";
     import_jsx_runtime23 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CobXpVdH();
+    init_site_DZylOCQT();
     import_react36 = __toESM(require_react(), 1);
     init_gallery_4_B_0I7K_V();
-    init_carbon_texture_qtvMXoo4();
+    init_carbon_texture_CrF_2aOK();
     init_video_btH4iMvl();
+    buildProcess = "/assets/gallery-1-BNSHI9Rh.jpg";
     buildStrip = "/assets/gallery-1-BNSHI9Rh.jpg";
     buildScan = "/assets/gallery-1-BNSHI9Rh.jpg";
     MEDIA = [
@@ -52334,7 +52337,7 @@ var init_the_build_BtVFE9Hb = __esm({
       img: g5,
       body: "Engine rebuild, paint, and final assembly come together. The car is validated on road and track before final sign-off and the first syndicate drive day.",
       bullets: ["Engine rebuild", "Paint & livery", "Road & track testing", "Final sign-off"],
-      partner: "MAHLE Group \u2022 Cornerstone"
+      partner: "MAHLE Group \u2022 DMC"
     }];
     SPECS = [{
       l: "Base",
@@ -52347,7 +52350,7 @@ var init_the_build_BtVFE9Hb = __esm({
       v: "550+ bhp"
     }, {
       l: "Bodywork",
-      v: "Carbon composite + hand-formed steel"
+      v: "Coachbuilt Aluminium + Composite"
     }, {
       l: "Chassis",
       v: "Reinforced shell, modern suspension geometry"
@@ -52367,9 +52370,9 @@ var init_fps_BgWRjoqf = __esm({
   }
 });
 
-// dist/server/assets/events-CqkwP6Qb.js
-var events_CqkwP6Qb_exports = {};
-__export(events_CqkwP6Qb_exports, {
+// dist/server/assets/events-C55AZNJO.js
+var events_C55AZNJO_exports = {};
+__export(events_C55AZNJO_exports, {
   component: () => EventsPage
 });
 function EventsPage() {
@@ -52431,12 +52434,12 @@ function EventsPage() {
   ] });
 }
 var import_jsx_runtime24, import_react37, EVENTS, FAQS;
-var init_events_CqkwP6Qb = __esm({
-  "dist/server/assets/events-CqkwP6Qb.js"() {
+var init_events_C55AZNJO = __esm({
+  "dist/server/assets/events-C55AZNJO.js"() {
     "use strict";
     import_jsx_runtime24 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CobXpVdH();
+    init_site_DZylOCQT();
     import_react37 = __toESM(require_react(), 1);
     init_fps_BgWRjoqf();
     EVENTS = [{
@@ -52501,9 +52504,9 @@ var init_pillar_one_of_one_DiN9SsXa = __esm({
   }
 });
 
-// dist/server/assets/design-gallery-c99w1dWR.js
-var design_gallery_c99w1dWR_exports = {};
-__export(design_gallery_c99w1dWR_exports, {
+// dist/server/assets/design-gallery-b0W838Sq.js
+var design_gallery_b0W838Sq_exports = {};
+__export(design_gallery_b0W838Sq_exports, {
   component: () => GalleryPage
 });
 function GalleryPage() {
@@ -52538,12 +52541,12 @@ function GalleryPage() {
   ] });
 }
 var import_jsx_runtime25, import_react38, ITEMS;
-var init_design_gallery_c99w1dWR = __esm({
-  "dist/server/assets/design-gallery-c99w1dWR.js"() {
+var init_design_gallery_b0W838Sq = __esm({
+  "dist/server/assets/design-gallery-b0W838Sq.js"() {
     "use strict";
     import_jsx_runtime25 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CobXpVdH();
+    init_site_DZylOCQT();
     init_gallery_4_B_0I7K_V();
     init_pillar_one_of_one_DiN9SsXa();
     init_video_btH4iMvl();
@@ -52587,9 +52590,9 @@ var init_design_gallery_c99w1dWR = __esm({
   }
 });
 
-// dist/server/assets/contact-C1RoL7ls.js
-var contact_C1RoL7ls_exports = {};
-__export(contact_C1RoL7ls_exports, {
+// dist/server/assets/contact-BVusgovq.js
+var contact_BVusgovq_exports = {};
+__export(contact_BVusgovq_exports, {
   component: () => ContactPage
 });
 function ContactPage() {
@@ -52710,19 +52713,19 @@ function ContactPage() {
   ] });
 }
 var import_jsx_runtime26, import_react39;
-var init_contact_C1RoL7ls = __esm({
-  "dist/server/assets/contact-C1RoL7ls.js"() {
+var init_contact_BVusgovq = __esm({
+  "dist/server/assets/contact-BVusgovq.js"() {
     "use strict";
     import_jsx_runtime26 = __toESM(require_jsx_runtime(), 1);
-    init_site_CobXpVdH();
+    init_site_DZylOCQT();
     import_react39 = __toESM(require_react(), 1);
     init_video_btH4iMvl();
   }
 });
 
-// dist/server/assets/apply-DC6JK--s.js
-var apply_DC6JK_s_exports = {};
-__export(apply_DC6JK_s_exports, {
+// dist/server/assets/apply-DxfTk8mH.js
+var apply_DxfTk8mH_exports = {};
+__export(apply_DxfTk8mH_exports, {
   component: () => ApplyPage
 });
 function ApplyPage() {
@@ -52800,13 +52803,13 @@ function Field({
   ] });
 }
 var import_jsx_runtime27, import_react40, STEPS;
-var init_apply_DC6JK_s = __esm({
-  "dist/server/assets/apply-DC6JK--s.js"() {
+var init_apply_DxfTk8mH = __esm({
+  "dist/server/assets/apply-DxfTk8mH.js"() {
     "use strict";
     import_jsx_runtime27 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     import_react40 = __toESM(require_react(), 1);
-    init_site_CobXpVdH();
+    init_site_DZylOCQT();
     init_video_btH4iMvl();
     STEPS = [{
       n: "01",
@@ -52837,9 +52840,9 @@ var init_hd_1920_1080_24fps_DsLk95nk = __esm({
   }
 });
 
-// dist/server/assets/about-BNQzIRpa.js
-var about_BNQzIRpa_exports = {};
-__export(about_BNQzIRpa_exports, {
+// dist/server/assets/about-DmFS81c0.js
+var about_DmFS81c0_exports = {};
+__export(about_DmFS81c0_exports, {
   component: () => AboutPage
 });
 function AboutPage() {
@@ -52863,7 +52866,7 @@ function AboutPage() {
           /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("br", {}),
           "Restomod Can Be"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred silhouettes and infuse them with modern carbon engineering, additive manufacturing, and motorsport-grade safety \u2014 without losing the analog soul that makes these cars magical." }),
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred silhouettes and infuse them with modern coach building engineering, additive manufacturing, and motorsport-grade safety \u2014 without losing the analog soul that makes these cars magical." }),
         /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed", children: "Every weld, every panel, every line of code in the ECU is obsessively considered. The result is not a replica. It is a rebirth." })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "reveal", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("img", { src: aboutDetail, alt: "Precision engineering detail", className: "w-full h-[500px] object-cover rounded-lg border border-white/10", loading: "lazy", width: 1024, height: 1024 }) })
@@ -52899,19 +52902,19 @@ function AboutPage() {
       /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "grid md:grid-cols-4 gap-6", children: [{
         name: "Marcus Hale",
         role: "Founder & Build Director",
-        bio: "20 years in motorsport fabrication. Ex-WRC team lead. Obsessed with panel gaps."
+        bio: "30 years experience in automotive & Fintech business"
       }, {
-        name: "Elena Voss",
-        role: "Chief Designer",
-        bio: "Former automotive concept artist. Designed three factory concept cars before going independent."
+        name: "Simon Kiero Watson",
+        role: "Commercial & Finance Oversight",
+        bio: "Highly experienced Corporate Finance and Exchange Expert."
       }, {
-        name: "James Okonkwo",
-        role: "Powertrain Lead",
-        bio: "Turbocharger specialist. Built championship-winning rally engines across three continents."
+        name: "Al Yasid Oozeear",
+        role: "Digital Visualisor & Designer",
+        bio: "Independent Automotive designer specialising in bespoke car design"
       }, {
-        name: "Sarah Chen",
-        role: "Syndicate Director",
-        bio: "Community architect. Connects collectors, engineers, and events into something greater than the sum."
+        name: "Stuart Peach",
+        role: "Project Co Founder",
+        bio: "Investor and partner in the Vision148 project and original custodian of #148"
       }].map((p3) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-6 text-center hover:border-acid/30 transition-colors duration-500", children: [
         /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "w-20 h-20 mx-auto mb-4 rounded-full bg-steel border border-white/10 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "font-display text-2xl text-acid", children: p3.name.charAt(0) }) }),
         /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("h3", { className: "font-display text-lg mb-1", children: p3.name }),
@@ -52932,21 +52935,21 @@ function AboutPage() {
   ] });
 }
 var import_jsx_runtime28, import_react41, aboutDetail;
-var init_about_BNQzIRpa = __esm({
-  "dist/server/assets/about-BNQzIRpa.js"() {
+var init_about_DmFS81c0 = __esm({
+  "dist/server/assets/about-DmFS81c0.js"() {
     "use strict";
     import_jsx_runtime28 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_CobXpVdH();
+    init_site_DZylOCQT();
     init_hd_1920_1080_24fps_DsLk95nk();
     import_react41 = __toESM(require_react(), 1);
     aboutDetail = "/assets/gallery-1-BNSHI9Rh.jpg";
   }
 });
 
-// dist/server/assets/index-CFpF3V7e.js
-var index_CFpF3V7e_exports = {};
-__export(index_CFpF3V7e_exports, {
+// dist/server/assets/index-B3e0A50V.js
+var index_B3e0A50V_exports = {};
+__export(index_B3e0A50V_exports, {
   component: () => Index
 });
 function Hero() {
@@ -53029,21 +53032,28 @@ function Intro() {
 function Stats() {
   return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("section", { className: "relative py-24 px-6 border-y border-white/5 bg-carbon/50 overflow-hidden", children: [
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5", children: [{
-      n: "110+",
-      label: "Curated Assets"
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative mx-auto max-w-7xl mb-12 text-center reveal", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("h2", { className: "font-mono text-xs md:text-sm tracking-[0.3em] uppercase text-bone/60", children: [
+      "Powered By ",
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-bone", children: "TheCarCrowd" })
+    ] }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-5 gap-px bg-white/5", children: [{
+      n: "110",
+      label: "CURATED ASSETS"
     }, {
-      n: "6,000+",
-      label: "Registered Members"
+      n: "6000",
+      label: "REGISTERED MEMBERS"
     }, {
-      n: "12.6%",
-      label: "Annual Rate of Return"
+      n: "12.6",
+      label: "ANNUAL RATE OF RETURN SINCE 2021"
     }, {
-      n: "\xA32,000",
-      label: "Low Entry Barrier"
-    }].map((st2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal text-center py-6 bg-ink/60 hover:bg-ink transition-colors group", children: [
+      n: "2020",
+      label: "FIRST CAR LAUNCHED"
+    }, {
+      n: "60",
+      label: "YEARS OF EXPERIENCE"
+    }].map((st2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal text-center py-6 px-2 bg-ink/60 hover:bg-ink transition-colors group flex flex-col justify-center items-center", children: [
       /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform", children: st2.n }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[10px] tracking-[0.25em] uppercase text-bone/50", children: st2.label })
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-bone/50 text-center", children: st2.label })
     ] }, st2.label)) })
   ] });
 }
@@ -53096,10 +53106,11 @@ function LiveSyndicates() {
       "Live Syndicates. ",
       /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "Open Allocations." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: LIVE_SYNDICATES.map((s) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("article", { className: "group border border-white/10 bg-ink overflow-hidden hover:border-acid transition-all duration-300 flex flex-col justify-between", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "aspect-[16/10] overflow-hidden relative", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: s.img, alt: s.title, loading: "lazy", className: "h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold", children: "Live" })
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: LIVE_SYNDICATES.map((s) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("article", { className: `group border ${s.isPlaceholder ? "border-white/5" : "border-white/10 hover:border-acid"} bg-ink overflow-hidden transition-all duration-300 flex flex-col justify-between`, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "aspect-[16/10] overflow-hidden relative bg-carbon", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: s.img, alt: s.title, loading: "lazy", className: `h-full w-full object-cover transition-transform duration-700 ${s.isPlaceholder ? "blur-md opacity-30 grayscale scale-110" : "group-hover:scale-105"}` }),
+        !s.isPlaceholder && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold", children: "Live" }),
+        s.isPlaceholder && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 flex items-center justify-center p-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "bg-ink/60 backdrop-blur-md border border-white/10 text-bone/80 px-4 py-2 font-mono text-[10px] tracking-widest uppercase rounded", children: "Assessing for Syndication" }) })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "p-8 flex-1 flex flex-col justify-between", children: [
         /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
@@ -53110,40 +53121,24 @@ function LiveSyndicates() {
             /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("li", { className: "text-bone/80 font-semibold", children: s.return })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-8", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "#apply", className: "w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300", children: "Request Details" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-8", children: s.waitlist ? /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("form", { className: "flex flex-col gap-2", onSubmit: (e) => e.preventDefault(), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("input", { type: "email", placeholder: "Email for waitlist", required: true, className: "bg-carbon border border-white/10 px-4 py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full transition-colors text-xs text-center" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("button", { type: "submit", className: "w-full text-center py-3 border border-acid text-acid uppercase tracking-widest text-xs rounded-full hover:bg-acid/10 transition-all duration-300 font-semibold", children: "Join Waitlist" })
+        ] }) : /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "#apply", className: "w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300", children: "Request Details" }) })
       ] })
-    ] }, s.title)) })
-  ] }) });
-}
-function RecentlyFunded() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "Track Record", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
-      "Recently Funded ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "Syndicates." })
-    ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: RECENTLY_FUNDED.map((rf) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "aspect-[16/10] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: rf.img, alt: rf.title, loading: "lazy", className: "h-full w-full object-cover" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute top-4 right-4 bg-white/10 backdrop-blur-md text-bone/90 px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase", children: "Fully Funded" })
+    ] }, s.title)) }),
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mt-20 reveal border border-white/10 bg-ink p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden group", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-acid/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative z-10 lg:max-w-xl text-center lg:text-left", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[10px] text-acid tracking-widest uppercase mb-3", children: "Learn the process" }),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-2xl md:text-3xl mb-3", children: "Want the full picture?" }),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/60 text-sm md:text-base leading-relaxed", children: "Download our comprehensive Briefing Document to dive deeper into our acquisition strategy, engineering standards, and projected returns." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "p-8", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-xl mb-4", children: rf.title }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("ul", { className: "space-y-1.5 text-bone/50 text-xs font-mono", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("li", { children: [
-            "\u2014 ",
-            rf.date
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("li", { children: [
-            "\u2014 ",
-            rf.val
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("li", { children: [
-            "\u2014 ",
-            rf.members
-          ] })
-        ] })
-      ] })
-    ] }, rf.title)) })
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative z-10 w-full lg:w-auto flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("form", { className: "flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("input", { type: "email", placeholder: "Enter your email address", required: true, className: "bg-carbon border border-white/20 px-6 py-4 sm:py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full sm:min-w-[280px] transition-colors text-sm" }),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("button", { type: "submit", className: "bg-acid text-ink font-semibold uppercase tracking-widest text-xs px-8 py-4 sm:py-3 rounded-full hover:bg-bone transition-colors whitespace-nowrap", children: "Get Briefing PDF" })
+      ] }) })
+    ] })
   ] }) });
 }
 function Partnership() {
@@ -53201,7 +53196,8 @@ function Events() {
           /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "bg-white/5 border border-white/10 px-2 py-0.5 rounded font-mono text-[9px] text-bone/60 tracking-wider", children: e.tag })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-xl mb-2", children: e.title }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-xs text-bone/40", children: e.date })
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-xs text-bone/40", children: e.date }),
+        e.description && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-4 text-sm text-bone/60 leading-relaxed", children: e.description })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-8 pt-6 border-t border-white/5", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("a", { href: "#apply", className: "inline-flex items-center gap-2 text-xs uppercase tracking-widest text-acid hover:text-bone transition-colors", children: [
         "Request Invite ",
@@ -53303,7 +53299,6 @@ function Index() {
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Pillars, {}),
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(TheCar, {}),
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(LiveSyndicates, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(RecentlyFunded, {}),
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Partnership, {}),
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(BuildProcess, {}),
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Events, {}),
@@ -53314,18 +53309,18 @@ function Index() {
     /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime29, import_react42, pillarPartners, pillarExperience, PILLARS, PROCESS, PARTNERS, SYNDICATE_STEPS, BENEFITS, LIVE_SYNDICATES, RECENTLY_FUNDED, EVENTS2;
-var init_index_CFpF3V7e = __esm({
-  "dist/server/assets/index-CFpF3V7e.js"() {
+var import_jsx_runtime29, import_react42, pillarPartners, pillarExperience, PILLARS, PROCESS, PARTNERS, SYNDICATE_STEPS, BENEFITS, LIVE_SYNDICATES, EVENTS2;
+var init_index_B3e0A50V = __esm({
+  "dist/server/assets/index-B3e0A50V.js"() {
     "use strict";
     import_jsx_runtime29 = __toESM(require_jsx_runtime(), 1);
     init_pillar_one_of_one_DiN9SsXa();
-    init_carbon_texture_qtvMXoo4();
+    init_carbon_texture_CrF_2aOK();
+    init_site_DZylOCQT();
     init_video_btH4iMvl();
     init_hd_1920_1080_24fps_DsLk95nk();
     init_fps_BgWRjoqf();
     init_esm5();
-    init_site_CobXpVdH();
     import_react42 = __toESM(require_react(), 1);
     pillarPartners = "/assets/gallery-1-BNSHI9Rh.jpg";
     pillarExperience = "/assets/gallery-1-BNSHI9Rh.jpg";
@@ -53383,7 +53378,7 @@ var init_index_CFpF3V7e = __esm({
       name: "MAHLE Group",
       role: "Engine Rebuild & Performance"
     }, {
-      name: "Cornerstone",
+      name: "Cornerstone Technologies",
       role: "Non-structural Skillsets"
     }, {
       name: "HGL / VenueServe",
@@ -53407,7 +53402,7 @@ var init_index_CFpF3V7e = __esm({
       body: "Potential sale of the asset at premium."
     }];
     BENEFITS = [{
-      icon: "\u2699",
+      icon: "\u2B21",
       title: "Build Access",
       items: ["Workshop visits", "Engineering insight"]
     }, {
@@ -53424,65 +53419,52 @@ var init_index_CFpF3V7e = __esm({
       items: ["Learn the build", "Understand the engineering"]
     }];
     LIVE_SYNDICATES = [{
-      title: "Ferrari F430 V8 Manual",
-      img: buildProcess,
+      title: "Vision148 Sierra Cosworth RS500",
+      img: placeholderLogo,
       allocation: "\xA35,000 per allocation",
-      stats: "27 Allocations \u2022 10 remaining",
+      stats: "25 Allocations \u2022 10 remaining",
       return: "Potential Returns 77.1%*"
     }, {
-      title: "Audi R8 V10 Manual",
-      img: buildProcess,
+      title: "Next Build being assessed for Syndication",
+      img: placeholderLogo,
       allocation: "\xA32,000 per allocation",
       stats: "31 Allocations \u2022 17 remaining",
-      return: "Potential Returns 63.90%*"
+      return: "Potential Returns 63.90%*",
+      isPlaceholder: false,
+      waitlist: true
     }, {
       title: "Mercedes SLS AMG",
-      img: buildProcess,
+      img: placeholderLogo,
       allocation: "\xA35,000 per allocation",
       stats: "39 Allocations \u2022 32 remaining",
-      return: "Potential Returns 87.2%*"
-    }];
-    RECENTLY_FUNDED = [{
-      title: "Lamborghini Gallardo SE",
-      img: buildProcess,
-      date: "Funded Date \u2014 Dec 25",
-      val: "Funded Value \u2014 \xA382,000",
-      members: "Syndicate Members \u2014 14"
-    }, {
-      title: "Aston Martin V12 Vantage",
-      img: buildProcess,
-      date: "Funded Date \u2014 Sep 25",
-      val: "Funded Value \u2014 \xA366,000",
-      members: "Syndicate Members \u2014 21"
-    }, {
-      title: "Porsche 996 GT3 RS",
-      img: buildProcess,
-      date: "Funded Date \u2014 May 25",
-      val: "Funded Value \u2014 \xA3165,000",
-      members: "Syndicate Members \u2014 22"
+      return: "Potential Returns 87.2%*",
+      isPlaceholder: false
     }];
     EVENTS2 = [{
-      type: "Casual Meet Up",
-      title: "London Meet Up, May",
+      type: "Syndicate Member Invitation",
+      title: "Coventry Metalcraft",
       tag: "INVITE ONLY",
-      date: "May 2026"
+      description: "An opportunity to meet the UK's leading coach building company and Vision148 build partner",
+      date: "TBA"
     }, {
-      type: "Cars & Coffee",
-      title: "Alex\u2019s Wish Charity Event",
-      tag: "Third Party Event",
-      date: "June 2026"
+      type: "Syndicate Member Invitation",
+      title: "Digital Manufacturing Centre - Silverstone",
+      tag: "INVITE ONLY",
+      description: "Emersion in Additive Manufacturing at this bleeding edge manufacturing facility in the heart of motorsport",
+      date: "TBA"
     }, {
-      type: "Supercar Driver",
+      type: "THE CARCROWD SYNDICATE GATHERING",
       title: "Secret Meet 2026",
-      tag: "Third Party Event",
-      date: "July 2026"
+      tag: "INVITE ONLY",
+      description: "",
+      date: "TBA"
     }];
   }
 });
 
-// dist/server/assets/router-B-XlRjbF.js
-var router_B_XlRjbF_exports = {};
-__export(router_B_XlRjbF_exports, {
+// dist/server/assets/router-BcmlSFze.js
+var router_BcmlSFze_exports = {};
+__export(router_BcmlSFze_exports, {
   getRouter: () => getRouter
 });
 function NotFoundComponent() {
@@ -53562,14 +53544,14 @@ function RootComponent() {
   ) }) });
 }
 var import_jsx_runtime30, appCss, Route$7, $$splitComponentImporter$6, Route$6, $$splitComponentImporter$5, Route$5, $$splitComponentImporter$4, Route$4, $$splitComponentImporter$3, Route$3, $$splitComponentImporter$2, Route$2, $$splitComponentImporter$1, Route$1, $$splitComponentImporter, Route2, TheBuildRoute, EventsRoute, DesignGalleryRoute, ContactRoute, ApplyRoute, AboutRoute, IndexRoute, rootRouteChildren, routeTree, getRouter;
-var init_router_B_XlRjbF = __esm({
-  "dist/server/assets/router-B-XlRjbF.js"() {
+var init_router_BcmlSFze = __esm({
+  "dist/server/assets/router-BcmlSFze.js"() {
     "use strict";
     init_modern2();
     init_esm5();
     import_jsx_runtime30 = __toESM(require_jsx_runtime(), 1);
     init_es3();
-    appCss = "/assets/styles-D9pE5nSV.css";
+    appCss = "/assets/styles-DolJQieJ.css";
     Route$7 = createRootRouteWithContext()({
       head: () => ({
         meta: [
@@ -53599,7 +53581,7 @@ var init_router_B_XlRjbF = __esm({
       notFoundComponent: NotFoundComponent,
       errorComponent: ErrorComponent2
     });
-    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_BtVFE9Hb(), the_build_BtVFE9Hb_exports));
+    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_JiGRFvjY(), the_build_JiGRFvjY_exports));
     Route$6 = createFileRoute("/the-build")({
       head: () => ({
         meta: [{
@@ -53617,7 +53599,7 @@ var init_router_B_XlRjbF = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$6, "component")
     });
-    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_CqkwP6Qb(), events_CqkwP6Qb_exports));
+    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_C55AZNJO(), events_C55AZNJO_exports));
     Route$5 = createFileRoute("/events")({
       head: () => ({
         meta: [{
@@ -53635,7 +53617,7 @@ var init_router_B_XlRjbF = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$5, "component")
     });
-    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_c99w1dWR(), design_gallery_c99w1dWR_exports));
+    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_b0W838Sq(), design_gallery_b0W838Sq_exports));
     Route$4 = createFileRoute("/design-gallery")({
       head: () => ({
         meta: [{
@@ -53653,7 +53635,7 @@ var init_router_B_XlRjbF = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$4, "component")
     });
-    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_C1RoL7ls(), contact_C1RoL7ls_exports));
+    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_BVusgovq(), contact_BVusgovq_exports));
     Route$3 = createFileRoute("/contact")({
       head: () => ({
         meta: [{
@@ -53671,7 +53653,7 @@ var init_router_B_XlRjbF = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$3, "component")
     });
-    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_DC6JK_s(), apply_DC6JK_s_exports));
+    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_DxfTk8mH(), apply_DxfTk8mH_exports));
     Route$2 = createFileRoute("/apply")({
       head: () => ({
         meta: [{
@@ -53689,7 +53671,7 @@ var init_router_B_XlRjbF = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$2, "component")
     });
-    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_BNQzIRpa(), about_BNQzIRpa_exports));
+    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_DmFS81c0(), about_DmFS81c0_exports));
     Route$1 = createFileRoute("/about")({
       head: () => ({
         meta: [{
@@ -53707,7 +53689,7 @@ var init_router_B_XlRjbF = __esm({
       }),
       component: lazyRouteComponent($$splitComponentImporter$1, "component")
     });
-    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_CFpF3V7e(), index_CFpF3V7e_exports));
+    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_B3e0A50V(), index_B3e0A50V_exports));
     Route2 = createFileRoute("/")({
       component: lazyRouteComponent($$splitComponentImporter, "component")
     });
@@ -53769,9 +53751,9 @@ var init_router_B_XlRjbF = __esm({
   }
 });
 
-// dist/server/assets/start-C2vB3THS.js
-var start_C2vB3THS_exports = {};
-__export(start_C2vB3THS_exports, {
+// dist/server/assets/start-B44JgS6u.js
+var start_B44JgS6u_exports = {};
+__export(start_B44JgS6u_exports, {
   startInstance: () => startInstance
 });
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
@@ -53784,10 +53766,10 @@ function dedupeSerializationAdapters(deduped, serializationAdapters) {
   }
 }
 var import_node_async_hooks, import_react43, import_jsx_runtime31, createStart, errorMiddleware, startInstance;
-var init_start_C2vB3THS = __esm({
-  "dist/server/assets/start-C2vB3THS.js"() {
+var init_start_B44JgS6u = __esm({
+  "dist/server/assets/start-B44JgS6u.js"() {
     "use strict";
-    init_server_TlufgBjG();
+    init_server_BOP1_qvk();
     init_server5();
     import_node_async_hooks = require("node:async_hooks");
     init_production();
@@ -53842,9 +53824,9 @@ var init_empty_plugin_adapters_BFgPZ6_d = __esm({
   }
 });
 
-// dist/server/assets/server-TlufgBjG.js
-var server_TlufgBjG_exports = {};
-__export(server_TlufgBjG_exports, {
+// dist/server/assets/server-BOP1_qvk.js
+var server_BOP1_qvk_exports = {};
+__export(server_BOP1_qvk_exports, {
   c: () => createMiddleware,
   s: () => server
 });
@@ -53901,7 +53883,7 @@ function getResponse() {
   return getH3Event().res;
 }
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_C8gx5qwb(), tanstack_start_manifest_v_C8gx5qwb_exports));
+  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_Cj3Mk0Iw(), tanstack_start_manifest_v_Cj3Mk0Iw_exports));
   const startManifest = tsrStartManifest2();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -54720,8 +54702,8 @@ function getStartResponseHeaders(opts) {
 }
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    Promise.resolve().then(() => (init_router_B_XlRjbF(), router_B_XlRjbF_exports)),
-    Promise.resolve().then(() => (init_start_C2vB3THS(), start_C2vB3THS_exports)),
+    Promise.resolve().then(() => (init_router_BcmlSFze(), router_BcmlSFze_exports)),
+    Promise.resolve().then(() => (init_start_B44JgS6u(), start_B44JgS6u_exports)),
     Promise.resolve().then(() => (init_empty_plugin_adapters_BFgPZ6_d(), empty_plugin_adapters_BFgPZ6_d_exports))
   ]);
   return {
@@ -55014,8 +54996,8 @@ function createServerEntry(entry) {
   } };
 }
 var import_node_async_hooks2, import_react44, import_jsx_runtime32, defaultStreamHandler, GLOBAL_EVENT_STORAGE_KEY, globalObj$1, eventStorage, HEADERS, manifest, TSS_FORMDATA_CONTEXT, TSS_SERVER_FUNCTION, X_TSS_SERIALIZED, X_TSS_RAW_RESPONSE, TSS_CONTENT_TYPE_FRAMED, FrameType, FRAME_HEADER_SIZE, TSS_CONTENT_TYPE_FRAMED_VERSIONED, GLOBAL_STORAGE_KEY, globalObj, startStorage, getStartOptions, createMiddleware, innerCreateCsrfMiddleware, createCsrfMiddleware, textEncoder2, EMPTY_PAYLOAD, serovalPlugins, FORM_DATA_CONTENT_TYPES, MAX_PAYLOAD_SIZE, handleServerAction, LINK_PARAM_TOKEN_RE, PRELOAD_AS_VALUES, ServerFunctionSerializationAdapter, entriesPromise, defaultCsrfMiddleware, getCachedBaseManifest, getProdBaseManifest, getBaseManifest, createEarlyHintsForRequest, ROUTER_BASEPATH, SERVER_FN_BASE, IS_PRERENDERING, IS_SHELL_ENV, ERR_NO_RESPONSE, ERR_NO_DEFER, fetch2, server_default, server;
-var init_server_TlufgBjG = __esm({
-  "dist/server/assets/server-TlufgBjG.js"() {
+var init_server_BOP1_qvk = __esm({
+  "dist/server/assets/server-BOP1_qvk.js"() {
     "use strict";
     import_node_async_hooks2 = require("node:async_hooks");
     init_node2();
@@ -55405,7 +55387,7 @@ function renderErrorPage(error) {
 }
 async function getServerEntry() {
   if (!serverEntryPromise) {
-    serverEntryPromise = Promise.resolve().then(() => (init_server_TlufgBjG(), server_TlufgBjG_exports)).then((n2) => n2.s).then(
+    serverEntryPromise = Promise.resolve().then(() => (init_server_BOP1_qvk(), server_BOP1_qvk_exports)).then((n2) => n2.s).then(
       (m3) => m3.default ?? m3
     );
   }
