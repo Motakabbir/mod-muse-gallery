@@ -43,6 +43,27 @@ const staticSrcAssetsOut = path.join(staticOut, "src/assets");
 if (fs.existsSync(srcAssets)) {
   console.log("Copying src/assets directly to static output...");
   copyDir(srcAssets, staticSrcAssetsOut);
+
+  // Check if any copied video file is a Git LFS pointer instead of a real video
+  console.log("Checking video files for Git LFS pointers...");
+  function checkVideoFiles(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        checkVideoFiles(fullPath);
+      } else if (/\.(mp4|mov|avi|webm)$/i.test(entry.name)) {
+        const stats = fs.statSync(fullPath);
+        if (stats.size < 1024) {
+          const content = fs.readFileSync(fullPath, "utf8");
+          if (content.includes("git-lfs")) {
+            console.warn(`\n[WARNING] Video file "${path.relative(root, fullPath)}" is a Git LFS pointer (${stats.size} bytes).`);
+            console.warn(`It will not play in production. Please enable Git Large File Storage (LFS) in your Vercel Project Settings > Git and trigger a redeploy.\n`);
+          }
+        }
+      }
+    }
+  }
+  checkVideoFiles(staticSrcAssetsOut);
 }
 
 // ── 2. Serverless function ──────────────────────────────────────────────────
@@ -196,14 +217,9 @@ fs.writeFileSync(
     {
       version: 3,
       routes: [
-        // Static assets served directly
+        // Serve static files from the filesystem first
         {
-          src: "^/assets/(.*)$",
-          dest: "/assets/$1",
-        },
-        {
-          src: "^/src/assets/(.*)$",
-          dest: "/src/assets/$1",
+          handle: "filesystem",
         },
         // Everything else → SSR function
         {

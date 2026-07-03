@@ -2,12 +2,7 @@
   "version": 3,
   "routes": [
     {
-      "src": "^/assets/(.*)$",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "^/src/assets/(.*)$",
-      "dest": "/src/assets/$1"
+      "handle": "filesystem"
     },
     {
       "src": "^/(.*)$",
