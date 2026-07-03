@@ -39013,25 +39013,25 @@ var init_server4 = __esm({
   }
 });
 
-// dist/server/assets/_tanstack-start-manifest_v-DfFn8Zw5.js
-var tanstack_start_manifest_v_DfFn8Zw5_exports = {};
-__export(tanstack_start_manifest_v_DfFn8Zw5_exports, {
+// dist/server/assets/_tanstack-start-manifest_v-IJN_Lp1J.js
+var tanstack_start_manifest_v_IJN_Lp1J_exports = {};
+__export(tanstack_start_manifest_v_IJN_Lp1J_exports, {
   tsrStartManifest: () => tsrStartManifest
 });
 var tsrStartManifest;
-var init_tanstack_start_manifest_v_DfFn8Zw5 = __esm({
-  "dist/server/assets/_tanstack-start-manifest_v-DfFn8Zw5.js"() {
+var init_tanstack_start_manifest_v_IJN_Lp1J = __esm({
+  "dist/server/assets/_tanstack-start-manifest_v-IJN_Lp1J.js"() {
     "use strict";
-    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/syndicate/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-BQOOGxCB.js"] }, "/": { filePath: "/media/dolar/office/projects/syndicate/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-DOsMjaA3.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/video-B1CxQ5O3.js", "/assets/site-CUsAwHQf.js"] }, "/about": { filePath: "/media/dolar/office/projects/syndicate/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-DzBSyJRu.js", "/assets/site-CUsAwHQf.js"] }, "/apply": { filePath: "/media/dolar/office/projects/syndicate/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-Bv0haycH.js", "/assets/site-CUsAwHQf.js", "/assets/video-B1CxQ5O3.js"] }, "/contact": { filePath: "/media/dolar/office/projects/syndicate/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-CA_MWogC.js", "/assets/site-CUsAwHQf.js", "/assets/video-B1CxQ5O3.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/syndicate/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-D5aZgx2b.js", "/assets/site-CUsAwHQf.js", "/assets/x-TrMV3gQk.js"] }, "/events": { filePath: "/media/dolar/office/projects/syndicate/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-BYKlnACf.js", "/assets/site-CUsAwHQf.js", "/assets/x-TrMV3gQk.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/syndicate/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-DQSNQP1y.js", "/assets/site-CUsAwHQf.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/x-TrMV3gQk.js", "/assets/video-B1CxQ5O3.js"] } }, clientEntry: "/assets/index-BQOOGxCB.js" });
+    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/syndicate/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-b5Js_mXo.js"] }, "/": { filePath: "/media/dolar/office/projects/syndicate/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-B-b8gSvM.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/video-B1CxQ5O3.js", "/assets/site-B9zq6SVP.js"] }, "/about": { filePath: "/media/dolar/office/projects/syndicate/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-8Y9bOwrm.js", "/assets/site-B9zq6SVP.js"] }, "/apply": { filePath: "/media/dolar/office/projects/syndicate/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-D-T_MpeO.js", "/assets/site-B9zq6SVP.js", "/assets/video-B1CxQ5O3.js"] }, "/contact": { filePath: "/media/dolar/office/projects/syndicate/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-DYGSg74c.js", "/assets/site-B9zq6SVP.js", "/assets/video-B1CxQ5O3.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/syndicate/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-DRT-4z6D.js", "/assets/site-B9zq6SVP.js", "/assets/x-CcBl_qrt.js"] }, "/events": { filePath: "/media/dolar/office/projects/syndicate/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-TUK_7wa8.js", "/assets/site-B9zq6SVP.js", "/assets/x-CcBl_qrt.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/syndicate/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-tMmHMtvm.js", "/assets/site-B9zq6SVP.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/x-CcBl_qrt.js", "/assets/video-B1CxQ5O3.js"] } }, clientEntry: "/assets/index-b5Js_mXo.js" });
   }
 });
 
-// dist/server/assets/createServerRpc-7svcIWIN.js
+// dist/server/assets/createServerRpc-Caqa2QB5.js
 var createServerRpc;
-var init_createServerRpc_7svcIWIN = __esm({
-  "dist/server/assets/createServerRpc-7svcIWIN.js"() {
+var init_createServerRpc_Caqa2QB5 = __esm({
+  "dist/server/assets/createServerRpc-Caqa2QB5.js"() {
     "use strict";
-    init_server_Be0UyiT1();
+    init_server_yuRsAm3R();
     createServerRpc = (serverFnMeta, splitImportFn) => {
       const url = "/_serverFn/" + serverFnMeta.id;
       return Object.assign(splitImportFn, {
@@ -39052,9 +39052,9 @@ var init_logo_4_ISZutHRh = __esm({
   }
 });
 
-// dist/server/assets/syndicates-DVwSpqa9.js
-var syndicates_DVwSpqa9_exports = {};
-__export(syndicates_DVwSpqa9_exports, {
+// dist/server/assets/syndicates-DWYsZj41.js
+var syndicates_DWYsZj41_exports = {};
+__export(syndicates_DWYsZj41_exports, {
   getBenefits_createServerFn_handler: () => getBenefits_createServerFn_handler,
   getEvents_createServerFn_handler: () => getEvents_createServerFn_handler,
   getLiveSyndicates_createServerFn_handler: () => getLiveSyndicates_createServerFn_handler,
@@ -39065,11 +39065,11 @@ __export(syndicates_DVwSpqa9_exports, {
   getSyndicateSteps_createServerFn_handler: () => getSyndicateSteps_createServerFn_handler
 });
 var import_node_async_hooks, import_react11, import_jsx_runtime16, getLiveSyndicates_createServerFn_handler, getLiveSyndicates, getRecentlyFunded_createServerFn_handler, getRecentlyFunded, getEvents_createServerFn_handler, getEvents, getPillars_createServerFn_handler, getPillars, getProcess_createServerFn_handler, getProcess, getPartners_createServerFn_handler, getPartners, getSyndicateSteps_createServerFn_handler, getSyndicateSteps, getBenefits_createServerFn_handler, getBenefits;
-var init_syndicates_DVwSpqa9 = __esm({
-  "dist/server/assets/syndicates-DVwSpqa9.js"() {
+var init_syndicates_DWYsZj41 = __esm({
+  "dist/server/assets/syndicates-DWYsZj41.js"() {
     "use strict";
-    init_createServerRpc_7svcIWIN();
-    init_server_Be0UyiT1();
+    init_createServerRpc_Caqa2QB5();
+    init_server_yuRsAm3R();
     init_logo_4_ISZutHRh();
     import_node_async_hooks = require("node:async_hooks");
     init_production();
@@ -39310,17 +39310,17 @@ var init_syndicates_DVwSpqa9 = __esm({
   }
 });
 
-// dist/server/assets/gallery-DNTFKypx.js
-var gallery_DNTFKypx_exports = {};
-__export(gallery_DNTFKypx_exports, {
+// dist/server/assets/gallery-rfBoI1_s.js
+var gallery_rfBoI1_s_exports = {};
+__export(gallery_rfBoI1_s_exports, {
   getGalleryItems_createServerFn_handler: () => getGalleryItems_createServerFn_handler
 });
 var import_node_async_hooks2, import_react12, import_jsx_runtime17, getGalleryItems_createServerFn_handler, getGalleryItems;
-var init_gallery_DNTFKypx = __esm({
-  "dist/server/assets/gallery-DNTFKypx.js"() {
+var init_gallery_rfBoI1_s = __esm({
+  "dist/server/assets/gallery-rfBoI1_s.js"() {
     "use strict";
-    init_createServerRpc_7svcIWIN();
-    init_server_Be0UyiT1();
+    init_createServerRpc_Caqa2QB5();
+    init_server_yuRsAm3R();
     import_node_async_hooks2 = require("node:async_hooks");
     init_production();
     import_react12 = __toESM(require_react(), 1);
@@ -39461,18 +39461,18 @@ var init_gallery_DNTFKypx = __esm({
   }
 });
 
-// dist/server/assets/events-BOGqBIIG.js
-var events_BOGqBIIG_exports = {};
-__export(events_BOGqBIIG_exports, {
+// dist/server/assets/events-DM3OLeDm.js
+var events_DM3OLeDm_exports = {};
+__export(events_DM3OLeDm_exports, {
   getFaqs_createServerFn_handler: () => getFaqs_createServerFn_handler,
   getPageEvents_createServerFn_handler: () => getPageEvents_createServerFn_handler
 });
 var import_node_async_hooks3, import_react13, import_jsx_runtime18, getPageEvents_createServerFn_handler, getPageEvents, getFaqs_createServerFn_handler, getFaqs;
-var init_events_BOGqBIIG = __esm({
-  "dist/server/assets/events-BOGqBIIG.js"() {
+var init_events_DM3OLeDm = __esm({
+  "dist/server/assets/events-DM3OLeDm.js"() {
     "use strict";
-    init_createServerRpc_7svcIWIN();
-    init_server_Be0UyiT1();
+    init_createServerRpc_Caqa2QB5();
+    init_server_yuRsAm3R();
     import_node_async_hooks3 = require("node:async_hooks");
     init_production();
     import_react13 = __toESM(require_react(), 1);
@@ -39564,18 +39564,18 @@ var init_events_BOGqBIIG = __esm({
   }
 });
 
-// dist/server/assets/contact-BQG7AqVf.js
-var contact_BQG7AqVf_exports = {};
-__export(contact_BQG7AqVf_exports, {
+// dist/server/assets/contact-Bd1YzkOI.js
+var contact_Bd1YzkOI_exports = {};
+__export(contact_Bd1YzkOI_exports, {
   getDirectLines_createServerFn_handler: () => getDirectLines_createServerFn_handler,
   getWorkshopAddress_createServerFn_handler: () => getWorkshopAddress_createServerFn_handler
 });
 var import_node_async_hooks4, import_react14, import_jsx_runtime19, getDirectLines_createServerFn_handler, getDirectLines, getWorkshopAddress_createServerFn_handler, getWorkshopAddress;
-var init_contact_BQG7AqVf = __esm({
-  "dist/server/assets/contact-BQG7AqVf.js"() {
+var init_contact_Bd1YzkOI = __esm({
+  "dist/server/assets/contact-Bd1YzkOI.js"() {
     "use strict";
-    init_createServerRpc_7svcIWIN();
-    init_server_Be0UyiT1();
+    init_createServerRpc_Caqa2QB5();
+    init_server_yuRsAm3R();
     import_node_async_hooks4 = require("node:async_hooks");
     init_production();
     import_react14 = __toESM(require_react(), 1);
@@ -39615,18 +39615,18 @@ var init_contact_BQG7AqVf = __esm({
   }
 });
 
-// dist/server/assets/build-BQUmRUjz.js
-var build_BQUmRUjz_exports = {};
-__export(build_BQUmRUjz_exports, {
+// dist/server/assets/build-Sqo25hQ2.js
+var build_Sqo25hQ2_exports = {};
+__export(build_Sqo25hQ2_exports, {
   getPhases_createServerFn_handler: () => getPhases_createServerFn_handler,
   getSpecs_createServerFn_handler: () => getSpecs_createServerFn_handler
 });
 var import_node_async_hooks5, import_react15, import_jsx_runtime20, getPhases_createServerFn_handler, getPhases, getSpecs_createServerFn_handler, getSpecs;
-var init_build_BQUmRUjz = __esm({
-  "dist/server/assets/build-BQUmRUjz.js"() {
+var init_build_Sqo25hQ2 = __esm({
+  "dist/server/assets/build-Sqo25hQ2.js"() {
     "use strict";
-    init_createServerRpc_7svcIWIN();
-    init_server_Be0UyiT1();
+    init_createServerRpc_Caqa2QB5();
+    init_server_yuRsAm3R();
     import_node_async_hooks5 = require("node:async_hooks");
     init_production();
     import_react15 = __toESM(require_react(), 1);
@@ -39700,18 +39700,18 @@ var init_build_BQUmRUjz = __esm({
   }
 });
 
-// dist/server/assets/about-CUWdb3K_.js
-var about_CUWdb3K_exports = {};
-__export(about_CUWdb3K_exports, {
+// dist/server/assets/about-cdqjctIw.js
+var about_cdqjctIw_exports = {};
+__export(about_cdqjctIw_exports, {
   getArchitects_createServerFn_handler: () => getArchitects_createServerFn_handler,
   getPrinciples_createServerFn_handler: () => getPrinciples_createServerFn_handler
 });
 var import_node_async_hooks6, import_react16, import_jsx_runtime21, getPrinciples_createServerFn_handler, getPrinciples, getArchitects_createServerFn_handler, getArchitects;
-var init_about_CUWdb3K = __esm({
-  "dist/server/assets/about-CUWdb3K_.js"() {
+var init_about_cdqjctIw = __esm({
+  "dist/server/assets/about-cdqjctIw.js"() {
     "use strict";
-    init_createServerRpc_7svcIWIN();
-    init_server_Be0UyiT1();
+    init_createServerRpc_Caqa2QB5();
+    init_server_yuRsAm3R();
     import_node_async_hooks6 = require("node:async_hooks");
     init_production();
     import_react16 = __toESM(require_react(), 1);
@@ -39771,17 +39771,17 @@ var init_about_CUWdb3K = __esm({
   }
 });
 
-// dist/server/assets/apply-Dhi3SY4G.js
-var apply_Dhi3SY4G_exports = {};
-__export(apply_Dhi3SY4G_exports, {
+// dist/server/assets/apply-CSDxAlqQ.js
+var apply_CSDxAlqQ_exports = {};
+__export(apply_CSDxAlqQ_exports, {
   getApplySteps_createServerFn_handler: () => getApplySteps_createServerFn_handler
 });
 var import_node_async_hooks7, import_react17, import_jsx_runtime22, getApplySteps_createServerFn_handler, getApplySteps;
-var init_apply_Dhi3SY4G = __esm({
-  "dist/server/assets/apply-Dhi3SY4G.js"() {
+var init_apply_CSDxAlqQ = __esm({
+  "dist/server/assets/apply-CSDxAlqQ.js"() {
     "use strict";
-    init_createServerRpc_7svcIWIN();
-    init_server_Be0UyiT1();
+    init_createServerRpc_Caqa2QB5();
+    init_server_yuRsAm3R();
     import_node_async_hooks7 = require("node:async_hooks");
     init_production();
     import_react17 = __toESM(require_react(), 1);
@@ -77178,9 +77178,9 @@ var init_video_E_2QOweG = __esm({
   }
 });
 
-// dist/server/assets/the-build-wzOiJT7-.js
-var the_build_wzOiJT7_exports = {};
-__export(the_build_wzOiJT7_exports, {
+// dist/server/assets/the-build-o0VsTsp4.js
+var the_build_o0VsTsp4_exports = {};
+__export(the_build_o0VsTsp4_exports, {
   component: () => TheBuildPage
 });
 function BuildGallery() {
@@ -77421,8 +77421,8 @@ function TheBuildPage() {
   ] });
 }
 var import_jsx_runtime30, import_react43, import_lucide_react, import_node_async_hooks8, buildStrip, buildScan, buildPrint, buildFinish, buildProcess, rs500Hero, gallery1, gallery2, gallery3, gallery4, heroVideo2, MEDIA, FILTERS;
-var init_the_build_wzOiJT7 = __esm({
-  "dist/server/assets/the-build-wzOiJT7-.js"() {
+var init_the_build_o0VsTsp4 = __esm({
+  "dist/server/assets/the-build-o0VsTsp4.js"() {
     "use strict";
     import_jsx_runtime30 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
@@ -77431,7 +77431,7 @@ var init_the_build_wzOiJT7 = __esm({
     import_lucide_react = __toESM(require_lucide_react(), 1);
     init_carbon_texture_CrF_2aOK();
     init_video_E_2QOweG();
-    init_router_DWX91qp4();
+    init_router_DLmABbX8();
     import_node_async_hooks8 = require("node:async_hooks");
     init_production();
     buildStrip = "/assets/gallery-1-BNSHI9Rh.jpg";
@@ -77444,7 +77444,7 @@ var init_the_build_wzOiJT7 = __esm({
     gallery2 = "/assets/gallery-1-BNSHI9Rh.jpg";
     gallery3 = "/assets/gallery-1-BNSHI9Rh.jpg";
     gallery4 = "/assets/gallery-1-BNSHI9Rh.jpg";
-    heroVideo2 = "/assets/SYNDICATE_TEASER_REAL-DebZQcAP.mp4";
+    heroVideo2 = "/assets/SYNDICATE_TEASER_REAL-DWnZKdrn.mp4";
     MEDIA = [
       {
         kind: "video",
@@ -77595,9 +77595,9 @@ var init_the_build_wzOiJT7 = __esm({
   }
 });
 
-// dist/server/assets/events-3yvEEvnS.js
-var events_3yvEEvnS_exports = {};
-__export(events_3yvEEvnS_exports, {
+// dist/server/assets/events-D42iPcxQ.js
+var events_D42iPcxQ_exports = {};
+__export(events_D42iPcxQ_exports, {
   component: () => EventsPage
 });
 function EventsPage() {
@@ -77784,8 +77784,8 @@ function EventsPage() {
   ] });
 }
 var import_jsx_runtime31, import_react44, import_lucide_react2, import_node_async_hooks9, videoPillarThree;
-var init_events_3yvEEvnS = __esm({
-  "dist/server/assets/events-3yvEEvnS.js"() {
+var init_events_D42iPcxQ = __esm({
+  "dist/server/assets/events-D42iPcxQ.js"() {
     "use strict";
     import_jsx_runtime31 = __toESM(require_jsx_runtime(), 1);
     import_react44 = __toESM(require_react(), 1);
@@ -77793,16 +77793,16 @@ var init_events_3yvEEvnS = __esm({
     import_lucide_react2 = __toESM(require_lucide_react(), 1);
     init_esm5();
     init_site_paN77MRt();
-    init_router_DWX91qp4();
+    init_router_DLmABbX8();
     import_node_async_hooks9 = require("node:async_hooks");
     init_production();
     videoPillarThree = "/assets/14209297_3840_2160_24fps-DVxx643l.mp4";
   }
 });
 
-// dist/server/assets/design-gallery-DjyMX6Vn.js
-var design_gallery_DjyMX6Vn_exports = {};
-__export(design_gallery_DjyMX6Vn_exports, {
+// dist/server/assets/design-gallery-zQvS5D1F.js
+var design_gallery_zQvS5D1F_exports = {};
+__export(design_gallery_zQvS5D1F_exports, {
   component: () => GalleryPage
 });
 function GalleryPage() {
@@ -77917,25 +77917,25 @@ function GalleryPage() {
   ] });
 }
 var import_jsx_runtime32, import_react45, import_lucide_react3, import_node_async_hooks10, videoCarSection;
-var init_design_gallery_DjyMX6Vn = __esm({
-  "dist/server/assets/design-gallery-DjyMX6Vn.js"() {
+var init_design_gallery_zQvS5D1F = __esm({
+  "dist/server/assets/design-gallery-zQvS5D1F.js"() {
     "use strict";
     import_jsx_runtime32 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     init_site_paN77MRt();
-    init_router_DWX91qp4();
+    init_router_DLmABbX8();
     import_react45 = __toESM(require_react(), 1);
     init_es3();
     import_lucide_react3 = __toESM(require_lucide_react(), 1);
     import_node_async_hooks10 = require("node:async_hooks");
     init_production();
-    videoCarSection = "/assets/LIBRARY_OF_INTENT-Bsd5Lk0m.MP4";
+    videoCarSection = "/assets/LIBRARY_OF_INTENT-CcxMx2Ke.mp4";
   }
 });
 
-// dist/server/assets/contact-Dc21Bo-I.js
-var contact_Dc21Bo_I_exports = {};
-__export(contact_Dc21Bo_I_exports, {
+// dist/server/assets/contact-Y1lkfsgs.js
+var contact_Y1lkfsgs_exports = {};
+__export(contact_Y1lkfsgs_exports, {
   component: () => ContactPage
 });
 function ContactPage() {
@@ -78041,22 +78041,22 @@ function ContactPage() {
   ] });
 }
 var import_jsx_runtime33, import_react46, import_node_async_hooks11;
-var init_contact_Dc21Bo_I = __esm({
-  "dist/server/assets/contact-Dc21Bo-I.js"() {
+var init_contact_Y1lkfsgs = __esm({
+  "dist/server/assets/contact-Y1lkfsgs.js"() {
     "use strict";
     import_jsx_runtime33 = __toESM(require_jsx_runtime(), 1);
     init_site_paN77MRt();
     import_react46 = __toESM(require_react(), 1);
     init_video_E_2QOweG();
-    init_router_DWX91qp4();
+    init_router_DLmABbX8();
     import_node_async_hooks11 = require("node:async_hooks");
     init_production();
   }
 });
 
-// dist/server/assets/apply-BX092ais.js
-var apply_BX092ais_exports = {};
-__export(apply_BX092ais_exports, {
+// dist/server/assets/apply-BBwJu7a-.js
+var apply_BBwJu7a_exports = {};
+__export(apply_BBwJu7a_exports, {
   component: () => ApplyPage
 });
 function ApplyPage() {
@@ -78135,23 +78135,23 @@ function Field({
   ] });
 }
 var import_jsx_runtime34, import_react47, import_node_async_hooks12;
-var init_apply_BX092ais = __esm({
-  "dist/server/assets/apply-BX092ais.js"() {
+var init_apply_BBwJu7a = __esm({
+  "dist/server/assets/apply-BBwJu7a-.js"() {
     "use strict";
     import_jsx_runtime34 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     import_react47 = __toESM(require_react(), 1);
     init_site_paN77MRt();
     init_video_E_2QOweG();
-    init_router_DWX91qp4();
+    init_router_DLmABbX8();
     import_node_async_hooks12 = require("node:async_hooks");
     init_production();
   }
 });
 
-// dist/server/assets/about-CyOXckou.js
-var about_CyOXckou_exports = {};
-__export(about_CyOXckou_exports, {
+// dist/server/assets/about-CxXki2s9.js
+var about_CxXki2s9_exports = {};
+__export(about_CxXki2s9_exports, {
   component: () => AboutPage
 });
 function AboutPage() {
@@ -78220,24 +78220,24 @@ function AboutPage() {
   ] });
 }
 var import_jsx_runtime35, import_react48, import_node_async_hooks13, aboutDetail, videoPillarOne;
-var init_about_CyOXckou = __esm({
-  "dist/server/assets/about-CyOXckou.js"() {
+var init_about_CxXki2s9 = __esm({
+  "dist/server/assets/about-CxXki2s9.js"() {
     "use strict";
     import_jsx_runtime35 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
     init_site_paN77MRt();
-    init_router_DWX91qp4();
+    init_router_DLmABbX8();
     import_react48 = __toESM(require_react(), 1);
     import_node_async_hooks13 = require("node:async_hooks");
     init_production();
     aboutDetail = "/assets/01_MISSION%20-Cu3ME3dV.png";
-    videoPillarOne = "/assets/OUR_STORY-2vBczoys.mp4";
+    videoPillarOne = "/assets/OUR_STORY-0mupV783.mp4";
   }
 });
 
-// dist/server/assets/index-CQOjNmEZ.js
-var index_CQOjNmEZ_exports = {};
-__export(index_CQOjNmEZ_exports, {
+// dist/server/assets/index-CBBfa5PJ.js
+var index_CBBfa5PJ_exports = {};
+__export(index_CBBfa5PJ_exports, {
   component: () => Index
 });
 function Hero() {
@@ -78622,15 +78622,15 @@ function Index() {
   ] });
 }
 var import_jsx_runtime36, import_react49, import_node_async_hooks14, videoCarSection2;
-var init_index_CQOjNmEZ = __esm({
-  "dist/server/assets/index-CQOjNmEZ.js"() {
+var init_index_CBBfa5PJ = __esm({
+  "dist/server/assets/index-CBBfa5PJ.js"() {
     "use strict";
     import_jsx_runtime36 = __toESM(require_jsx_runtime(), 1);
     init_carbon_texture_CrF_2aOK();
     init_video_E_2QOweG();
     init_esm5();
     init_site_paN77MRt();
-    init_router_DWX91qp4();
+    init_router_DLmABbX8();
     import_react49 = __toESM(require_react(), 1);
     import_node_async_hooks14 = require("node:async_hooks");
     init_production();
@@ -78638,9 +78638,9 @@ var init_index_CQOjNmEZ = __esm({
   }
 });
 
-// dist/server/assets/router-DWX91qp4.js
-var router_DWX91qp4_exports = {};
-__export(router_DWX91qp4_exports, {
+// dist/server/assets/router-DLmABbX8.js
+var router_DLmABbX8_exports = {};
+__export(router_DLmABbX8_exports, {
   R: () => Route$6,
   a: () => Route$5,
   b: () => Route$4,
@@ -78727,15 +78727,15 @@ function RootComponent() {
   ) }) });
 }
 var import_jsx_runtime37, appCss, Route$7, createSsrRpc, getPhases2, getSpecs2, $$splitComponentImporter$6, Route$6, getPageEvents2, getFaqs2, $$splitComponentImporter$5, Route$5, getGalleryItems2, $$splitComponentImporter$4, Route$4, getDirectLines2, getWorkshopAddress2, $$splitComponentImporter$3, Route$3, getApplySteps2, $$splitComponentImporter$2, Route$2, getPrinciples2, getArchitects2, $$splitComponentImporter$1, Route$1, getLiveSyndicates2, getRecentlyFunded2, getEvents2, getPillars2, getProcess2, getPartners2, getSyndicateSteps2, getBenefits2, $$splitComponentImporter, Route2, TheBuildRoute, EventsRoute, DesignGalleryRoute, ContactRoute, ApplyRoute, AboutRoute, IndexRoute, rootRouteChildren, routeTree, getRouter, router;
-var init_router_DWX91qp4 = __esm({
-  "dist/server/assets/router-DWX91qp4.js"() {
+var init_router_DLmABbX8 = __esm({
+  "dist/server/assets/router-DLmABbX8.js"() {
     "use strict";
     init_modern2();
     init_esm5();
     import_jsx_runtime37 = __toESM(require_jsx_runtime(), 1);
     init_es3();
-    init_server_Be0UyiT1();
-    appCss = "/assets/styles-DKka1J5O.css";
+    init_server_yuRsAm3R();
+    appCss = "/assets/styles-GMLvOTfK.css";
     Route$7 = createRootRouteWithContext()({
       head: () => ({
         meta: [
@@ -78783,7 +78783,7 @@ var init_router_DWX91qp4 = __esm({
     getSpecs2 = createServerFn({
       method: "GET"
     }).handler(createSsrRpc("99b07c72264bd83f294bf8c190daadda04dd85ad1509ca79cec14ab8c32bf477"));
-    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_wzOiJT7(), the_build_wzOiJT7_exports));
+    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_o0VsTsp4(), the_build_o0VsTsp4_exports));
     Route$6 = createFileRoute("/the-build")({
       head: () => ({
         meta: [{
@@ -78815,7 +78815,7 @@ var init_router_DWX91qp4 = __esm({
     getFaqs2 = createServerFn({
       method: "GET"
     }).handler(createSsrRpc("84ac47e88e92c0a102a5f22e093fc9253feb648bc5fb9abad64c673167143404"));
-    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_3yvEEvnS(), events_3yvEEvnS_exports));
+    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_D42iPcxQ(), events_D42iPcxQ_exports));
     Route$5 = createFileRoute("/events")({
       head: () => ({
         meta: [{
@@ -78844,7 +78844,7 @@ var init_router_DWX91qp4 = __esm({
     getGalleryItems2 = createServerFn({
       method: "GET"
     }).handler(createSsrRpc("0f43699aa5c12fd7eccb86d3c89fc028b662ee26b58f0d02adfb484e9344adea"));
-    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_DjyMX6Vn(), design_gallery_DjyMX6Vn_exports));
+    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_zQvS5D1F(), design_gallery_zQvS5D1F_exports));
     Route$4 = createFileRoute("/design-gallery")({
       head: () => ({
         meta: [{
@@ -78869,7 +78869,7 @@ var init_router_DWX91qp4 = __esm({
     getWorkshopAddress2 = createServerFn({
       method: "GET"
     }).handler(createSsrRpc("7ccf67c9f0168c6ac9157c05785d1dcd26d00c09dfaf8efac7d05f81052b726b"));
-    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_Dc21Bo_I(), contact_Dc21Bo_I_exports));
+    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_Y1lkfsgs(), contact_Y1lkfsgs_exports));
     Route$3 = createFileRoute("/contact")({
       head: () => ({
         meta: [{
@@ -78898,7 +78898,7 @@ var init_router_DWX91qp4 = __esm({
     getApplySteps2 = createServerFn({
       method: "GET"
     }).handler(createSsrRpc("ebe8ef3d05a46c2d928d9d6319350dfb53ad6f290bd633e464e3550d615987e5"));
-    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_BX092ais(), apply_BX092ais_exports));
+    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_BBwJu7a(), apply_BBwJu7a_exports));
     Route$2 = createFileRoute("/apply")({
       head: () => ({
         meta: [{
@@ -78923,7 +78923,7 @@ var init_router_DWX91qp4 = __esm({
     getArchitects2 = createServerFn({
       method: "GET"
     }).handler(createSsrRpc("b6ec13c45afd3f3a4fc06cbfb77f797107faeaad290a546d85fda1f90d7de29b"));
-    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_CyOXckou(), about_CyOXckou_exports));
+    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_CxXki2s9(), about_CxXki2s9_exports));
     Route$1 = createFileRoute("/about")({
       head: () => ({
         meta: [{
@@ -78973,7 +78973,7 @@ var init_router_DWX91qp4 = __esm({
     getBenefits2 = createServerFn({
       method: "GET"
     }).handler(createSsrRpc("908d6378279f221ff138851f3efe8d5676afb43fba40f140c2cfa0b0dd888628"));
-    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_CQOjNmEZ(), index_CQOjNmEZ_exports));
+    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_CBBfa5PJ(), index_CBBfa5PJ_exports));
     Route2 = createFileRoute("/")({
       component: lazyRouteComponent($$splitComponentImporter, "component"),
       loader: async () => {
@@ -79059,9 +79059,9 @@ var init_router_DWX91qp4 = __esm({
   }
 });
 
-// dist/server/assets/start-DT9_FB7f.js
-var start_DT9_FB7f_exports = {};
-__export(start_DT9_FB7f_exports, {
+// dist/server/assets/start-Ch4QC6l7.js
+var start_Ch4QC6l7_exports = {};
+__export(start_Ch4QC6l7_exports, {
   startInstance: () => startInstance
 });
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
@@ -79074,10 +79074,10 @@ function dedupeSerializationAdapters(deduped, serializationAdapters) {
   }
 }
 var import_node_async_hooks15, import_react50, import_jsx_runtime38, createStart, errorMiddleware, startInstance;
-var init_start_DT9_FB7f = __esm({
-  "dist/server/assets/start-DT9_FB7f.js"() {
+var init_start_Ch4QC6l7 = __esm({
+  "dist/server/assets/start-Ch4QC6l7.js"() {
     "use strict";
-    init_server_Be0UyiT1();
+    init_server_yuRsAm3R();
     init_server5();
     import_node_async_hooks15 = require("node:async_hooks");
     init_production();
@@ -79132,9 +79132,9 @@ var init_empty_plugin_adapters_BFgPZ6_d = __esm({
   }
 });
 
-// dist/server/assets/server-Be0UyiT1.js
-var server_Be0UyiT1_exports = {};
-__export(server_Be0UyiT1_exports, {
+// dist/server/assets/server-yuRsAm3R.js
+var server_yuRsAm3R_exports = {};
+__export(server_yuRsAm3R_exports, {
   T: () => TSS_SERVER_FUNCTION,
   a: () => createServerFn,
   c: () => createMiddleware,
@@ -79194,7 +79194,7 @@ function getResponse() {
   return getH3Event().res;
 }
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_DfFn8Zw5(), tanstack_start_manifest_v_DfFn8Zw5_exports));
+  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_IJN_Lp1J(), tanstack_start_manifest_v_IJN_Lp1J_exports));
   const startManifest = tsrStartManifest2();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -80109,8 +80109,8 @@ function getStartResponseHeaders(opts) {
 }
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    Promise.resolve().then(() => (init_router_DWX91qp4(), router_DWX91qp4_exports)).then((n2) => n2.r),
-    Promise.resolve().then(() => (init_start_DT9_FB7f(), start_DT9_FB7f_exports)),
+    Promise.resolve().then(() => (init_router_DLmABbX8(), router_DLmABbX8_exports)).then((n2) => n2.r),
+    Promise.resolve().then(() => (init_start_Ch4QC6l7(), start_Ch4QC6l7_exports)),
     Promise.resolve().then(() => (init_empty_plugin_adapters_BFgPZ6_d(), empty_plugin_adapters_BFgPZ6_d_exports))
   ]);
   return {
@@ -80403,8 +80403,8 @@ function createServerEntry(entry) {
   } };
 }
 var import_node_async_hooks16, import_react51, import_jsx_runtime39, defaultStreamHandler, GLOBAL_EVENT_STORAGE_KEY, globalObj$1, eventStorage, HEADERS, manifest, TSS_FORMDATA_CONTEXT, TSS_SERVER_FUNCTION, TSS_SERVER_FUNCTION_FACTORY, X_TSS_SERIALIZED, X_TSS_RAW_RESPONSE, TSS_CONTENT_TYPE_FRAMED, FrameType, FRAME_HEADER_SIZE, TSS_CONTENT_TYPE_FRAMED_VERSIONED, GLOBAL_STORAGE_KEY, globalObj, startStorage, getStartOptions, getStartContextServerOnly, createServerFn, createMiddleware, innerCreateCsrfMiddleware, createCsrfMiddleware, textEncoder2, EMPTY_PAYLOAD, serovalPlugins, FORM_DATA_CONTENT_TYPES, MAX_PAYLOAD_SIZE, handleServerAction, LINK_PARAM_TOKEN_RE, PRELOAD_AS_VALUES, ServerFunctionSerializationAdapter, entriesPromise, defaultCsrfMiddleware, getCachedBaseManifest, getProdBaseManifest, getBaseManifest, createEarlyHintsForRequest, ROUTER_BASEPATH, SERVER_FN_BASE, IS_PRERENDERING, IS_SHELL_ENV, ERR_NO_RESPONSE, ERR_NO_DEFER, fetch2, server_default, server;
-var init_server_Be0UyiT1 = __esm({
-  "dist/server/assets/server-Be0UyiT1.js"() {
+var init_server_yuRsAm3R = __esm({
+  "dist/server/assets/server-yuRsAm3R.js"() {
     "use strict";
     import_node_async_hooks16 = require("node:async_hooks");
     init_node2();
@@ -80431,75 +80431,75 @@ var init_server_Be0UyiT1 = __esm({
     manifest = {
       "041b66f586895c402252b0a2ec4cbb187064b43fc562c382861f52f1fae90224": {
         functionName: "getLiveSyndicates_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "0f43699aa5c12fd7eccb86d3c89fc028b662ee26b58f0d02adfb484e9344adea": {
         functionName: "getGalleryItems_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_gallery_DNTFKypx(), gallery_DNTFKypx_exports))
+        importer: () => Promise.resolve().then(() => (init_gallery_rfBoI1_s(), gallery_rfBoI1_s_exports))
       },
       "32ebfdeb12c784e01d43e641321f48eb4b3a23b1017f01ba2e406f7461e63a7e": {
         functionName: "getPageEvents_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_events_BOGqBIIG(), events_BOGqBIIG_exports))
+        importer: () => Promise.resolve().then(() => (init_events_DM3OLeDm(), events_DM3OLeDm_exports))
       },
       "4a4bed894e92b763e0483532a03ef3b66456933fb0cb0c1ddcb303b229de53eb": {
         functionName: "getPillars_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "598d1ce99a86ccdfcf29f22eb6720f9eea7fb410d8b2a1ed82f69f5877049988": {
         functionName: "getProcess_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "7ccf67c9f0168c6ac9157c05785d1dcd26d00c09dfaf8efac7d05f81052b726b": {
         functionName: "getWorkshopAddress_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_contact_BQG7AqVf(), contact_BQG7AqVf_exports))
+        importer: () => Promise.resolve().then(() => (init_contact_Bd1YzkOI(), contact_Bd1YzkOI_exports))
       },
       "84ac47e88e92c0a102a5f22e093fc9253feb648bc5fb9abad64c673167143404": {
         functionName: "getFaqs_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_events_BOGqBIIG(), events_BOGqBIIG_exports))
+        importer: () => Promise.resolve().then(() => (init_events_DM3OLeDm(), events_DM3OLeDm_exports))
       },
       "908d6378279f221ff138851f3efe8d5676afb43fba40f140c2cfa0b0dd888628": {
         functionName: "getBenefits_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "99b07c72264bd83f294bf8c190daadda04dd85ad1509ca79cec14ab8c32bf477": {
         functionName: "getSpecs_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_build_BQUmRUjz(), build_BQUmRUjz_exports))
+        importer: () => Promise.resolve().then(() => (init_build_Sqo25hQ2(), build_Sqo25hQ2_exports))
       },
       "9d5d90b80df1ece8b649303ca74c9d63692f0f226b382338d93d8d04399a1955": {
         functionName: "getDirectLines_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_contact_BQG7AqVf(), contact_BQG7AqVf_exports))
+        importer: () => Promise.resolve().then(() => (init_contact_Bd1YzkOI(), contact_Bd1YzkOI_exports))
       },
       "ac52de4b35ea0c682573eb720be0c3dc0e938a370123a3490c4605b60ab0786c": {
         functionName: "getSyndicateSteps_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "b6ec13c45afd3f3a4fc06cbfb77f797107faeaad290a546d85fda1f90d7de29b": {
         functionName: "getArchitects_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_about_CUWdb3K(), about_CUWdb3K_exports))
+        importer: () => Promise.resolve().then(() => (init_about_cdqjctIw(), about_cdqjctIw_exports))
       },
       "bcde8082d3369e5a7fc294219e3bc981a037f0fd2283bf641bde7a11feebf4b2": {
         functionName: "getEvents_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "c196cb2e36758946b524ae3ac80190f8a985530bc850e44f1d9fb958cdafbb0e": {
         functionName: "getPartners_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "c3ab668dcbbf85177bcd1c92f3777bc61f78af3c447bb7cd1449451b613d7329": {
         functionName: "getPrinciples_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_about_CUWdb3K(), about_CUWdb3K_exports))
+        importer: () => Promise.resolve().then(() => (init_about_cdqjctIw(), about_cdqjctIw_exports))
       },
       "cdb6f24a000fe743889e66044e57b678ffab7c29ad8773078d041e94faab139b": {
         functionName: "getRecentlyFunded_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_syndicates_DVwSpqa9(), syndicates_DVwSpqa9_exports))
+        importer: () => Promise.resolve().then(() => (init_syndicates_DWYsZj41(), syndicates_DWYsZj41_exports))
       },
       "de1baaab6d9d6b32a851c3872eda95f609bc6ad63df410dcd14a814a4a6b8c7d": {
         functionName: "getPhases_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_build_BQUmRUjz(), build_BQUmRUjz_exports))
+        importer: () => Promise.resolve().then(() => (init_build_Sqo25hQ2(), build_Sqo25hQ2_exports))
       },
       "ebe8ef3d05a46c2d928d9d6319350dfb53ad6f290bd633e464e3550d615987e5": {
         functionName: "getApplySteps_createServerFn_handler",
-        importer: () => Promise.resolve().then(() => (init_apply_Dhi3SY4G(), apply_Dhi3SY4G_exports))
+        importer: () => Promise.resolve().then(() => (init_apply_CSDxAlqQ(), apply_CSDxAlqQ_exports))
       }
     };
     TSS_FORMDATA_CONTEXT = "__TSS_CONTEXT";
@@ -80946,7 +80946,7 @@ function renderErrorPage(error) {
 }
 async function getServerEntry() {
   if (!serverEntryPromise) {
-    serverEntryPromise = Promise.resolve().then(() => (init_server_Be0UyiT1(), server_Be0UyiT1_exports)).then((n2) => n2.s).then(
+    serverEntryPromise = Promise.resolve().then(() => (init_server_yuRsAm3R(), server_yuRsAm3R_exports)).then((n2) => n2.s).then(
       (m3) => m3.default ?? m3
     );
   }

@@ -8,7 +8,7 @@ import g5 from "../assets/build-finish.jpg";
 import g6 from "../assets/build-print.jpg";
 import g7 from "../assets/rs500-hero.jpg";
 import g8 from "../assets/pillar-one-of-one.jpg";
-import videoCarSection from "../assets/LIBRARY_OF_INTENT.MP4";
+import videoCarSection from "../assets/LIBRARY_OF_INTENT.mp4";
 
 import { getGalleryItems } from "../lib/gallery";
 import { useLoaderData } from "@tanstack/react-router";
