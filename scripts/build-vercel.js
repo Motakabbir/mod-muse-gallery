@@ -37,6 +37,14 @@ function copyDir(src, dest) {
 console.log("Copying static assets...");
 copyDir(distClient, staticOut);
 
+// Copy raw src/assets to static output to support un-bundled media references in production
+const srcAssets = path.join(root, "src/assets");
+const staticSrcAssetsOut = path.join(staticOut, "src/assets");
+if (fs.existsSync(srcAssets)) {
+  console.log("Copying src/assets directly to static output...");
+  copyDir(srcAssets, staticSrcAssetsOut);
+}
+
 // ── 2. Serverless function ──────────────────────────────────────────────────
 console.log("Building serverless function...");
 fs.mkdirSync(funcOut, { recursive: true });
@@ -192,6 +200,10 @@ fs.writeFileSync(
         {
           src: "^/assets/(.*)$",
           dest: "/assets/$1",
+        },
+        {
+          src: "^/src/assets/(.*)$",
+          dest: "/src/assets/$1",
         },
         // Everything else → SSR function
         {
