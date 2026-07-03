@@ -7,145 +7,56 @@ import buildProcess from "../assets/build-process.jpg";
 import placeholderLogo from "../assets/logo/logo-4.jpeg";
 import heroVideo from "../assets/video.mp4";
 import videoPillarOne from "../assets/10825391-hd_1920_1080_24fps.mp4";
-import videoCarSection from "../assets/video.mp4";
+import videoCarSection from "../assets/RS500_REIMAGINED_MORPHING.mp4";
 import videoPillarThree from "../assets/14209297_3840_2160_24fps.mp4";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal } from "@/components/site";
 
 
+import {
+  getLiveSyndicates,
+  getEvents,
+  getRecentlyFunded,
+  getPillars,
+  getProcess,
+  getPartners,
+  getSyndicateSteps,
+  getBenefits
+} from "../lib/syndicates";
+import { useLoaderData } from "@tanstack/react-router";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  loader: async () => {
+    const syndicates = await getLiveSyndicates();
+    const events = await getEvents();
+    const recentlyFunded = await getRecentlyFunded();
+    const pillars = await getPillars();
+    const process = await getProcess();
+    const partners = await getPartners();
+    const syndicateSteps = await getSyndicateSteps();
+    const benefits = await getBenefits();
+
+    return {
+      syndicates,
+      events,
+      recentlyFunded,
+      pillars,
+      process,
+      partners,
+      syndicateSteps,
+      benefits
+    };
+  },
 });
 
-const PILLARS = [
-  {
-    n: "01",
-    title: "One of One Build",
-    video: videoPillarOne,
-    img: pillarOne,
-    body: "There will never be another. Car #148 — the 148th of 500 RS500s ever built — reborn as a unique, documented, investment-grade restomod.",
-  },
-  {
-    n: "02",
-    title: "World-Class Build Partners",
-    img: pillarPartners,
-    body: "The very best in innovative manufacturing and artisan craft — from coachbuilding to bleeding-edge additive manufacturing.",
-  },
-  {
-    n: "03",
-    title: "Exclusive Access & Experience",
-    video: videoPillarThree,
-    img: pillarExperience,
-    body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations.",
-  },
-];
+// Dynamic arrays moved to API/Loader
 
-const PROCESS = [
-  { n: "01", title: "Acquisition & Strip", items: ["Base vehicle selection", "Full teardown", "Digital scanning"] },
-  { n: "02", title: "Design & Engineering", items: ["CAD modelling", "Structural optimisation", "Performance upgrades"] },
-  { n: "03", title: "Manufacturing", items: ["Fabrication", "Additive manufacturing", "Precision assembly"] },
-  { n: "04", title: "Finishing & Validation", items: ["Paint & livery", "Road & track testing", "Final sign-off"] },
-];
+// LIVE_SYNDICATES moved to API/Loader
 
-const PARTNERS = [
-  { name: "T3DMC", role: "3D Scanning & Digital Twin" },
-  { name: "ASM Auto Recycling", role: "Chassis Dismantling & Cataloguing" },
-  { name: "Coventry Metalcraft", role: "Precision Coachbuilding" },
-  { name: "DMC Silverstone", role: "Assembly & Digital Manufacturing" },
-  { name: "BAMD Composites", role: "Composite Structures" },
-  { name: "MAHLE Group", role: "Engine Rebuild & Performance" },
-  { name: "Cornerstone Technologies", role: "Non-structural Skillsets" },
-  { name: "HGL / VenueServe", role: "Membership Platform & Fan Portal" },
-];
+// RECENTLY_FUNDED moved to API/Loader
 
-const SYNDICATE_STEPS = [
-  { n: 1, title: "Syndicate Formation", body: "A fixed number of participants secure allocation." },
-  { n: 2, title: "Build Phase", body: "Full transparency through content and direct access." },
-  { n: 3, title: "Experience Phase", body: "Driving events, track days, private access." },
-  { n: 4, title: "Exit Opportunity", body: "Potential sale of the asset at premium." },
-];
-
-const BENEFITS = [
-  { icon: "⬡", title: "Build Access", items: ["Workshop visits", "Engineering insight"] },
-  { icon: "◎", title: "Driving Access", items: ["Road drives", "Track sessions"] },
-  { icon: "✦", title: "Events", items: ["Launch", "Private experiences"] },
-  { icon: "◈", title: "Knowledge", items: ["Learn the build", "Understand the engineering"] },
-];
-
-const LIVE_SYNDICATES = [
-  {
-    title: "Vision148 Sierra Cosworth RS500",
-    img: placeholderLogo,
-    allocation: "£5,000 per allocation",
-    stats: "25 Allocations • 10 remaining",
-    return: "Potential Returns 77.1%*",
-  },
-  {
-    title: "Next Build being assessed for Syndication",
-    img: placeholderLogo,
-    allocation: "£2,000 per allocation",
-    stats: "31 Allocations • 17 remaining",
-    return: "Potential Returns 63.90%*",
-    isPlaceholder: false,
-    waitlist: true,
-  },
-  {
-    title: "Mercedes SLS AMG",
-    img: placeholderLogo,
-    allocation: "£5,000 per allocation",
-    stats: "39 Allocations • 32 remaining",
-    return: "Potential Returns 87.2%*",
-    isPlaceholder: false,
-  },
-];
-
-const RECENTLY_FUNDED = [
-  {
-    title: "Lamborghini Gallardo SE",
-    img: buildProcess,
-    date: "Funded Date — Dec 25",
-    val: "Funded Value — £82,000",
-    members: "Syndicate Members — 14",
-  },
-  {
-    title: "Aston Martin V12 Vantage",
-    img: buildProcess,
-    date: "Funded Date — Sep 25",
-    val: "Funded Value — £66,000",
-    members: "Syndicate Members — 21",
-  },
-  {
-    title: "Porsche 996 GT3 RS",
-    img: buildProcess,
-    date: "Funded Date — May 25",
-    val: "Funded Value — £165,000",
-    members: "Syndicate Members — 22",
-  },
-];
-
-const EVENTS = [
-  {
-    type: "Syndicate Member Invitation",
-    title: "Coventry Metalcraft",
-    tag: "INVITE ONLY",
-    description: "An opportunity to meet the UK's leading coach building company and Vision148 build partner",
-    date: "TBA",
-  },
-  {
-    type: "Syndicate Member Invitation",
-    title: "Digital Manufacturing Centre - Silverstone",
-    tag: "INVITE ONLY",
-    description: "Emersion in Additive Manufacturing at this bleeding edge manufacturing facility in the heart of motorsport",
-    date: "TBA",
-  },
-  {
-    type: "THE CARCROWD SYNDICATE GATHERING",
-    title: "Secret Meet 2026",
-    tag: "INVITE ONLY",
-    description: "",
-    date: "TBA",
-  },
-];
+// EVENTS moved to API/Loader
 
 const rs500HeroUrl = "https://thecarcrowd.uk/wp-content/uploads/2026/02/1764953707_1-min.webp";
 
@@ -263,14 +174,14 @@ function Stats() {
   );
 }
 
-function Pillars() {
+function Pillars({ pillars }: { pillars: any[] }) {
   return (
     <section className="relative py-32 px-6 bg-carbon overflow-hidden">
       <div className="absolute inset-0 noise-bg pointer-events-none" />
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Why Syndicate" title={<>Built on three pillars.</>} />
         <div className="reveal-stagger grid md:grid-cols-3 gap-8">
-          {PILLARS.map((p) => (
+          {pillars.map((p) => (
             <article key={p.n} className="group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift">
               <div className="aspect-[4/5] overflow-hidden relative">
                 {p.video ? (
@@ -316,7 +227,7 @@ function TheCar() {
               className="w-full h-full object-cover hover:scale-102 transition-transform duration-700"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6">
-              <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid">VRS500 Reimagined</div>
+              <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid">RS500 Reimagined</div>
             </div>
           </div>
         </div>
@@ -348,7 +259,7 @@ function TheCar() {
   );
 }
 
-function LiveSyndicates() {
+function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
   return (
     <section id="syndicates" className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
@@ -357,7 +268,7 @@ function LiveSyndicates() {
           title={<>Live Syndicates. <span className="text-acid">Open Allocations.</span></>}
         />
         <div className="reveal-stagger grid md:grid-cols-3 gap-8">
-          {LIVE_SYNDICATES.map((s) => (
+          {syndicates.map((s) => (
             <article key={s.title} className={`group border ${s.isPlaceholder ? 'border-white/5' : 'border-white/10 hover:border-acid'} bg-ink overflow-hidden transition-all duration-300 flex flex-col justify-between`}>
               <div className="aspect-[16/10] overflow-hidden relative bg-carbon">
                 <img
@@ -450,7 +361,7 @@ function LiveSyndicates() {
   );
 }
 
-function RecentlyFunded() {
+function RecentlyFunded({ recentlyFunded }: { recentlyFunded: any[] }) {
   return (
     <section className="relative py-32 px-6">
       <div className="mx-auto max-w-7xl">
@@ -459,7 +370,7 @@ function RecentlyFunded() {
           title={<>Recently Funded <span className="text-acid">Syndicates.</span></>}
         />
         <div className="reveal-stagger grid md:grid-cols-3 gap-8">
-          {RECENTLY_FUNDED.map((rf) => (
+          {recentlyFunded.map((rf) => (
             <div key={rf.title} className="group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300">
               <div className="aspect-[16/10] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
                 <img
@@ -488,7 +399,7 @@ function RecentlyFunded() {
   );
 }
 
-function Partnership() {
+function Partnership({ steps }: { steps: any[] }) {
   return (
     <section className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
@@ -497,7 +408,7 @@ function Partnership() {
           title={<>A New Model of <span className="text-acid">Automotive Ownership.</span></>}
         />
         <div className="grid md:grid-cols-4 gap-px bg-white/10 border border-white/10">
-          {SYNDICATE_STEPS.map((s) => (
+          {steps.map((s) => (
             <div key={s.n} className="reveal bg-carbon p-8 hover:bg-steel transition-colors">
               <div className="font-display text-6xl text-acid mb-6">{s.n}</div>
               <h3 className="font-display text-xl mb-3">{s.title}</h3>
@@ -515,7 +426,7 @@ function Partnership() {
   );
 }
 
-function BuildProcess() {
+function BuildProcess({ process }: { process: any[] }) {
   return (
     <section id="build" className="relative py-32 px-6 overflow-hidden">
       <video
@@ -530,7 +441,7 @@ function BuildProcess() {
       <div className="relative mx-auto max-w-7xl">
         <SectionLabel kicker="The Build Process" title={<>Engineered <span className="text-acid">in the open.</span></>} />
         <div className="reveal-stagger grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {PROCESS.map((p) => (
+          {process.map((p) => (
             <div key={p.n} className="border-t-2 border-acid pt-6">
               <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-2">Phase {p.n}</div>
               <h3 className="font-display text-xl mb-6 leading-tight">{p.title}</h3>
@@ -550,7 +461,7 @@ function BuildProcess() {
   );
 }
 
-function Events() {
+function Events({ events }: { events: any[] }) {
   return (
     <section id="events" className="relative py-32 px-6">
       <div className="mx-auto max-w-7xl">
@@ -559,7 +470,7 @@ function Events() {
           title={<>Upcoming Events & <span className="text-acid">Experiences.</span></>}
         />
         <div className="grid md:grid-cols-3 gap-8">
-          {EVENTS.map((e) => (
+          {events.map((e) => (
             <div key={e.title} className="reveal border border-white/10 bg-carbon p-8 flex flex-col justify-between hover:border-acid transition-all duration-300">
               <div>
                 <div className="flex justify-between items-start mb-6">
@@ -592,7 +503,7 @@ function Events() {
   );
 }
 
-function Partners() {
+function Partners({ partners }: { partners: any[] }) {
   return (
     <section id="partners" className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
@@ -602,7 +513,7 @@ function Partners() {
           and specialist car builds.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10">
-          {PARTNERS.map((p, i) => (
+          {partners.map((p, i) => (
             <div key={p.name} className="reveal bg-carbon p-8 hover:bg-steel transition-colors">
               <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
                 Partner {String(i + 1).padStart(2, "0")}
@@ -617,13 +528,13 @@ function Partners() {
   );
 }
 
-function Benefits() {
+function Benefits({ benefits }: { benefits: any[] }) {
   return (
     <section className="relative py-32 px-6">
       <div className="mx-auto max-w-7xl">
         <SectionLabel kicker="Syndicate Benefits" title={<>More than an <span className="text-acid">investment.</span></>} />
         <div className="grid md:grid-cols-4 gap-6">
-          {BENEFITS.map((b) => (
+          {benefits.map((b) => (
             <div key={b.title} className="reveal border border-white/10 p-8 hover:border-acid transition-colors">
               <div className="text-acid text-4xl mb-6 font-mono">{b.icon}</div>
               <h3 className="font-display text-xl mb-4">{b.title}</h3>
@@ -703,21 +614,32 @@ function Apply() {
 
 function Index() {
   useReveal();
+  const {
+    syndicates,
+    events,
+    recentlyFunded,
+    pillars,
+    process,
+    partners,
+    syndicateSteps,
+    benefits
+  } = Route.useLoaderData();
+
   return (
     <main className="bg-ink text-bone overflow-x-hidden">
       <Nav />
       <Hero />
       <Intro />
       <Stats />
-      <Pillars />
+      <Pillars pillars={pillars} />
       <TheCar />
-      <LiveSyndicates />
-      {/* <RecentlyFunded /> Disabled until Vision148 momentum */}
-      <Partnership />
-      <BuildProcess />
-      <Events />
-      <Partners />
-      <Benefits />
+      <LiveSyndicates syndicates={syndicates} />
+      {/* <RecentlyFunded recentlyFunded={recentlyFunded} /> Disabled until Vision148 momentum */}
+      <Partnership steps={syndicateSteps} />
+      <BuildProcess process={process} />
+      <Events events={events} />
+      <Partners partners={partners} />
+      <Benefits benefits={benefits} />
       <Value />
       <Apply />
       <Footer />

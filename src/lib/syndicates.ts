@@ -1,0 +1,154 @@
+import { createServerFn } from '@tanstack/react-start';
+import placeholderLogo from "../assets/logo/logo-4.jpeg";
+
+export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async () => {
+  // Simulate network delay and DB fetch
+  await new Promise(resolve => setTimeout(resolve, 300));
+  
+  return [
+    {
+      title: "Vision148 Sierra Cosworth RS500",
+      img: placeholderLogo, // In a real DB, this would be a URL
+      allocation: "£5,000 per allocation",
+      stats: "25 Allocations • 10 remaining",
+      return: "Potential Returns 77.1%*",
+      isPlaceholder: false,
+      waitlist: false,
+    },
+    {
+      title: "Next Build being assessed for Syndication",
+      img: placeholderLogo,
+      allocation: "£2,000 per allocation",
+      stats: "31 Allocations • 17 remaining",
+      return: "Potential Returns 63.90%*",
+      isPlaceholder: true,
+      waitlist: true,
+    },
+    {
+      title: "Mercedes SLS AMG",
+      img: placeholderLogo,
+      allocation: "£5,000 per allocation",
+      stats: "39 Allocations • 32 remaining",
+      return: "Potential Returns 87.2%*",
+      isPlaceholder: false,
+      waitlist: false,
+    },
+  ];
+});
+
+export const getRecentlyFunded = createServerFn({ method: 'GET' }).handler(async () => {
+  return [
+    {
+      title: "Lamborghini Gallardo SE",
+      img: "/src/assets/build-process.jpg", // Representing a dynamic image path
+      date: "Funded Date — Dec 25",
+      val: "Funded Value — £82,000",
+      members: "Syndicate Members — 14",
+    },
+    {
+      title: "Aston Martin V12 Vantage",
+      img: "/src/assets/build-process.jpg",
+      date: "Funded Date — Sep 25",
+      val: "Funded Value — £66,000",
+      members: "Syndicate Members — 21",
+    },
+    {
+      title: "Porsche 996 GT3 RS",
+      img: "/src/assets/build-process.jpg",
+      date: "Funded Date — May 25",
+      val: "Funded Value — £165,000",
+      members: "Syndicate Members — 22",
+    },
+  ];
+});
+
+export const getEvents = createServerFn({ method: 'GET' }).handler(async () => {
+  return [
+    {
+      type: "Syndicate Member Invitation",
+      title: "Coventry Metalcraft",
+      tag: "INVITE ONLY",
+      description: "An opportunity to meet the UK's leading coach building company and Vision148 build partner",
+      date: "TBA",
+    },
+    {
+      type: "Syndicate Member Invitation",
+      title: "Digital Manufacturing Centre - Silverstone",
+      tag: "INVITE ONLY",
+      description: "Emersion in Additive Manufacturing at this bleeding edge manufacturing facility in the heart of motorsport",
+      date: "TBA",
+    },
+    {
+      type: "THE CARCROWD SYNDICATE GATHERING",
+      title: "Secret Meet 2026",
+      tag: "INVITE ONLY",
+      description: "",
+      date: "TBA",
+    },
+  ];
+});
+
+export const getPillars = createServerFn({ method: 'GET' }).handler(async () => {
+  return [
+    {
+      n: "01",
+      title: "One of One Build",
+      video: "/src/assets/10825391-hd_1920_1080_24fps.mp4",
+      img: "/src/assets/pillar-one-of-one.jpg",
+      body: "There will never be another. Car #148 — the 148th of 500 RS500s ever built — reborn as a unique, documented, investment-grade restomod.",
+    },
+    {
+      n: "02",
+      title: "World-Class Build Partners",
+      img: "/src/assets/pillar-partners.jpg",
+      body: "The very best in innovative manufacturing and artisan craft — from coachbuilding to bleeding-edge additive manufacturing.",
+    },
+    {
+      n: "03",
+      title: "Exclusive Access & Experience",
+      video: "/src/assets/14209297_3840_2160_24fps.mp4",
+      img: "/src/assets/pillar-experience.jpg",
+      body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations.",
+    },
+  ];
+});
+
+export const getProcess = createServerFn({ method: 'GET' }).handler(async () => {
+  return [
+    { n: "01", title: "Acquisition & Strip", items: ["Base vehicle selection", "Full teardown", "Digital scanning"] },
+    { n: "02", title: "Design & Engineering", items: ["CAD modelling", "Structural optimisation", "Performance upgrades"] },
+    { n: "03", title: "Manufacturing", items: ["Fabrication", "Additive manufacturing", "Precision assembly"] },
+    { n: "04", title: "Finishing & Validation", items: ["Paint & livery", "Road & track testing", "Final sign-off"] },
+  ];
+});
+
+export const getPartners = createServerFn({ method: 'GET' }).handler(async () => {
+  return [
+    { name: "T3DMC", role: "3D Scanning & Digital Twin" },
+    { name: "ASM Auto Recycling", role: "Chassis Dismantling & Cataloguing" },
+    { name: "Coventry Metalcraft", role: "Precision Coachbuilding" },
+    { name: "DMC Silverstone", role: "Assembly & Digital Manufacturing" },
+    { name: "BAMD Composites", role: "Composite Structures" },
+    { name: "MAHLE Group", role: "Engine Rebuild & Performance" },
+    { name: "Cornerstone Technologies", role: "Non-structural Skillsets" },
+    { name: "HGL / VenueServe", role: "Membership Platform & Fan Portal" },
+  ];
+});
+
+export const getSyndicateSteps = createServerFn({ method: 'GET' }).handler(async () => {
+  return [
+    { n: 1, title: "Syndicate Formation", body: "A fixed number of participants secure allocation." },
+    { n: 2, title: "Build Phase", body: "Full transparency through content and direct access." },
+    { n: 3, title: "Experience Phase", body: "Driving events, track days, private access." },
+    { n: 4, title: "Exit Opportunity", body: "Potential sale of the asset at premium." },
+  ];
+});
+
+export const getBenefits = createServerFn({ method: 'GET' }).handler(async () => {
+  return [
+    { icon: "⬡", title: "Build Access", items: ["Workshop visits", "Engineering insight"] },
+    { icon: "◎", title: "Driving Access", items: ["Road drives", "Track sessions"] },
+    { icon: "✦", title: "Events", items: ["Launch", "Private experiences"] },
+    { icon: "◈", title: "Knowledge", items: ["Learn the build", "Understand the engineering"] },
+  ];
+});

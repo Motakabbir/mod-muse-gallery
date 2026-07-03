@@ -2,8 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import aboutHero from "../assets/about-hero.jpg";
-import aboutDetail from "../assets/about-detail.jpg";
-import videoPillarOne from "../assets/10825391-hd_1920_1080_24fps.mp4";
+import aboutDetail from "../assets/01_MISSION .png";
+import videoPillarOne from "../assets/OUR_STORY.mp4";
+
+import { getPrinciples, getArchitects } from "../lib/about";
+import { useLoaderData } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -15,10 +18,16 @@ export const Route = createFileRoute("/about")({
     ],
   }),
   component: AboutPage,
+  loader: async () => {
+    const principles = await getPrinciples();
+    const architects = await getArchitects();
+    return { principles, architects };
+  },
 });
 
 function AboutPage() {
   useReveal();
+  const { principles, architects } = Route.useLoaderData();
   return (
     <div className="min-h-screen bg-ink text-bone">
       <Nav />
@@ -73,23 +82,7 @@ function AboutPage() {
             <h2 className="font-display text-4xl md:text-5xl">What Drives Us</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                num: "01",
-                title: "Analog Soul",
-                text: "We preserve mechanical connection. Hydraulic steering. Manual gearboxes. Driver-first ergonomics. Technology serves the experience, never replaces it.",
-              },
-              {
-                num: "02",
-                title: "Engineering Integrity",
-                text: "Every component is traceable, tested, and validated. We partner with OEM-grade suppliers and motorsport specialists who share our obsession.",
-              },
-              {
-                num: "03",
-                title: "Open Collaboration",
-                text: "The syndicate model means owners are participants, not spectators. From design votes to build-week visits, transparency is our default.",
-              },
-            ].map((v) => (
+            {principles.map((v) => (
               <div key={v.num} className="reveal bg-carbon border border-white/10 rounded-lg p-8 hover:border-acid/30 transition-colors duration-500">
                 <div className="font-mono text-5xl text-white/10 mb-6">{v.num}</div>
                 <h3 className="font-display text-2xl mb-4">{v.title}</h3>
@@ -108,15 +101,14 @@ function AboutPage() {
             <h2 className="font-display text-4xl md:text-5xl">The Architects</h2>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { name: "Marcus Hale", role: "Founder & Build Director", bio: "30 years experience in automotive & Fintech business" },
-              { name: "Simon Kiero Watson", role: "Commercial & Finance Oversight", bio: "Highly experienced Corporate Finance and Exchange Expert." },
-              { name: "Al Yasid Oozeear", role: "Digital Visualisor & Designer", bio: "Independent Automotive designer specialising in bespoke car design" },
-              { name: "Stuart Peach", role: "Project Co Founder", bio: "Investor and partner in the Vision148 project and original custodian of #148" },
-            ].map((p) => (
+            {architects.map((p) => (
               <div key={p.name} className="reveal bg-carbon border border-white/10 rounded-lg p-6 text-center hover:border-acid/30 transition-colors duration-500">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-steel border border-white/10 flex items-center justify-center">
-                  <span className="font-display text-2xl text-acid">{p.name.charAt(0)}</span>
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-steel border border-white/10 flex items-center justify-center overflow-hidden">
+                  {p.img ? (
+                    <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="font-display text-2xl text-acid">{p.name.charAt(0)}</span>
+                  )}
                 </div>
                 <h3 className="font-display text-lg mb-1">{p.name}</h3>
                 <div className="font-mono text-xs text-acid uppercase tracking-widest mb-3">{p.role}</div>

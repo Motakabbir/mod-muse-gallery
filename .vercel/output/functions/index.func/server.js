@@ -1926,6 +1926,9 @@ function isRedirect(obj) {
 function isResolvedRedirect(obj) {
   return isRedirect(obj) && !!obj.options.href;
 }
+function parseRedirect(obj) {
+  if (obj !== null && typeof obj === "object" && obj.isSerializedRedirect) return redirect2(obj);
+}
 var init_redirect = __esm({
   "node_modules/@tanstack/router-core/dist/esm/redirect.js"() {
   }
@@ -2088,9 +2091,9 @@ var init_load_matches = __esm({
         return inner.onReady?.();
       }
     };
-    hasForcePendingActiveMatch = (router) => {
-      return router.stores.matchesId.get().some((matchId) => {
-        return router.stores.matchStores.get(matchId)?.get()._forcePending;
+    hasForcePendingActiveMatch = (router2) => {
+      return router2.stores.matchesId.get().some((matchId) => {
+        return router2.stores.matchStores.get(matchId)?.get()._forcePending;
       });
     };
     resolvePreload = (inner, matchId) => {
@@ -4341,12 +4344,12 @@ function getScrollToTopElements(scrollToTopSelectors) {
   }
   return elements;
 }
-function setupScrollRestoration(router, force) {
-  if (force ?? router.options.scrollRestoration) router.isScrollRestoring = true;
-  if ((isServer ?? router.isServer) || router.isScrollRestorationSetup) return;
-  router.isScrollRestorationSetup = true;
+function setupScrollRestoration(router2, force) {
+  if (force ?? router2.options.scrollRestoration) router2.isScrollRestoring = true;
+  if ((isServer ?? router2.isServer) || router2.isScrollRestorationSetup) return;
+  router2.isScrollRestorationSetup = true;
   ignoreScroll = false;
-  const getKey = router.options.getScrollRestorationKey || defaultGetScrollRestorationKey;
+  const getKey = router2.options.getScrollRestorationKey || defaultGetScrollRestorationKey;
   const trackedScrollEntries = /* @__PURE__ */ new Map();
   const setTrackedScrollEntry = (target, scrollX2, scrollY2) => {
     const entry = trackedScrollEntries.get(target) || {};
@@ -4356,7 +4359,7 @@ function setupScrollRestoration(router, force) {
   };
   history.scrollRestoration = "manual";
   const onScroll = (event) => {
-    if (ignoreScroll || !router.isScrollRestoring) return;
+    if (ignoreScroll || !router2.isScrollRestoring) return;
     if (event.target === document) setTrackedScrollEntry(windowScrollTarget, scrollX, scrollY);
     else {
       const target = event.target;
@@ -4364,31 +4367,31 @@ function setupScrollRestoration(router, force) {
     }
   };
   const snapshotCurrentScrollTargets = (restoreKey) => {
-    if (!router.isScrollRestoring) return;
+    if (!router2.isScrollRestoring) return;
     const keyEntry = scrollRestorationCache[restoreKey] ||= {};
     for (const [target, position] of trackedScrollEntries) if (target === windowScrollTarget) keyEntry[windowScrollTarget] = position;
     else if (target.isConnected) keyEntry[getScrollRestorationSelector(target)] = position;
   };
   document.addEventListener("scroll", onScroll, true);
-  router.subscribe("onBeforeLoad", (event) => {
+  router2.subscribe("onBeforeLoad", (event) => {
     if (event.fromLocation) snapshotCurrentScrollTargets(getKey(event.fromLocation));
     trackedScrollEntries.clear();
   });
   addEventListener("pagehide", () => {
-    snapshotCurrentScrollTargets(getKey(router.stores.resolvedLocation.get() ?? router.stores.location.get()));
+    snapshotCurrentScrollTargets(getKey(router2.stores.resolvedLocation.get() ?? router2.stores.location.get()));
     persistScrollRestorationCache();
   });
-  router.subscribe("onRendered", (event) => {
-    const behavior = router.options.scrollRestorationBehavior;
-    const scrollToTopSelectors = router.options.scrollToTopSelectors;
-    const shouldResetScroll = router.resetNextScroll;
+  router2.subscribe("onRendered", (event) => {
+    const behavior = router2.options.scrollRestorationBehavior;
+    const scrollToTopSelectors = router2.options.scrollToTopSelectors;
+    const shouldResetScroll = router2.resetNextScroll;
     let scrollToTopElements;
     trackedScrollEntries.clear();
-    if (!shouldResetScroll) router.resetNextScroll = true;
-    if (typeof router.options.scrollRestoration === "function" && !router.options.scrollRestoration({ location: router.latestLocation })) return;
+    if (!shouldResetScroll) router2.resetNextScroll = true;
+    if (typeof router2.options.scrollRestoration === "function" && !router2.options.scrollRestoration({ location: router2.latestLocation })) return;
     const cacheKey = getKey(event.toLocation);
     const fromCacheKey = event.fromLocation && getKey(event.fromLocation);
-    if (router.isScrollRestoring && fromCacheKey && fromCacheKey !== cacheKey) {
+    if (router2.isScrollRestoring && fromCacheKey && fromCacheKey !== cacheKey) {
       const fromElementEntries = scrollRestorationCache[fromCacheKey];
       if (fromElementEntries) {
         let toElementEntries = scrollRestorationCache[cacheKey];
@@ -4416,7 +4419,7 @@ function setupScrollRestoration(router, force) {
       if (shouldResetScroll) {
         const action = locationHistoryActions.get(event.toLocation);
         const skipWindowRestore = hash && hashScrollIntoViewOptions && (action === "PUSH" || action === "REPLACE");
-        const elementEntries = router.isScrollRestoring ? scrollRestorationCache[cacheKey] : void 0;
+        const elementEntries = router2.isScrollRestoring ? scrollRestorationCache[cacheKey] : void 0;
         if (elementEntries) for (const elementSelector in elementEntries) {
           const { scrollX: scrollX2, scrollY: scrollY2 } = elementEntries[elementSelector];
           if (elementSelector === windowScrollTarget) {
@@ -4639,8 +4642,8 @@ var init_constants = __esm({
 });
 
 // node_modules/seroval/dist/esm/production/index.mjs
-function c(e, r, t, n2, a, s, i2, u2, l2, g8, S, d2) {
-  return { t: e, i: r, s: t, c: n2, m: a, p: s, e: i2, a: u2, f: l2, b: g8, o: S, l: d2 };
+function c(e, r, t, n2, a, s, i2, u2, l2, g2, S, d2) {
+  return { t: e, i: r, s: t, c: n2, m: a, p: s, e: i2, a: u2, f: l2, b: g2, o: S, l: d2 };
 }
 function B(e) {
   return c(2, o, e, o, o, o, o, o, o, o, o, o);
@@ -5632,8 +5635,8 @@ function Wo(e, r, t, n2, a) {
   let s = e.base, i2 = f(e, a), u2 = Number(n2), l2 = u2 >= 0 && u2.toString() === n2 || Mr(n2);
   if (F(s, a)) l2 && u2 !== u2 ? jr(e, r.i, n2, i2) : Ne(e, r.i, l2 ? n2 : '"' + n2 + '"', i2);
   else {
-    let g8 = s.assignments;
-    s.assignments = t, l2 && u2 !== u2 ? jr(e, r.i, n2, i2) : Ne(e, r.i, l2 ? n2 : '"' + n2 + '"', i2), s.assignments = g8;
+    let g2 = s.assignments;
+    s.assignments = t, l2 && u2 !== u2 ? jr(e, r.i, n2, i2) : Ne(e, r.i, l2 ? n2 : '"' + n2 + '"', i2), s.assignments = g2;
   }
 }
 function Go(e, r, t, n2, a) {
@@ -5722,10 +5725,10 @@ function tn(e, r, t, n2, a) {
 function Xo(e, r) {
   let t = ho, n2 = r.e.k, a = n2.length, s = r.i, i2 = r.f, u2 = m(e, i2.i), l2 = e.base;
   if (a > 0) {
-    let g8 = r.e.v;
+    let g2 = r.e.v;
     l2.stack.push(s);
-    let S = tn(e, s, n2[0], g8[0], u2);
-    for (let d2 = 1, G2 = S; d2 < a; d2++) G2 = tn(e, s, n2[d2], g8[d2], u2), S += (G2 && S && ",") + G2;
+    let S = tn(e, s, n2[0], g2[0], u2);
+    for (let d2 = 1, G2 = S; d2 < a; d2++) G2 = tn(e, s, n2[d2], g2[d2], u2), S += (G2 && S && ",") + G2;
     l2.stack.pop(), S && (t += "([" + S + "])");
   }
   return i2.t === 26 && (w(l2, i2.i), t = "(" + f(e, i2) + "," + t + ")"), t;
@@ -5923,8 +5926,8 @@ function fr(e, r) {
   if (n2 == null) return t;
   let a = sn(e.base), s = m(e, n2), i2 = e.state.scopeId, u2 = i2 == null ? "" : le, l2 = a ? "(" + t + "," + a + s + ")" : t;
   if (u2 === "") return r.t === 10 && !a ? "(" + l2 + ")" : l2;
-  let g8 = i2 == null ? "()" : "(" + le + '["' + y(i2) + '"])';
-  return "(" + ir([u2], l2) + ")" + g8;
+  let g2 = i2 == null ? "()" : "(" + le + '["' + y(i2) + '"])';
+  return "(" + ir([u2], l2) + ")" + g2;
 }
 function va(e) {
   return { alive: true, pending: 0, initial: true, buffer: [], onParse: e.onParse, onError: e.onError, onDone: e.onDone };
@@ -6333,12 +6336,12 @@ var init_production = __esm({
     bt = An.toString();
     vt = En.toString();
     Pr = () => {
-      let e = [], r = [], t = true, n2 = false, a = 0, s = (l2, g8, S) => {
-        for (S = 0; S < a; S++) r[S] && r[S][g8](l2);
-      }, i2 = (l2, g8, S, d2) => {
-        for (g8 = 0, S = e.length; g8 < S; g8++) d2 = e[g8], !t && g8 === S - 1 ? l2[n2 ? "return" : "throw"](d2) : l2.next(d2);
-      }, u2 = (l2, g8) => (t && (g8 = a++, r[g8] = l2), i2(l2), () => {
-        t && (r[g8] = r[a], r[a--] = void 0);
+      let e = [], r = [], t = true, n2 = false, a = 0, s = (l2, g2, S) => {
+        for (S = 0; S < a; S++) r[S] && r[S][g2](l2);
+      }, i2 = (l2, g2, S, d2) => {
+        for (g2 = 0, S = e.length; g2 < S; g2++) d2 = e[g2], !t && g2 === S - 1 ? l2[n2 ? "return" : "throw"](d2) : l2.next(d2);
+      }, u2 = (l2, g2) => (t && (g2 = a++, r[g2] = l2), i2(l2), () => {
+        t && (r[g2] = r[a], r[a--] = void 0);
       });
       return { __SEROVAL_STREAM__: true, on: (l2) => u2(l2), next: (l2) => {
         t && (e.push(l2), s(l2, "next"));
@@ -6373,7 +6376,7 @@ var init_production = __esm({
         let d2 = u2.shift();
         d2 && d2.s({ done: true, value: S }), l2(), a = i2.length, i2.push(S);
       } });
-      let g8 = { [e]: () => g8, next: () => {
+      let g2 = { [e]: () => g2, next: () => {
         if (a === -1) {
           let G2 = n2++;
           if (G2 >= i2.length) {
@@ -6388,7 +6391,7 @@ var init_production = __esm({
         if (s) throw d2;
         return { done: true, value: d2 };
       } };
-      return g8;
+      return g2;
     };
     Et = Tr.toString();
     Or = (e) => {
@@ -7385,11 +7388,11 @@ function mergeRequestAssetsIntoRootRoute(rootRoute, requestAssets) {
     ...cssLinks?.length ? { css: cssLinks } : {}
   };
 }
-function attachRouterServerSsrUtils({ router, manifest: manifest2, getRequestAssets }) {
-  router.ssr = { get manifest() {
+function attachRouterServerSsrUtils({ router: router2, manifest: manifest2, getRequestAssets }) {
+  router2.ssr = { get manifest() {
     if (!manifest2) return manifest2;
     const requestAssets = getRequestAssets?.();
-    const matches = router.stores.matches.get();
+    const matches = router2.stores.matches.get();
     const hasAssets = hasRequestAssets(requestAssets);
     if (!hasAssets && !manifest2.inlineCss) return manifest2;
     let inlineCssAsset;
@@ -7421,26 +7424,26 @@ function attachRouterServerSsrUtils({ router, manifest: manifest2, getRequestAss
   let _serializationFinished = false;
   const renderFinishedListeners = [];
   const serializationFinishedListeners = [];
-  const scriptBuffer = new ScriptBuffer(router);
+  const scriptBuffer = new ScriptBuffer(router2);
   let injectedHtmlBuffer = "";
-  router.serverSsr = {
+  router2.serverSsr = {
     injectHtml: (html2) => {
       if (!html2) return;
       injectedHtmlBuffer += html2;
-      router.emit({ type: "onInjectedHtml" });
+      router2.emit({ type: "onInjectedHtml" });
     },
     injectScript: (script) => {
       if (!script) return;
-      const html2 = `<script${router.options.ssr?.nonce ? ` nonce='${router.options.ssr.nonce}'` : ""}>${script}</script>`;
-      router.serverSsr.injectHtml(html2);
+      const html2 = `<script${router2.options.ssr?.nonce ? ` nonce='${router2.options.ssr.nonce}'` : ""}>${script}</script>`;
+      router2.serverSsr.injectHtml(html2);
     },
     dehydrate: async (opts) => {
       if (_dehydrated) {
         if (process.env.NODE_ENV !== "production") throw new Error("Invariant failed: router is already dehydrated!");
         invariant();
       }
-      let matchesToDehydrate = router.stores.matches.get();
-      if (router.isShell()) matchesToDehydrate = matchesToDehydrate.slice(0, 1);
+      let matchesToDehydrate = router2.stores.matches.get();
+      if (router2.isShell()) matchesToDehydrate = matchesToDehydrate.slice(0, 1);
       const matches = matchesToDehydrate.map(dehydrateMatch);
       let manifestToDehydrate = void 0;
       if (manifest2) {
@@ -7466,17 +7469,17 @@ function attachRouterServerSsrUtils({ router, manifest: manifest2, getRequestAss
       };
       const lastMatchId = matchesToDehydrate[matchesToDehydrate.length - 1]?.id;
       if (lastMatchId) dehydratedRouter.lastMatchId = dehydrateSsrMatchId(lastMatchId);
-      const dehydratedData = await router.options.dehydrate?.();
+      const dehydratedData = await router2.options.dehydrate?.();
       if (dehydratedData) dehydratedRouter.dehydratedData = dehydratedData;
       _dehydrated = true;
       const trackPlugins = { didRun: false };
-      const serializationAdapters = router.options.serializationAdapters;
+      const serializationAdapters = router2.options.serializationAdapters;
       const plugins = serializationAdapters ? serializationAdapters.map((t) => /* @__PURE__ */ makeSsrSerovalPlugin(t, trackPlugins)).concat(defaultSerovalPlugins) : defaultSerovalPlugins;
       const signalSerializationComplete = () => {
         _serializationFinished = true;
         try {
           serializationFinishedListeners.forEach((l2) => l2());
-          router.emit({ type: "onSerializationFinished" });
+          router2.emit({ type: "onSerializationFinished" });
         } catch (err) {
           console.error("Serialization listener error:", err);
         } finally {
@@ -7528,7 +7531,7 @@ function attachRouterServerSsrUtils({ router, manifest: manifest2, getRequestAss
       return {
         tag: "script",
         attrs: {
-          nonce: router.options.ssr?.nonce,
+          nonce: router2.options.ssr?.nonce,
           className: "$tsr",
           id: TSR_SCRIPT_BARRIER_ID
         },
@@ -7545,12 +7548,12 @@ function attachRouterServerSsrUtils({ router, manifest: manifest2, getRequestAss
       return buffered;
     },
     cleanup() {
-      if (!router.serverSsr) return;
+      if (!router2.serverSsr) return;
       renderFinishedListeners.length = 0;
       serializationFinishedListeners.length = 0;
       injectedHtmlBuffer = "";
       scriptBuffer.cleanup();
-      router.serverSsr = void 0;
+      router2.serverSsr = void 0;
     }
   };
 }
@@ -7592,11 +7595,11 @@ var init_ssr_server = __esm({
     P_SUFFIX = ")";
     INITIAL_SCRIPTS = [dn(SCOPE_ID), tsrScript_default];
     ScriptBuffer = class {
-      constructor(router) {
+      constructor(router2) {
         this._scriptBarrierLifted = false;
         this._cleanedUp = false;
         this._pendingMicrotask = false;
-        this.router = router;
+        this.router = router2;
         this._queue = INITIAL_SCRIPTS.slice();
       }
       enqueue(script) {
@@ -7670,11 +7673,11 @@ var init_handlerCallback = __esm({
 });
 
 // node_modules/@tanstack/router-core/dist/esm/ssr/transformStreamWithRouter.js
-function transformReadableStreamWithRouter(router, routerStream) {
-  return transformStreamWithRouter(router, routerStream);
+function transformReadableStreamWithRouter(router2, routerStream) {
+  return transformStreamWithRouter(router2, routerStream);
 }
-function transformPipeableStreamWithRouter(router, routerStream) {
-  return import_node_stream2.Readable.fromWeb(transformStreamWithRouter(router, import_node_stream2.Readable.toWeb(routerStream)));
+function transformPipeableStreamWithRouter(router2, routerStream) {
+  return import_node_stream2.Readable.fromWeb(transformStreamWithRouter(router2, import_node_stream2.Readable.toWeb(routerStream)));
 }
 function findLastClosingTagEnd(str) {
   const len = str.length;
@@ -7700,9 +7703,9 @@ function findLastClosingTagEnd(str) {
   }
   return -1;
 }
-function transformStreamWithRouter(router, appStream, opts) {
-  const serializationAlreadyFinished = router.serverSsr?.isSerializationFinished() ?? false;
-  const initialBufferedHtml = router.serverSsr?.takeBufferedHtml();
+function transformStreamWithRouter(router2, appStream, opts) {
+  const serializationAlreadyFinished = router2.serverSsr?.isSerializationFinished() ?? false;
+  const initialBufferedHtml = router2.serverSsr?.takeBufferedHtml();
   if (serializationAlreadyFinished && !initialBufferedHtml) {
     let cleanedUp2 = false;
     let controller2;
@@ -7715,7 +7718,7 @@ function transformStreamWithRouter(router, appStream, opts) {
         clearTimeout(lifetimeTimeoutHandle2);
         lifetimeTimeoutHandle2 = void 0;
       }
-      router.serverSsr?.cleanup();
+      router2.serverSsr?.cleanup();
     };
     const safeClose2 = () => {
       if (isStreamClosed2) return;
@@ -7760,13 +7763,13 @@ function transformStreamWithRouter(router, appStream, opts) {
           controller2?.enqueue(value);
         }
         if (cleanedUp2 || isStreamClosed2) return;
-        router.serverSsr?.setRenderFinished();
+        router2.serverSsr?.setRenderFinished();
         safeClose2();
         cleanup2();
       } catch (error) {
         if (cleanedUp2) return;
         console.error("Error reading appStream:", error);
-        router.serverSsr?.setRenderFinished();
+        router2.serverSsr?.setRenderFinished();
         safeError2(error);
         cleanup2();
       } finally {
@@ -7837,7 +7840,7 @@ function transformStreamWithRouter(router, appStream, opts) {
     pendingRouterHtml = "";
     leftover = "";
     pendingClosingTags = "";
-    router.serverSsr?.cleanup();
+    router2.serverSsr?.cleanup();
   }
   const stream = new import_web2.ReadableStream({
     start(c3) {
@@ -7881,9 +7884,9 @@ function transformStreamWithRouter(router, appStream, opts) {
     }
   }, lifetimeMs);
   if (!serializationAlreadyFinished) {
-    stopListeningToInjectedHtml = router.subscribe("onInjectedHtml", () => {
+    stopListeningToInjectedHtml = router2.subscribe("onInjectedHtml", () => {
       if (cleanedUp || isStreamClosed) return;
-      const html2 = router.serverSsr?.takeBufferedHtml();
+      const html2 = router2.serverSsr?.takeBufferedHtml();
       if (!html2) return;
       if (isAppRendering || leftover || pendingClosingTags) appendRouterHtml(html2);
       else {
@@ -7891,7 +7894,7 @@ function transformStreamWithRouter(router, appStream, opts) {
         safeEnqueue(html2);
       }
     });
-    stopListeningToSerializationFinished = router.subscribe("onSerializationFinished", () => {
+    stopListeningToSerializationFinished = router2.subscribe("onSerializationFinished", () => {
       serializationFinished = true;
       tryFinish();
     });
@@ -7908,7 +7911,7 @@ function transformStreamWithRouter(router, appStream, opts) {
         if (!streamBarrierLifted) {
           if (chunkString.includes("$tsr-stream-barrier")) {
             streamBarrierLifted = true;
-            router.serverSsr?.liftScriptBarrier();
+            router2.serverSsr?.liftScriptBarrier();
           }
         }
         if (pendingClosingTags) {
@@ -7945,7 +7948,7 @@ function transformStreamWithRouter(router, appStream, opts) {
       }
       if (cleanedUp || isStreamClosed) return;
       isAppRendering = false;
-      router.serverSsr?.setRenderFinished();
+      router2.serverSsr?.setRenderFinished();
       if (serializationFinished) tryFinish();
       else {
         const timeoutMs = opts?.timeoutMs ?? DEFAULT_SERIALIZATION_TIMEOUT_MS;
@@ -7961,7 +7964,7 @@ function transformStreamWithRouter(router, appStream, opts) {
       if (cleanedUp) return;
       console.error("Error reading appStream:", error);
       isAppRendering = false;
-      router.serverSsr?.setRenderFinished();
+      router2.serverSsr?.setRenderFinished();
       safeError(error);
       cleanup();
     } finally {
@@ -10687,11 +10690,11 @@ var init_esm4 = __esm({
 
 // node_modules/@tanstack/react-router/dist/esm/useMatch.js
 function useMatch(opts) {
-  const router = useRouter();
+  const router2 = useRouter();
   const nearestMatchId = React$16.useContext(opts.from ? dummyMatchContext : matchContext);
   const key = opts.from ?? nearestMatchId;
-  const matchStore = key ? opts.from ? router.stores.getRouteMatchStore(key) : router.stores.matchStores.get(key) : void 0;
-  if (isServer ?? router.isServer) {
+  const matchStore = key ? opts.from ? router2.stores.getRouteMatchStore(key) : router2.stores.matchStores.get(key) : void 0;
+  if (isServer ?? router2.isServer) {
     const match = matchStore?.get();
     if ((opts.shouldThrow ?? true) && !match) {
       if (process.env.NODE_ENV !== "production") throw new Error(`Invariant failed: Could not find ${opts.from ? `an active match from "${opts.from}"` : "a nearest match!"}`);
@@ -10708,7 +10711,7 @@ function useMatch(opts) {
     }
     if (match === void 0) return;
     const selected = opts.select ? opts.select(match) : match;
-    if (opts.structuralSharing ?? router.options.defaultStructuralSharing) {
+    if (opts.structuralSharing ?? router2.options.defaultStructuralSharing) {
       const shared = replaceEqualDeep(previousResult.current, selected);
       previousResult.current = shared;
       return shared;
@@ -10806,13 +10809,13 @@ var init_useSearch = __esm({
 
 // node_modules/@tanstack/react-router/dist/esm/useNavigate.js
 function useNavigate(_defaultOpts) {
-  const router = useRouter();
+  const router2 = useRouter();
   return React$17.useCallback((options) => {
-    return router.navigate({
+    return router2.navigate({
       ...options,
       from: options.from ?? _defaultOpts?.from
     });
-  }, [_defaultOpts?.from, router]);
+  }, [_defaultOpts?.from, router2]);
 }
 var React$17;
 var init_useNavigate = __esm({
@@ -11257,15 +11260,15 @@ var require_react_dom = __commonJS({
 
 // node_modules/@tanstack/react-router/dist/esm/link.js
 function useLinkProps(options, forwardedRef) {
-  const router = useRouter();
+  const router2 = useRouter();
   const innerRef = useForwardedRef(forwardedRef);
-  const _isServer = isServer ?? router.isServer;
+  const _isServer = isServer ?? router2.isServer;
   const { activeProps, inactiveProps, activeOptions, to: to2, preload: userPreload, preloadDelay: userPreloadDelay, preloadIntentProximity: _preloadIntentProximity, hashScrollIntoView, replace, startTransition: startTransition2, resetScroll, viewTransition, children, target, disabled, style, className, onClick, onBlur, onFocus, onMouseEnter, onMouseLeave, onTouchStart, ignoreBlocker, params: _params, search: _search, hash: _hash, state: _state, mask: _mask, reloadDocument: _reloadDocument, unsafeRelative: _unsafeRelative, from: _from, _fromLocation, ...propsSafeToSpread } = options;
   if (_isServer) {
     const safeInternal = isSafeInternal(to2);
     if (typeof to2 === "string" && !safeInternal && to2.indexOf(":") > -1) try {
       new URL(to2);
-      if (isDangerousProtocol(to2, router.protocolAllowlist)) {
+      if (isDangerousProtocol(to2, router2.protocolAllowlist)) {
         if (process.env.NODE_ENV !== "production") console.warn(`Blocked Link with dangerous protocol: ${to2}`);
         return {
           ...propsSafeToSpread,
@@ -11290,14 +11293,14 @@ function useLinkProps(options, forwardedRef) {
       };
     } catch {
     }
-    const next2 = router.buildLocation({
+    const next2 = router2.buildLocation({
       ...options,
       from: options.from
     });
-    const hrefOption2 = getHrefOption(next2.maskedLocation ? next2.maskedLocation.publicHref : next2.publicHref, next2.maskedLocation ? next2.maskedLocation.external : next2.external, router.history, disabled);
+    const hrefOption2 = getHrefOption(next2.maskedLocation ? next2.maskedLocation.publicHref : next2.publicHref, next2.maskedLocation ? next2.maskedLocation.external : next2.external, router2.history, disabled);
     const externalLink2 = (() => {
       if (hrefOption2?.external) {
-        if (isDangerousProtocol(hrefOption2.href, router.protocolAllowlist)) {
+        if (isDangerousProtocol(hrefOption2.href, router2.protocolAllowlist)) {
           if (process.env.NODE_ENV !== "production") console.warn(`Blocked Link with dangerous protocol: ${hrefOption2.href}`);
           return;
         }
@@ -11306,7 +11309,7 @@ function useLinkProps(options, forwardedRef) {
       if (safeInternal) return void 0;
       if (typeof to2 === "string" && to2.indexOf(":") > -1) try {
         new URL(to2);
-        if (isDangerousProtocol(to2, router.protocolAllowlist)) {
+        if (isDangerousProtocol(to2, router2.protocolAllowlist)) {
           if (process.env.NODE_ENV !== "production") console.warn(`Blocked Link with dangerous protocol: ${to2}`);
           return;
         }
@@ -11316,13 +11319,13 @@ function useLinkProps(options, forwardedRef) {
     })();
     const isActive2 = (() => {
       if (externalLink2) return false;
-      const currentLocation2 = router.stores.location.get();
+      const currentLocation2 = router2.stores.location.get();
       const exact = activeOptions?.exact ?? false;
       if (exact) {
-        if (!exactPathTest(currentLocation2.pathname, next2.pathname, router.basepath)) return false;
+        if (!exactPathTest(currentLocation2.pathname, next2.pathname, router2.basepath)) return false;
       } else {
-        const currentPathSplit = removeTrailingSlash(currentLocation2.pathname, router.basepath);
-        const nextPathSplit = removeTrailingSlash(next2.pathname, router.basepath);
+        const currentPathSplit = removeTrailingSlash(currentLocation2.pathname, router2.basepath);
+        const nextPathSplit = removeTrailingSlash(next2.pathname, router2.basepath);
         if (!(currentPathSplit.startsWith(nextPathSplit) && (currentPathSplit.length === nextPathSplit.length || currentPathSplit[nextPathSplit.length] === "/"))) return false;
       }
       if (activeOptions?.includeSearch ?? true) {
@@ -11393,7 +11396,7 @@ function useLinkProps(options, forwardedRef) {
   }
   const isHydrated = useHydrated();
   const _options = React$18.useMemo(() => options, [
-    router,
+    router2,
     options.from,
     options._fromLocation,
     options.hash,
@@ -11404,29 +11407,29 @@ function useLinkProps(options, forwardedRef) {
     options.mask,
     options.unsafeRelative
   ]);
-  const currentLocation = useStore(router.stores.location, (l2) => l2, (prev, next2) => prev.href === next2.href);
+  const currentLocation = useStore(router2.stores.location, (l2) => l2, (prev, next2) => prev.href === next2.href);
   const next = React$18.useMemo(() => {
     const opts = {
       _fromLocation: currentLocation,
       ..._options
     };
-    return router.buildLocation(opts);
+    return router2.buildLocation(opts);
   }, [
-    router,
+    router2,
     currentLocation,
     _options
   ]);
   const hrefOptionPublicHref = next.maskedLocation ? next.maskedLocation.publicHref : next.publicHref;
   const hrefOptionExternal = next.maskedLocation ? next.maskedLocation.external : next.external;
-  const hrefOption = React$18.useMemo(() => getHrefOption(hrefOptionPublicHref, hrefOptionExternal, router.history, disabled), [
+  const hrefOption = React$18.useMemo(() => getHrefOption(hrefOptionPublicHref, hrefOptionExternal, router2.history, disabled), [
     disabled,
     hrefOptionExternal,
     hrefOptionPublicHref,
-    router.history
+    router2.history
   ]);
   const externalLink = React$18.useMemo(() => {
     if (hrefOption?.external) {
-      if (isDangerousProtocol(hrefOption.href, router.protocolAllowlist)) {
+      if (isDangerousProtocol(hrefOption.href, router2.protocolAllowlist)) {
         if (process.env.NODE_ENV !== "production") console.warn(`Blocked Link with dangerous protocol: ${hrefOption.href}`);
         return;
       }
@@ -11436,7 +11439,7 @@ function useLinkProps(options, forwardedRef) {
     if (typeof to2 !== "string" || to2.indexOf(":") === -1) return void 0;
     try {
       new URL(to2);
-      if (isDangerousProtocol(to2, router.protocolAllowlist)) {
+      if (isDangerousProtocol(to2, router2.protocolAllowlist)) {
         if (process.env.NODE_ENV !== "production") console.warn(`Blocked Link with dangerous protocol: ${to2}`);
         return;
       }
@@ -11446,15 +11449,15 @@ function useLinkProps(options, forwardedRef) {
   }, [
     to2,
     hrefOption,
-    router.protocolAllowlist
+    router2.protocolAllowlist
   ]);
   const isActive = React$18.useMemo(() => {
     if (externalLink) return false;
     if (activeOptions?.exact) {
-      if (!exactPathTest(currentLocation.pathname, next.pathname, router.basepath)) return false;
+      if (!exactPathTest(currentLocation.pathname, next.pathname, router2.basepath)) return false;
     } else {
-      const currentPathSplit = removeTrailingSlash(currentLocation.pathname, router.basepath);
-      const nextPathSplit = removeTrailingSlash(next.pathname, router.basepath);
+      const currentPathSplit = removeTrailingSlash(currentLocation.pathname, router2.basepath);
+      const nextPathSplit = removeTrailingSlash(next.pathname, router2.basepath);
       if (!(currentPathSplit.startsWith(nextPathSplit) && (currentPathSplit.length === nextPathSplit.length || currentPathSplit[nextPathSplit.length] === "/"))) return false;
     }
     if (activeOptions?.includeSearch ?? true) {
@@ -11476,7 +11479,7 @@ function useLinkProps(options, forwardedRef) {
     next.hash,
     next.pathname,
     next.search,
-    router.basepath
+    router2.basepath
   ]);
   const resolvedActiveProps = isActive ? functionalUpdate(activeProps, {}) ?? STATIC_ACTIVE_OBJECT : STATIC_EMPTY_OBJECT;
   const resolvedInactiveProps = isActive ? STATIC_EMPTY_OBJECT : functionalUpdate(inactiveProps, {}) ?? STATIC_EMPTY_OBJECT;
@@ -11492,10 +11495,10 @@ function useLinkProps(options, forwardedRef) {
   };
   const [isTransitioning, setIsTransitioning] = React$18.useState(false);
   const hasRenderFetched = React$18.useRef(false);
-  const preload = options.reloadDocument || externalLink ? false : userPreload ?? router.options.defaultPreload;
-  const preloadDelay = userPreloadDelay ?? router.options.defaultPreloadDelay ?? 0;
+  const preload = options.reloadDocument || externalLink ? false : userPreload ?? router2.options.defaultPreload;
+  const preloadDelay = userPreloadDelay ?? router2.options.defaultPreloadDelay ?? 0;
   const doPreload = React$18.useCallback(() => {
-    router.preloadRoute({
+    router2.preloadRoute({
       ..._options,
       _builtLocation: next
     }).catch((err) => {
@@ -11503,7 +11506,7 @@ function useLinkProps(options, forwardedRef) {
       console.warn(preloadWarning);
     });
   }, [
-    router,
+    router2,
     _options,
     next
   ]);
@@ -11529,11 +11532,11 @@ function useLinkProps(options, forwardedRef) {
       (0, import_react_dom.flushSync)(() => {
         setIsTransitioning(true);
       });
-      const unsub = router.subscribe("onResolved", () => {
+      const unsub = router2.subscribe("onResolved", () => {
         unsub();
         setIsTransitioning(false);
       });
-      router.navigate({
+      router2.navigate({
         ..._options,
         replace,
         resetScroll,
@@ -11891,9 +11894,9 @@ var init_lazyRouteComponent = __esm({
 
 // node_modules/@tanstack/react-router/dist/esm/not-found.js
 function CatchNotFound(props) {
-  const router = useRouter();
-  if (isServer ?? router.isServer) {
-    const resetKey2 = `not-found-${router.stores.location.get().pathname}-${router.stores.status.get()}`;
+  const router2 = useRouter();
+  if (isServer ?? router2.isServer) {
+    const resetKey2 = `not-found-${router2.stores.location.get().pathname}-${router2.stores.status.get()}`;
     return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(CatchBoundary, {
       getResetKey: () => resetKey2,
       onCatch: (error, errorInfo) => {
@@ -11907,7 +11910,7 @@ function CatchNotFound(props) {
       children: props.children
     });
   }
-  const resetKey = `not-found-${useStore(router.stores.location, (location) => location.pathname)}-${useStore(router.stores.status, (status) => status)}`;
+  const resetKey = `not-found-${useStore(router2.stores.location, (location) => location.pathname)}-${useStore(router2.stores.status, (status) => status)}`;
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(CatchBoundary, {
     getResetKey: () => resetKey,
     onCatch: (error, errorInfo) => {
@@ -11939,10 +11942,10 @@ var init_not_found2 = __esm({
 
 // node_modules/@tanstack/react-router/dist/esm/ScriptOnce.js
 function ScriptOnce({ children }) {
-  const router = useRouter();
-  if (!(isServer ?? router.isServer)) return null;
+  const router2 = useRouter();
+  if (!(isServer ?? router2.isServer)) return null;
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("script", {
-    nonce: router.options.ssr?.nonce,
+    nonce: router2.options.ssr?.nonce,
     dangerouslySetInnerHTML: { __html: children + ";document.currentScript.remove()" }
   });
 }
@@ -11968,9 +11971,9 @@ var init_SafeFragment = __esm({
 });
 
 // node_modules/@tanstack/react-router/dist/esm/renderRouteNotFound.js
-function renderRouteNotFound(router, route, data) {
+function renderRouteNotFound(router2, route, data) {
   if (!route.options.notFoundComponent) {
-    if (router.options.defaultNotFoundComponent) return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(router.options.defaultNotFoundComponent, { ...data });
+    if (router2.options.defaultNotFoundComponent) return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(router2.options.defaultNotFoundComponent, { ...data });
     if (process.env.NODE_ENV !== "production") {
       if (!route.options.notFoundComponent) console.warn(`Warning: A notFoundError was encountered on the route with ID "${route.id}", but a notFoundComponent option was not configured, nor was a router level defaultNotFoundComponent configured. Consider configuring at least one of these to avoid TanStack Router's overly generic defaultNotFoundComponent (<p>Not Found</p>)`);
     }
@@ -12000,11 +12003,11 @@ function getScrollRestorationScript(key) {
   if (key === void 0) return defaultInlineScrollRestorationScript;
   return `(${scroll_restoration_inline_default})(${escapeHtml(JSON.stringify(storageKey))},${escapeHtml(JSON.stringify(key))})`;
 }
-function getScrollRestorationScriptForRouter(router) {
-  if (typeof router.options.scrollRestoration === "function" && !router.options.scrollRestoration({ location: router.latestLocation })) return null;
-  const getKey = router.options.getScrollRestorationKey;
+function getScrollRestorationScriptForRouter(router2) {
+  if (typeof router2.options.scrollRestoration === "function" && !router2.options.scrollRestoration({ location: router2.latestLocation })) return null;
+  const getKey = router2.options.getScrollRestorationKey;
   if (!getKey) return defaultInlineScrollRestorationScript;
-  const location = router.latestLocation;
+  const location = router2.latestLocation;
   const userKey = getKey(location);
   if (userKey === defaultGetScrollRestorationKey(location)) return defaultInlineScrollRestorationScript;
   return getScrollRestorationScript(userKey);
@@ -12036,13 +12039,13 @@ var init_scroll_restoration2 = __esm({
 });
 
 // node_modules/@tanstack/react-router/dist/esm/Match.js
-function MatchView({ router, matchId, resetKey, matchState }) {
-  const route = router.routesById[matchState.routeId];
-  const PendingComponent = route.options.pendingComponent ?? router.options.defaultPendingComponent;
+function MatchView({ router: router2, matchId, resetKey, matchState }) {
+  const route = router2.routesById[matchState.routeId];
+  const PendingComponent = route.options.pendingComponent ?? router2.options.defaultPendingComponent;
   const pendingElement = PendingComponent ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(PendingComponent, {}) : null;
-  const routeErrorComponent = route.options.errorComponent ?? router.options.defaultErrorComponent;
-  const routeOnCatch = route.options.onCatch ?? router.options.defaultOnCatch;
-  const routeNotFoundComponent = route.isRoot ? route.options.notFoundComponent ?? router.options.notFoundRoute?.options.component : route.options.notFoundComponent;
+  const routeErrorComponent = route.options.errorComponent ?? router2.options.defaultErrorComponent;
+  const routeOnCatch = route.options.onCatch ?? router2.options.defaultOnCatch;
+  const routeNotFoundComponent = route.isRoot ? route.options.notFoundComponent ?? router2.options.notFoundRoute?.options.component : route.options.notFoundComponent;
   const resolvedNoSsr = matchState.ssr === false || matchState.ssr === "data-only";
   const ResolvedSuspenseBoundary = (!route.isRoot || route.options.wrapInSuspense || resolvedNoSsr) && (route.options.wrapInSuspense ?? PendingComponent ?? (route.options.errorComponent?.preload || resolvedNoSsr)) ? React$110.Suspense : SafeFragment;
   const ResolvedCatchBoundary = routeErrorComponent ? CatchBoundary : SafeFragment;
@@ -12075,25 +12078,25 @@ function MatchView({ router, matchId, resetKey, matchState }) {
         })
       })
     })
-  }), matchState.parentRouteId === rootRouteId ? /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(import_jsx_runtime10.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime10.jsx)(OnRendered, { resetKey }), router.options.scrollRestoration && (isServer ?? router.isServer) ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ScrollRestoration, {}) : null] }) : null] });
+  }), matchState.parentRouteId === rootRouteId ? /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(import_jsx_runtime10.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime10.jsx)(OnRendered, { resetKey }), router2.options.scrollRestoration && (isServer ?? router2.isServer) ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(ScrollRestoration, {}) : null] }) : null] });
 }
 function OnRendered({ resetKey }) {
-  const router = useRouter();
-  if (isServer ?? router.isServer) return null;
+  const router2 = useRouter();
+  if (isServer ?? router2.isServer) return null;
   const prevHrefRef = React$110.useRef(void 0);
   useLayoutEffect2(() => {
-    const currentHref = router.latestLocation.href;
+    const currentHref = router2.latestLocation.href;
     if (prevHrefRef.current === void 0 || prevHrefRef.current !== currentHref) {
-      router.emit({
+      router2.emit({
         type: "onRendered",
-        ...getLocationChangeInfo(router.stores.location.get(), router.stores.resolvedLocation.get())
+        ...getLocationChangeInfo(router2.stores.location.get(), router2.stores.resolvedLocation.get())
       });
       prevHrefRef.current = currentHref;
     }
   }, [
-    router.latestLocation.state.__TSR_key,
+    router2.latestLocation.state.__TSR_key,
     resetKey,
-    router
+    router2
   ]);
   return null;
 }
@@ -12116,19 +12119,19 @@ var init_Match = __esm({
     init_esm4();
     init_server();
     Match = React$110.memo(function MatchImpl({ matchId }) {
-      const router = useRouter();
-      if (isServer ?? router.isServer) {
-        const match2 = router.stores.matchStores.get(matchId)?.get();
+      const router2 = useRouter();
+      if (isServer ?? router2.isServer) {
+        const match2 = router2.stores.matchStores.get(matchId)?.get();
         if (!match2) {
           if (process.env.NODE_ENV !== "production") throw new Error(`Invariant failed: Could not find match for matchId "${matchId}". Please file an issue!`);
           invariant();
         }
         const routeId = match2.routeId;
-        const parentRouteId = router.routesById[routeId].parentRoute?.id;
+        const parentRouteId = router2.routesById[routeId].parentRoute?.id;
         return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(MatchView, {
-          router,
+          router: router2,
           matchId,
-          resetKey: router.stores.loadedAt.get(),
+          resetKey: router2.stores.loadedAt.get(),
           matchState: {
             routeId,
             ssr: match2.ssr,
@@ -12137,20 +12140,20 @@ var init_Match = __esm({
           }
         });
       }
-      const matchStore = router.stores.matchStores.get(matchId);
+      const matchStore = router2.stores.matchStores.get(matchId);
       if (!matchStore) {
         if (process.env.NODE_ENV !== "production") throw new Error(`Invariant failed: Could not find match for matchId "${matchId}". Please file an issue!`);
         invariant();
       }
-      const resetKey = useStore(router.stores.loadedAt, (loadedAt) => loadedAt);
+      const resetKey = useStore(router2.stores.loadedAt, (loadedAt) => loadedAt);
       const match = useStore(matchStore, (value) => value);
       return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(MatchView, {
-        router,
+        router: router2,
         matchId,
         resetKey,
         matchState: React$110.useMemo(() => {
           const routeId = match.routeId;
-          const parentRouteId = router.routesById[routeId].parentRoute?.id;
+          const parentRouteId = router2.routesById[routeId].parentRoute?.id;
           return {
             routeId,
             ssr: match.ssr,
@@ -12161,31 +12164,31 @@ var init_Match = __esm({
           match._displayPending,
           match.routeId,
           match.ssr,
-          router.routesById
+          router2.routesById
         ])
       });
     });
     MatchInner = React$110.memo(function MatchInnerImpl({ matchId }) {
-      const router = useRouter();
+      const router2 = useRouter();
       const getMatchPromise = (match2, key2) => {
-        return router.getMatch(match2.id)?._nonReactive[key2] ?? match2._nonReactive[key2];
+        return router2.getMatch(match2.id)?._nonReactive[key2] ?? match2._nonReactive[key2];
       };
-      if (isServer ?? router.isServer) {
-        const match2 = router.stores.matchStores.get(matchId)?.get();
+      if (isServer ?? router2.isServer) {
+        const match2 = router2.stores.matchStores.get(matchId)?.get();
         if (!match2) {
           if (process.env.NODE_ENV !== "production") throw new Error(`Invariant failed: Could not find match for matchId "${matchId}". Please file an issue!`);
           invariant();
         }
         const routeId2 = match2.routeId;
-        const route2 = router.routesById[routeId2];
-        const remountDeps = (router.routesById[routeId2].options.remountDeps ?? router.options.defaultRemountDeps)?.({
+        const route2 = router2.routesById[routeId2];
+        const remountDeps = (router2.routesById[routeId2].options.remountDeps ?? router2.options.defaultRemountDeps)?.({
           routeId: routeId2,
           loaderDeps: match2.loaderDeps,
           params: match2._strictParams,
           search: match2._strictSearch
         });
         const key2 = remountDeps ? JSON.stringify(remountDeps) : void 0;
-        const Comp = route2.options.component ?? router.options.defaultComponent;
+        const Comp = route2.options.component ?? router2.options.defaultComponent;
         const out2 = Comp ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Comp, {}, key2) : /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Outlet, {});
         if (match2._displayPending) throw getMatchPromise(match2, "displayPendingPromise");
         if (match2._forcePending) throw getMatchPromise(match2, "minPendingPromise");
@@ -12195,7 +12198,7 @@ var init_Match = __esm({
             if (process.env.NODE_ENV !== "production") throw new Error("Invariant failed: Expected a notFound error");
             invariant();
           }
-          return renderRouteNotFound(router, route2, match2.error);
+          return renderRouteNotFound(router2, route2, match2.error);
         }
         if (match2.status === "redirected") {
           if (!isRedirect(match2.error)) {
@@ -12204,23 +12207,23 @@ var init_Match = __esm({
           }
           throw getMatchPromise(match2, "loadPromise");
         }
-        if (match2.status === "error") return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)((route2.options.errorComponent ?? router.options.defaultErrorComponent) || ErrorComponent, {
+        if (match2.status === "error") return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)((route2.options.errorComponent ?? router2.options.defaultErrorComponent) || ErrorComponent, {
           error: match2.error,
           reset: void 0,
           info: { componentStack: "" }
         });
         return out2;
       }
-      const matchStore = router.stores.matchStores.get(matchId);
+      const matchStore = router2.stores.matchStores.get(matchId);
       if (!matchStore) {
         if (process.env.NODE_ENV !== "production") throw new Error(`Invariant failed: Could not find match for matchId "${matchId}". Please file an issue!`);
         invariant();
       }
       const match = useStore(matchStore, (value) => value);
       const routeId = match.routeId;
-      const route = router.routesById[routeId];
+      const route = router2.routesById[routeId];
       const key = React$110.useMemo(() => {
-        const remountDeps = (router.routesById[routeId].options.remountDeps ?? router.options.defaultRemountDeps)?.({
+        const remountDeps = (router2.routesById[routeId].options.remountDeps ?? router2.options.defaultRemountDeps)?.({
           routeId,
           loaderDeps: match.loaderDeps,
           params: match._strictParams,
@@ -12232,26 +12235,26 @@ var init_Match = __esm({
         match.loaderDeps,
         match._strictParams,
         match._strictSearch,
-        router.options.defaultRemountDeps,
-        router.routesById
+        router2.options.defaultRemountDeps,
+        router2.routesById
       ]);
       const out = React$110.useMemo(() => {
-        const Comp = route.options.component ?? router.options.defaultComponent;
+        const Comp = route.options.component ?? router2.options.defaultComponent;
         if (Comp) return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Comp, {}, key);
         return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Outlet, {});
       }, [
         key,
         route.options.component,
-        router.options.defaultComponent
+        router2.options.defaultComponent
       ]);
       if (match._displayPending) throw getMatchPromise(match, "displayPendingPromise");
       if (match._forcePending) throw getMatchPromise(match, "minPendingPromise");
       if (match.status === "pending") {
-        const pendingMinMs = route.options.pendingMinMs ?? router.options.defaultPendingMinMs;
+        const pendingMinMs = route.options.pendingMinMs ?? router2.options.defaultPendingMinMs;
         if (pendingMinMs) {
-          const routerMatch = router.getMatch(match.id);
+          const routerMatch = router2.getMatch(match.id);
           if (routerMatch && !routerMatch._nonReactive.minPendingPromise) {
-            if (!(isServer ?? router.isServer)) {
+            if (!(isServer ?? router2.isServer)) {
               const minPendingPromise = createControlledPromise();
               routerMatch._nonReactive.minPendingPromise = minPendingPromise;
               setTimeout(() => {
@@ -12268,7 +12271,7 @@ var init_Match = __esm({
           if (process.env.NODE_ENV !== "production") throw new Error("Invariant failed: Expected a notFound error");
           invariant();
         }
-        return renderRouteNotFound(router, route, match.error);
+        return renderRouteNotFound(router2, route, match.error);
       }
       if (match.status === "redirected") {
         if (!isRedirect(match.error)) {
@@ -12278,7 +12281,7 @@ var init_Match = __esm({
         throw getMatchPromise(match, "loadPromise");
       }
       if (match.status === "error") {
-        if (isServer ?? router.isServer) return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)((route.options.errorComponent ?? router.options.defaultErrorComponent) || ErrorComponent, {
+        if (isServer ?? router2.isServer) return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)((route.options.errorComponent ?? router2.options.defaultErrorComponent) || ErrorComponent, {
           error: match.error,
           reset: void 0,
           info: { componentStack: "" }
@@ -12288,33 +12291,33 @@ var init_Match = __esm({
       return out;
     });
     Outlet = React$110.memo(function OutletImpl() {
-      const router = useRouter();
+      const router2 = useRouter();
       const matchId = React$110.useContext(matchContext);
       let routeId;
       let parentGlobalNotFound = false;
       let childMatchId;
-      if (isServer ?? router.isServer) {
-        const matches = router.stores.matches.get();
+      if (isServer ?? router2.isServer) {
+        const matches = router2.stores.matches.get();
         const parentIndex = matchId ? matches.findIndex((match) => match.id === matchId) : -1;
         const parentMatch = parentIndex >= 0 ? matches[parentIndex] : void 0;
         routeId = parentMatch?.routeId;
         parentGlobalNotFound = parentMatch?.globalNotFound ?? false;
         childMatchId = parentIndex >= 0 ? matches[parentIndex + 1]?.id : void 0;
       } else {
-        const parentMatchStore = matchId ? router.stores.matchStores.get(matchId) : void 0;
+        const parentMatchStore = matchId ? router2.stores.matchStores.get(matchId) : void 0;
         [routeId, parentGlobalNotFound] = useStore(parentMatchStore, (match) => [match?.routeId, match?.globalNotFound ?? false]);
-        childMatchId = useStore(router.stores.matchesId, (ids) => {
+        childMatchId = useStore(router2.stores.matchesId, (ids) => {
           return ids[ids.findIndex((id3) => id3 === matchId) + 1];
         });
       }
-      const route = routeId ? router.routesById[routeId] : void 0;
-      const pendingElement = router.options.defaultPendingComponent ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(router.options.defaultPendingComponent, {}) : null;
+      const route = routeId ? router2.routesById[routeId] : void 0;
+      const pendingElement = router2.options.defaultPendingComponent ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(router2.options.defaultPendingComponent, {}) : null;
       if (parentGlobalNotFound) {
         if (!route) {
           if (process.env.NODE_ENV !== "production") throw new Error("Invariant failed: Could not resolve route for Outlet render");
           invariant();
         }
-        return renderRouteNotFound(router, route, void 0);
+        return renderRouteNotFound(router2, route, void 0);
       }
       if (!childMatchId) return null;
       const nextMatch = /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Match, { matchId: childMatchId });
@@ -12329,20 +12332,20 @@ var init_Match = __esm({
 
 // node_modules/@tanstack/react-router/dist/esm/Transitioner.js
 function Transitioner() {
-  const router = useRouter();
+  const router2 = useRouter();
   const mountLoadForRouter = React$111.useRef({
-    router,
+    router: router2,
     mounted: false
   });
   const [isTransitioning, setIsTransitioning] = React$111.useState(false);
-  const isLoading = useStore(router.stores.isLoading, (value) => value);
-  const hasPending = useStore(router.stores.hasPending, (value) => value);
+  const isLoading = useStore(router2.stores.isLoading, (value) => value);
+  const hasPending = useStore(router2.stores.hasPending, (value) => value);
   const previousIsLoading = usePrevious(isLoading);
   const isAnyPending = isLoading || isTransitioning || hasPending;
   const previousIsAnyPending = usePrevious(isAnyPending);
   const isPagePending = isLoading || hasPending;
   const previousIsPagePending = usePrevious(isPagePending);
-  router.startTransition = (fn2) => {
+  router2.startTransition = (fn2) => {
     setIsTransitioning(true);
     React$111.startTransition(() => {
       fn2();
@@ -12350,74 +12353,74 @@ function Transitioner() {
     });
   };
   React$111.useEffect(() => {
-    const unsub = router.history.subscribe(router.load);
-    const nextLocation = router.buildLocation({
-      to: router.latestLocation.pathname,
+    const unsub = router2.history.subscribe(router2.load);
+    const nextLocation = router2.buildLocation({
+      to: router2.latestLocation.pathname,
       search: true,
       params: true,
       hash: true,
       state: true,
       _includeValidateSearch: true
     });
-    if (trimPathRight2(router.latestLocation.publicHref) !== trimPathRight2(nextLocation.publicHref)) router.commitLocation({
+    if (trimPathRight2(router2.latestLocation.publicHref) !== trimPathRight2(nextLocation.publicHref)) router2.commitLocation({
       ...nextLocation,
       replace: true
     });
     return () => {
       unsub();
     };
-  }, [router, router.history]);
+  }, [router2, router2.history]);
   useLayoutEffect2(() => {
-    if (typeof window !== "undefined" && router.ssr || mountLoadForRouter.current.router === router && mountLoadForRouter.current.mounted) return;
+    if (typeof window !== "undefined" && router2.ssr || mountLoadForRouter.current.router === router2 && mountLoadForRouter.current.mounted) return;
     mountLoadForRouter.current = {
-      router,
+      router: router2,
       mounted: true
     };
     const tryLoad = async () => {
       try {
-        await router.load();
+        await router2.load();
       } catch (err) {
         console.error(err);
       }
     };
     tryLoad();
-  }, [router]);
+  }, [router2]);
   useLayoutEffect2(() => {
-    if (previousIsLoading && !isLoading) router.emit({
+    if (previousIsLoading && !isLoading) router2.emit({
       type: "onLoad",
-      ...getLocationChangeInfo(router.stores.location.get(), router.stores.resolvedLocation.get())
+      ...getLocationChangeInfo(router2.stores.location.get(), router2.stores.resolvedLocation.get())
     });
   }, [
     previousIsLoading,
-    router,
+    router2,
     isLoading
   ]);
   useLayoutEffect2(() => {
-    if (previousIsPagePending && !isPagePending) router.emit({
+    if (previousIsPagePending && !isPagePending) router2.emit({
       type: "onBeforeRouteMount",
-      ...getLocationChangeInfo(router.stores.location.get(), router.stores.resolvedLocation.get())
+      ...getLocationChangeInfo(router2.stores.location.get(), router2.stores.resolvedLocation.get())
     });
   }, [
     isPagePending,
     previousIsPagePending,
-    router
+    router2
   ]);
   useLayoutEffect2(() => {
     if (previousIsAnyPending && !isAnyPending) {
-      const changeInfo = getLocationChangeInfo(router.stores.location.get(), router.stores.resolvedLocation.get());
-      router.emit({
+      const changeInfo = getLocationChangeInfo(router2.stores.location.get(), router2.stores.resolvedLocation.get());
+      router2.emit({
         type: "onResolved",
         ...changeInfo
       });
       batch(() => {
-        router.stores.status.set("idle");
-        router.stores.resolvedLocation.set(router.stores.location.get());
+        router2.stores.status.set("idle");
+        router2.stores.resolvedLocation.set(router2.stores.location.get());
       });
     }
   }, [
     isAnyPending,
     previousIsAnyPending,
-    router
+    router2
   ]);
   return null;
 }
@@ -12435,24 +12438,24 @@ var init_Transitioner = __esm({
 
 // node_modules/@tanstack/react-router/dist/esm/Matches.js
 function Matches() {
-  const router = useRouter();
-  const PendingComponent = router.routesById[rootRouteId].options.pendingComponent ?? router.options.defaultPendingComponent;
+  const router2 = useRouter();
+  const PendingComponent = router2.routesById[rootRouteId].options.pendingComponent ?? router2.options.defaultPendingComponent;
   const pendingElement = PendingComponent ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(PendingComponent, {}) : null;
-  const inner = /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)((isServer ?? router.isServer) || typeof document !== "undefined" && router.ssr ? SafeFragment : React$112.Suspense, {
+  const inner = /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)((isServer ?? router2.isServer) || typeof document !== "undefined" && router2.ssr ? SafeFragment : React$112.Suspense, {
     fallback: pendingElement,
-    children: [!(isServer ?? router.isServer) && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Transitioner, {}), /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(MatchesInner, {})]
+    children: [!(isServer ?? router2.isServer) && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Transitioner, {}), /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(MatchesInner, {})]
   });
-  return router.options.InnerWrap ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(router.options.InnerWrap, { children: inner }) : inner;
+  return router2.options.InnerWrap ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(router2.options.InnerWrap, { children: inner }) : inner;
 }
 function MatchesInner() {
-  const router = useRouter();
-  const _isServer = isServer ?? router.isServer;
-  const matchId = _isServer ? router.stores.firstId.get() : useStore(router.stores.firstId, (id3) => id3);
-  const resetKey = _isServer ? router.stores.loadedAt.get() : useStore(router.stores.loadedAt, (loadedAt) => loadedAt);
+  const router2 = useRouter();
+  const _isServer = isServer ?? router2.isServer;
+  const matchId = _isServer ? router2.stores.firstId.get() : useStore(router2.stores.firstId, (id3) => id3);
+  const resetKey = _isServer ? router2.stores.loadedAt.get() : useStore(router2.stores.loadedAt, (loadedAt) => loadedAt);
   const matchComponent = matchId ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Match, { matchId }) : null;
   return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(matchContext.Provider, {
     value: matchId,
-    children: router.options.disableGlobalCatchBoundary ? matchComponent : /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(CatchBoundary, {
+    children: router2.options.disableGlobalCatchBoundary ? matchComponent : /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(CatchBoundary, {
       getResetKey: () => resetKey,
       errorComponent: ErrorComponent,
       onCatch: process.env.NODE_ENV !== "production" ? (error) => {
@@ -12521,25 +12524,25 @@ var init_router2 = __esm({
 });
 
 // node_modules/@tanstack/react-router/dist/esm/RouterProvider.js
-function RouterContextProvider({ router, children, ...rest }) {
-  if (hasKeys(rest)) router.update({
-    ...router.options,
+function RouterContextProvider({ router: router2, children, ...rest }) {
+  if (hasKeys(rest)) router2.update({
+    ...router2.options,
     ...rest,
     context: {
-      ...router.options.context,
+      ...router2.options.context,
       ...rest.context
     }
   });
   const provider = /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(routerContext.Provider, {
-    value: router,
+    value: router2,
     children
   });
-  if (router.options.Wrap) return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(router.options.Wrap, { children: provider });
+  if (router2.options.Wrap) return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(router2.options.Wrap, { children: provider });
   return provider;
 }
-function RouterProvider({ router, ...rest }) {
+function RouterProvider({ router: router2, ...rest }) {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(RouterContextProvider, {
-    router,
+    router: router2,
     ...rest,
     children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Matches, {})
   });
@@ -12559,15 +12562,15 @@ var init_RouterProvider = __esm({
 // node_modules/@tanstack/react-router/dist/esm/useRouterState.js
 function useRouterState(opts) {
   const contextRouter = useRouter({ warn: opts?.router === void 0 });
-  const router = opts?.router || contextRouter;
-  if (isServer ?? router.isServer) {
-    const state = router.stores.__store.get();
+  const router2 = opts?.router || contextRouter;
+  if (isServer ?? router2.isServer) {
+    const state = router2.stores.__store.get();
     return opts?.select ? opts.select(state) : state;
   }
   const previousResult = (0, import_react8.useRef)(void 0);
-  return useStore(router.stores.__store, (state) => {
+  return useStore(router2.stores.__store, (state) => {
     if (opts?.select) {
-      if (opts.structuralSharing ?? router.options.defaultStructuralSharing) {
+      if (opts.structuralSharing ?? router2.options.defaultStructuralSharing) {
         const newSlice = replaceEqualDeep(previousResult.current, opts.select(state));
         previousResult.current = newSlice;
         return newSlice;
@@ -12652,7 +12655,7 @@ function InlineCssStyle({ attrs, children, nonce }) {
   });
 }
 function Script({ attrs, children, preventScriptHoist }) {
-  const router = useRouter();
+  const router2 = useRouter();
   const hydrated = useHydrated();
   const dataScript = typeof attrs?.type === "string" && attrs.type !== "" && attrs.type !== "text/javascript" && attrs.type !== "module";
   if (process.env.NODE_ENV !== "production" && attrs?.src && typeof children === "string" && children.trim().length) console.warn("[TanStack Router] <Script> received both `src` and `children`. The `children` content will be ignored. Remove `children` or remove `src`.");
@@ -12693,7 +12696,7 @@ function Script({ attrs, children, preventScriptHoist }) {
     children,
     dataScript
   ]);
-  if (isServer ?? router.isServer) {
+  if (isServer ?? router2.isServer) {
     if (attrs?.src) {
       if (!preventScriptHoist) return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("script", {
         ...attrs,
@@ -12746,7 +12749,7 @@ var init_Asset = __esm({
 });
 
 // node_modules/@tanstack/react-router/dist/esm/headContentUtils.js
-function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
+function buildTagsFromMatches(router2, nonce, matches, assetCrossOrigin) {
   const routeMeta = matches.map((match) => match.meta).filter((meta) => meta !== void 0);
   const resultMeta = [];
   const metaByAttribute = {};
@@ -12800,7 +12803,7 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
       nonce
     }
   }));
-  const manifest2 = router.ssr?.manifest;
+  const manifest2 = router2.ssr?.manifest;
   const manifestCssTags = [];
   if (manifest2) {
     matches.forEach((match) => {
@@ -12874,10 +12877,10 @@ var init_headContentUtils = __esm({
     init_esm4();
     init_server();
     useTags = (assetCrossOrigin) => {
-      const router = useRouter();
-      const nonce = router.options.ssr?.nonce;
-      if (isServer ?? router.isServer) return buildTagsFromMatches(router, nonce, router.stores.matches.get(), assetCrossOrigin);
-      const routeMeta = useStore(router.stores.matches, (matches) => {
+      const router2 = useRouter();
+      const nonce = router2.options.ssr?.nonce;
+      if (isServer ?? router2.isServer) return buildTagsFromMatches(router2, nonce, router2.stores.matches.get(), assetCrossOrigin);
+      const routeMeta = useStore(router2.stores.matches, (matches) => {
         return matches.map((match) => match.meta).filter((meta2) => meta2 !== void 0);
       }, deepEqual);
       const meta = React$114.useMemo(() => {
@@ -12928,7 +12931,7 @@ var init_headContentUtils = __esm({
         resultMeta.reverse();
         return resultMeta;
       }, [routeMeta, nonce]);
-      const links = useStore(router.stores.matches, (matches) => {
+      const links = useStore(router2.stores.matches, (matches) => {
         return matches.flatMap((match) => match.links ?? []).filter((link2) => link2 !== void 0).map((link2) => ({
           tag: "link",
           attrs: {
@@ -12937,8 +12940,8 @@ var init_headContentUtils = __esm({
           }
         }));
       }, deepEqual);
-      const manifestCssTags = useStore(router.stores.matches, (matches) => {
-        const manifest2 = router.ssr?.manifest;
+      const manifestCssTags = useStore(router2.stores.matches, (matches) => {
+        const manifest2 = router2.ssr?.manifest;
         const tags2 = [];
         if (!manifest2) return tags2;
         matches.forEach((match) => {
@@ -12967,9 +12970,9 @@ var init_headContentUtils = __esm({
         });
         return tags2;
       }, deepEqual);
-      const preloadLinks = useStore(router.stores.matches, (matches) => {
+      const preloadLinks = useStore(router2.stores.matches, (matches) => {
         const preloadLinks2 = [];
-        const manifest2 = router.ssr?.manifest;
+        const manifest2 = router2.ssr?.manifest;
         if (!manifest2) return preloadLinks2;
         matches.forEach((match) => {
           manifest2.routes[match.routeId]?.preloads?.forEach((preload) => {
@@ -12984,7 +12987,7 @@ var init_headContentUtils = __esm({
         });
         return preloadLinks2;
       }, deepEqual);
-      const styles = useStore(router.stores.matches, (matches) => {
+      const styles = useStore(router2.stores.matches, (matches) => {
         return matches.flatMap((match) => match.styles ?? []).filter((style) => style !== void 0).map(({ children, ...attrs }) => ({
           tag: "style",
           attrs: {
@@ -12994,7 +12997,7 @@ var init_headContentUtils = __esm({
           children
         }));
       }, deepEqual);
-      const headScripts = useStore(router.stores.matches, (matches) => {
+      const headScripts = useStore(router2.stores.matches, (matches) => {
         return matches.flatMap((match) => match.headScripts ?? []).filter((script) => script !== void 0).map(({ children, ...script }) => ({
           tag: "script",
           attrs: {
@@ -13039,10 +13042,10 @@ var init_HeadContent = __esm({
 });
 
 // node_modules/@tanstack/react-router/dist/esm/Scripts.js
-function renderScripts(router, scripts, assetScripts) {
+function renderScripts(router2, scripts, assetScripts) {
   const allScripts = [...scripts, ...assetScripts];
-  if ((isServer ?? router.isServer) && router.serverSsr) {
-    const serverBufferedScript = router.serverSsr.takeBufferedScripts();
+  if ((isServer ?? router2.isServer) && router2.serverSsr) {
+    const serverBufferedScript = router2.serverSsr.takeBufferedScripts();
     if (serverBufferedScript) allScripts.unshift(serverBufferedScript);
   }
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(import_jsx_runtime15.Fragment, { children: allScripts.map((asset, i2) => /* @__PURE__ */ (0, import_react10.createElement)(Asset, {
@@ -13061,11 +13064,11 @@ var init_Scripts = __esm({
     init_esm4();
     init_server();
     Scripts = () => {
-      const router = useRouter();
-      const nonce = router.options.ssr?.nonce;
+      const router2 = useRouter();
+      const nonce = router2.options.ssr?.nonce;
       const getAssetScripts = (matches) => {
         const assetScripts2 = [];
-        const manifest2 = router.ssr?.manifest;
+        const manifest2 = router2.ssr?.manifest;
         if (!manifest2) return [];
         for (const match of matches) {
           const scripts = manifest2.routes[match.routeId]?.scripts;
@@ -13091,13 +13094,13 @@ var init_Scripts = __esm({
         },
         children
       }));
-      if (isServer ?? router.isServer) {
-        const activeMatches = router.stores.matches.get();
+      if (isServer ?? router2.isServer) {
+        const activeMatches = router2.stores.matches.get();
         const assetScripts2 = getAssetScripts(activeMatches);
-        return renderScripts(router, getScripts(activeMatches), assetScripts2);
+        return renderScripts(router2, getScripts(activeMatches), assetScripts2);
       }
-      const assetScripts = useStore(router.stores.matches, getAssetScripts, deepEqual);
-      return renderScripts(router, useStore(router.stores.matches, getScripts, deepEqual), assetScripts);
+      const assetScripts = useStore(router2.stores.matches, getAssetScripts, deepEqual);
+      return renderScripts(router2, useStore(router2.stores.matches, getScripts, deepEqual), assetScripts);
     };
   }
 });
@@ -38957,17 +38960,17 @@ var init_renderRouterToStream = __esm({
     import_server2 = __toESM(require_server_node(), 1);
     import_node_stream3 = require("node:stream");
     init_isbot();
-    renderRouterToStream = async ({ request, router, responseHeaders, children }) => {
+    renderRouterToStream = async ({ request, router: router2, responseHeaders, children }) => {
       if (typeof import_server2.default.renderToReadableStream === "function") {
         const stream = await import_server2.default.renderToReadableStream(children, {
           signal: request.signal,
-          nonce: router.options.ssr?.nonce,
+          nonce: router2.options.ssr?.nonce,
           progressiveChunkSize: Number.POSITIVE_INFINITY
         });
         if (isbot(request.headers.get("User-Agent"))) await stream.allReady;
-        const responseStream = transformReadableStreamWithRouter(router, stream);
+        const responseStream = transformReadableStreamWithRouter(router2, stream);
         return new Response(responseStream, {
-          status: router.stores.statusCode.get(),
+          status: router2.stores.statusCode.get(),
           headers: responseHeaders
         });
       }
@@ -38975,7 +38978,7 @@ var init_renderRouterToStream = __esm({
         const reactAppPassthrough = new import_node_stream3.PassThrough();
         try {
           const pipeable = import_server2.default.renderToPipeableStream(children, {
-            nonce: router.options.ssr?.nonce,
+            nonce: router2.options.ssr?.nonce,
             progressiveChunkSize: Number.POSITIVE_INFINITY,
             ...isbot(request.headers.get("User-Agent")) ? { onAllReady() {
               pipeable.pipe(reactAppPassthrough);
@@ -38991,9 +38994,9 @@ var init_renderRouterToStream = __esm({
           console.error("Error in renderToPipeableStream:", e);
           reactAppPassthrough.destroy(e instanceof Error ? e : new Error(String(e)));
         }
-        const responseStream = transformPipeableStreamWithRouter(router, reactAppPassthrough);
+        const responseStream = transformPipeableStreamWithRouter(router2, reactAppPassthrough);
         return new Response(responseStream, {
-          status: router.stores.statusCode.get(),
+          status: router2.stores.statusCode.get(),
           headers: responseHeaders
         });
       }
@@ -39010,16 +39013,697 @@ var init_server4 = __esm({
   }
 });
 
-// dist/server/assets/_tanstack-start-manifest_v-Cj3Mk0Iw.js
-var tanstack_start_manifest_v_Cj3Mk0Iw_exports = {};
-__export(tanstack_start_manifest_v_Cj3Mk0Iw_exports, {
+// dist/server/assets/_tanstack-start-manifest_v-D--a0zMx.js
+var tanstack_start_manifest_v_D_a0zMx_exports = {};
+__export(tanstack_start_manifest_v_D_a0zMx_exports, {
   tsrStartManifest: () => tsrStartManifest
 });
 var tsrStartManifest;
-var init_tanstack_start_manifest_v_Cj3Mk0Iw = __esm({
-  "dist/server/assets/_tanstack-start-manifest_v-Cj3Mk0Iw.js"() {
+var init_tanstack_start_manifest_v_D_a0zMx = __esm({
+  "dist/server/assets/_tanstack-start-manifest_v-D--a0zMx.js"() {
     "use strict";
-    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/syndicate/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-_jw9VWCd.js"] }, "/": { filePath: "/media/dolar/office/projects/syndicate/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-CJQFoZLu.js", "/assets/pillar-one-of-one-CNlA5F64.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/site-BaOQlNlK.js", "/assets/video-CgAy-CTL.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js"] }, "/about": { filePath: "/media/dolar/office/projects/syndicate/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-BGCXc1AU.js", "/assets/site-BaOQlNlK.js", "/assets/10825391-hd_1920_1080_24fps-CiAwXmfc.js"] }, "/apply": { filePath: "/media/dolar/office/projects/syndicate/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-PqTdhQaR.js", "/assets/site-BaOQlNlK.js", "/assets/video-CgAy-CTL.js"] }, "/contact": { filePath: "/media/dolar/office/projects/syndicate/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-D42x-xXh.js", "/assets/site-BaOQlNlK.js", "/assets/video-CgAy-CTL.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/syndicate/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-D1WOani3.js", "/assets/site-BaOQlNlK.js", "/assets/gallery-4-DPW8Iuoe.js", "/assets/pillar-one-of-one-CNlA5F64.js", "/assets/video-CgAy-CTL.js"] }, "/events": { filePath: "/media/dolar/office/projects/syndicate/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-CGxujuaU.js", "/assets/site-BaOQlNlK.js", "/assets/14209297_3840_2160_24fps-BPxziZTz.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/syndicate/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-DtUiOG3R.js", "/assets/site-BaOQlNlK.js", "/assets/gallery-4-DPW8Iuoe.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/video-CgAy-CTL.js"] } }, clientEntry: "/assets/index-_jw9VWCd.js" });
+    tsrStartManifest = () => ({ routes: { __root__: { filePath: "/media/dolar/office/projects/syndicate/src/routes/__root.tsx", children: ["/", "/about", "/apply", "/contact", "/design-gallery", "/events", "/the-build"], preloads: ["/assets/index-Cl7Ea4w9.js"] }, "/": { filePath: "/media/dolar/office/projects/syndicate/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-lsoKSOCs.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/video-CgAy-CTL.js", "/assets/site-CSzzo-t4.js"] }, "/about": { filePath: "/media/dolar/office/projects/syndicate/src/routes/about.tsx", children: void 0, preloads: ["/assets/about-BSzJqH0s.js", "/assets/site-CSzzo-t4.js"] }, "/apply": { filePath: "/media/dolar/office/projects/syndicate/src/routes/apply.tsx", children: void 0, preloads: ["/assets/apply-C47pM8LY.js", "/assets/site-CSzzo-t4.js", "/assets/video-CgAy-CTL.js"] }, "/contact": { filePath: "/media/dolar/office/projects/syndicate/src/routes/contact.tsx", children: void 0, preloads: ["/assets/contact-BRQZjEsZ.js", "/assets/site-CSzzo-t4.js", "/assets/video-CgAy-CTL.js"] }, "/design-gallery": { filePath: "/media/dolar/office/projects/syndicate/src/routes/design-gallery.tsx", children: void 0, preloads: ["/assets/design-gallery-DH7lKJNI.js", "/assets/site-CSzzo-t4.js", "/assets/video-CgAy-CTL.js"] }, "/events": { filePath: "/media/dolar/office/projects/syndicate/src/routes/events.tsx", children: void 0, preloads: ["/assets/events-C1x1GU0H.js", "/assets/site-CSzzo-t4.js"] }, "/the-build": { filePath: "/media/dolar/office/projects/syndicate/src/routes/the-build.tsx", children: void 0, preloads: ["/assets/the-build-Bi_nWT3Q.js", "/assets/site-CSzzo-t4.js", "/assets/carbon-texture-B71ZzfLi.js", "/assets/video-CgAy-CTL.js"] } }, clientEntry: "/assets/index-Cl7Ea4w9.js" });
+  }
+});
+
+// dist/server/assets/createServerRpc-4M7C4PKe.js
+var createServerRpc;
+var init_createServerRpc_4M7C4PKe = __esm({
+  "dist/server/assets/createServerRpc-4M7C4PKe.js"() {
+    "use strict";
+    init_server_Z5_5AO7O();
+    createServerRpc = (serverFnMeta, splitImportFn) => {
+      const url = "/_serverFn/" + serverFnMeta.id;
+      return Object.assign(splitImportFn, {
+        url,
+        serverFnMeta,
+        [TSS_SERVER_FUNCTION]: true
+      });
+    };
+  }
+});
+
+// dist/server/assets/logo-4-ISZutHRh.js
+var logo;
+var init_logo_4_ISZutHRh = __esm({
+  "dist/server/assets/logo-4-ISZutHRh.js"() {
+    "use strict";
+    logo = "/assets/logo-4-BrrnFFbn.jpeg";
+  }
+});
+
+// dist/server/assets/syndicates-D-B8VaQZ.js
+var syndicates_D_B8VaQZ_exports = {};
+__export(syndicates_D_B8VaQZ_exports, {
+  getBenefits_createServerFn_handler: () => getBenefits_createServerFn_handler,
+  getEvents_createServerFn_handler: () => getEvents_createServerFn_handler,
+  getLiveSyndicates_createServerFn_handler: () => getLiveSyndicates_createServerFn_handler,
+  getPartners_createServerFn_handler: () => getPartners_createServerFn_handler,
+  getPillars_createServerFn_handler: () => getPillars_createServerFn_handler,
+  getProcess_createServerFn_handler: () => getProcess_createServerFn_handler,
+  getRecentlyFunded_createServerFn_handler: () => getRecentlyFunded_createServerFn_handler,
+  getSyndicateSteps_createServerFn_handler: () => getSyndicateSteps_createServerFn_handler
+});
+var import_node_async_hooks, import_react11, import_jsx_runtime16, getLiveSyndicates_createServerFn_handler, getLiveSyndicates, getRecentlyFunded_createServerFn_handler, getRecentlyFunded, getEvents_createServerFn_handler, getEvents, getPillars_createServerFn_handler, getPillars, getProcess_createServerFn_handler, getProcess, getPartners_createServerFn_handler, getPartners, getSyndicateSteps_createServerFn_handler, getSyndicateSteps, getBenefits_createServerFn_handler, getBenefits;
+var init_syndicates_D_B8VaQZ = __esm({
+  "dist/server/assets/syndicates-D-B8VaQZ.js"() {
+    "use strict";
+    init_createServerRpc_4M7C4PKe();
+    init_server_Z5_5AO7O();
+    init_logo_4_ISZutHRh();
+    import_node_async_hooks = require("node:async_hooks");
+    init_production();
+    import_react11 = __toESM(require_react(), 1);
+    import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
+    getLiveSyndicates_createServerFn_handler = createServerRpc({
+      id: "041b66f586895c402252b0a2ec4cbb187064b43fc562c382861f52f1fae90224",
+      name: "getLiveSyndicates",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getLiveSyndicates.__executeServer(opts));
+    getLiveSyndicates = createServerFn({
+      method: "GET"
+    }).handler(getLiveSyndicates_createServerFn_handler, async () => {
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      return [{
+        title: "Vision148 Sierra Cosworth RS500",
+        img: logo,
+        // In a real DB, this would be a URL
+        allocation: "\xA35,000 per allocation",
+        stats: "25 Allocations \u2022 10 remaining",
+        return: "Potential Returns 77.1%*",
+        isPlaceholder: false,
+        waitlist: false
+      }, {
+        title: "Next Build being assessed for Syndication",
+        img: logo,
+        allocation: "\xA32,000 per allocation",
+        stats: "31 Allocations \u2022 17 remaining",
+        return: "Potential Returns 63.90%*",
+        isPlaceholder: true,
+        waitlist: true
+      }, {
+        title: "Mercedes SLS AMG",
+        img: logo,
+        allocation: "\xA35,000 per allocation",
+        stats: "39 Allocations \u2022 32 remaining",
+        return: "Potential Returns 87.2%*",
+        isPlaceholder: false,
+        waitlist: false
+      }];
+    });
+    getRecentlyFunded_createServerFn_handler = createServerRpc({
+      id: "cdb6f24a000fe743889e66044e57b678ffab7c29ad8773078d041e94faab139b",
+      name: "getRecentlyFunded",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getRecentlyFunded.__executeServer(opts));
+    getRecentlyFunded = createServerFn({
+      method: "GET"
+    }).handler(getRecentlyFunded_createServerFn_handler, async () => {
+      return [{
+        title: "Lamborghini Gallardo SE",
+        img: "/src/assets/build-process.jpg",
+        // Representing a dynamic image path
+        date: "Funded Date \u2014 Dec 25",
+        val: "Funded Value \u2014 \xA382,000",
+        members: "Syndicate Members \u2014 14"
+      }, {
+        title: "Aston Martin V12 Vantage",
+        img: "/src/assets/build-process.jpg",
+        date: "Funded Date \u2014 Sep 25",
+        val: "Funded Value \u2014 \xA366,000",
+        members: "Syndicate Members \u2014 21"
+      }, {
+        title: "Porsche 996 GT3 RS",
+        img: "/src/assets/build-process.jpg",
+        date: "Funded Date \u2014 May 25",
+        val: "Funded Value \u2014 \xA3165,000",
+        members: "Syndicate Members \u2014 22"
+      }];
+    });
+    getEvents_createServerFn_handler = createServerRpc({
+      id: "bcde8082d3369e5a7fc294219e3bc981a037f0fd2283bf641bde7a11feebf4b2",
+      name: "getEvents",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getEvents.__executeServer(opts));
+    getEvents = createServerFn({
+      method: "GET"
+    }).handler(getEvents_createServerFn_handler, async () => {
+      return [{
+        type: "Syndicate Member Invitation",
+        title: "Coventry Metalcraft",
+        tag: "INVITE ONLY",
+        description: "An opportunity to meet the UK's leading coach building company and Vision148 build partner",
+        date: "TBA"
+      }, {
+        type: "Syndicate Member Invitation",
+        title: "Digital Manufacturing Centre - Silverstone",
+        tag: "INVITE ONLY",
+        description: "Emersion in Additive Manufacturing at this bleeding edge manufacturing facility in the heart of motorsport",
+        date: "TBA"
+      }, {
+        type: "THE CARCROWD SYNDICATE GATHERING",
+        title: "Secret Meet 2026",
+        tag: "INVITE ONLY",
+        description: "",
+        date: "TBA"
+      }];
+    });
+    getPillars_createServerFn_handler = createServerRpc({
+      id: "4a4bed894e92b763e0483532a03ef3b66456933fb0cb0c1ddcb303b229de53eb",
+      name: "getPillars",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getPillars.__executeServer(opts));
+    getPillars = createServerFn({
+      method: "GET"
+    }).handler(getPillars_createServerFn_handler, async () => {
+      return [{
+        n: "01",
+        title: "One of One Build",
+        video: "/src/assets/10825391-hd_1920_1080_24fps.mp4",
+        img: "/src/assets/pillar-one-of-one.jpg",
+        body: "There will never be another. Car #148 \u2014 the 148th of 500 RS500s ever built \u2014 reborn as a unique, documented, investment-grade restomod."
+      }, {
+        n: "02",
+        title: "World-Class Build Partners",
+        img: "/src/assets/pillar-partners.jpg",
+        body: "The very best in innovative manufacturing and artisan craft \u2014 from coachbuilding to bleeding-edge additive manufacturing."
+      }, {
+        n: "03",
+        title: "Exclusive Access & Experience",
+        video: "/src/assets/14209297_3840_2160_24fps.mp4",
+        img: "/src/assets/pillar-experience.jpg",
+        body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations."
+      }];
+    });
+    getProcess_createServerFn_handler = createServerRpc({
+      id: "598d1ce99a86ccdfcf29f22eb6720f9eea7fb410d8b2a1ed82f69f5877049988",
+      name: "getProcess",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getProcess.__executeServer(opts));
+    getProcess = createServerFn({
+      method: "GET"
+    }).handler(getProcess_createServerFn_handler, async () => {
+      return [{
+        n: "01",
+        title: "Acquisition & Strip",
+        items: ["Base vehicle selection", "Full teardown", "Digital scanning"]
+      }, {
+        n: "02",
+        title: "Design & Engineering",
+        items: ["CAD modelling", "Structural optimisation", "Performance upgrades"]
+      }, {
+        n: "03",
+        title: "Manufacturing",
+        items: ["Fabrication", "Additive manufacturing", "Precision assembly"]
+      }, {
+        n: "04",
+        title: "Finishing & Validation",
+        items: ["Paint & livery", "Road & track testing", "Final sign-off"]
+      }];
+    });
+    getPartners_createServerFn_handler = createServerRpc({
+      id: "c196cb2e36758946b524ae3ac80190f8a985530bc850e44f1d9fb958cdafbb0e",
+      name: "getPartners",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getPartners.__executeServer(opts));
+    getPartners = createServerFn({
+      method: "GET"
+    }).handler(getPartners_createServerFn_handler, async () => {
+      return [{
+        name: "T3DMC",
+        role: "3D Scanning & Digital Twin"
+      }, {
+        name: "ASM Auto Recycling",
+        role: "Chassis Dismantling & Cataloguing"
+      }, {
+        name: "Coventry Metalcraft",
+        role: "Precision Coachbuilding"
+      }, {
+        name: "DMC Silverstone",
+        role: "Assembly & Digital Manufacturing"
+      }, {
+        name: "BAMD Composites",
+        role: "Composite Structures"
+      }, {
+        name: "MAHLE Group",
+        role: "Engine Rebuild & Performance"
+      }, {
+        name: "Cornerstone Technologies",
+        role: "Non-structural Skillsets"
+      }, {
+        name: "HGL / VenueServe",
+        role: "Membership Platform & Fan Portal"
+      }];
+    });
+    getSyndicateSteps_createServerFn_handler = createServerRpc({
+      id: "ac52de4b35ea0c682573eb720be0c3dc0e938a370123a3490c4605b60ab0786c",
+      name: "getSyndicateSteps",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getSyndicateSteps.__executeServer(opts));
+    getSyndicateSteps = createServerFn({
+      method: "GET"
+    }).handler(getSyndicateSteps_createServerFn_handler, async () => {
+      return [{
+        n: 1,
+        title: "Syndicate Formation",
+        body: "A fixed number of participants secure allocation."
+      }, {
+        n: 2,
+        title: "Build Phase",
+        body: "Full transparency through content and direct access."
+      }, {
+        n: 3,
+        title: "Experience Phase",
+        body: "Driving events, track days, private access."
+      }, {
+        n: 4,
+        title: "Exit Opportunity",
+        body: "Potential sale of the asset at premium."
+      }];
+    });
+    getBenefits_createServerFn_handler = createServerRpc({
+      id: "908d6378279f221ff138851f3efe8d5676afb43fba40f140c2cfa0b0dd888628",
+      name: "getBenefits",
+      filename: "src/lib/syndicates.ts"
+    }, (opts) => getBenefits.__executeServer(opts));
+    getBenefits = createServerFn({
+      method: "GET"
+    }).handler(getBenefits_createServerFn_handler, async () => {
+      return [{
+        icon: "\u2B21",
+        title: "Build Access",
+        items: ["Workshop visits", "Engineering insight"]
+      }, {
+        icon: "\u25CE",
+        title: "Driving Access",
+        items: ["Road drives", "Track sessions"]
+      }, {
+        icon: "\u2726",
+        title: "Events",
+        items: ["Launch", "Private experiences"]
+      }, {
+        icon: "\u25C8",
+        title: "Knowledge",
+        items: ["Learn the build", "Understand the engineering"]
+      }];
+    });
+  }
+});
+
+// dist/server/assets/gallery-DCNTZseF.js
+var gallery_DCNTZseF_exports = {};
+__export(gallery_DCNTZseF_exports, {
+  getGalleryItems_createServerFn_handler: () => getGalleryItems_createServerFn_handler
+});
+var import_node_async_hooks2, import_react12, import_jsx_runtime17, getGalleryItems_createServerFn_handler, getGalleryItems;
+var init_gallery_DCNTZseF = __esm({
+  "dist/server/assets/gallery-DCNTZseF.js"() {
+    "use strict";
+    init_createServerRpc_4M7C4PKe();
+    init_server_Z5_5AO7O();
+    import_node_async_hooks2 = require("node:async_hooks");
+    init_production();
+    import_react12 = __toESM(require_react(), 1);
+    import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
+    getGalleryItems_createServerFn_handler = createServerRpc({
+      id: "0f43699aa5c12fd7eccb86d3c89fc028b662ee26b58f0d02adfb484e9344adea",
+      name: "getGalleryItems",
+      filename: "src/lib/gallery.ts"
+    }, (opts) => getGalleryItems.__executeServer(opts));
+    getGalleryItems = createServerFn({
+      method: "GET"
+    }).handler(getGalleryItems_createServerFn_handler, async () => {
+      return [{
+        img: "/src/assets/gallery-1.jpg",
+        t: "RS500 Reimagined",
+        tag: "Render",
+        span: "md:col-span-2 md:row-span-2"
+      }, {
+        img: "/src/assets/gallery-3.jpg",
+        t: "Carbon Rear Wing",
+        tag: "Detail"
+      }, {
+        img: "/src/assets/gallery-4.jpg",
+        t: "Engine Bay Study",
+        tag: "Component"
+      }, {
+        img: "/src/assets/gallery-2.jpg",
+        t: "Digital Twin",
+        tag: "Engineering",
+        span: "md:col-span-2"
+      }, {
+        img: "/src/assets/build-finish.jpg",
+        t: "Final Finish",
+        tag: "Process"
+      }, {
+        img: "/src/assets/build-print.jpg",
+        t: "Composite Layup",
+        tag: "Manufacturing"
+      }, {
+        img: "/src/assets/rs500-hero.jpg",
+        t: "Workshop Capture",
+        tag: "On Set",
+        span: "md:col-span-2"
+      }, {
+        img: "/src/assets/pillar-one-of-one.jpg",
+        t: "Hand Fabrication",
+        tag: "Coachbuilding"
+      }];
+    });
+  }
+});
+
+// dist/server/assets/events-uZCst0a2.js
+var events_uZCst0a2_exports = {};
+__export(events_uZCst0a2_exports, {
+  getFaqs_createServerFn_handler: () => getFaqs_createServerFn_handler,
+  getPageEvents_createServerFn_handler: () => getPageEvents_createServerFn_handler
+});
+var import_node_async_hooks3, import_react13, import_jsx_runtime18, getPageEvents_createServerFn_handler, getPageEvents, getFaqs_createServerFn_handler, getFaqs;
+var init_events_uZCst0a2 = __esm({
+  "dist/server/assets/events-uZCst0a2.js"() {
+    "use strict";
+    init_createServerRpc_4M7C4PKe();
+    init_server_Z5_5AO7O();
+    import_node_async_hooks3 = require("node:async_hooks");
+    init_production();
+    import_react13 = __toESM(require_react(), 1);
+    import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
+    getPageEvents_createServerFn_handler = createServerRpc({
+      id: "32ebfdeb12c784e01d43e641321f48eb4b3a23b1017f01ba2e406f7461e63a7e",
+      name: "getPageEvents",
+      filename: "src/lib/events.ts"
+    }, (opts) => getPageEvents.__executeServer(opts));
+    getPageEvents = createServerFn({
+      method: "GET"
+    }).handler(getPageEvents_createServerFn_handler, async () => {
+      return [{
+        date: "MAR 2026",
+        title: "Build Facility Open Day",
+        desc: "Exclusive behind-the-scenes access for confirmed syndicate members. See the chassis in progress, meet the fabrication team, and review panel fitment firsthand.",
+        location: "Silverstone Park, UK",
+        status: "Members Only"
+      }, {
+        date: "JUN 2026",
+        title: "Goodwood Members' Meeting",
+        desc: "Syndicate will have a dedicated paddock presence. Syndicate members receive hospitality passes and grid walk access.",
+        location: "Goodwood Circuit, UK",
+        status: "Public + Members"
+      }, {
+        date: "SEP 2026",
+        title: "Design Review Weekend",
+        desc: "Final design sign-off event. Members vote on remaining specification choices: wheel finish, interior stitch colour, and livery details.",
+        location: "Silverstone Park, UK",
+        status: "Members Only"
+      }, {
+        date: "NOV 2026",
+        title: "Track Day \u2014 Anglesey Circuit",
+        desc: "First shakedown and member track experience. Professional instruction provided. Photography and videography included.",
+        location: "Anglesey, Wales",
+        status: "Members Only"
+      }];
+    });
+    getFaqs_createServerFn_handler = createServerRpc({
+      id: "84ac47e88e92c0a102a5f22e093fc9253feb648bc5fb9abad64c673167143404",
+      name: "getFaqs",
+      filename: "src/lib/events.ts"
+    }, (opts) => getFaqs.__executeServer(opts));
+    getFaqs = createServerFn({
+      method: "GET"
+    }).handler(getFaqs_createServerFn_handler, async () => {
+      return [{
+        q: "What is a syndicated restomod?",
+        a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset \u2014 all managed by Syndicate."
+      }, {
+        q: "How much does allocation cost?",
+        a: "Syndicate slots start at \xA348,000 per share for the Syndicate RS500 build. This covers your proportional build cost, insurance, storage, maintenance, and event access for the first 24 months."
+      }, {
+        q: "How many shares are available?",
+        a: "Each build is strictly capped at 12 shares. This ensures meaningful access for every member while preserving the exclusivity that makes these cars special."
+      }, {
+        q: "Can I sell my share?",
+        a: "Yes. Shares can be transferred to approved buyers through Syndicate at any time. We handle the valuation, documentation, and introduction to the buyer pool."
+      }, {
+        q: "What happens if the build goes over budget?",
+        a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Syndicate and our partner network. Your share price will not change post-commitment."
+      }, {
+        q: "Do I get to drive the car?",
+        a: "Absolutely. Every member receives an annual allocation of drive days, track sessions, and road tours. The schedule is coordinated democratically through the member portal."
+      }, {
+        q: "Where is the car stored?",
+        a: "Vehicles are stored in a climate-controlled secure facility at Silverstone Park, maintained by our in-house team. Members can arrange visits by appointment."
+      }, {
+        q: "How do I apply?",
+        a: "Submit an application through our Apply page. We review every application personally and aim to respond within 7 business days. A brief phone call is part of the process."
+      }];
+    });
+  }
+});
+
+// dist/server/assets/contact-Bc0_yUrY.js
+var contact_Bc0_yUrY_exports = {};
+__export(contact_Bc0_yUrY_exports, {
+  getDirectLines_createServerFn_handler: () => getDirectLines_createServerFn_handler,
+  getWorkshopAddress_createServerFn_handler: () => getWorkshopAddress_createServerFn_handler
+});
+var import_node_async_hooks4, import_react14, import_jsx_runtime19, getDirectLines_createServerFn_handler, getDirectLines, getWorkshopAddress_createServerFn_handler, getWorkshopAddress;
+var init_contact_Bc0_yUrY = __esm({
+  "dist/server/assets/contact-Bc0_yUrY.js"() {
+    "use strict";
+    init_createServerRpc_4M7C4PKe();
+    init_server_Z5_5AO7O();
+    import_node_async_hooks4 = require("node:async_hooks");
+    init_production();
+    import_react14 = __toESM(require_react(), 1);
+    import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
+    getDirectLines_createServerFn_handler = createServerRpc({
+      id: "9d5d90b80df1ece8b649303ca74c9d63692f0f226b382338d93d8d04399a1955",
+      name: "getDirectLines",
+      filename: "src/lib/contact.ts"
+    }, (opts) => getDirectLines.__executeServer(opts));
+    getDirectLines = createServerFn({
+      method: "GET"
+    }).handler(getDirectLines_createServerFn_handler, async () => {
+      return [{
+        label: "General Inquiries",
+        email: "hello@synmod.build"
+      }, {
+        label: "Syndicate Applications",
+        email: "apply@synmod.build"
+      }, {
+        label: "Press & Media",
+        email: "press@synmod.build"
+      }, {
+        label: "Partnerships",
+        email: "partners@synmod.build"
+      }];
+    });
+    getWorkshopAddress_createServerFn_handler = createServerRpc({
+      id: "7ccf67c9f0168c6ac9157c05785d1dcd26d00c09dfaf8efac7d05f81052b726b",
+      name: "getWorkshopAddress",
+      filename: "src/lib/contact.ts"
+    }, (opts) => getWorkshopAddress.__executeServer(opts));
+    getWorkshopAddress = createServerFn({
+      method: "GET"
+    }).handler(getWorkshopAddress_createServerFn_handler, async () => {
+      return ["Syndicate Build Facility", "Unit 7, Silverstone Park", "Northamptonshire, NN12 8TN", "United Kingdom"];
+    });
+  }
+});
+
+// dist/server/assets/build-BUOr1TJ3.js
+var build_BUOr1TJ3_exports = {};
+__export(build_BUOr1TJ3_exports, {
+  getPhases_createServerFn_handler: () => getPhases_createServerFn_handler,
+  getSpecs_createServerFn_handler: () => getSpecs_createServerFn_handler
+});
+var import_node_async_hooks5, import_react15, import_jsx_runtime20, getPhases_createServerFn_handler, getPhases, getSpecs_createServerFn_handler, getSpecs;
+var init_build_BUOr1TJ3 = __esm({
+  "dist/server/assets/build-BUOr1TJ3.js"() {
+    "use strict";
+    init_createServerRpc_4M7C4PKe();
+    init_server_Z5_5AO7O();
+    import_node_async_hooks5 = require("node:async_hooks");
+    init_production();
+    import_react15 = __toESM(require_react(), 1);
+    import_jsx_runtime20 = __toESM(require_jsx_runtime(), 1);
+    getPhases_createServerFn_handler = createServerRpc({
+      id: "de1baaab6d9d6b32a851c3872eda95f609bc6ad63df410dcd14a814a4a6b8c7d",
+      name: "getPhases",
+      filename: "src/lib/build.ts"
+    }, (opts) => getPhases.__executeServer(opts));
+    getPhases = createServerFn({
+      method: "GET"
+    }).handler(getPhases_createServerFn_handler, async () => {
+      return [{
+        n: "01",
+        t: "Acquisition & Strip",
+        img: "/src/assets/build-strip.jpg",
+        body: "Car #148 \u2014 the 148th of 500 RS500s ever built \u2014 sourced, authenticated, and fully stripped to bare metal. Every component is catalogued and inspected.",
+        bullets: ["Base vehicle selection", "Full teardown", "Component cataloguing", "Chassis inspection"],
+        partner: "ASM Auto Recycling"
+      }, {
+        n: "02",
+        t: "Design & Engineering",
+        img: "/src/assets/build-scan.jpg",
+        body: "Body shell is 3D scanned to sub-millimetre accuracy, producing a complete digital twin. Engineers iterate CAD designs for structural optimisation and modern performance.",
+        bullets: ["3D scanning & digital twin", "CAD modelling", "Structural optimisation", "Aero & thermal sims"],
+        partner: "T3DMC \u2022 BAMD Composites"
+      }, {
+        n: "03",
+        t: "Manufacturing",
+        img: "/src/assets/build-print.jpg",
+        body: "Additive manufacturing meets traditional coachbuilding. Carbon-composite panels and billet components are produced alongside hand-formed steelwork.",
+        bullets: ["Fabrication", "Additive manufacturing", "Composite layup", "Precision assembly"],
+        partner: "Coventry Metalcraft \u2022 DMC Silverstone"
+      }, {
+        n: "04",
+        t: "Finishing & Validation",
+        img: "/src/assets/build-finish.jpg",
+        body: "Engine rebuild, paint, and final assembly come together. The car is validated on road and track before final sign-off and the first syndicate drive day.",
+        bullets: ["Engine rebuild", "Paint & livery", "Road & track testing", "Final sign-off"],
+        partner: "MAHLE Group \u2022 DMC"
+      }];
+    });
+    getSpecs_createServerFn_handler = createServerRpc({
+      id: "99b07c72264bd83f294bf8c190daadda04dd85ad1509ca79cec14ab8c32bf477",
+      name: "getSpecs",
+      filename: "src/lib/build.ts"
+    }, (opts) => getSpecs.__executeServer(opts));
+    getSpecs = createServerFn({
+      method: "GET"
+    }).handler(getSpecs_createServerFn_handler, async () => {
+      return [{
+        l: "Base",
+        v: "1987 Ford Sierra Cosworth RS500 #148"
+      }, {
+        l: "Engine",
+        v: "Reworked YB 2.0L turbocharged inline-4"
+      }, {
+        l: "Target Power",
+        v: "550+ bhp"
+      }, {
+        l: "Bodywork",
+        v: "Coachbuilt Aluminium + Composite"
+      }, {
+        l: "Chassis",
+        v: "Reinforced shell, modern suspension geometry"
+      }, {
+        l: "Production",
+        v: "1 of 1"
+      }];
+    });
+  }
+});
+
+// dist/server/assets/about-Va2MKswd.js
+var about_Va2MKswd_exports = {};
+__export(about_Va2MKswd_exports, {
+  getArchitects_createServerFn_handler: () => getArchitects_createServerFn_handler,
+  getPrinciples_createServerFn_handler: () => getPrinciples_createServerFn_handler
+});
+var import_node_async_hooks6, import_react16, import_jsx_runtime21, getPrinciples_createServerFn_handler, getPrinciples, getArchitects_createServerFn_handler, getArchitects;
+var init_about_Va2MKswd = __esm({
+  "dist/server/assets/about-Va2MKswd.js"() {
+    "use strict";
+    init_createServerRpc_4M7C4PKe();
+    init_server_Z5_5AO7O();
+    import_node_async_hooks6 = require("node:async_hooks");
+    init_production();
+    import_react16 = __toESM(require_react(), 1);
+    import_jsx_runtime21 = __toESM(require_jsx_runtime(), 1);
+    getPrinciples_createServerFn_handler = createServerRpc({
+      id: "c3ab668dcbbf85177bcd1c92f3777bc61f78af3c447bb7cd1449451b613d7329",
+      name: "getPrinciples",
+      filename: "src/lib/about.ts"
+    }, (opts) => getPrinciples.__executeServer(opts));
+    getPrinciples = createServerFn({
+      method: "GET"
+    }).handler(getPrinciples_createServerFn_handler, async () => {
+      return [{
+        num: "01",
+        title: "Analog Soul",
+        text: "We preserve mechanical connection. Hydraulic steering. Manual gearboxes. Driver-first ergonomics. Technology serves the experience, never replaces it."
+      }, {
+        num: "02",
+        title: "Engineering Integrity",
+        text: "Every component is traceable, tested, and validated. We partner with OEM-grade suppliers and motorsport specialists who share our obsession."
+      }, {
+        num: "03",
+        title: "Open Collaboration",
+        text: "The syndicate model means owners are participants, not spectators. From design votes to build-week visits, transparency is our default."
+      }];
+    });
+    getArchitects_createServerFn_handler = createServerRpc({
+      id: "b6ec13c45afd3f3a4fc06cbfb77f797107faeaad290a546d85fda1f90d7de29b",
+      name: "getArchitects",
+      filename: "src/lib/about.ts"
+    }, (opts) => getArchitects.__executeServer(opts));
+    getArchitects = createServerFn({
+      method: "GET"
+    }).handler(getArchitects_createServerFn_handler, async () => {
+      return [{
+        name: "Marcus Hale",
+        role: "Founder & Build Director",
+        bio: "30 years experience in automotive & Fintech business"
+      }, {
+        name: "Simon Kiero Watson",
+        role: "Commercial & Finance Oversight",
+        bio: "Highly experienced Corporate Finance and Exchange Expert."
+      }, {
+        name: "Al Yasid Oozeear",
+        role: "Digital Visualisor & Designer",
+        bio: "Independent Automotive designer specialising in bespoke car design"
+      }, {
+        name: "Stuart Peach",
+        role: "Project Co Founder",
+        bio: "Investor and partner in the Vision148 project and original custodian of #148"
+      }];
+    });
+  }
+});
+
+// dist/server/assets/apply-BQ8LwNfo.js
+var apply_BQ8LwNfo_exports = {};
+__export(apply_BQ8LwNfo_exports, {
+  getApplySteps_createServerFn_handler: () => getApplySteps_createServerFn_handler
+});
+var import_node_async_hooks7, import_react17, import_jsx_runtime22, getApplySteps_createServerFn_handler, getApplySteps;
+var init_apply_BQ8LwNfo = __esm({
+  "dist/server/assets/apply-BQ8LwNfo.js"() {
+    "use strict";
+    init_createServerRpc_4M7C4PKe();
+    init_server_Z5_5AO7O();
+    import_node_async_hooks7 = require("node:async_hooks");
+    init_production();
+    import_react17 = __toESM(require_react(), 1);
+    import_jsx_runtime22 = __toESM(require_jsx_runtime(), 1);
+    getApplySteps_createServerFn_handler = createServerRpc({
+      id: "ebe8ef3d05a46c2d928d9d6319350dfb53ad6f290bd633e464e3550d615987e5",
+      name: "getApplySteps",
+      filename: "src/lib/apply.ts"
+    }, (opts) => getApplySteps.__executeServer(opts));
+    getApplySteps = createServerFn({
+      method: "GET"
+    }).handler(getApplySteps_createServerFn_handler, async () => {
+      return [{
+        n: "01",
+        t: "Register Interest",
+        b: "Submit the form below. We respond within 48 hours."
+      }, {
+        n: "02",
+        t: "Discovery Call",
+        b: "A 30-min call to walk through the syndicate model and answer questions."
+      }, {
+        n: "03",
+        t: "Allocation Offer",
+        b: "Receive a formal allocation document outlining cost, structure, and timeline."
+      }, {
+        n: "04",
+        t: "Secure Position",
+        b: "Sign and fund. You're in. Welcome to Syndicate."
+      }];
+    });
   }
 });
 
@@ -41179,12 +41863,12 @@ var init_types2 = __esm({
 });
 
 // node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js
-var React3, import_jsx_runtime16, QueryClientContext, QueryClientProvider;
+var React3, import_jsx_runtime23, QueryClientContext, QueryClientProvider;
 var init_QueryClientProvider = __esm({
   "node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js"() {
     "use client";
     React3 = __toESM(require_react(), 1);
-    import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime23 = __toESM(require_jsx_runtime(), 1);
     QueryClientContext = React3.createContext(
       void 0
     );
@@ -41198,7 +41882,7 @@ var init_QueryClientProvider = __esm({
           client.unmount();
         };
       }, [client]);
-      return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(QueryClientContext.Provider, { value: client, children });
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(QueryClientContext.Provider, { value: client, children });
     };
   }
 });
@@ -41213,28 +41897,28 @@ var init_modern2 = __esm({
 });
 
 // node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs
-var import_react11, LayoutGroupContext;
+var import_react18, LayoutGroupContext;
 var init_LayoutGroupContext = __esm({
   "node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs"() {
     "use client";
-    import_react11 = __toESM(require_react(), 1);
-    LayoutGroupContext = (0, import_react11.createContext)({});
+    import_react18 = __toESM(require_react(), 1);
+    LayoutGroupContext = (0, import_react18.createContext)({});
   }
 });
 
 // node_modules/framer-motion/dist/es/utils/use-constant.mjs
 function useConstant(init) {
-  const ref = (0, import_react12.useRef)(null);
+  const ref = (0, import_react19.useRef)(null);
   if (ref.current === null) {
     ref.current = init();
   }
   return ref.current;
 }
-var import_react12;
+var import_react19;
 var init_use_constant = __esm({
   "node_modules/framer-motion/dist/es/utils/use-constant.mjs"() {
     "use client";
-    import_react12 = __toESM(require_react(), 1);
+    import_react19 = __toESM(require_react(), 1);
   }
 });
 
@@ -41247,23 +41931,23 @@ var init_is_browser = __esm({
 });
 
 // node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs
-var import_react13, useIsomorphicLayoutEffect;
+var import_react20, useIsomorphicLayoutEffect;
 var init_use_isomorphic_effect = __esm({
   "node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs"() {
     "use client";
-    import_react13 = __toESM(require_react(), 1);
+    import_react20 = __toESM(require_react(), 1);
     init_is_browser();
-    useIsomorphicLayoutEffect = isBrowser ? import_react13.useLayoutEffect : import_react13.useEffect;
+    useIsomorphicLayoutEffect = isBrowser ? import_react20.useLayoutEffect : import_react20.useEffect;
   }
 });
 
 // node_modules/framer-motion/dist/es/context/PresenceContext.mjs
-var import_react14, PresenceContext;
+var import_react21, PresenceContext;
 var init_PresenceContext = __esm({
   "node_modules/framer-motion/dist/es/context/PresenceContext.mjs"() {
     "use client";
-    import_react14 = __toESM(require_react(), 1);
-    PresenceContext = /* @__PURE__ */ (0, import_react14.createContext)(null);
+    import_react21 = __toESM(require_react(), 1);
+    PresenceContext = /* @__PURE__ */ (0, import_react21.createContext)(null);
   }
 });
 
@@ -42004,27 +42688,27 @@ var init_rgba = __esm({
 // node_modules/motion-dom/dist/es/value/types/color/hex.mjs
 function parseHex(v3) {
   let r = "";
-  let g8 = "";
+  let g2 = "";
   let b2 = "";
   let a = "";
   if (v3.length > 5) {
     r = v3.substring(1, 3);
-    g8 = v3.substring(3, 5);
+    g2 = v3.substring(3, 5);
     b2 = v3.substring(5, 7);
     a = v3.substring(7, 9);
   } else {
     r = v3.substring(1, 2);
-    g8 = v3.substring(2, 3);
+    g2 = v3.substring(2, 3);
     b2 = v3.substring(3, 4);
     a = v3.substring(4, 5);
     r += r;
-    g8 += g8;
+    g2 += g2;
     b2 += b2;
     a += a;
   }
   return {
     red: parseInt(r, 16),
-    green: parseInt(g8, 16),
+    green: parseInt(g2, 16),
     blue: parseInt(b2, 16),
     alpha: a ? parseInt(a, 16) / 255 : 1
   };
@@ -42541,9 +43225,9 @@ function findSpring({ duration = springDefaults.duration, bounce = springDefault
       const d2 = delta * velocity + velocity;
       const e = Math.pow(dampingRatio, 2) * Math.pow(undampedFreq2, 2) * duration;
       const f3 = Math.exp(-delta);
-      const g8 = calcAngularFreq(Math.pow(undampedFreq2, 2), dampingRatio);
+      const g2 = calcAngularFreq(Math.pow(undampedFreq2, 2), dampingRatio);
       const factor = -envelope(undampedFreq2) + safeMin > 0 ? -1 : 1;
-      return factor * ((d2 - e) * f3) / g8;
+      return factor * ((d2 - e) * f3) / g2;
     };
   } else {
     envelope = (undampedFreq2) => {
@@ -49263,12 +49947,12 @@ var init_es2 = __esm({
 });
 
 // node_modules/framer-motion/dist/es/context/MotionConfigContext.mjs
-var import_react15, MotionConfigContext;
+var import_react22, MotionConfigContext;
 var init_MotionConfigContext = __esm({
   "node_modules/framer-motion/dist/es/context/MotionConfigContext.mjs"() {
     "use client";
-    import_react15 = __toESM(require_react(), 1);
-    MotionConfigContext = (0, import_react15.createContext)({
+    import_react22 = __toESM(require_react(), 1);
+    MotionConfigContext = (0, import_react22.createContext)({
       transformPagePoint: (p3) => p3,
       isStatic: false,
       reducedMotion: "never"
@@ -49320,9 +50004,9 @@ var init_use_composed_ref = __esm({
 
 // node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs
 function PopChild({ children, isPresent, anchorX, anchorY, root, pop }) {
-  const id3 = (0, import_react16.useId)();
-  const ref = (0, import_react16.useRef)(null);
-  const size = (0, import_react16.useRef)({
+  const id3 = (0, import_react23.useId)();
+  const ref = (0, import_react23.useRef)(null);
+  const size = (0, import_react23.useRef)({
     width: 0,
     height: 0,
     top: 0,
@@ -49331,10 +50015,10 @@ function PopChild({ children, isPresent, anchorX, anchorY, root, pop }) {
     bottom: 0,
     direction: "ltr"
   });
-  const { nonce } = (0, import_react16.useContext)(MotionConfigContext);
+  const { nonce } = (0, import_react23.useContext)(MotionConfigContext);
   const childRef = children.props?.ref ?? children?.ref;
   const composedRef = useComposedRefs(ref, childRef);
-  (0, import_react16.useInsertionEffect)(() => {
+  (0, import_react23.useInsertionEffect)(() => {
     const { width, height, top, left, right, bottom, direction } = size.current;
     if (isPresent || pop === false || !ref.current || !width || !height)
       return;
@@ -49365,16 +50049,16 @@ function PopChild({ children, isPresent, anchorX, anchorY, root, pop }) {
       }
     };
   }, [isPresent]);
-  return (0, import_jsx_runtime17.jsx)(PopChildMeasure, { isPresent, childRef: ref, sizeRef: size, pop, children: pop === false ? children : React5.cloneElement(children, { ref: composedRef }) });
+  return (0, import_jsx_runtime24.jsx)(PopChildMeasure, { isPresent, childRef: ref, sizeRef: size, pop, children: pop === false ? children : React5.cloneElement(children, { ref: composedRef }) });
 }
-var import_jsx_runtime17, React5, import_react16, PopChildMeasure;
+var import_jsx_runtime24, React5, import_react23, PopChildMeasure;
 var init_PopChild = __esm({
   "node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs"() {
     "use client";
-    import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime24 = __toESM(require_jsx_runtime(), 1);
     init_es2();
     React5 = __toESM(require_react(), 1);
-    import_react16 = __toESM(require_react(), 1);
+    import_react23 = __toESM(require_react(), 1);
     init_MotionConfigContext();
     init_use_composed_ref();
     PopChildMeasure = class extends React5.Component {
@@ -49412,21 +50096,21 @@ var init_PopChild = __esm({
 function newChildrenMap() {
   return /* @__PURE__ */ new Map();
 }
-var import_jsx_runtime18, React6, import_react17, PresenceChild;
+var import_jsx_runtime25, React6, import_react24, PresenceChild;
 var init_PresenceChild = __esm({
   "node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs"() {
     "use client";
-    import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime25 = __toESM(require_jsx_runtime(), 1);
     React6 = __toESM(require_react(), 1);
-    import_react17 = __toESM(require_react(), 1);
+    import_react24 = __toESM(require_react(), 1);
     init_PresenceContext();
     init_use_constant();
     init_PopChild();
     PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, anchorX, anchorY, root }) => {
       const presenceChildren = useConstant(newChildrenMap);
-      const id3 = (0, import_react17.useId)();
+      const id3 = (0, import_react24.useId)();
       let isReusedContext = true;
-      let context = (0, import_react17.useMemo)(() => {
+      let context = (0, import_react24.useMemo)(() => {
         isReusedContext = false;
         return {
           id: id3,
@@ -49450,38 +50134,38 @@ var init_PresenceChild = __esm({
       if (presenceAffectsLayout && isReusedContext) {
         context = { ...context };
       }
-      (0, import_react17.useMemo)(() => {
+      (0, import_react24.useMemo)(() => {
         presenceChildren.forEach((_3, key) => presenceChildren.set(key, false));
       }, [isPresent]);
       React6.useEffect(() => {
         !isPresent && !presenceChildren.size && onExitComplete && onExitComplete();
       }, [isPresent]);
-      children = (0, import_jsx_runtime18.jsx)(PopChild, { pop: mode === "popLayout", isPresent, anchorX, anchorY, root, children });
-      return (0, import_jsx_runtime18.jsx)(PresenceContext.Provider, { value: context, children });
+      children = (0, import_jsx_runtime25.jsx)(PopChild, { pop: mode === "popLayout", isPresent, anchorX, anchorY, root, children });
+      return (0, import_jsx_runtime25.jsx)(PresenceContext.Provider, { value: context, children });
     };
   }
 });
 
 // node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs
 function usePresence(subscribe2 = true) {
-  const context = (0, import_react18.useContext)(PresenceContext);
+  const context = (0, import_react25.useContext)(PresenceContext);
   if (context === null)
     return [true, null];
   const { isPresent, onExitComplete, register } = context;
-  const id3 = (0, import_react18.useId)();
-  (0, import_react18.useEffect)(() => {
+  const id3 = (0, import_react25.useId)();
+  (0, import_react25.useEffect)(() => {
     if (subscribe2) {
       return register(id3);
     }
   }, [subscribe2]);
-  const safeToRemove = (0, import_react18.useCallback)(() => subscribe2 && onExitComplete && onExitComplete(id3), [id3, onExitComplete, subscribe2]);
+  const safeToRemove = (0, import_react25.useCallback)(() => subscribe2 && onExitComplete && onExitComplete(id3), [id3, onExitComplete, subscribe2]);
   return !isPresent && onExitComplete ? [false, safeToRemove] : [true];
 }
-var import_react18;
+var import_react25;
 var init_use_presence = __esm({
   "node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs"() {
     "use client";
-    import_react18 = __toESM(require_react(), 1);
+    import_react25 = __toESM(require_react(), 1);
     init_PresenceContext();
   }
 });
@@ -49489,27 +50173,27 @@ var init_use_presence = __esm({
 // node_modules/framer-motion/dist/es/components/AnimatePresence/utils.mjs
 function onlyElements(children) {
   const filtered = [];
-  import_react19.Children.forEach(children, (child) => {
-    if ((0, import_react19.isValidElement)(child))
+  import_react26.Children.forEach(children, (child) => {
+    if ((0, import_react26.isValidElement)(child))
       filtered.push(child);
   });
   return filtered;
 }
-var import_react19, getChildKey;
+var import_react26, getChildKey;
 var init_utils6 = __esm({
   "node_modules/framer-motion/dist/es/components/AnimatePresence/utils.mjs"() {
-    import_react19 = __toESM(require_react(), 1);
+    import_react26 = __toESM(require_react(), 1);
     getChildKey = (child) => child.key || "";
   }
 });
 
 // node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs
-var import_jsx_runtime19, import_react20, AnimatePresence;
+var import_jsx_runtime26, import_react27, AnimatePresence;
 var init_AnimatePresence = __esm({
   "node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs"() {
     "use client";
-    import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
-    import_react20 = __toESM(require_react(), 1);
+    import_jsx_runtime26 = __toESM(require_jsx_runtime(), 1);
+    import_react27 = __toESM(require_react(), 1);
     init_LayoutGroupContext();
     init_use_constant();
     init_use_isomorphic_effect();
@@ -49518,14 +50202,14 @@ var init_AnimatePresence = __esm({
     init_utils6();
     AnimatePresence = ({ children, custom, initial = true, onExitComplete, presenceAffectsLayout = true, mode = "sync", propagate: propagate2 = false, anchorX = "left", anchorY = "top", root }) => {
       const [isParentPresent, safeToRemove] = usePresence(propagate2);
-      const presentChildren = (0, import_react20.useMemo)(() => onlyElements(children), [children]);
+      const presentChildren = (0, import_react27.useMemo)(() => onlyElements(children), [children]);
       const presentKeys = propagate2 && !isParentPresent ? [] : presentChildren.map(getChildKey);
-      const isInitialRender = (0, import_react20.useRef)(true);
-      const pendingPresentChildren = (0, import_react20.useRef)(presentChildren);
+      const isInitialRender = (0, import_react27.useRef)(true);
+      const pendingPresentChildren = (0, import_react27.useRef)(presentChildren);
       const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
-      const exitingComponents = (0, import_react20.useRef)(/* @__PURE__ */ new Set());
-      const [diffedChildren, setDiffedChildren] = (0, import_react20.useState)(presentChildren);
-      const [renderedChildren, setRenderedChildren] = (0, import_react20.useState)(presentChildren);
+      const exitingComponents = (0, import_react27.useRef)(/* @__PURE__ */ new Set());
+      const [diffedChildren, setDiffedChildren] = (0, import_react27.useState)(presentChildren);
+      const [renderedChildren, setRenderedChildren] = (0, import_react27.useState)(presentChildren);
       useIsomorphicLayoutEffect(() => {
         isInitialRender.current = false;
         pendingPresentChildren.current = presentChildren;
@@ -49562,8 +50246,8 @@ var init_AnimatePresence = __esm({
       if (process.env.NODE_ENV !== "production" && mode === "wait" && renderedChildren.length > 1) {
         console.warn(`You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.`);
       }
-      const { forceRender } = (0, import_react20.useContext)(LayoutGroupContext);
-      return (0, import_jsx_runtime19.jsx)(import_jsx_runtime19.Fragment, { children: renderedChildren.map((child) => {
+      const { forceRender } = (0, import_react27.useContext)(LayoutGroupContext);
+      return (0, import_jsx_runtime26.jsx)(import_jsx_runtime26.Fragment, { children: renderedChildren.map((child) => {
         const key = getChildKey(child);
         const isPresent = propagate2 && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key);
         const onExit = () => {
@@ -49588,19 +50272,19 @@ var init_AnimatePresence = __esm({
             onExitComplete && onExitComplete();
           }
         };
-        return (0, import_jsx_runtime19.jsx)(PresenceChild, { isPresent, initial: !isInitialRender.current || initial ? void 0 : false, custom, presenceAffectsLayout, mode, root, onExitComplete: isPresent ? void 0 : onExit, anchorX, anchorY, children: child }, key);
+        return (0, import_jsx_runtime26.jsx)(PresenceChild, { isPresent, initial: !isInitialRender.current || initial ? void 0 : false, custom, presenceAffectsLayout, mode, root, onExitComplete: isPresent ? void 0 : onExit, anchorX, anchorY, children: child }, key);
       }) });
     };
   }
 });
 
 // node_modules/framer-motion/dist/es/context/LazyContext.mjs
-var import_react21, LazyContext;
+var import_react28, LazyContext;
 var init_LazyContext = __esm({
   "node_modules/framer-motion/dist/es/context/LazyContext.mjs"() {
     "use client";
-    import_react21 = __toESM(require_react(), 1);
-    LazyContext = (0, import_react21.createContext)({ strict: false });
+    import_react28 = __toESM(require_react(), 1);
+    LazyContext = (0, import_react28.createContext)({ strict: false });
   }
 });
 
@@ -49745,12 +50429,12 @@ var init_filter_props = __esm({
 });
 
 // node_modules/framer-motion/dist/es/context/MotionContext/index.mjs
-var import_react22, MotionContext;
+var import_react29, MotionContext;
 var init_MotionContext = __esm({
   "node_modules/framer-motion/dist/es/context/MotionContext/index.mjs"() {
     "use client";
-    import_react22 = __toESM(require_react(), 1);
-    MotionContext = /* @__PURE__ */ (0, import_react22.createContext)({});
+    import_react29 = __toESM(require_react(), 1);
+    MotionContext = /* @__PURE__ */ (0, import_react29.createContext)({});
   }
 });
 
@@ -49773,17 +50457,17 @@ var init_utils7 = __esm({
 
 // node_modules/framer-motion/dist/es/context/MotionContext/create.mjs
 function useCreateMotionContext(props) {
-  const { initial, animate } = getCurrentTreeVariants(props, (0, import_react23.useContext)(MotionContext));
-  return (0, import_react23.useMemo)(() => ({ initial, animate }), [variantLabelsAsDependency(initial), variantLabelsAsDependency(animate)]);
+  const { initial, animate } = getCurrentTreeVariants(props, (0, import_react30.useContext)(MotionContext));
+  return (0, import_react30.useMemo)(() => ({ initial, animate }), [variantLabelsAsDependency(initial), variantLabelsAsDependency(animate)]);
 }
 function variantLabelsAsDependency(prop) {
   return Array.isArray(prop) ? prop.join(" ") : prop;
 }
-var import_react23;
+var import_react30;
 var init_create = __esm({
   "node_modules/framer-motion/dist/es/context/MotionContext/create.mjs"() {
     "use client";
-    import_react23 = __toESM(require_react(), 1);
+    import_react30 = __toESM(require_react(), 1);
     init_MotionContext();
     init_utils7();
   }
@@ -49811,7 +50495,7 @@ function copyRawValuesOnly(target, source, props) {
   }
 }
 function useInitialMotionValues({ transformTemplate }, visualState) {
-  return (0, import_react24.useMemo)(() => {
+  return (0, import_react31.useMemo)(() => {
     const state = createHtmlRenderState();
     buildHTMLStyles(state, visualState, transformTemplate);
     return Object.assign({}, state.vars, state.style);
@@ -49838,12 +50522,12 @@ function useHTMLProps(props, visualState) {
   htmlProps.style = style;
   return htmlProps;
 }
-var import_react24;
+var import_react31;
 var init_use_props = __esm({
   "node_modules/framer-motion/dist/es/render/html/use-props.mjs"() {
     "use client";
     init_es2();
-    import_react24 = __toESM(require_react(), 1);
+    import_react31 = __toESM(require_react(), 1);
     init_create_render_state();
   }
 });
@@ -49862,7 +50546,7 @@ var init_create_render_state2 = __esm({
 
 // node_modules/framer-motion/dist/es/render/svg/use-props.mjs
 function useSVGProps(props, visualState, _isStatic, Component4) {
-  const visualProps = (0, import_react25.useMemo)(() => {
+  const visualProps = (0, import_react32.useMemo)(() => {
     const state = createSvgRenderState();
     buildSVGAttrs(state, visualState, isSVGTag(Component4), props.transformTemplate, props.style);
     return {
@@ -49877,12 +50561,12 @@ function useSVGProps(props, visualState, _isStatic, Component4) {
   }
   return visualProps;
 }
-var import_react25;
+var import_react32;
 var init_use_props2 = __esm({
   "node_modules/framer-motion/dist/es/render/svg/use-props.mjs"() {
     "use client";
     init_es2();
-    import_react25 = __toESM(require_react(), 1);
+    import_react32 = __toESM(require_react(), 1);
     init_use_props();
     init_create_render_state2();
   }
@@ -49959,20 +50643,20 @@ function useRender(Component4, props, ref, { latestValues }, isStatic, forwardMo
   const useVisualProps = isSVG ?? isSVGComponent(Component4) ? useSVGProps : useHTMLProps;
   const visualProps = useVisualProps(props, latestValues, isStatic, Component4);
   const filteredProps = filterProps(props, typeof Component4 === "string", forwardMotionProps);
-  const elementProps = Component4 !== import_react26.Fragment ? { ...filteredProps, ...visualProps, ref } : {};
+  const elementProps = Component4 !== import_react33.Fragment ? { ...filteredProps, ...visualProps, ref } : {};
   const { children } = props;
-  const renderedChildren = (0, import_react26.useMemo)(() => isMotionValue(children) ? children.get() : children, [children]);
-  return (0, import_react26.createElement)(Component4, {
+  const renderedChildren = (0, import_react33.useMemo)(() => isMotionValue(children) ? children.get() : children, [children]);
+  return (0, import_react33.createElement)(Component4, {
     ...elementProps,
     children: renderedChildren
   });
 }
-var import_react26;
+var import_react33;
 var init_use_render = __esm({
   "node_modules/framer-motion/dist/es/render/dom/use-render.mjs"() {
     "use client";
     init_es2();
-    import_react26 = __toESM(require_react(), 1);
+    import_react33 = __toESM(require_react(), 1);
     init_use_props();
     init_use_props2();
     init_filter_props();
@@ -50030,18 +50714,18 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues) {
   }
   return values;
 }
-var import_react27, makeUseVisualState;
+var import_react34, makeUseVisualState;
 var init_use_visual_state = __esm({
   "node_modules/framer-motion/dist/es/motion/utils/use-visual-state.mjs"() {
     "use client";
     init_es2();
-    import_react27 = __toESM(require_react(), 1);
+    import_react34 = __toESM(require_react(), 1);
     init_MotionContext();
     init_PresenceContext();
     init_use_constant();
     makeUseVisualState = (config) => (props, isStatic) => {
-      const context = (0, import_react27.useContext)(MotionContext);
-      const presenceContext = (0, import_react27.useContext)(PresenceContext);
+      const context = (0, import_react34.useContext)(MotionContext);
+      const presenceContext = (0, import_react34.useContext)(PresenceContext);
       const make = () => makeState(config, props, context, presenceContext);
       return isStatic ? make() : useConstant(make);
     };
@@ -50088,12 +50772,12 @@ var init_symbol = __esm({
 
 // node_modules/framer-motion/dist/es/motion/utils/use-motion-ref.mjs
 function useMotionRef(visualState, visualElement, externalRef) {
-  const externalRefContainer = (0, import_react28.useRef)(externalRef);
-  (0, import_react28.useInsertionEffect)(() => {
+  const externalRefContainer = (0, import_react35.useRef)(externalRef);
+  (0, import_react35.useInsertionEffect)(() => {
     externalRefContainer.current = externalRef;
   });
-  const refCleanup = (0, import_react28.useRef)(null);
-  return (0, import_react28.useCallback)((instance) => {
+  const refCleanup = (0, import_react35.useRef)(null);
+  return (0, import_react35.useCallback)((instance) => {
     if (instance) {
       visualState.onMount?.(instance);
     }
@@ -50118,21 +50802,21 @@ function useMotionRef(visualState, visualElement, externalRef) {
     }
   }, [visualElement]);
 }
-var import_react28;
+var import_react35;
 var init_use_motion_ref = __esm({
   "node_modules/framer-motion/dist/es/motion/utils/use-motion-ref.mjs"() {
     "use client";
-    import_react28 = __toESM(require_react(), 1);
+    import_react35 = __toESM(require_react(), 1);
   }
 });
 
 // node_modules/framer-motion/dist/es/context/SwitchLayoutGroupContext.mjs
-var import_react29, SwitchLayoutGroupContext;
+var import_react36, SwitchLayoutGroupContext;
 var init_SwitchLayoutGroupContext = __esm({
   "node_modules/framer-motion/dist/es/context/SwitchLayoutGroupContext.mjs"() {
     "use client";
-    import_react29 = __toESM(require_react(), 1);
-    SwitchLayoutGroupContext = (0, import_react29.createContext)({});
+    import_react36 = __toESM(require_react(), 1);
+    SwitchLayoutGroupContext = (0, import_react36.createContext)({});
   }
 });
 
@@ -50147,14 +50831,14 @@ var init_is_ref_object = __esm({
 
 // node_modules/framer-motion/dist/es/motion/utils/use-visual-element.mjs
 function useVisualElement(Component4, visualState, props, createVisualElement, ProjectionNodeConstructor, isSVG) {
-  const { visualElement: parent } = (0, import_react30.useContext)(MotionContext);
-  const lazyContext = (0, import_react30.useContext)(LazyContext);
-  const presenceContext = (0, import_react30.useContext)(PresenceContext);
-  const motionConfig = (0, import_react30.useContext)(MotionConfigContext);
+  const { visualElement: parent } = (0, import_react37.useContext)(MotionContext);
+  const lazyContext = (0, import_react37.useContext)(LazyContext);
+  const presenceContext = (0, import_react37.useContext)(PresenceContext);
+  const motionConfig = (0, import_react37.useContext)(MotionConfigContext);
   const reducedMotionConfig = motionConfig.reducedMotion;
   const skipAnimations = motionConfig.skipAnimations;
-  const visualElementRef = (0, import_react30.useRef)(null);
-  const hasMountedOnce = (0, import_react30.useRef)(false);
+  const visualElementRef = (0, import_react37.useRef)(null);
+  const hasMountedOnce = (0, import_react37.useRef)(false);
   createVisualElement = createVisualElement || lazyContext.renderer;
   if (!visualElementRef.current && createVisualElement) {
     visualElementRef.current = createVisualElement(Component4, {
@@ -50172,18 +50856,18 @@ function useVisualElement(Component4, visualState, props, createVisualElement, P
     }
   }
   const visualElement = visualElementRef.current;
-  const initialLayoutGroupConfig = (0, import_react30.useContext)(SwitchLayoutGroupContext);
+  const initialLayoutGroupConfig = (0, import_react37.useContext)(SwitchLayoutGroupContext);
   if (visualElement && !visualElement.projection && ProjectionNodeConstructor && (visualElement.type === "html" || visualElement.type === "svg")) {
     createProjectionNode2(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig);
   }
-  const isMounted = (0, import_react30.useRef)(false);
-  (0, import_react30.useInsertionEffect)(() => {
+  const isMounted = (0, import_react37.useRef)(false);
+  (0, import_react37.useInsertionEffect)(() => {
     if (visualElement && isMounted.current) {
       visualElement.update(props, presenceContext);
     }
   });
   const optimisedAppearId = props[optimizedAppearDataAttribute];
-  const wantsHandoff = (0, import_react30.useRef)(Boolean(optimisedAppearId) && typeof window !== "undefined" && !window.MotionHandoffIsComplete?.(optimisedAppearId) && window.MotionHasOptimisedAnimation?.(optimisedAppearId));
+  const wantsHandoff = (0, import_react37.useRef)(Boolean(optimisedAppearId) && typeof window !== "undefined" && !window.MotionHandoffIsComplete?.(optimisedAppearId) && window.MotionHasOptimisedAnimation?.(optimisedAppearId));
   useIsomorphicLayoutEffect(() => {
     hasMountedOnce.current = true;
     if (!visualElement)
@@ -50196,7 +50880,7 @@ function useVisualElement(Component4, visualState, props, createVisualElement, P
       visualElement.animationState.animateChanges();
     }
   });
-  (0, import_react30.useEffect)(() => {
+  (0, import_react37.useEffect)(() => {
     if (!visualElement)
       return;
     if (!wantsHandoff.current && visualElement.animationState) {
@@ -50240,12 +50924,12 @@ function getClosestProjectingNode(visualElement) {
     return void 0;
   return visualElement.options.allowProjection !== false ? visualElement.projection : getClosestProjectingNode(visualElement.parent);
 }
-var import_react30;
+var import_react37;
 var init_use_visual_element = __esm({
   "node_modules/framer-motion/dist/es/motion/utils/use-visual-element.mjs"() {
     "use client";
     init_es2();
-    import_react30 = __toESM(require_react(), 1);
+    import_react37 = __toESM(require_react(), 1);
     init_LazyContext();
     init_MotionConfigContext();
     init_MotionContext();
@@ -50264,7 +50948,7 @@ function createMotionComponent(Component4, { forwardMotionProps = false, type } 
   function MotionDOMComponent(props, externalRef) {
     let MeasureLayout2;
     const configAndProps = {
-      ...(0, import_react31.useContext)(MotionConfigContext),
+      ...(0, import_react38.useContext)(MotionConfigContext),
       ...props,
       layoutId: useLayoutId(props)
     };
@@ -50277,19 +50961,19 @@ function createMotionComponent(Component4, { forwardMotionProps = false, type } 
       MeasureLayout2 = layoutProjection.MeasureLayout;
       context.visualElement = useVisualElement(Component4, visualState, configAndProps, createVisualElement, layoutProjection.ProjectionNode, isSVG);
     }
-    return (0, import_jsx_runtime20.jsxs)(MotionContext.Provider, { value: context, children: [MeasureLayout2 && context.visualElement ? (0, import_jsx_runtime20.jsx)(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps }) : null, useRender(Component4, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, forwardMotionProps, isSVG)] });
+    return (0, import_jsx_runtime27.jsxs)(MotionContext.Provider, { value: context, children: [MeasureLayout2 && context.visualElement ? (0, import_jsx_runtime27.jsx)(MeasureLayout2, { visualElement: context.visualElement, ...configAndProps }) : null, useRender(Component4, props, useMotionRef(visualState, context.visualElement, externalRef), visualState, isStatic, forwardMotionProps, isSVG)] });
   }
   MotionDOMComponent.displayName = `motion.${typeof Component4 === "string" ? Component4 : `create(${Component4.displayName ?? Component4.name ?? ""})`}`;
-  const ForwardRefMotionComponent = (0, import_react31.forwardRef)(MotionDOMComponent);
+  const ForwardRefMotionComponent = (0, import_react38.forwardRef)(MotionDOMComponent);
   ForwardRefMotionComponent[motionComponentSymbol] = Component4;
   return ForwardRefMotionComponent;
 }
 function useLayoutId({ layoutId }) {
-  const layoutGroupId = (0, import_react31.useContext)(LayoutGroupContext).id;
+  const layoutGroupId = (0, import_react38.useContext)(LayoutGroupContext).id;
   return layoutGroupId && layoutId !== void 0 ? layoutGroupId + "-" + layoutId : layoutId;
 }
 function useStrictMode(configAndProps, preloadedFeatures) {
-  const isStrict = (0, import_react31.useContext)(LazyContext).strict;
+  const isStrict = (0, import_react38.useContext)(LazyContext).strict;
   if (process.env.NODE_ENV !== "production" && preloadedFeatures && isStrict) {
     const strictMessage = "You have rendered a `motion` component within a `LazyMotion` component. This will break tree shaking. Import and render a `m` component instead.";
     configAndProps.ignoreStrict ? warning(false, strictMessage, "lazy-strict-mode") : invariant2(false, strictMessage, "lazy-strict-mode");
@@ -50306,13 +50990,13 @@ function getProjectionFunctionality(props) {
     ProjectionNode: combined.ProjectionNode
   };
 }
-var import_jsx_runtime20, import_react31;
+var import_jsx_runtime27, import_react38;
 var init_motion = __esm({
   "node_modules/framer-motion/dist/es/motion/index.mjs"() {
     "use client";
-    import_jsx_runtime20 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime27 = __toESM(require_jsx_runtime(), 1);
     init_es();
-    import_react31 = __toESM(require_react(), 1);
+    import_react38 = __toESM(require_react(), 1);
     init_LayoutGroupContext();
     init_LazyContext();
     init_MotionConfigContext();
@@ -50369,16 +51053,16 @@ var init_create_proxy = __esm({
 });
 
 // node_modules/framer-motion/dist/es/render/dom/create-visual-element.mjs
-var import_react32, createDomVisualElement;
+var import_react39, createDomVisualElement;
 var init_create_visual_element = __esm({
   "node_modules/framer-motion/dist/es/render/dom/create-visual-element.mjs"() {
     init_es2();
-    import_react32 = __toESM(require_react(), 1);
+    import_react39 = __toESM(require_react(), 1);
     init_is_svg_component();
     createDomVisualElement = (Component4, options) => {
       const isSVG = options.isSVG ?? isSVGComponent(Component4);
       return isSVG ? new SVGVisualElement(options) : new HTMLVisualElement(options, {
-        allowProjection: Component4 !== import_react32.Fragment
+        allowProjection: Component4 !== import_react39.Fragment
       });
     };
   }
@@ -51379,21 +52063,21 @@ var init_pan = __esm({
 // node_modules/framer-motion/dist/es/motion/features/layout/MeasureLayout.mjs
 function MeasureLayout(props) {
   const [isPresent, safeToRemove] = usePresence();
-  const layoutGroup = (0, import_react33.useContext)(LayoutGroupContext);
-  return (0, import_jsx_runtime21.jsx)(MeasureLayoutWithContext, { ...props, layoutGroup, switchLayoutGroup: (0, import_react33.useContext)(SwitchLayoutGroupContext), isPresent, safeToRemove });
+  const layoutGroup = (0, import_react40.useContext)(LayoutGroupContext);
+  return (0, import_jsx_runtime28.jsx)(MeasureLayoutWithContext, { ...props, layoutGroup, switchLayoutGroup: (0, import_react40.useContext)(SwitchLayoutGroupContext), isPresent, safeToRemove });
 }
-var import_jsx_runtime21, import_react33, hasTakenAnySnapshot, MeasureLayoutWithContext;
+var import_jsx_runtime28, import_react40, hasTakenAnySnapshot, MeasureLayoutWithContext;
 var init_MeasureLayout = __esm({
   "node_modules/framer-motion/dist/es/motion/features/layout/MeasureLayout.mjs"() {
     "use client";
-    import_jsx_runtime21 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime28 = __toESM(require_jsx_runtime(), 1);
     init_es2();
-    import_react33 = __toESM(require_react(), 1);
+    import_react40 = __toESM(require_react(), 1);
     init_use_presence();
     init_LayoutGroupContext();
     init_SwitchLayoutGroupContext();
     hasTakenAnySnapshot = false;
-    MeasureLayoutWithContext = class extends import_react33.Component {
+    MeasureLayoutWithContext = class extends import_react40.Component {
       /**
        * This only mounts projection nodes for components that
        * need measuring, we might want to do it for all components
@@ -51798,19 +52482,19 @@ var init_proxy = __esm({
 // node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.mjs
 function useReducedMotion() {
   !hasReducedMotionListener.current && initPrefersReducedMotion();
-  const [shouldReduceMotion] = (0, import_react34.useState)(prefersReducedMotion.current);
+  const [shouldReduceMotion] = (0, import_react41.useState)(prefersReducedMotion.current);
   if (process.env.NODE_ENV !== "production") {
     warnOnce(shouldReduceMotion !== true, "You have Reduced Motion enabled on your device. Animations may not appear as expected.", "reduced-motion-disabled");
   }
   return shouldReduceMotion;
 }
-var import_react34;
+var import_react41;
 var init_use_reduced_motion = __esm({
   "node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.mjs"() {
     "use client";
     init_es2();
     init_es();
-    import_react34 = __toESM(require_react(), 1);
+    import_react41 = __toESM(require_react(), 1);
   }
 });
 
@@ -51825,9 +52509,9 @@ var init_es3 = __esm({
   }
 });
 
-// dist/server/assets/site-DZylOCQT.js
+// dist/server/assets/site-paN77MRt.js
 function useReveal() {
-  (0, import_react35.useEffect)(() => {
+  (0, import_react42.useEffect)(() => {
     const els = document.querySelectorAll(".reveal");
     const io2 = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("is-visible")),
@@ -51838,34 +52522,34 @@ function useReveal() {
   }, []);
 }
 function Nav() {
-  const [scrolled, setScrolled] = (0, import_react35.useState)(false);
-  const [open, setOpen] = (0, import_react35.useState)(false);
-  (0, import_react35.useEffect)(() => {
+  const [scrolled, setScrolled] = (0, import_react42.useState)(false);
+  const [open, setOpen] = (0, import_react42.useState)(false);
+  (0, import_react42.useEffect)(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
     "header",
     {
       className: `fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "glass border-b border-white/5" : "bg-transparent"}`,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "mx-auto max-w-7xl px-6 py-4 flex items-center justify-between", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(Link, { to: "/", className: "flex items-center gap-3 group", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "relative", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "absolute inset-0 bg-acid/30 blur-xl group-hover:bg-acid/50 transition-all rounded-full" }),
-              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("img", { src: placeholderLogo, alt: "Syn Mod Build", className: "relative h-10 w-10", width: 40, height: 40 })
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl px-6 py-4 flex items-center justify-between", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(Link, { to: "/", className: "flex items-center gap-3 group", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-acid/30 blur-xl group-hover:bg-acid/50 transition-all rounded-full" }),
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: logo, alt: "Syn Mod Build", className: "relative h-10 w-10", width: 40, height: 40 })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("span", { className: "font-mono text-[10px] tracking-[0.25em] uppercase text-bone/80 leading-tight hidden sm:block", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("span", { className: "font-mono text-[10px] tracking-[0.25em] uppercase text-bone/80 leading-tight hidden sm:block", children: [
               "Syndicated",
-              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("br", {}),
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("br", {}),
               "Restomod"
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("nav", { className: "hidden lg:flex items-center gap-8", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("nav", { className: "hidden lg:flex items-center gap-8", children: [
             NAV.map((n2) => {
               const href = n2.hash ? `/#${n2.hash}` : n2.to;
-              return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+              return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
                 "a",
                 {
                   href,
@@ -51875,28 +52559,28 @@ function Nav() {
                 n2.label
               );
             }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(Link, { to: "/apply", className: "btn-acid !py-2.5 !px-5 !text-[11px]", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(Link, { to: "/apply", className: "btn-acid !py-2.5 !px-5 !text-[11px]", children: [
               "Apply ",
-              /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { "aria-hidden": true, children: "\u2192" })
+              /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { "aria-hidden": true, children: "\u2192" })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
             "button",
             {
               onClick: () => setOpen(!open),
               "aria-label": "Menu",
               className: "lg:hidden h-10 w-10 flex flex-col items-center justify-center gap-1.5 border border-white/10 rounded-full",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: `h-px w-4 bg-bone transition-all ${open ? "rotate-45 translate-y-1" : ""}` }),
-                /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: `h-px w-4 bg-bone transition-all ${open ? "-rotate-45 -translate-y-0.5" : ""}` })
+                /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: `h-px w-4 bg-bone transition-all ${open ? "rotate-45 translate-y-1" : ""}` }),
+                /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: `h-px w-4 bg-bone transition-all ${open ? "-rotate-45 -translate-y-0.5" : ""}` })
               ]
             }
           )
         ] }),
-        open && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "lg:hidden glass border-t border-white/5 px-6 py-6 flex flex-col gap-4", children: [
+        open && /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "lg:hidden glass border-t border-white/5 px-6 py-6 flex flex-col gap-4", children: [
           NAV.map((n2) => {
             const href = n2.hash ? `/#${n2.hash}` : n2.to;
-            return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+            return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
               "a",
               {
                 href,
@@ -51907,64 +52591,64 @@ function Nav() {
               n2.label
             );
           }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/apply", onClick: () => setOpen(false), className: "btn-acid justify-center", children: "Apply Now \u2192" })
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/apply", onClick: () => setOpen(false), className: "btn-acid justify-center", children: "Apply Now \u2192" })
         ] })
       ]
     }
   );
 }
 function Footer() {
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("footer", { className: "relative border-t border-white/10 bg-carbon overflow-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "absolute inset-0 noise-bg opacity-60 pointer-events-none" }),
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "relative overflow-hidden py-6 border-b border-white/5", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "flex whitespace-nowrap scroll-marquee", children: Array.from({ length: 2 }).map((_3, i2) => /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "flex items-center gap-12 px-6 font-display text-4xl md:text-6xl text-bone/10", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { children: "Syndicate" }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { children: "SYNDICATED RESTOMOD" }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { children: "ONE OF ONE" }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { children: "BUILT IN THE OPEN" }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "text-acid/30", children: "\u2605" })
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("footer", { className: "relative border-t border-white/10 bg-carbon overflow-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 noise-bg opacity-60 pointer-events-none" }),
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative overflow-hidden py-6 border-b border-white/5", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "flex whitespace-nowrap scroll-marquee", children: Array.from({ length: 2 }).map((_3, i2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "flex items-center gap-12 px-6 font-display text-4xl md:text-6xl text-bone/10", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { children: "Syndicate" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { children: "SYNDICATED RESTOMOD" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { children: "ONE OF ONE" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid/30", children: "\u2605" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { children: "BUILT IN THE OPEN" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid/30", children: "\u2605" })
     ] }, i2)) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "relative mx-auto max-w-7xl px-6 py-16 grid lg:grid-cols-4 gap-10", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "lg:col-span-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "flex items-center gap-3 mb-6", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("img", { src: placeholderLogo, alt: "Syn Mod Build", className: "h-12 w-12" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-display text-lg", children: "Syndicated Restomod" }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-mono text-[10px] text-bone/40 uppercase tracking-[0.25em]", children: "Syndicate \u2022 Powered by TheCarCrowd" })
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative mx-auto max-w-7xl px-6 py-16 grid lg:grid-cols-4 gap-10", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "lg:col-span-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "flex items-center gap-3 mb-6", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: logo, alt: "Syn Mod Build", className: "h-12 w-12" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-display text-lg", children: "Syndicated Restomod" }),
+            /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[10px] text-bone/40 uppercase tracking-[0.25em]", children: "Syndicate \u2022 Powered by TheCarCrowd" })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "text-bone/60 text-sm max-w-md leading-relaxed", children: "A new model for collective ownership of a singular hand-built restomod. Engineered in the open with the world's leading specialists." })
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/60 text-sm max-w-md leading-relaxed", children: "A new model for collective ownership of a singular hand-built restomod. Engineered in the open with the world's leading specialists." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4", children: "Explore" }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "flex flex-col gap-3 text-sm text-bone/70", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/about", className: "hover:text-acid transition-colors", children: "About" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/the-build", className: "hover:text-acid transition-colors", children: "The Build" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/design-gallery", className: "hover:text-acid transition-colors", children: "Gallery" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/events", className: "hover:text-acid transition-colors", children: "Events" })
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4", children: "Explore" }),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "flex flex-col gap-3 text-sm text-bone/70", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/about", className: "hover:text-acid transition-colors", children: "About" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/the-build", className: "hover:text-acid transition-colors", children: "The Build" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/design-gallery", className: "hover:text-acid transition-colors", children: "Gallery" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/events", className: "hover:text-acid transition-colors", children: "Events" })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4", children: "Connect" }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "flex flex-col gap-3 text-sm text-bone/70", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/contact", className: "hover:text-acid transition-colors", children: "Contact" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(Link, { to: "/apply", className: "hover:text-acid transition-colors", children: "Apply" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("a", { href: "mailto:hello@Syndicate.com", className: "hover:text-acid transition-colors", children: "hello@Syndicate.com" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "h-px w-6 bg-white/10 my-1" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("a", { href: "https://instagram.com", target: "_blank", rel: "noreferrer", className: "hover:text-acid transition-colors", children: "Instagram" }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("a", { href: "https://linkedin.com", target: "_blank", rel: "noreferrer", className: "hover:text-acid transition-colors", children: "LinkedIn" })
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4", children: "Connect" }),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "flex flex-col gap-3 text-sm text-bone/70", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/contact", className: "hover:text-acid transition-colors", children: "Contact" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/apply", className: "hover:text-acid transition-colors", children: "Apply" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "mailto:hello@Syndicate.com", className: "hover:text-acid transition-colors", children: "hello@Syndicate.com" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "h-px w-6 bg-white/10 my-1" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "https://instagram.com", target: "_blank", rel: "noreferrer", className: "hover:text-acid transition-colors", children: "Instagram" }),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "https://linkedin.com", target: "_blank", rel: "noreferrer", className: "hover:text-acid transition-colors", children: "LinkedIn" })
         ] })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "relative border-t border-white/5 py-6 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-3 text-bone/40 text-[11px] font-mono uppercase tracking-[0.25em]", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative border-t border-white/5 py-6 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl flex flex-col md:flex-row justify-between gap-3 text-bone/40 text-[11px] font-mono uppercase tracking-[0.25em]", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
         "\xA9 ",
         (/* @__PURE__ */ new Date()).getFullYear(),
         " Syn Mod Build \u2014 All rights reserved"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { children: "Built in the open \xB7 Driven for life" })
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { children: "Built in the open \xB7 Driven for life" })
     ] }) })
   ] });
 }
@@ -51975,8 +52659,8 @@ function PageHero({
   image,
   video
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("section", { className: "relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10", children: [
-    video ? /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("section", { className: "relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10", children: [
+    video ? /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
       "video",
       {
         src: video,
@@ -51986,7 +52670,7 @@ function PageHero({
         playsInline: true,
         className: "absolute inset-0 h-full w-full object-cover opacity-30"
       }
-    ) : image ? /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+    ) : image ? /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
       "img",
       {
         src: image,
@@ -51995,31 +52679,31 @@ function PageHero({
         loading: "eager"
       }
     ) : null,
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/80 to-ink" }),
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "absolute inset-0 noise-bg" }),
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "absolute top-1/3 right-10 h-72 w-72 rounded-full bg-acid/10 blur-[120px] float-slow" }),
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "relative mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "inline-flex items-center gap-2 glass-acid rounded-full px-4 py-1.5 mb-8", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-acid animate-pulse" }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: kicker })
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/80 to-ink" }),
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 noise-bg" }),
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute top-1/3 right-10 h-72 w-72 rounded-full bg-acid/10 blur-[120px] float-slow" }),
+    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "inline-flex items-center gap-2 glass-acid rounded-full px-4 py-1.5 mb-8", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-acid animate-pulse" }),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: kicker })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("h1", { className: "font-display text-5xl md:text-7xl lg:text-8xl leading-[0.92] max-w-5xl text-gradient-bone", children: title }),
-      subtitle && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("p", { className: "mt-8 text-bone/70 text-lg md:text-xl max-w-2xl leading-relaxed", children: subtitle }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "mt-12 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "h-px w-12 bg-acid/60" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h1", { className: "font-display text-5xl md:text-7xl lg:text-8xl leading-[0.92] max-w-5xl text-gradient-bone", children: title }),
+      subtitle && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-8 text-bone/70 text-lg md:text-xl max-w-2xl leading-relaxed", children: subtitle }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mt-12 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "h-px w-12 bg-acid/60" }),
         "Scroll to explore"
       ] })
     ] })
   ] });
 }
-var import_jsx_runtime22, import_react35, placeholderLogo, NAV;
-var init_site_DZylOCQT = __esm({
-  "dist/server/assets/site-DZylOCQT.js"() {
+var import_jsx_runtime29, import_react42, NAV;
+var init_site_paN77MRt = __esm({
+  "dist/server/assets/site-paN77MRt.js"() {
     "use strict";
-    import_jsx_runtime22 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime29 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    import_react35 = __toESM(require_react(), 1);
-    placeholderLogo = "/assets/logo-4-BrrnFFbn.jpeg";
+    import_react42 = __toESM(require_react(), 1);
+    init_logo_4_ISZutHRh();
     NAV = [
       { label: "Syndicate", to: "/", hash: "intro" },
       { label: "The Car", to: "/", hash: "car" },
@@ -52029,21 +52713,6 @@ var init_site_DZylOCQT = __esm({
       { label: "Events", to: "/events" },
       { label: "Contact", to: "/contact" }
     ];
-  }
-});
-
-// dist/server/assets/gallery-4-B_0I7K_V.js
-var g6, g5, g7, g1, g2, g3, g4;
-var init_gallery_4_B_0I7K_V = __esm({
-  "dist/server/assets/gallery-4-B_0I7K_V.js"() {
-    "use strict";
-    g6 = "/assets/gallery-1-BNSHI9Rh.jpg";
-    g5 = "/assets/gallery-1-BNSHI9Rh.jpg";
-    g7 = "/assets/gallery-1-BNSHI9Rh.jpg";
-    g1 = "/assets/gallery-1-BNSHI9Rh.jpg";
-    g2 = "/assets/gallery-1-BNSHI9Rh.jpg";
-    g3 = "/assets/gallery-1-BNSHI9Rh.jpg";
-    g4 = "/assets/gallery-1-BNSHI9Rh.jpg";
   }
 });
 
@@ -52065,25 +52734,25 @@ var init_video_btH4iMvl = __esm({
   }
 });
 
-// dist/server/assets/the-build-JiGRFvjY.js
-var the_build_JiGRFvjY_exports = {};
-__export(the_build_JiGRFvjY_exports, {
+// dist/server/assets/the-build-D9506stp.js
+var the_build_D9506stp_exports = {};
+__export(the_build_D9506stp_exports, {
   component: () => TheBuildPage
 });
 function BuildGallery() {
-  const [filter2, setFilter] = (0, import_react36.useState)("All");
-  const [openIndex, setOpenIndex] = (0, import_react36.useState)(null);
+  const [filter2, setFilter] = (0, import_react43.useState)("All");
+  const [openIndex, setOpenIndex] = (0, import_react43.useState)(null);
   const filtered = filter2 === "All" ? MEDIA : MEDIA.filter((m3) => m3.phase === filter2);
-  const close = (0, import_react36.useCallback)(() => setOpenIndex(null), []);
-  const next = (0, import_react36.useCallback)(
+  const close = (0, import_react43.useCallback)(() => setOpenIndex(null), []);
+  const next = (0, import_react43.useCallback)(
     () => setOpenIndex((i2) => i2 === null ? null : (i2 + 1) % filtered.length),
     [filtered.length]
   );
-  const prev = (0, import_react36.useCallback)(
+  const prev = (0, import_react43.useCallback)(
     () => setOpenIndex((i2) => i2 === null ? null : (i2 - 1 + filtered.length) % filtered.length),
     [filtered.length]
   );
-  (0, import_react36.useEffect)(() => {
+  (0, import_react43.useEffect)(() => {
     if (openIndex === null) return;
     const onKey = (e) => {
       if (e.key === "Escape") close();
@@ -52098,18 +52767,18 @@ function BuildGallery() {
     };
   }, [openIndex, close, next, prev]);
   const active = openIndex !== null ? filtered[openIndex] : null;
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("section", { id: "gallery", className: "relative py-32 px-6 bg-carbon border-y border-white/10 overflow-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "relative mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "reveal mb-12", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "\u25CF Build Gallery" }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("h2", { className: "font-display text-4xl md:text-6xl leading-[1] max-w-4xl text-gradient-bone", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("section", { id: "gallery", className: "relative py-32 px-6 bg-carbon border-y border-white/10 overflow-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "relative mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "reveal mb-12", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "\u25CF Build Gallery" }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("h2", { className: "font-display text-4xl md:text-6xl leading-[1] max-w-4xl text-gradient-bone", children: [
           "Watch every ",
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-gradient-acid", children: "turn of the wrench." })
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "text-gradient-acid", children: "turn of the wrench." })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "mt-6 text-bone/60 max-w-2xl leading-relaxed", children: "Films and stills from the workshop floor. Tap any tile to open in fullscreen \u2014 use arrow keys to navigate." })
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("p", { className: "mt-6 text-bone/60 max-w-2xl leading-relaxed", children: "Films and stills from the workshop floor. Tap any tile to open in fullscreen \u2014 use arrow keys to navigate." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "reveal mb-10 flex flex-wrap gap-2", children: FILTERS.map((f3) => /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "reveal mb-10 flex flex-wrap gap-2", children: FILTERS.map((f3) => /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
         "button",
         {
           onClick: () => setFilter(f3),
@@ -52118,15 +52787,15 @@ function BuildGallery() {
         },
         f3
       )) }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-3", children: filtered.map((m3, i2) => {
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[180px] md:auto-rows-[220px] gap-3", children: filtered.map((m3, i2) => {
         const isBig = i2 === 0 || i2 % 7 === 0;
-        return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+        return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(
           "button",
           {
             onClick: () => setOpenIndex(i2),
             className: `reveal group relative overflow-hidden rounded-xl border border-white/10 bg-ink hover-lift text-left ${isBig ? "col-span-2 row-span-2" : ""}`,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
                 "img",
                 {
                   src: m3.kind === "video" ? m3.poster : m3.src,
@@ -52135,12 +52804,12 @@ function BuildGallery() {
                   className: "absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" }),
-              m3.kind === "video" && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "h-16 w-16 rounded-full glass-acid flex items-center justify-center group-hover:scale-110 transition-transform", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("svg", { viewBox: "0 0 24 24", className: "h-7 w-7 fill-acid ml-1", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("path", { d: "M8 5v14l11-7z" }) }) }) }),
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "absolute top-3 left-3 glass-acid rounded-full px-2.5 py-1 font-mono text-[9px] tracking-[0.25em] uppercase text-acid", children: m3.phase }),
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "absolute bottom-0 left-0 right-0 p-4", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-display text-base md:text-lg text-bone leading-tight", children: m3.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-bone/50 mt-1 line-clamp-1", children: m3.caption })
+              /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" }),
+              m3.kind === "video" && /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "h-16 w-16 rounded-full glass-acid flex items-center justify-center group-hover:scale-110 transition-transform", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("svg", { viewBox: "0 0 24 24", className: "h-7 w-7 fill-acid ml-1", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("path", { d: "M8 5v14l11-7z" }) }) }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "absolute top-3 left-3 glass-acid rounded-full px-2.5 py-1 font-mono text-[9px] tracking-[0.25em] uppercase text-acid", children: m3.phase }),
+              /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "absolute bottom-0 left-0 right-0 p-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "font-display text-base md:text-lg text-bone leading-tight", children: m3.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-bone/50 mt-1 line-clamp-1", children: m3.caption })
               ] })
             ]
           },
@@ -52148,22 +52817,22 @@ function BuildGallery() {
         );
       }) })
     ] }),
-    active && /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+    active && /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(
       "div",
       {
         className: "fixed inset-0 z-[100] bg-ink/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-10 animate-in fade-in duration-200",
         onClick: close,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
             "button",
             {
               onClick: close,
               "aria-label": "Close",
               className: "absolute top-5 right-5 h-12 w-12 rounded-full glass border border-white/10 flex items-center justify-center text-bone hover:text-acid hover:border-acid transition-colors z-10",
-              children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("svg", { viewBox: "0 0 24 24", className: "h-5 w-5", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("path", { d: "M6 6l12 12M18 6L6 18" }) })
+              children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("svg", { viewBox: "0 0 24 24", className: "h-5 w-5", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("path", { d: "M6 6l12 12M18 6L6 18" }) })
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
             "button",
             {
               onClick: (e) => {
@@ -52172,10 +52841,10 @@ function BuildGallery() {
               },
               "aria-label": "Previous",
               className: "absolute left-2 md:left-6 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full glass border border-white/10 flex items-center justify-center text-bone hover:text-acid hover:border-acid transition-colors z-10",
-              children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("svg", { viewBox: "0 0 24 24", className: "h-5 w-5", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("path", { d: "M15 18l-6-6 6-6" }) })
+              children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("svg", { viewBox: "0 0 24 24", className: "h-5 w-5", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("path", { d: "M15 18l-6-6 6-6" }) })
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
             "button",
             {
               onClick: (e) => {
@@ -52184,16 +52853,16 @@ function BuildGallery() {
               },
               "aria-label": "Next",
               className: "absolute right-2 md:right-6 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full glass border border-white/10 flex items-center justify-center text-bone hover:text-acid hover:border-acid transition-colors z-10",
-              children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("svg", { viewBox: "0 0 24 24", className: "h-5 w-5", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("path", { d: "M9 6l6 6-6 6" }) })
+              children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("svg", { viewBox: "0 0 24 24", className: "h-5 w-5", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("path", { d: "M9 6l6 6-6 6" }) })
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(
             "div",
             {
               className: "relative max-w-6xl w-full max-h-[88vh] flex flex-col gap-4",
               onClick: (e) => e.stopPropagation(),
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "relative flex-1 min-h-0 rounded-xl overflow-hidden border border-white/10 bg-ink", children: active.kind === "video" ? /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "relative flex-1 min-h-0 rounded-xl overflow-hidden border border-white/10 bg-ink", children: active.kind === "video" ? /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
                   "video",
                   {
                     src: active.src,
@@ -52203,7 +52872,7 @@ function BuildGallery() {
                     className: "w-full h-full max-h-[78vh] object-contain bg-black"
                   },
                   active.src
-                ) : /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+                ) : /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
                   "img",
                   {
                     src: active.src,
@@ -52212,13 +52881,13 @@ function BuildGallery() {
                   },
                   active.src
                 ) }),
-                /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "flex items-end justify-between gap-6", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.3em] text-acid mb-2", children: active.phase }),
-                    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-display text-xl md:text-2xl text-bone", children: active.title }),
-                    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "text-bone/60 text-sm mt-1 max-w-2xl", children: active.caption })
+                /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "flex items-end justify-between gap-6", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.3em] text-acid mb-2", children: active.phase }),
+                    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "font-display text-xl md:text-2xl text-bone", children: active.title }),
+                    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "text-bone/60 text-sm mt-1 max-w-2xl", children: active.caption })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 whitespace-nowrap", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 whitespace-nowrap", children: [
                     String((openIndex ?? 0) + 1).padStart(2, "0"),
                     " / ",
                     String(filtered.length).padStart(2, "0")
@@ -52234,376 +52903,250 @@ function BuildGallery() {
 }
 function TheBuildPage() {
   useReveal();
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Nav, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(PageHero, { kicker: "The Build Process", title: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(import_jsx_runtime23.Fragment, { children: [
+  const {
+    phases,
+    specs
+  } = Route$6.useLoaderData();
+  return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Nav, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(PageHero, { kicker: "The Build Process", title: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(import_jsx_runtime30.Fragment, { children: [
       "Engineered ",
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-acid", children: "In The Open." })
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "text-acid", children: "In The Open." })
     ] }), subtitle: "Every stage documented. Every decision visible. From bare shell to first ignition, syndicate members travel with the build from day one.", video: videoCarSection }),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("section", { className: "py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "mx-auto max-w-7xl space-y-32", children: PHASES.map((p3, i2) => /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("article", { className: `reveal grid lg:grid-cols-12 gap-12 items-center ${i2 % 2 ? "lg:[&>*:first-child]:order-2" : ""}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "lg:col-span-7", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "overflow-hidden border border-white/10 group", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("img", { src: p3.img, alt: p3.t, loading: "lazy", className: "w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" }) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "lg:col-span-5", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-3", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("section", { className: "py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "mx-auto max-w-7xl space-y-32", children: phases.map((p3, i2) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("article", { className: `reveal grid lg:grid-cols-12 gap-12 items-center ${i2 % 2 ? "lg:[&>*:first-child]:order-2" : ""}`, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "lg:col-span-7", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "overflow-hidden border border-white/10 group", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("img", { src: p3.img, alt: p3.t, loading: "lazy", className: "w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "lg:col-span-5", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-3", children: [
           "Phase ",
           p3.n
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-6", children: p3.t }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "text-bone/70 leading-relaxed mb-8", children: p3.body }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("ul", { className: "space-y-2 border-t border-white/10 pt-6 mb-6", children: p3.bullets.map((b2) => /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("li", { className: "flex gap-3 text-bone/80", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-acid", children: "\u2014" }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-6", children: p3.t }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("p", { className: "text-bone/70 leading-relaxed mb-8", children: p3.body }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("ul", { className: "space-y-2 border-t border-white/10 pt-6 mb-6", children: p3.bullets.map((b2) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("li", { className: "flex gap-3 text-bone/80", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "text-acid", children: "\u2014" }),
           b2
         ] }, b2)) }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "font-mono text-xs uppercase tracking-[0.25em] text-bone/50", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "font-mono text-xs uppercase tracking-[0.25em] text-bone/50", children: [
           "Partner: ",
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-bone/90", children: p3.partner })
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "text-bone/90", children: p3.partner })
         ] })
       ] })
     ] }, p3.n)) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(BuildGallery, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("section", { className: "py-32 px-6 bg-carbon border-y border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "mx-auto max-w-5xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "Specification" }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("h2", { className: "reveal font-display text-4xl md:text-5xl leading-[1] mb-16", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(BuildGallery, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("section", { className: "py-32 px-6 bg-carbon border-y border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "mx-auto max-w-5xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "Specification" }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("h2", { className: "reveal font-display text-4xl md:text-5xl leading-[1] mb-16", children: [
         "Technical ",
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-acid", children: "Snapshot." })
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "text-acid", children: "Snapshot." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("dl", { className: "grid md:grid-cols-2 gap-px bg-white/10 border border-white/10", children: SPECS.map((s) => /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("dt", { className: "font-mono text-xs uppercase tracking-[0.3em] text-acid mb-3", children: s.l }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("dd", { className: "font-display text-xl text-bone", children: s.v })
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("dl", { className: "grid md:grid-cols-2 gap-px bg-white/10 border border-white/10", children: specs.map((s) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("dt", { className: "font-mono text-xs uppercase tracking-[0.3em] text-acid mb-3", children: s.l }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("dd", { className: "font-display text-xl text-bone", children: s.v })
       ] }, s.l)) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("section", { className: "py-32 px-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "mx-auto max-w-3xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("h2", { className: "reveal font-display text-4xl md:text-6xl leading-[1] mb-10", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("section", { className: "py-32 px-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "mx-auto max-w-3xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("h2", { className: "reveal font-display text-4xl md:text-6xl leading-[1] mb-10", children: [
         "Watch it ",
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "text-acid", children: "come together." })
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "text-acid", children: "come together." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("p", { className: "reveal text-bone/70 mb-10 leading-relaxed", children: "Syndicate members receive build documentation, workshop access, and behind-the-scenes content at every milestone." }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Link, { to: "/apply", className: "reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors", children: "Apply for Allocation" })
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("p", { className: "reveal text-bone/70 mb-10 leading-relaxed", children: "Syndicate members receive build documentation, workshop access, and behind-the-scenes content at every milestone." }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Link, { to: "/apply", className: "reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors", children: "Apply for Allocation" })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Footer, {})
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime23, import_react36, buildProcess, buildStrip, buildScan, MEDIA, FILTERS, PHASES, SPECS;
-var init_the_build_JiGRFvjY = __esm({
-  "dist/server/assets/the-build-JiGRFvjY.js"() {
+var import_jsx_runtime30, import_react43, import_node_async_hooks8, buildStrip, buildScan, buildPrint, buildFinish, buildProcess, rs500Hero, gallery1, gallery2, gallery3, gallery4, MEDIA, FILTERS;
+var init_the_build_D9506stp = __esm({
+  "dist/server/assets/the-build-D9506stp.js"() {
     "use strict";
-    import_jsx_runtime23 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime30 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DZylOCQT();
-    import_react36 = __toESM(require_react(), 1);
-    init_gallery_4_B_0I7K_V();
+    init_site_paN77MRt();
+    import_react43 = __toESM(require_react(), 1);
     init_carbon_texture_CrF_2aOK();
     init_video_btH4iMvl();
-    buildProcess = "/assets/gallery-1-BNSHI9Rh.jpg";
+    init_router_BhOLo_lT();
+    import_node_async_hooks8 = require("node:async_hooks");
+    init_production();
     buildStrip = "/assets/gallery-1-BNSHI9Rh.jpg";
     buildScan = "/assets/gallery-1-BNSHI9Rh.jpg";
+    buildPrint = "/assets/gallery-1-BNSHI9Rh.jpg";
+    buildFinish = "/assets/gallery-1-BNSHI9Rh.jpg";
+    buildProcess = "/assets/gallery-1-BNSHI9Rh.jpg";
+    rs500Hero = "/assets/gallery-1-BNSHI9Rh.jpg";
+    gallery1 = "/assets/gallery-1-BNSHI9Rh.jpg";
+    gallery2 = "/assets/gallery-1-BNSHI9Rh.jpg";
+    gallery3 = "/assets/gallery-1-BNSHI9Rh.jpg";
+    gallery4 = "/assets/gallery-1-BNSHI9Rh.jpg";
     MEDIA = [
-      { kind: "video", src: videoCarSection, poster: g7, title: "Syndicate \u2014 Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
+      { kind: "video", src: videoCarSection, poster: rs500Hero, title: "Syndicate \u2014 Teaser Reel", caption: "First glimpse of the RS500 reborn.", phase: "Reveal" },
       { kind: "image", src: buildStrip, title: "Bare Shell", caption: "Car #148 stripped to bare metal. Every component catalogued.", phase: "Phase 01" },
       { kind: "image", src: buildScan, title: "Digital Twin", caption: "Sub-millimetre 3D scan of the original shell.", phase: "Phase 02" },
-      { kind: "image", src: g1, title: "CAD Surfacing", caption: "Aero and structural geometry refined in CAD.", phase: "Phase 02" },
-      { kind: "image", src: g6, title: "Additive Tooling", caption: "Composite tooling printed in-house at DMC Silverstone.", phase: "Phase 03" },
+      { kind: "image", src: gallery1, title: "CAD Surfacing", caption: "Aero and structural geometry refined in CAD.", phase: "Phase 02" },
+      { kind: "image", src: buildPrint, title: "Additive Tooling", caption: "Composite tooling printed in-house at DMC Silverstone.", phase: "Phase 03" },
       { kind: "image", src: carbonTexture, title: "Carbon Layup", caption: "BAMD composite panels \u2014 weave inspection.", phase: "Phase 03" },
-      { kind: "image", src: g2, title: "Block Assembly", caption: "MAHLE rebuild of the YB inline-four.", phase: "Phase 04" },
-      { kind: "image", src: g5, title: "Paint Shop", caption: "Heritage livery, modern finish process.", phase: "Phase 04" },
-      { kind: "image", src: g3, title: "Suspension Geometry", caption: "Modern damping under classic bodywork.", phase: "Phase 04" },
-      { kind: "image", src: g4, title: "Track Validation", caption: "First shakedown laps at Silverstone.", phase: "Validation" },
+      { kind: "image", src: gallery2, title: "Block Assembly", caption: "MAHLE rebuild of the YB inline-four.", phase: "Phase 04" },
+      { kind: "image", src: buildFinish, title: "Paint Shop", caption: "Heritage livery, modern finish process.", phase: "Phase 04" },
+      { kind: "image", src: gallery3, title: "Suspension Geometry", caption: "Modern damping under classic bodywork.", phase: "Phase 04" },
+      { kind: "image", src: gallery4, title: "Track Validation", caption: "First shakedown laps at Silverstone.", phase: "Validation" },
       { kind: "image", src: buildProcess, title: "Workshop Floor", caption: "Engineered in the open \u2014 every visit documented.", phase: "Ongoing" }
     ];
     FILTERS = ["All", "Reveal", "Phase 01", "Phase 02", "Phase 03", "Phase 04", "Validation", "Ongoing"];
-    PHASES = [{
-      n: "01",
-      t: "Acquisition & Strip",
-      img: buildStrip,
-      body: "Car #148 \u2014 the 148th of 500 RS500s ever built \u2014 sourced, authenticated, and fully stripped to bare metal. Every component is catalogued and inspected.",
-      bullets: ["Base vehicle selection", "Full teardown", "Component cataloguing", "Chassis inspection"],
-      partner: "ASM Auto Recycling"
-    }, {
-      n: "02",
-      t: "Design & Engineering",
-      img: buildScan,
-      body: "Body shell is 3D scanned to sub-millimetre accuracy, producing a complete digital twin. Engineers iterate CAD designs for structural optimisation and modern performance.",
-      bullets: ["3D scanning & digital twin", "CAD modelling", "Structural optimisation", "Aero & thermal sims"],
-      partner: "T3DMC \u2022 BAMD Composites"
-    }, {
-      n: "03",
-      t: "Manufacturing",
-      img: g6,
-      body: "Additive manufacturing meets traditional coachbuilding. Carbon-composite panels and billet components are produced alongside hand-formed steelwork.",
-      bullets: ["Fabrication", "Additive manufacturing", "Composite layup", "Precision assembly"],
-      partner: "Coventry Metalcraft \u2022 DMC Silverstone"
-    }, {
-      n: "04",
-      t: "Finishing & Validation",
-      img: g5,
-      body: "Engine rebuild, paint, and final assembly come together. The car is validated on road and track before final sign-off and the first syndicate drive day.",
-      bullets: ["Engine rebuild", "Paint & livery", "Road & track testing", "Final sign-off"],
-      partner: "MAHLE Group \u2022 DMC"
-    }];
-    SPECS = [{
-      l: "Base",
-      v: "1987 Ford Sierra Cosworth RS500 #148"
-    }, {
-      l: "Engine",
-      v: "Reworked YB 2.0L turbocharged inline-4"
-    }, {
-      l: "Target Power",
-      v: "550+ bhp"
-    }, {
-      l: "Bodywork",
-      v: "Coachbuilt Aluminium + Composite"
-    }, {
-      l: "Chassis",
-      v: "Reinforced shell, modern suspension geometry"
-    }, {
-      l: "Production",
-      v: "1 of 1"
-    }];
   }
 });
 
-// dist/server/assets/14209297_3840_2160_24fps-BgWRjoqf.js
-var videoPillarThree;
-var init_fps_BgWRjoqf = __esm({
-  "dist/server/assets/14209297_3840_2160_24fps-BgWRjoqf.js"() {
-    "use strict";
-    videoPillarThree = "/assets/14209297_3840_2160_24fps-DVxx643l.mp4";
-  }
-});
-
-// dist/server/assets/events-C55AZNJO.js
-var events_C55AZNJO_exports = {};
-__export(events_C55AZNJO_exports, {
+// dist/server/assets/events-B-nQOv9X.js
+var events_B_nQOv9X_exports = {};
+__export(events_B_nQOv9X_exports, {
   component: () => EventsPage
 });
 function EventsPage() {
   useReveal();
-  const [openFaq, setOpenFaq] = (0, import_react37.useState)(null);
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "min-h-screen bg-ink text-bone", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Nav, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(PageHero, { kicker: "Community", title: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(import_jsx_runtime24.Fragment, { children: [
+  const {
+    events,
+    faqs
+  } = Route$5.useLoaderData();
+  const [openFaq, setOpenFaq] = (0, import_react44.useState)(null);
+  return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "min-h-screen bg-ink text-bone", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Nav, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(PageHero, { kicker: "Community", title: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(import_jsx_runtime31.Fragment, { children: [
       "Events & ",
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "text-acid", children: "Answers" }),
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "text-acid", children: "Answers" }),
       "."
     ] }), subtitle: "Join us at the track, in the workshop, and everywhere in between. Every question answered below.", video: videoPillarThree }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "reveal flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Calendar" }),
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "Upcoming Events" })
+    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "reveal flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Calendar" }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "Upcoming Events" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "text-bone/60 max-w-md", children: "From build open-days to track experiences, the syndicate calendar is designed to maximise your connection to the car and the community." })
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "text-bone/60 max-w-md", children: "From build open-days to track experiences, the syndicate calendar is designed to maximise your connection to the car and the community." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "space-y-6", children: EVENTS.map((ev, i2) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 hover:border-acid/30 transition-colors duration-500", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "md:w-32 shrink-0", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "font-mono text-xs text-acid uppercase tracking-widest", children: ev.date }),
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mt-1 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-acid" }),
-            /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "font-mono text-[10px] text-bone/60 uppercase tracking-wider", children: ev.status })
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "space-y-6", children: events.map((ev, i2) => /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 hover:border-acid/30 transition-colors duration-500", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "md:w-32 shrink-0", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "font-mono text-xs text-acid uppercase tracking-widest", children: ev.date }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "mt-1 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-acid" }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "font-mono text-[10px] text-bone/60 uppercase tracking-wider", children: ev.status })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "flex-1", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h3", { className: "font-display text-xl md:text-2xl mb-2", children: ev.title }),
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "text-bone/60 leading-relaxed", children: ev.desc })
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "flex-1", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h3", { className: "font-display text-xl md:text-2xl mb-2", children: ev.title }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "text-bone/60 leading-relaxed", children: ev.desc })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "md:w-48 shrink-0 text-right", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest", children: ev.location }) })
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "md:w-48 shrink-0 text-right", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest", children: ev.location }) })
       ] }, i2)) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("section", { className: "py-24 px-6 grain relative", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mx-auto max-w-4xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "reveal text-center mb-16", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "02 \u2014 FAQ" }),
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "Common Questions" })
+    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("section", { className: "py-24 px-6 grain relative", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "mx-auto max-w-4xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "reveal text-center mb-16", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "02 \u2014 FAQ" }),
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "Common Questions" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "space-y-4", children: FAQS.map((faq, i2) => /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: `reveal bg-carbon border rounded-lg transition-colors duration-300 ${openFaq === i2 ? "border-acid/40" : "border-white/10 hover:border-white/20"}`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("button", { onClick: () => setOpenFaq(openFaq === i2 ? null : i2), className: "w-full flex items-center justify-between p-6 text-left", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "font-display text-lg pr-4", children: faq.q }),
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: `shrink-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${openFaq === i2 ? "bg-acid border-acid text-ink rotate-45" : "text-bone/60"}`, children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("svg", { className: "w-4 h-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2.5, children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4v16m8-8H4" }) }) })
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "space-y-4", children: faqs.map((faq, i2) => /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: `reveal bg-carbon border rounded-lg transition-colors duration-300 ${openFaq === i2 ? "border-acid/40" : "border-white/10 hover:border-white/20"}`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("button", { onClick: () => setOpenFaq(openFaq === i2 ? null : i2), className: "w-full flex items-center justify-between p-6 text-left", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "font-display text-lg pr-4", children: faq.q }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: `shrink-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${openFaq === i2 ? "bg-acid border-acid text-ink rotate-45" : "text-bone/60"}`, children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("svg", { className: "w-4 h-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2.5, children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4v16m8-8H4" }) }) })
         ] }),
-        openFaq === i2 && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "px-6 pb-6", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "text-bone/70 leading-relaxed", children: faq.a }) })
+        openFaq === i2 && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "px-6 pb-6", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "text-bone/70 leading-relaxed", children: faq.a }) })
       ] }, i2)) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("section", { className: "py-24 px-6 text-center border-t border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "reveal mx-auto max-w-3xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("h2", { className: "font-display text-4xl md:text-6xl leading-[0.95] mb-6", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("section", { className: "py-24 px-6 text-center border-t border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "reveal mx-auto max-w-3xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("h2", { className: "font-display text-4xl md:text-6xl leading-[0.95] mb-6", children: [
         "Still Have ",
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("span", { className: "text-acid", children: "Questions" }),
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "text-acid", children: "Questions" }),
         "?"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("p", { className: "text-bone/70 text-lg mb-10 max-w-xl mx-auto", children: "We are happy to talk through anything that is not covered above. No obligation, no pressure." }),
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Link, { to: "/contact", className: "inline-block px-10 py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300", children: "Contact The Team" })
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("p", { className: "text-bone/70 text-lg mb-10 max-w-xl mx-auto", children: "We are happy to talk through anything that is not covered above. No obligation, no pressure." }),
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Link, { to: "/contact", className: "inline-block px-10 py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300", children: "Contact The Team" })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Footer, {})
+    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime24, import_react37, EVENTS, FAQS;
-var init_events_C55AZNJO = __esm({
-  "dist/server/assets/events-C55AZNJO.js"() {
+var import_jsx_runtime31, import_react44, import_node_async_hooks9, videoPillarThree;
+var init_events_B_nQOv9X = __esm({
+  "dist/server/assets/events-B-nQOv9X.js"() {
     "use strict";
-    import_jsx_runtime24 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime31 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DZylOCQT();
-    import_react37 = __toESM(require_react(), 1);
-    init_fps_BgWRjoqf();
-    EVENTS = [{
-      date: "MAR 2026",
-      title: "Build Facility Open Day",
-      desc: "Exclusive behind-the-scenes access for confirmed syndicate members. See the chassis in progress, meet the fabrication team, and review panel fitment firsthand.",
-      location: "Silverstone Park, UK",
-      status: "Members Only"
-    }, {
-      date: "JUN 2026",
-      title: "Goodwood Members' Meeting",
-      desc: "Syndicate will have a dedicated paddock presence. Syndicate members receive hospitality passes and grid walk access.",
-      location: "Goodwood Circuit, UK",
-      status: "Public + Members"
-    }, {
-      date: "SEP 2026",
-      title: "Design Review Weekend",
-      desc: "Final design sign-off event. Members vote on remaining specification choices: wheel finish, interior stitch colour, and livery details.",
-      location: "Silverstone Park, UK",
-      status: "Members Only"
-    }, {
-      date: "NOV 2026",
-      title: "Track Day \u2014 Anglesey Circuit",
-      desc: "First shakedown and member track experience. Professional instruction provided. Photography and videography included.",
-      location: "Anglesey, Wales",
-      status: "Members Only"
-    }];
-    FAQS = [{
-      q: "What is a syndicated restomod?",
-      a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset \u2014 all managed by Syndicate."
-    }, {
-      q: "How much does allocation cost?",
-      a: "Syndicate slots start at \xA348,000 per share for the Syndicate RS500 build. This covers your proportional build cost, insurance, storage, maintenance, and event access for the first 24 months."
-    }, {
-      q: "How many shares are available?",
-      a: "Each build is strictly capped at 12 shares. This ensures meaningful access for every member while preserving the exclusivity that makes these cars special."
-    }, {
-      q: "Can I sell my share?",
-      a: "Yes. Shares can be transferred to approved buyers through Syndicate at any time. We handle the valuation, documentation, and introduction to the buyer pool."
-    }, {
-      q: "What happens if the build goes over budget?",
-      a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Syndicate and our partner network. Your share price will not change post-commitment."
-    }, {
-      q: "Do I get to drive the car?",
-      a: "Absolutely. Every member receives an annual allocation of drive days, track sessions, and road tours. The schedule is coordinated democratically through the member portal."
-    }, {
-      q: "Where is the car stored?",
-      a: "Vehicles are stored in a climate-controlled secure facility at Silverstone Park, maintained by our in-house team. Members can arrange visits by appointment."
-    }, {
-      q: "How do I apply?",
-      a: "Submit an application through our Apply page. We review every application personally and aim to respond within 7 business days. A brief phone call is part of the process."
-    }];
+    init_site_paN77MRt();
+    import_react44 = __toESM(require_react(), 1);
+    init_router_BhOLo_lT();
+    import_node_async_hooks9 = require("node:async_hooks");
+    init_production();
+    videoPillarThree = "/assets/14209297_3840_2160_24fps-DVxx643l.mp4";
   }
 });
 
-// dist/server/assets/pillar-one-of-one-DiN9SsXa.js
-var pillarOne;
-var init_pillar_one_of_one_DiN9SsXa = __esm({
-  "dist/server/assets/pillar-one-of-one-DiN9SsXa.js"() {
-    "use strict";
-    pillarOne = "/assets/gallery-1-BNSHI9Rh.jpg";
-  }
-});
-
-// dist/server/assets/design-gallery-b0W838Sq.js
-var design_gallery_b0W838Sq_exports = {};
-__export(design_gallery_b0W838Sq_exports, {
+// dist/server/assets/design-gallery-V0yqGY0V.js
+var design_gallery_V0yqGY0V_exports = {};
+__export(design_gallery_V0yqGY0V_exports, {
   component: () => GalleryPage
 });
 function GalleryPage() {
   useReveal();
-  return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Nav, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(PageHero, { kicker: "Design Gallery", title: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(import_jsx_runtime25.Fragment, { children: [
+  const items = Route$4.useLoaderData();
+  return /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Nav, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(PageHero, { kicker: "Design Gallery", title: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(import_jsx_runtime32.Fragment, { children: [
       "A Library of ",
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("span", { className: "text-acid", children: "Intent." })
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", { className: "text-acid", children: "Intent." })
     ] }), subtitle: "Renders, scans, details, materials, and process imagery from the Syndicate design phase \u2014 a living archive of the build as it develops.", video: videoCarSection }),
-    /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("section", { className: "py-24 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "mx-auto max-w-7xl", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "grid md:grid-cols-4 grid-cols-2 auto-rows-[16rem] gap-4", children: ITEMS.map((it2, i2) => /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("figure", { className: `reveal relative overflow-hidden border border-white/10 group bg-ink ${it2.span ?? ""}`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("img", { src: it2.img, alt: it2.t, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("figcaption", { className: "absolute bottom-0 left-0 right-0 p-5", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "font-mono text-[10px] tracking-[0.3em] uppercase text-acid mb-1", children: it2.tag }),
-        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "font-display text-lg text-bone", children: it2.t })
+    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("section", { className: "py-24 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "mx-auto max-w-7xl", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "grid md:grid-cols-4 grid-cols-2 auto-rows-[16rem] gap-4", children: items.map((it2, i2) => /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("figure", { className: `reveal relative overflow-hidden border border-white/10 group bg-ink ${it2.span ?? ""}`, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("img", { src: it2.img, alt: it2.t, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("figcaption", { className: "absolute bottom-0 left-0 right-0 p-5", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "font-mono text-[10px] tracking-[0.3em] uppercase text-acid mb-1", children: it2.tag }),
+        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "font-display text-lg text-bone", children: it2.t })
       ] })
     ] }, i2)) }) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("section", { className: "py-32 px-6 text-center border-t border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "mx-auto max-w-3xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "More Coming" }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("h2", { className: "reveal font-display text-4xl md:text-6xl leading-[1] mb-10", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("section", { className: "py-32 px-6 text-center border-t border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "mx-auto max-w-3xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "More Coming" }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("h2", { className: "reveal font-display text-4xl md:text-6xl leading-[1] mb-10", children: [
         "The gallery grows with ",
-        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("span", { className: "text-acid", children: "every milestone." })
+        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", { className: "text-acid", children: "every milestone." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("p", { className: "reveal text-bone/70 mb-10 leading-relaxed", children: "Syndicate members receive the full-resolution archive, plus exclusive imagery from inside each partner workshop." }),
-      /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Link, { to: "/the-build", className: "reveal px-8 py-4 border border-white/30 text-bone uppercase tracking-widest text-sm rounded-full hover:border-acid hover:text-acid transition-colors", children: "See the Build \u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Link, { to: "/apply", className: "reveal px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors", children: "Apply for Allocation" })
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("p", { className: "reveal text-bone/70 mb-10 leading-relaxed", children: "Syndicate members receive the full-resolution archive, plus exclusive imagery from inside each partner workshop." }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)("div", { className: "flex flex-col sm:flex-row gap-4 justify-center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Link, { to: "/the-build", className: "reveal px-8 py-4 border border-white/30 text-bone uppercase tracking-widest text-sm rounded-full hover:border-acid hover:text-acid transition-colors", children: "See the Build \u2192" }),
+        /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Link, { to: "/apply", className: "reveal px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors", children: "Apply for Allocation" })
       ] })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(Footer, {})
+    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime25, import_react38, ITEMS;
-var init_design_gallery_b0W838Sq = __esm({
-  "dist/server/assets/design-gallery-b0W838Sq.js"() {
+var import_jsx_runtime32, import_react45, import_node_async_hooks10;
+var init_design_gallery_V0yqGY0V = __esm({
+  "dist/server/assets/design-gallery-V0yqGY0V.js"() {
     "use strict";
-    import_jsx_runtime25 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime32 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DZylOCQT();
-    init_gallery_4_B_0I7K_V();
-    init_pillar_one_of_one_DiN9SsXa();
+    init_site_paN77MRt();
     init_video_btH4iMvl();
-    import_react38 = __toESM(require_react(), 1);
-    ITEMS = [{
-      img: g1,
-      t: "RS500 Reimagined",
-      tag: "Render",
-      span: "md:col-span-2 md:row-span-2"
-    }, {
-      img: g3,
-      t: "Carbon Rear Wing",
-      tag: "Detail"
-    }, {
-      img: g4,
-      t: "Engine Bay Study",
-      tag: "Component"
-    }, {
-      img: g2,
-      t: "Digital Twin",
-      tag: "Engineering",
-      span: "md:col-span-2"
-    }, {
-      img: g5,
-      t: "Final Finish",
-      tag: "Process"
-    }, {
-      img: g6,
-      t: "Composite Layup",
-      tag: "Manufacturing"
-    }, {
-      img: g7,
-      t: "Workshop Capture",
-      tag: "On Set",
-      span: "md:col-span-2"
-    }, {
-      img: pillarOne,
-      t: "Hand Fabrication",
-      tag: "Coachbuilding"
-    }];
+    init_router_BhOLo_lT();
+    import_react45 = __toESM(require_react(), 1);
+    import_node_async_hooks10 = require("node:async_hooks");
+    init_production();
   }
 });
 
-// dist/server/assets/contact-BVusgovq.js
-var contact_BVusgovq_exports = {};
-__export(contact_BVusgovq_exports, {
+// dist/server/assets/contact-YaAxU4_t.js
+var contact_YaAxU4_t_exports = {};
+__export(contact_YaAxU4_t_exports, {
   component: () => ContactPage
 });
 function ContactPage() {
   useReveal();
-  const [form, setForm] = (0, import_react39.useState)({
+  const {
+    directLines,
+    workshopAddress
+  } = Route$3.useLoaderData();
+  const [form, setForm] = (0, import_react46.useState)({
     name: "",
     email: "",
     subject: "",
     message: ""
   });
-  const [sent, setSent] = (0, import_react39.useState)(false);
+  const [sent, setSent] = (0, import_react46.useState)(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     setSent(true);
@@ -52615,176 +53158,161 @@ function ContactPage() {
       message: ""
     });
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "min-h-screen bg-ink text-bone", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(Nav, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(PageHero, { kicker: "Get In Touch", title: /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(import_jsx_runtime26.Fragment, { children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "min-h-screen bg-ink text-bone", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Nav, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(PageHero, { kicker: "Get In Touch", title: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(import_jsx_runtime33.Fragment, { children: [
       "Let's ",
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "text-acid", children: "Talk" }),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("span", { className: "text-acid", children: "Talk" }),
       "."
     ] }), subtitle: "Press inquiries, partnership proposals, or questions about the syndicate \u2014 we read every message personally.", video: videoCarSection }),
-    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "mx-auto max-w-7xl grid md:grid-cols-2 gap-16", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "reveal", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Direct Lines" }),
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-8", children: "Reach The Team" }),
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "space-y-8", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-2", children: "General Inquiries" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("a", { href: "mailto:hello@synmod.build", className: "text-lg text-bone hover:text-acid transition-colors", children: "hello@synmod.build" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-2", children: "Syndicate Applications" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("a", { href: "mailto:apply@synmod.build", className: "text-lg text-bone hover:text-acid transition-colors", children: "apply@synmod.build" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-2", children: "Press & Media" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("a", { href: "mailto:press@synmod.build", className: "text-lg text-bone hover:text-acid transition-colors", children: "press@synmod.build" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-2", children: "Partnerships" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("a", { href: "mailto:partners@synmod.build", className: "text-lg text-bone hover:text-acid transition-colors", children: "partners@synmod.build" })
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "mt-12 pt-8 border-t border-white/10", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-3", children: "Workshop" }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("p", { className: "text-bone/70 leading-relaxed", children: [
-            "Syndicate Build Facility",
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("br", {}),
-            "Unit 7, Silverstone Park",
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("br", {}),
-            "Northamptonshire, NN12 8TN",
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("br", {}),
-            "United Kingdom"
-          ] })
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "mx-auto max-w-7xl grid md:grid-cols-2 gap-16", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "reveal", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Direct Lines" }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-8", children: "Reach The Team" }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "space-y-8", children: directLines.map((line, i2) => /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-2", children: line.label }),
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("a", { href: `mailto:${line.email}`, className: "text-lg text-bone hover:text-acid transition-colors", children: line.email })
+        ] }, i2)) }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "mt-12 pt-8 border-t border-white/10", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "font-mono text-xs text-bone/40 uppercase tracking-widest mb-3", children: "Workshop" }),
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("p", { className: "text-bone/70 leading-relaxed", children: workshopAddress.map((line, i2) => /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("span", { children: [
+            line,
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("br", {})
+          ] }, i2)) })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-8 md:p-10", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "02 \u2014 Send A Message" }),
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h3", { className: "font-display text-2xl mb-8", children: "Write To Us" }),
-        sent ? /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "text-center py-12", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "w-16 h-16 mx-auto mb-6 rounded-full bg-acid/10 border border-acid/30 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("svg", { className: "w-8 h-8 text-acid", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2, children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M5 13l4 4L19 7" }) }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h4", { className: "font-display text-2xl mb-2", children: "Message Sent" }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("p", { className: "text-bone/60", children: "We will be in touch within 48 hours." })
-        ] }) : /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("form", { onSubmit: handleSubmit, className: "space-y-6", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Name" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("input", { required: true, value: form.name, onChange: (e) => setForm({
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-8 md:p-10", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "02 \u2014 Send A Message" }),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h3", { className: "font-display text-2xl mb-8", children: "Write To Us" }),
+        sent ? /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "text-center py-12", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "w-16 h-16 mx-auto mb-6 rounded-full bg-acid/10 border border-acid/30 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("svg", { className: "w-8 h-8 text-acid", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2, children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M5 13l4 4L19 7" }) }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h4", { className: "font-display text-2xl mb-2", children: "Message Sent" }),
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("p", { className: "text-bone/60", children: "We will be in touch within 48 hours." })
+        ] }) : /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("form", { onSubmit: handleSubmit, className: "space-y-6", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Name" }),
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("input", { required: true, value: form.name, onChange: (e) => setForm({
               ...form,
               name: e.target.value
             }), className: "w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone placeholder:text-bone/30 focus:outline-none focus:border-acid/50 transition-colors", placeholder: "Your full name" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Email" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("input", { required: true, type: "email", value: form.email, onChange: (e) => setForm({
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Email" }),
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("input", { required: true, type: "email", value: form.email, onChange: (e) => setForm({
               ...form,
               email: e.target.value
             }), className: "w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone placeholder:text-bone/30 focus:outline-none focus:border-acid/50 transition-colors", placeholder: "you@example.com" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Subject" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("select", { required: true, value: form.subject, onChange: (e) => setForm({
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Subject" }),
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("select", { required: true, value: form.subject, onChange: (e) => setForm({
               ...form,
               subject: e.target.value
             }), className: "w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone focus:outline-none focus:border-acid/50 transition-colors", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("option", { value: "", children: "Select a subject" }),
-              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("option", { value: "syndicate", children: "Syndicate Application Question" }),
-              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("option", { value: "press", children: "Press & Media" }),
-              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("option", { value: "partnership", children: "Partnership" }),
-              /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("option", { value: "general", children: "General Inquiry" })
+              /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("option", { value: "", children: "Select a subject" }),
+              /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("option", { value: "syndicate", children: "Syndicate Application Question" }),
+              /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("option", { value: "press", children: "Press & Media" }),
+              /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("option", { value: "partnership", children: "Partnership" }),
+              /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("option", { value: "general", children: "General Inquiry" })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Message" }),
-            /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("textarea", { required: true, rows: 5, value: form.message, onChange: (e) => setForm({
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("label", { className: "block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2", children: "Message" }),
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("textarea", { required: true, rows: 5, value: form.message, onChange: (e) => setForm({
               ...form,
               message: e.target.value
             }), className: "w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone placeholder:text-bone/30 focus:outline-none focus:border-acid/50 transition-colors resize-none", placeholder: "Tell us what is on your mind..." })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("button", { type: "submit", className: "w-full py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.2em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300", children: "Send Message" })
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("button", { type: "submit", className: "w-full py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.2em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300", children: "Send Message" })
         ] })
       ] })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("section", { className: "py-24 px-6 grain relative", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { className: "mx-auto max-w-7xl text-center reveal", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "Questions?" }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h2", { className: "font-display text-4xl md:text-5xl mb-6", children: "Common Questions" }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("p", { className: "text-bone/70 text-lg max-w-2xl mx-auto mb-10", children: "Everything you need to know about joining the Syndicate syndicate, from allocation to ownership structure." }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("a", { href: "/events", className: "inline-block px-10 py-4 border-2 border-white/20 text-bone text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:border-acid hover:text-acid transition-all duration-300", children: "View FAQ & Events" })
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("section", { className: "py-24 px-6 grain relative", children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "mx-auto max-w-7xl text-center reveal", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "Questions?" }),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { className: "font-display text-4xl md:text-5xl mb-6", children: "Common Questions" }),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("p", { className: "text-bone/70 text-lg max-w-2xl mx-auto mb-10", children: "Everything you need to know about joining the Syndicate syndicate, from allocation to ownership structure." }),
+      /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("a", { href: "/events", className: "inline-block px-10 py-4 border-2 border-white/20 text-bone text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:border-acid hover:text-acid transition-all duration-300", children: "View FAQ & Events" })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(Footer, {})
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime26, import_react39;
-var init_contact_BVusgovq = __esm({
-  "dist/server/assets/contact-BVusgovq.js"() {
+var import_jsx_runtime33, import_react46, import_node_async_hooks11;
+var init_contact_YaAxU4_t = __esm({
+  "dist/server/assets/contact-YaAxU4_t.js"() {
     "use strict";
-    import_jsx_runtime26 = __toESM(require_jsx_runtime(), 1);
-    init_site_DZylOCQT();
-    import_react39 = __toESM(require_react(), 1);
+    import_jsx_runtime33 = __toESM(require_jsx_runtime(), 1);
+    init_site_paN77MRt();
+    import_react46 = __toESM(require_react(), 1);
     init_video_btH4iMvl();
+    init_router_BhOLo_lT();
+    import_node_async_hooks11 = require("node:async_hooks");
+    init_production();
   }
 });
 
-// dist/server/assets/apply-DxfTk8mH.js
-var apply_DxfTk8mH_exports = {};
-__export(apply_DxfTk8mH_exports, {
+// dist/server/assets/apply-C1dS3vaz.js
+var apply_C1dS3vaz_exports = {};
+__export(apply_C1dS3vaz_exports, {
   component: () => ApplyPage
 });
 function ApplyPage() {
   useReveal();
-  const [submitted, setSubmitted] = (0, import_react40.useState)(false);
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden min-h-screen", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Nav, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(PageHero, { kicker: "Syndicate Availability", title: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(import_jsx_runtime27.Fragment, { children: [
+  const steps = Route$2.useLoaderData();
+  const [submitted, setSubmitted] = (0, import_react47.useState)(false);
+  return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden min-h-screen", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Nav, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(PageHero, { kicker: "Syndicate Availability", title: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(import_jsx_runtime34.Fragment, { children: [
       "Apply for ",
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "text-acid", children: "Allocation." })
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "text-acid", children: "Allocation." })
     ] }), subtitle: "A fixed number of syndicate positions. Strict allocation structure. Early applicants prioritised. Once filled, the opportunity closes.", video: videoCarSection }),
-    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("section", { className: "py-24 px-6 bg-carbon border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-12 reveal", children: "How It Works" }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "grid md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: STEPS.map((s) => /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "font-display text-5xl text-acid mb-6", children: s.n }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("h3", { className: "font-display text-xl mb-3", children: s.t }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { className: "text-bone/60 text-sm leading-relaxed", children: s.b })
+    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("section", { className: "py-24 px-6 bg-carbon border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-12 reveal", children: "How It Works" }),
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "grid md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: steps.map((s) => /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "font-display text-5xl text-acid mb-6", children: s.n }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("h3", { className: "font-display text-xl mb-3", children: s.t }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("p", { className: "text-bone/60 text-sm leading-relaxed", children: s.b })
       ] }, s.n)) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("section", { className: "py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "mx-auto max-w-3xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "Application Form" }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("h2", { className: "reveal font-display text-4xl md:text-5xl leading-[1] mb-12", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("section", { className: "py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "mx-auto max-w-3xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "Application Form" }),
+      /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("h2", { className: "reveal font-display text-4xl md:text-5xl leading-[1] mb-12", children: [
         "Register Your ",
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "text-acid", children: "Interest." })
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "text-acid", children: "Interest." })
       ] }),
-      submitted ? /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "reveal border border-acid bg-acid/5 p-10 text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "font-display text-3xl text-acid mb-4", children: "Application Received" }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { className: "text-bone/70 mb-8", children: "Thank you. A member of the syndicate team will be in touch within 48 hours." }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Link, { to: "/", className: "inline-block px-8 py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid transition-all", children: "Back to Home" })
-      ] }) : /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("form", { onSubmit: (e) => {
+      submitted ? /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "reveal border border-acid bg-acid/5 p-10 text-center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "font-display text-3xl text-acid mb-4", children: "Application Received" }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("p", { className: "text-bone/70 mb-8", children: "Thank you. A member of the syndicate team will be in touch within 48 hours." }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Link, { to: "/", className: "inline-block px-8 py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid transition-all", children: "Back to Home" })
+      ] }) : /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("form", { onSubmit: (e) => {
         e.preventDefault();
         setSubmitted(true);
       }, className: "reveal space-y-6 border border-white/10 bg-carbon p-8 md:p-12", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "grid md:grid-cols-2 gap-6", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Field, { label: "First Name", name: "firstName", required: true }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Field, { label: "Last Name", name: "lastName", required: true })
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "grid md:grid-cols-2 gap-6", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Field, { label: "First Name", name: "firstName", required: true }),
+          /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Field, { label: "Last Name", name: "lastName", required: true })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Field, { label: "Email", name: "email", type: "email", required: true }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Field, { label: "Phone", name: "phone", type: "tel" }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Field, { label: "Country of Residence", name: "country" }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("label", { className: "block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2", children: "Allocation Interest" }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("select", { required: true, name: "allocation", className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { value: "", children: "Select an option\u2026" }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { children: "Single allocation" }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { children: "Multiple allocations" }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { children: "Lead syndicate position" }),
-            /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("option", { children: "Just exploring" })
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Field, { label: "Email", name: "email", type: "email", required: true }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Field, { label: "Phone", name: "phone", type: "tel" }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Field, { label: "Country of Residence", name: "country" }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("label", { className: "block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2", children: "Allocation Interest" }),
+          /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("select", { required: true, name: "allocation", className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("option", { value: "", children: "Select an option\u2026" }),
+            /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("option", { children: "Single allocation" }),
+            /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("option", { children: "Multiple allocations" }),
+            /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("option", { children: "Lead syndicate position" }),
+            /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("option", { children: "Just exploring" })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("label", { className: "block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2", children: "Tell Us About You" }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("textarea", { name: "message", rows: 5, className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors resize-none", placeholder: "Your background, what drew you to Syndicate, any questions\u2026" })
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("label", { className: "block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2", children: "Tell Us About You" }),
+          /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("textarea", { name: "message", rows: 5, className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors resize-none", placeholder: "Your background, what drew you to Syndicate, any questions\u2026" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "submit", className: "w-full px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors", children: "Submit Application" }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("p", { className: "text-bone/40 text-xs font-mono uppercase tracking-[0.2em] text-center", children: "Your information is handled confidentially." })
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("button", { type: "submit", className: "w-full px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors", children: "Submit Application" }),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("p", { className: "text-bone/40 text-xs font-mono uppercase tracking-[0.2em] text-center", children: "Your information is handled confidentially." })
       ] })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Footer, {})
+    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Footer, {})
   ] });
 }
 function Field({
@@ -52793,190 +53321,146 @@ function Field({
   type = "text",
   required
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("label", { className: "block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("label", { className: "block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2", children: [
       label,
       " ",
-      required && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("span", { className: "text-acid", children: "*" })
+      required && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "text-acid", children: "*" })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("input", { type, name, required, className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors" })
+    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("input", { type, name, required, className: "w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors" })
   ] });
 }
-var import_jsx_runtime27, import_react40, STEPS;
-var init_apply_DxfTk8mH = __esm({
-  "dist/server/assets/apply-DxfTk8mH.js"() {
+var import_jsx_runtime34, import_react47, import_node_async_hooks12;
+var init_apply_C1dS3vaz = __esm({
+  "dist/server/assets/apply-C1dS3vaz.js"() {
     "use strict";
-    import_jsx_runtime27 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime34 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    import_react40 = __toESM(require_react(), 1);
-    init_site_DZylOCQT();
+    import_react47 = __toESM(require_react(), 1);
+    init_site_paN77MRt();
     init_video_btH4iMvl();
-    STEPS = [{
-      n: "01",
-      t: "Register Interest",
-      b: "Submit the form below. We respond within 48 hours."
-    }, {
-      n: "02",
-      t: "Discovery Call",
-      b: "A 30-min call to walk through the syndicate model and answer questions."
-    }, {
-      n: "03",
-      t: "Allocation Offer",
-      b: "Receive a formal allocation document outlining cost, structure, and timeline."
-    }, {
-      n: "04",
-      t: "Secure Position",
-      b: "Sign and fund. You're in. Welcome to Syndicate."
-    }];
+    init_router_BhOLo_lT();
+    import_node_async_hooks12 = require("node:async_hooks");
+    init_production();
   }
 });
 
-// dist/server/assets/10825391-hd_1920_1080_24fps-DsLk95nk.js
-var videoPillarOne;
-var init_hd_1920_1080_24fps_DsLk95nk = __esm({
-  "dist/server/assets/10825391-hd_1920_1080_24fps-DsLk95nk.js"() {
-    "use strict";
-    videoPillarOne = "/assets/10825391-hd_1920_1080_24fps-DwLB906H.mp4";
-  }
-});
-
-// dist/server/assets/about-DmFS81c0.js
-var about_DmFS81c0_exports = {};
-__export(about_DmFS81c0_exports, {
+// dist/server/assets/about-Dls_vIsa.js
+var about_Dls_vIsa_exports = {};
+__export(about_Dls_vIsa_exports, {
   component: () => AboutPage
 });
 function AboutPage() {
   useReveal();
-  return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "min-h-screen bg-ink text-bone", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Nav, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(PageHero, { kicker: "Our Story", title: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(import_jsx_runtime28.Fragment, { children: [
+  const {
+    principles,
+    architects
+  } = Route$1.useLoaderData();
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "min-h-screen bg-ink text-bone", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Nav, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(PageHero, { kicker: "Our Story", title: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(import_jsx_runtime35.Fragment, { children: [
       "Built By ",
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "text-acid", children: "Fanatics" }),
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("span", { className: "text-acid", children: "Fanatics" }),
       ".",
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("br", {}),
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("br", {}),
       "Engineered To ",
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "text-acid", children: "Last" }),
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("span", { className: "text-acid", children: "Last" }),
       "."
     ] }), subtitle: "Syndicate is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore.", video: videoPillarOne }),
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mx-auto max-w-7xl grid md:grid-cols-2 gap-16 items-center", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "reveal", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Mission" }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-6", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "mx-auto max-w-7xl grid md:grid-cols-2 gap-16 items-center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "reveal", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 \u2014 Mission" }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-6", children: [
           "Reimagine What A",
-          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("br", {}),
+          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("br", {}),
           "Restomod Can Be"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred silhouettes and infuse them with modern coach building engineering, additive manufacturing, and motorsport-grade safety \u2014 without losing the analog soul that makes these cars magical." }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed", children: "Every weld, every panel, every line of code in the ECU is obsessively considered. The result is not a replica. It is a rebirth." })
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred silhouettes and infuse them with modern coach building engineering, additive manufacturing, and motorsport-grade safety \u2014 without losing the analog soul that makes these cars magical." }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("p", { className: "text-bone/70 text-lg leading-relaxed", children: "Every weld, every panel, every line of code in the ECU is obsessively considered. The result is not a replica. It is a rebirth." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "reveal", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("img", { src: aboutDetail, alt: "Precision engineering detail", className: "w-full h-[500px] object-cover rounded-lg border border-white/10", loading: "lazy", width: 1024, height: 1024 }) })
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "reveal", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("img", { src: aboutDetail, alt: "Precision engineering detail", className: "w-full h-[500px] object-cover rounded-lg border border-white/10", loading: "lazy", width: 1024, height: 1024 }) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("section", { className: "py-24 px-6 grain relative border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "reveal text-center mb-16", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "02 \u2014 Principles" }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "What Drives Us" })
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("section", { className: "py-24 px-6 grain relative border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "reveal text-center mb-16", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "02 \u2014 Principles" }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "What Drives Us" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: [{
-        num: "01",
-        title: "Analog Soul",
-        text: "We preserve mechanical connection. Hydraulic steering. Manual gearboxes. Driver-first ergonomics. Technology serves the experience, never replaces it."
-      }, {
-        num: "02",
-        title: "Engineering Integrity",
-        text: "Every component is traceable, tested, and validated. We partner with OEM-grade suppliers and motorsport specialists who share our obsession."
-      }, {
-        num: "03",
-        title: "Open Collaboration",
-        text: "The syndicate model means owners are participants, not spectators. From design votes to build-week visits, transparency is our default."
-      }].map((v3) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-8 hover:border-acid/30 transition-colors duration-500", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "font-mono text-5xl text-white/10 mb-6", children: v3.num }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("h3", { className: "font-display text-2xl mb-4", children: v3.title }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/60 leading-relaxed", children: v3.text })
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: principles.map((v3) => /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-8 hover:border-acid/30 transition-colors duration-500", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "font-mono text-5xl text-white/10 mb-6", children: v3.num }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h3", { className: "font-display text-2xl mb-4", children: v3.title }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("p", { className: "text-bone/60 leading-relaxed", children: v3.text })
       ] }, v3.num)) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "reveal text-center mb-16", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "03 \u2014 Leadership" }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "The Architects" })
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "reveal text-center mb-16", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "03 \u2014 Leadership" }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { className: "font-display text-4xl md:text-5xl", children: "The Architects" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "grid md:grid-cols-4 gap-6", children: [{
-        name: "Marcus Hale",
-        role: "Founder & Build Director",
-        bio: "30 years experience in automotive & Fintech business"
-      }, {
-        name: "Simon Kiero Watson",
-        role: "Commercial & Finance Oversight",
-        bio: "Highly experienced Corporate Finance and Exchange Expert."
-      }, {
-        name: "Al Yasid Oozeear",
-        role: "Digital Visualisor & Designer",
-        bio: "Independent Automotive designer specialising in bespoke car design"
-      }, {
-        name: "Stuart Peach",
-        role: "Project Co Founder",
-        bio: "Investor and partner in the Vision148 project and original custodian of #148"
-      }].map((p3) => /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-6 text-center hover:border-acid/30 transition-colors duration-500", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "w-20 h-20 mx-auto mb-4 rounded-full bg-steel border border-white/10 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "font-display text-2xl text-acid", children: p3.name.charAt(0) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("h3", { className: "font-display text-lg mb-1", children: p3.name }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "font-mono text-xs text-acid uppercase tracking-widest mb-3", children: p3.role }),
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/50 text-sm leading-relaxed", children: p3.bio })
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "grid md:grid-cols-4 gap-6", children: architects.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "reveal bg-carbon border border-white/10 rounded-lg p-6 text-center hover:border-acid/30 transition-colors duration-500", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "w-20 h-20 mx-auto mb-4 rounded-full bg-steel border border-white/10 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("span", { className: "font-display text-2xl text-acid", children: p3.name.charAt(0) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h3", { className: "font-display text-lg mb-1", children: p3.name }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "font-mono text-xs text-acid uppercase tracking-widest mb-3", children: p3.role }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("p", { className: "text-bone/50 text-sm leading-relaxed", children: p3.bio })
       ] }, p3.name)) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("section", { className: "py-24 px-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "reveal mx-auto max-w-3xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("h2", { className: "font-display text-4xl md:text-6xl leading-[0.95] mb-6", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("section", { className: "py-24 px-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "reveal mx-auto max-w-3xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("h2", { className: "font-display text-4xl md:text-6xl leading-[0.95] mb-6", children: [
         "Want To Join ",
-        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "text-acid", children: "The Build" }),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("span", { className: "text-acid", children: "The Build" }),
         "?"
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("p", { className: "text-bone/70 text-lg mb-10 max-w-xl mx-auto", children: "Allocation is limited. Applications are reviewed personally by the build team." }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Link, { to: "/apply", className: "inline-block px-10 py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300", children: "Apply For Allocation" })
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("p", { className: "text-bone/70 text-lg mb-10 max-w-xl mx-auto", children: "Allocation is limited. Applications are reviewed personally by the build team." }),
+      /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Link, { to: "/apply", className: "inline-block px-10 py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300", children: "Apply For Allocation" })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Footer, {})
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime28, import_react41, aboutDetail;
-var init_about_DmFS81c0 = __esm({
-  "dist/server/assets/about-DmFS81c0.js"() {
+var import_jsx_runtime35, import_react48, import_node_async_hooks13, aboutDetail, videoPillarOne;
+var init_about_Dls_vIsa = __esm({
+  "dist/server/assets/about-Dls_vIsa.js"() {
     "use strict";
-    import_jsx_runtime28 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime35 = __toESM(require_jsx_runtime(), 1);
     init_esm5();
-    init_site_DZylOCQT();
-    init_hd_1920_1080_24fps_DsLk95nk();
-    import_react41 = __toESM(require_react(), 1);
+    init_site_paN77MRt();
+    init_router_BhOLo_lT();
+    import_react48 = __toESM(require_react(), 1);
+    import_node_async_hooks13 = require("node:async_hooks");
+    init_production();
     aboutDetail = "/assets/gallery-1-BNSHI9Rh.jpg";
+    videoPillarOne = "/assets/10825391-hd_1920_1080_24fps-DwLB906H.mp4";
   }
 });
 
-// dist/server/assets/index-B3e0A50V.js
-var index_B3e0A50V_exports = {};
-__export(index_B3e0A50V_exports, {
+// dist/server/assets/index-DoNLU0Z3.js
+var index_DoNLU0Z3_exports = {};
+__export(index_DoNLU0Z3_exports, {
   component: () => Index
 });
 function Hero() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("section", { id: "top", className: "relative min-h-screen w-full overflow-hidden grain flex items-center justify-center py-24 md:pt-28 md:pb-20", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 noise-bg" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow", style: {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("section", { id: "top", className: "relative min-h-screen w-full overflow-hidden grain flex items-center justify-center py-24 md:pt-28 md:pb-20", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 noise-bg" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow", style: {
       animationDelay: "2s"
     } }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative z-10 w-full flex flex-col items-center justify-center text-center px-6", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "inline-flex items-center gap-2 glass-acid rounded-full px-5 py-2 mb-8 animate-in fade-in slide-in-from-bottom duration-1000", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-acid animate-pulse" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: "Syndicate \xB7 Now Forming" })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "relative z-10 w-full flex flex-col items-center justify-center text-center px-6", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "inline-flex items-center gap-2 glass-acid rounded-full px-5 py-2 mb-8 animate-in fade-in slide-in-from-bottom duration-1000", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-acid animate-pulse" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: "Syndicate \xB7 Now Forming" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("h1", { className: "font-display text-6xl md:text-8xl lg:text-9xl leading-[0.9] max-w-6xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-gradient-bone", children: "Be Part of the" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("br", {}),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-gradient-acid", children: "Creation of an Icon" })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("h1", { className: "font-display text-6xl md:text-8xl lg:text-9xl leading-[0.9] max-w-6xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-gradient-bone", children: "Be Part of the" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("br", {}),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-gradient-acid", children: "Creation of an Icon" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200", children: "Syndicated Restomod Builds \u2014 engineered in the open, owned together, driven for life." }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Link, { to: "/apply", className: "btn-acid", children: "Apply for Allocation \u2192" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "#intro", className: "btn-ghost", children: "Explore Syndicate" })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200", children: "Syndicated Restomod Builds \u2014 engineered in the open, owned together, driven for life." }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Link, { to: "/apply", className: "btn-acid", children: "Apply for Allocation \u2192" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("a", { href: "#intro", className: "btn-ghost", children: "Explore Syndicate" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500", children: [{
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500", children: [{
         k: "Car",
         v: "#148 / 500"
       }, {
@@ -52985,15 +53469,15 @@ function Hero() {
       }, {
         k: "Status",
         v: "Forming"
-      }].map((s) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "text-center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 mb-1", children: s.k }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-display text-sm md:text-base text-acid", children: s.v })
+      }].map((s) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "text-center", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 mb-1", children: s.k }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-display text-sm md:text-base text-acid", children: s.v })
       ] }, s.k)) })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 font-mono text-[10px] text-bone/40 tracking-[0.3em] uppercase", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "h-px w-8 bg-acid/60" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 font-mono text-[10px] text-bone/40 tracking-[0.3em] uppercase", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "h-px w-8 bg-acid/60" }),
       "Scroll",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "h-px w-8 bg-acid/60" })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "h-px w-8 bg-acid/60" })
     ] })
   ] });
 }
@@ -53001,42 +53485,42 @@ function SectionLabel({
   kicker,
   title
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal mb-16", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: kicker }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h2", { className: "font-display text-4xl md:text-6xl leading-[1] max-w-4xl", children: title })
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal mb-16", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: kicker }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { className: "font-display text-4xl md:text-6xl leading-[1] max-w-4xl", children: title })
   ] });
 }
 function Intro() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { id: "intro", className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-6xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "\u25CF Not Just Ownership", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { id: "intro", className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-6xl", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "\u25CF Not Just Ownership", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
       "Not Just Ownership.",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("br", {}),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-bone/40", children: "Participation." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("br", {}),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-bone/40", children: "Participation." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "grid md:grid-cols-2 gap-16", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal space-y-6 text-bone/70 text-lg leading-relaxed", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { children: "This is not a traditional restoration. This is not passive investment." }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("p", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "grid md:grid-cols-2 gap-16", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal space-y-6 text-bone/70 text-lg leading-relaxed", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { children: "This is not a traditional restoration. This is not passive investment." }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("p", { children: [
           "This is a ",
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "syndicated restomod build" }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "syndicated restomod build" }),
           " where participants join the creation and future of a unique automotive asset."
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal space-y-6 text-bone/60 leading-relaxed", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { children: "Syndicate members support the project from the earliest stage \u2014 funding the development of a one-of-one car, staying engaged with every phase of the build, and ultimately gaining firsthand access to the finished asset while sharing in the potential appreciation of its value over time." }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "font-display text-bone text-xl pt-4 border-t border-white/10", children: "From strip-down to final drive \u2014 you are part of it." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal space-y-6 text-bone/60 leading-relaxed", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { children: "Syndicate members support the project from the earliest stage \u2014 funding the development of a one-of-one car, staying engaged with every phase of the build, and ultimately gaining firsthand access to the finished asset while sharing in the potential appreciation of its value over time." }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "font-display text-bone text-xl pt-4 border-t border-white/10", children: "From strip-down to final drive \u2014 you are part of it." })
       ] })
     ] })
   ] }) });
 }
 function Stats() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("section", { className: "relative py-24 px-6 border-y border-white/5 bg-carbon/50 overflow-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative mx-auto max-w-7xl mb-12 text-center reveal", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("h2", { className: "font-mono text-xs md:text-sm tracking-[0.3em] uppercase text-bone/60", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("section", { className: "relative py-24 px-6 border-y border-white/5 bg-carbon/50 overflow-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "relative mx-auto max-w-7xl mb-12 text-center reveal", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("h2", { className: "font-mono text-xs md:text-sm tracking-[0.3em] uppercase text-bone/60", children: [
       "Powered By ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-bone", children: "TheCarCrowd" })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-bone", children: "TheCarCrowd" })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-5 gap-px bg-white/5", children: [{
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "relative mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-5 gap-px bg-white/5", children: [{
       n: "110",
       label: "CURATED ASSETS"
     }, {
@@ -53051,210 +53535,224 @@ function Stats() {
     }, {
       n: "60",
       label: "YEARS OF EXPERIENCE"
-    }].map((st2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal text-center py-6 px-2 bg-ink/60 hover:bg-ink transition-colors group flex flex-col justify-center items-center", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform", children: st2.n }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-bone/50 text-center", children: st2.label })
+    }].map((st2) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal text-center py-6 px-2 bg-ink/60 hover:bg-ink transition-colors group flex flex-col justify-center items-center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform", children: st2.n }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-bone/50 text-center", children: st2.label })
     ] }, st2.label)) })
   ] });
 }
-function Pillars() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("section", { className: "relative py-32 px-6 bg-carbon overflow-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "Why Syndicate", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(import_jsx_runtime29.Fragment, { children: "Built on three pillars." }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: PILLARS.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("article", { className: "group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "aspect-[4/5] overflow-hidden relative", children: [
-          p3.video ? /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("video", { src: p3.video, autoPlay: true, muted: true, loop: true, playsInline: true, className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }) : /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: p3.img, alt: p3.title, loading: "lazy", className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-acid", children: [
+function Pillars({
+  pillars
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("section", { className: "relative py-32 px-6 bg-carbon overflow-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 noise-bg pointer-events-none" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "Why Syndicate", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(import_jsx_runtime36.Fragment, { children: "Built on three pillars." }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: pillars.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("article", { className: "group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "aspect-[4/5] overflow-hidden relative", children: [
+          p3.video ? /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("video", { src: p3.video, autoPlay: true, muted: true, loop: true, playsInline: true, className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }) : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("img", { src: p3.img, alt: p3.title, loading: "lazy", className: "h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-acid", children: [
             "PILLAR ",
             p3.n
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "p-8 -mt-16 relative", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-2xl mb-4 text-gradient-bone", children: p3.title }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/60 leading-relaxed", children: p3.body }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-6 h-px w-12 bg-acid/60 group-hover:w-24 transition-all duration-500" })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "p-8 -mt-16 relative", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-2xl mb-4 text-gradient-bone", children: p3.title }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "text-bone/60 leading-relaxed", children: p3.body }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mt-6 h-px w-12 bg-acid/60 group-hover:w-24 transition-all duration-500" })
         ] })
       ] }, p3.n)) })
     ] })
   ] });
 }
 function TheCar() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { id: "car", className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 items-center", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "lg:col-span-7 reveal", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative overflow-hidden border border-white/10 aspect-video", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "w-full h-full object-cover hover:scale-102 transition-transform duration-700" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: "VRS500 Reimagined" }) })
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { id: "car", className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 items-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "lg:col-span-7 reveal", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "relative overflow-hidden border border-white/10 aspect-video", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "w-full h-full object-cover hover:scale-102 transition-transform duration-700" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid", children: "VRS500 Reimagined" }) })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "lg:col-span-5 reveal", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "The Car" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-8", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "lg:col-span-5 reveal", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "The Car" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-8", children: [
         "The Ford Sierra Cosworth RS500. ",
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-bone/40", children: "Reimagined." })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-bone/40", children: "Reimagined." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/70 leading-relaxed mb-8", children: "One of the most dominant touring cars ever built and a fan-favourite road icon \u2014 reinterpreted through modern engineering, advanced materials, precision manufacturing, and performance optimisation." }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("ul", { className: "space-y-3 border-t border-white/10 pt-6", children: ["One-of-one build", "Engineering-led, not cosmetic", "Heritage-informed design", "Built for road and track"].map((h3, i2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("li", { className: "flex gap-4 items-baseline", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "font-mono text-xs text-acid", children: String(i2 + 1).padStart(2, "0") }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-bone/90", children: h3 })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "text-bone/70 leading-relaxed mb-8", children: "One of the most dominant touring cars ever built and a fan-favourite road icon \u2014 reinterpreted through modern engineering, advanced materials, precision manufacturing, and performance optimisation." }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("ul", { className: "space-y-3 border-t border-white/10 pt-6", children: ["One-of-one build", "Engineering-led, not cosmetic", "Heritage-informed design", "Built for road and track"].map((h3, i2) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("li", { className: "flex gap-4 items-baseline", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "font-mono text-xs text-acid", children: String(i2 + 1).padStart(2, "0") }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-bone/90", children: h3 })
       ] }, h3)) })
     ] })
   ] }) });
 }
-function LiveSyndicates() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { id: "syndicates", className: "relative py-32 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "Active Opportunities", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+function LiveSyndicates({
+  syndicates
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { id: "syndicates", className: "relative py-32 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "Active Opportunities", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
       "Live Syndicates. ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "Open Allocations." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "Open Allocations." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: LIVE_SYNDICATES.map((s) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("article", { className: `group border ${s.isPlaceholder ? "border-white/5" : "border-white/10 hover:border-acid"} bg-ink overflow-hidden transition-all duration-300 flex flex-col justify-between`, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "aspect-[16/10] overflow-hidden relative bg-carbon", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: s.img, alt: s.title, loading: "lazy", className: `h-full w-full object-cover transition-transform duration-700 ${s.isPlaceholder ? "blur-md opacity-30 grayscale scale-110" : "group-hover:scale-105"}` }),
-        !s.isPlaceholder && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold", children: "Live" }),
-        s.isPlaceholder && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 flex items-center justify-center p-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "bg-ink/60 backdrop-blur-md border border-white/10 text-bone/80 px-4 py-2 font-mono text-[10px] tracking-widest uppercase rounded", children: "Assessing for Syndication" }) })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "reveal-stagger grid md:grid-cols-3 gap-8", children: syndicates.map((s) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("article", { className: `group border ${s.isPlaceholder ? "border-white/5" : "border-white/10 hover:border-acid"} bg-ink overflow-hidden transition-all duration-300 flex flex-col justify-between`, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "aspect-[16/10] overflow-hidden relative bg-carbon", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("img", { src: s.img, alt: s.title, loading: "lazy", className: `h-full w-full object-cover transition-transform duration-700 ${s.isPlaceholder ? "blur-md opacity-30 grayscale scale-110" : "group-hover:scale-105"}` }),
+        !s.isPlaceholder && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold", children: "Live" }),
+        s.isPlaceholder && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 flex items-center justify-center p-6 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "bg-ink/60 backdrop-blur-md border border-white/10 text-bone/80 px-4 py-2 font-mono text-[10px] tracking-widest uppercase rounded", children: "Assessing for Syndication" }) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "p-8 flex-1 flex flex-col justify-between", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-2xl mb-2", children: s.title }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-sm text-acid mb-6", children: s.allocation }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("ul", { className: "space-y-2 text-bone/60 text-sm border-t border-white/5 pt-4", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("li", { children: s.stats }),
-            /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("li", { className: "text-bone/80 font-semibold", children: s.return })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "p-8 flex-1 flex flex-col justify-between", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-2xl mb-2", children: s.title }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-sm text-acid mb-6", children: s.allocation }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("ul", { className: "space-y-2 text-bone/60 text-sm border-t border-white/5 pt-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("li", { children: s.stats }),
+            /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("li", { className: "text-bone/80 font-semibold", children: s.return })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-8", children: s.waitlist ? /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("form", { className: "flex flex-col gap-2", onSubmit: (e) => e.preventDefault(), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("input", { type: "email", placeholder: "Email for waitlist", required: true, className: "bg-carbon border border-white/10 px-4 py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full transition-colors text-xs text-center" }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("button", { type: "submit", className: "w-full text-center py-3 border border-acid text-acid uppercase tracking-widest text-xs rounded-full hover:bg-acid/10 transition-all duration-300 font-semibold", children: "Join Waitlist" })
-        ] }) : /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "#apply", className: "w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300", children: "Request Details" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mt-8", children: s.waitlist ? /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("form", { className: "flex flex-col gap-2", onSubmit: (e) => e.preventDefault(), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { type: "email", placeholder: "Email for waitlist", required: true, className: "bg-carbon border border-white/10 px-4 py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full transition-colors text-xs text-center" }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "submit", className: "w-full text-center py-3 border border-acid text-acid uppercase tracking-widest text-xs rounded-full hover:bg-acid/10 transition-all duration-300 font-semibold", children: "Join Waitlist" })
+        ] }) : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("a", { href: "#apply", className: "w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300", children: "Request Details" }) })
       ] })
     ] }, s.title)) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mt-20 reveal border border-white/10 bg-ink p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden group", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-acid/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative z-10 lg:max-w-xl text-center lg:text-left", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-[10px] text-acid tracking-widest uppercase mb-3", children: "Learn the process" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-2xl md:text-3xl mb-3", children: "Want the full picture?" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/60 text-sm md:text-base leading-relaxed", children: "Download our comprehensive Briefing Document to dive deeper into our acquisition strategy, engineering standards, and projected returns." })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mt-20 reveal border border-white/10 bg-ink p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden group", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-acid/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "relative z-10 lg:max-w-xl text-center lg:text-left", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-[10px] text-acid tracking-widest uppercase mb-3", children: "Learn the process" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-2xl md:text-3xl mb-3", children: "Want the full picture?" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "text-bone/60 text-sm md:text-base leading-relaxed", children: "Download our comprehensive Briefing Document to dive deeper into our acquisition strategy, engineering standards, and projected returns." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "relative z-10 w-full lg:w-auto flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("form", { className: "flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("input", { type: "email", placeholder: "Enter your email address", required: true, className: "bg-carbon border border-white/20 px-6 py-4 sm:py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full sm:min-w-[280px] transition-colors text-sm" }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("button", { type: "submit", className: "bg-acid text-ink font-semibold uppercase tracking-widest text-xs px-8 py-4 sm:py-3 rounded-full hover:bg-bone transition-colors whitespace-nowrap", children: "Get Briefing PDF" })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "relative z-10 w-full lg:w-auto flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("form", { className: "flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("input", { type: "email", placeholder: "Enter your email address", required: true, className: "bg-carbon border border-white/20 px-6 py-4 sm:py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full sm:min-w-[280px] transition-colors text-sm" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "submit", className: "bg-acid text-ink font-semibold uppercase tracking-widest text-xs px-8 py-4 sm:py-3 rounded-full hover:bg-bone transition-colors whitespace-nowrap", children: "Get Briefing PDF" })
       ] }) })
     ] })
   ] }) });
 }
-function Partnership() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { className: "relative py-32 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "Partnership", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+function Partnership({
+  steps
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { className: "relative py-32 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "Partnership", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
       "A New Model of ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "Automotive Ownership." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "Automotive Ownership." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "grid md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: SYNDICATE_STEPS.map((s) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-display text-6xl text-acid mb-6", children: s.n }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-xl mb-3", children: s.title }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/60 text-sm leading-relaxed", children: s.body })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "grid md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: steps.map((s) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-display text-6xl text-acid mb-6", children: s.n }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-xl mb-3", children: s.title }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "text-bone/60 text-sm leading-relaxed", children: s.body })
     ] }, s.n)) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mt-12 reveal flex items-center gap-6 justify-center text-bone/50 text-sm", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "font-mono uppercase tracking-[0.3em] text-xs", children: "Powered by Syndi" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "h-px w-12 bg-white/20" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "font-mono uppercase tracking-[0.3em] text-xs", children: "In collaboration with The Car Crowd" })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mt-12 reveal flex items-center gap-6 justify-center text-bone/50 text-sm", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "font-mono uppercase tracking-[0.3em] text-xs", children: "Powered by Syndi" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "h-px w-12 bg-white/20" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "font-mono uppercase tracking-[0.3em] text-xs", children: "In collaboration with The Car Crowd" })
     ] })
   ] }) });
 }
-function BuildProcess() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("section", { id: "build", className: "relative py-32 px-6 overflow-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover opacity-15 pointer-events-none" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-ink" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative mx-auto max-w-7xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "The Build Process", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+function BuildProcess({
+  process: process2
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("section", { id: "build", className: "relative py-32 px-6 overflow-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("video", { src: videoCarSection, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover opacity-15 pointer-events-none" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-ink" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "relative mx-auto max-w-7xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "The Build Process", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
         "Engineered ",
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "in the open." })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "in the open." })
       ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal-stagger grid md:grid-cols-2 lg:grid-cols-4 gap-8", children: PROCESS.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "border-t-2 border-acid pt-6", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-2", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "reveal-stagger grid md:grid-cols-2 lg:grid-cols-4 gap-8", children: process2.map((p3) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "border-t-2 border-acid pt-6", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-2", children: [
           "Phase ",
           p3.n
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-xl mb-6 leading-tight", children: p3.title }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("ul", { className: "space-y-2 text-bone/70 text-sm", children: p3.items.map((i2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("li", { className: "flex gap-2", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "\u2014" }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-xl mb-6 leading-tight", children: p3.title }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("ul", { className: "space-y-2 text-bone/70 text-sm", children: p3.items.map((i2) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("li", { className: "flex gap-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "\u2014" }),
           i2
         ] }, i2)) })
       ] }, p3.n)) }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal mt-16 text-center font-mono text-xs uppercase tracking-[0.3em] text-bone/50", children: "Every stage documented \u2022 Every decision visible" })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "reveal mt-16 text-center font-mono text-xs uppercase tracking-[0.3em] text-bone/50", children: "Every stage documented \u2022 Every decision visible" })
     ] })
   ] });
 }
-function Events() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { id: "events", className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "Syndicate Community", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+function Events({
+  events
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { id: "events", className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "Syndicate Community", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
       "Upcoming Events & ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "Experiences." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "Experiences." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: EVENTS2.map((e) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal border border-white/10 bg-carbon p-8 flex flex-col justify-between hover:border-acid transition-all duration-300", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "flex justify-between items-start mb-6", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "font-mono text-xs text-acid tracking-widest uppercase", children: e.type }),
-          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "bg-white/5 border border-white/10 px-2 py-0.5 rounded font-mono text-[9px] text-bone/60 tracking-wider", children: e.tag })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "grid md:grid-cols-3 gap-8", children: events.map((e) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal border border-white/10 bg-carbon p-8 flex flex-col justify-between hover:border-acid transition-all duration-300", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "flex justify-between items-start mb-6", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "font-mono text-xs text-acid tracking-widest uppercase", children: e.type }),
+          /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "bg-white/5 border border-white/10 px-2 py-0.5 rounded font-mono text-[9px] text-bone/60 tracking-wider", children: e.tag })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-xl mb-2", children: e.title }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-xs text-bone/40", children: e.date }),
-        e.description && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "mt-4 text-sm text-bone/60 leading-relaxed", children: e.description })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-xl mb-2", children: e.title }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-xs text-bone/40", children: e.date }),
+        e.description && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "mt-4 text-sm text-bone/60 leading-relaxed", children: e.description })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "mt-8 pt-6 border-t border-white/5", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("a", { href: "#apply", className: "inline-flex items-center gap-2 text-xs uppercase tracking-widest text-acid hover:text-bone transition-colors", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "mt-8 pt-6 border-t border-white/5", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("a", { href: "#apply", className: "inline-flex items-center gap-2 text-xs uppercase tracking-widest text-acid hover:text-bone transition-colors", children: [
         "Request Invite ",
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "font-sans text-sm", children: "\u2192" })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "font-sans text-sm", children: "\u2192" })
       ] }) })
     ] }, e.title)) })
   ] }) });
 }
-function Partners() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { id: "partners", className: "relative py-32 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "Partners", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+function Partners({
+  partners
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { id: "partners", className: "relative py-32 px-6 bg-carbon", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "Partners", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
       "Built with ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "specialists." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "specialists." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed", children: "The Syndicate RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing, and specialist car builds." }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: PARTNERS.map((p3, i2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed", children: "The Syndicate RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing, and specialist car builds." }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10", children: partners.map((p3, i2) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal bg-carbon p-8 hover:bg-steel transition-colors", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: [
         "Partner ",
         String(i2 + 1).padStart(2, "0")
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-lg mb-2", children: p3.name }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/50 text-sm", children: p3.role })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-lg mb-2", children: p3.name }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "text-bone/50 text-sm", children: p3.role })
     ] }, p3.name)) })
   ] }) });
 }
-function Benefits() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(SectionLabel, { kicker: "Syndicate Benefits", title: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+function Benefits({
+  benefits
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { className: "relative py-32 px-6", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-7xl", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(SectionLabel, { kicker: "Syndicate Benefits", title: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
       "More than an ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "investment." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "investment." })
     ] }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "grid md:grid-cols-4 gap-6", children: BENEFITS.map((b2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal border border-white/10 p-8 hover:border-acid transition-colors", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "text-acid text-4xl mb-6 font-mono", children: b2.icon }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h3", { className: "font-display text-xl mb-4", children: b2.title }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("ul", { className: "space-y-2 text-bone/60 text-sm", children: b2.items.map((i2) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("li", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "grid md:grid-cols-4 gap-6", children: benefits.map((b2) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal border border-white/10 p-8 hover:border-acid transition-colors", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "text-acid text-4xl mb-6 font-mono", children: b2.icon }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "font-display text-xl mb-4", children: b2.title }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("ul", { className: "space-y-2 text-bone/60 text-sm", children: b2.items.map((i2) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("li", { children: [
         "\u2014 ",
         i2
       ] }, i2)) })
     ] }, b2.title)) }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("p", { className: "reveal text-center mt-16 font-display text-2xl md:text-3xl text-bone/80", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("p", { className: "reveal text-center mt-16 font-display text-2xl md:text-3xl text-bone/80", children: [
       "This is ownership ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "you can feel." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "you can feel." })
     ] })
   ] }) });
 }
 function Value() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("section", { className: "relative py-32 px-6 overflow-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("img", { src: carbonTexture, alt: "", loading: "lazy", className: "absolute inset-0 h-full w-full object-cover opacity-30" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "relative mx-auto max-w-6xl", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "The Value Proposition" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("h2", { className: "reveal font-display text-4xl md:text-6xl leading-[1] mb-10 max-w-3xl", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("section", { className: "relative py-32 px-6 overflow-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("img", { src: carbonTexture, alt: "", loading: "lazy", className: "absolute inset-0 h-full w-full object-cover opacity-30" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "relative mx-auto max-w-6xl", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "The Value Proposition" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("h2", { className: "reveal font-display text-4xl md:text-6xl leading-[1] mb-10 max-w-3xl", children: [
         "A Different Kind of ",
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "Return." })
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "Return." })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal max-w-2xl text-bone/70 leading-relaxed mb-16", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "border-l-2 border-acid pl-6 italic font-display text-xl text-bone", children: '"Financial return is only part of the story."' }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-6", children: [{
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "reveal max-w-2xl text-bone/70 leading-relaxed mb-16", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "border-l-2 border-acid pl-6 italic font-display text-xl text-bone", children: '"Financial return is only part of the story."' }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-6", children: [{
         t: "Shared Cost",
         b: "Of a high-value build"
       }, {
@@ -53266,213 +53764,93 @@ function Value() {
       }, {
         t: "Upside Potential",
         b: "On future sale"
-      }].map((v3) => /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "reveal bg-ink/60 backdrop-blur border border-white/10 p-6", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("h4", { className: "font-display text-lg mb-2 text-acid", children: v3.t }),
-        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "text-bone/60 text-sm", children: v3.b })
+      }].map((v3) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "reveal bg-ink/60 backdrop-blur border border-white/10 p-6", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h4", { className: "font-display text-lg mb-2 text-acid", children: v3.t }),
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "text-bone/60 text-sm", children: v3.b })
       ] }, v3.t)) })
     ] })
   ] });
 }
 function Apply() {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("section", { id: "apply", className: "relative py-40 px-6 border-t border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "mx-auto max-w-5xl text-center", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "reveal font-mono text-xs tracking-[0.3em] uppercase text-acid mb-6", children: "Syndicate Availability" }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("h2", { className: "reveal font-display text-5xl md:text-7xl leading-[0.95] mb-10", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("section", { id: "apply", className: "relative py-40 px-6 border-t border-white/10", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "mx-auto max-w-5xl text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "reveal font-mono text-xs tracking-[0.3em] uppercase text-acid mb-6", children: "Syndicate Availability" }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("h2", { className: "reveal font-display text-5xl md:text-7xl leading-[0.95] mb-10", children: [
       "Limited ",
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "text-acid", children: "Allocation." })
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("span", { className: "text-acid", children: "Allocation." })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("ul", { className: "reveal text-bone/70 space-y-2 mb-12 inline-block text-left", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("li", { children: "\u2014 Fixed number of syndicate positions" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("li", { children: "\u2014 Strict allocation structure" }),
-      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("li", { children: "\u2014 Early applicants prioritised" })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("ul", { className: "reveal text-bone/70 space-y-2 mb-12 inline-block text-left", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("li", { children: "\u2014 Fixed number of syndicate positions" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("li", { children: "\u2014 Strict allocation structure" }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("li", { children: "\u2014 Early applicants prioritised" })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("p", { className: "reveal text-bone/50 mb-10 font-mono uppercase tracking-[0.25em] text-xs", children: "Once filled, the opportunity closes." }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("a", { href: "mailto:hello@syndicatedrestomod.com", className: "reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors", children: "Apply for Allocation" })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("p", { className: "reveal text-bone/50 mb-10 font-mono uppercase tracking-[0.25em] text-xs", children: "Once filled, the opportunity closes." }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("a", { href: "mailto:hello@syndicatedrestomod.com", className: "reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors", children: "Apply for Allocation" })
   ] }) });
 }
 function Index() {
   useReveal();
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Nav, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Hero, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Intro, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Stats, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Pillars, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(TheCar, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(LiveSyndicates, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Partnership, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(BuildProcess, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Events, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Partners, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Benefits, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Value, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Apply, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(Footer, {})
+  const {
+    syndicates,
+    events,
+    recentlyFunded,
+    pillars,
+    process: process2,
+    partners,
+    syndicateSteps,
+    benefits
+  } = Route2.useLoaderData();
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("main", { className: "bg-ink text-bone overflow-x-hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Nav, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Hero, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Intro, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Stats, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Pillars, { pillars }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(TheCar, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(LiveSyndicates, { syndicates }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Partnership, { steps: syndicateSteps }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BuildProcess, { process: process2 }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Events, { events }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Partners, { partners }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Benefits, { benefits }),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Value, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Apply, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Footer, {})
   ] });
 }
-var import_jsx_runtime29, import_react42, pillarPartners, pillarExperience, PILLARS, PROCESS, PARTNERS, SYNDICATE_STEPS, BENEFITS, LIVE_SYNDICATES, EVENTS2;
-var init_index_B3e0A50V = __esm({
-  "dist/server/assets/index-B3e0A50V.js"() {
+var import_jsx_runtime36, import_react49, import_node_async_hooks14;
+var init_index_DoNLU0Z3 = __esm({
+  "dist/server/assets/index-DoNLU0Z3.js"() {
     "use strict";
-    import_jsx_runtime29 = __toESM(require_jsx_runtime(), 1);
-    init_pillar_one_of_one_DiN9SsXa();
+    import_jsx_runtime36 = __toESM(require_jsx_runtime(), 1);
     init_carbon_texture_CrF_2aOK();
-    init_site_DZylOCQT();
     init_video_btH4iMvl();
-    init_hd_1920_1080_24fps_DsLk95nk();
-    init_fps_BgWRjoqf();
     init_esm5();
-    import_react42 = __toESM(require_react(), 1);
-    pillarPartners = "/assets/gallery-1-BNSHI9Rh.jpg";
-    pillarExperience = "/assets/gallery-1-BNSHI9Rh.jpg";
-    PILLARS = [{
-      n: "01",
-      title: "One of One Build",
-      video: videoPillarOne,
-      img: pillarOne,
-      body: "There will never be another. Car #148 \u2014 the 148th of 500 RS500s ever built \u2014 reborn as a unique, documented, investment-grade restomod."
-    }, {
-      n: "02",
-      title: "World-Class Build Partners",
-      img: pillarPartners,
-      body: "The very best in innovative manufacturing and artisan craft \u2014 from coachbuilding to bleeding-edge additive manufacturing."
-    }, {
-      n: "03",
-      title: "Exclusive Access & Experience",
-      video: videoPillarThree,
-      img: pillarExperience,
-      body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations."
-    }];
-    PROCESS = [{
-      n: "01",
-      title: "Acquisition & Strip",
-      items: ["Base vehicle selection", "Full teardown", "Digital scanning"]
-    }, {
-      n: "02",
-      title: "Design & Engineering",
-      items: ["CAD modelling", "Structural optimisation", "Performance upgrades"]
-    }, {
-      n: "03",
-      title: "Manufacturing",
-      items: ["Fabrication", "Additive manufacturing", "Precision assembly"]
-    }, {
-      n: "04",
-      title: "Finishing & Validation",
-      items: ["Paint & livery", "Road & track testing", "Final sign-off"]
-    }];
-    PARTNERS = [{
-      name: "T3DMC",
-      role: "3D Scanning & Digital Twin"
-    }, {
-      name: "ASM Auto Recycling",
-      role: "Chassis Dismantling & Cataloguing"
-    }, {
-      name: "Coventry Metalcraft",
-      role: "Precision Coachbuilding"
-    }, {
-      name: "DMC Silverstone",
-      role: "Assembly & Digital Manufacturing"
-    }, {
-      name: "BAMD Composites",
-      role: "Composite Structures"
-    }, {
-      name: "MAHLE Group",
-      role: "Engine Rebuild & Performance"
-    }, {
-      name: "Cornerstone Technologies",
-      role: "Non-structural Skillsets"
-    }, {
-      name: "HGL / VenueServe",
-      role: "Membership Platform & Fan Portal"
-    }];
-    SYNDICATE_STEPS = [{
-      n: 1,
-      title: "Syndicate Formation",
-      body: "A fixed number of participants secure allocation."
-    }, {
-      n: 2,
-      title: "Build Phase",
-      body: "Full transparency through content and direct access."
-    }, {
-      n: 3,
-      title: "Experience Phase",
-      body: "Driving events, track days, private access."
-    }, {
-      n: 4,
-      title: "Exit Opportunity",
-      body: "Potential sale of the asset at premium."
-    }];
-    BENEFITS = [{
-      icon: "\u2B21",
-      title: "Build Access",
-      items: ["Workshop visits", "Engineering insight"]
-    }, {
-      icon: "\u25CE",
-      title: "Driving Access",
-      items: ["Road drives", "Track sessions"]
-    }, {
-      icon: "\u2726",
-      title: "Events",
-      items: ["Launch", "Private experiences"]
-    }, {
-      icon: "\u25C8",
-      title: "Knowledge",
-      items: ["Learn the build", "Understand the engineering"]
-    }];
-    LIVE_SYNDICATES = [{
-      title: "Vision148 Sierra Cosworth RS500",
-      img: placeholderLogo,
-      allocation: "\xA35,000 per allocation",
-      stats: "25 Allocations \u2022 10 remaining",
-      return: "Potential Returns 77.1%*"
-    }, {
-      title: "Next Build being assessed for Syndication",
-      img: placeholderLogo,
-      allocation: "\xA32,000 per allocation",
-      stats: "31 Allocations \u2022 17 remaining",
-      return: "Potential Returns 63.90%*",
-      isPlaceholder: false,
-      waitlist: true
-    }, {
-      title: "Mercedes SLS AMG",
-      img: placeholderLogo,
-      allocation: "\xA35,000 per allocation",
-      stats: "39 Allocations \u2022 32 remaining",
-      return: "Potential Returns 87.2%*",
-      isPlaceholder: false
-    }];
-    EVENTS2 = [{
-      type: "Syndicate Member Invitation",
-      title: "Coventry Metalcraft",
-      tag: "INVITE ONLY",
-      description: "An opportunity to meet the UK's leading coach building company and Vision148 build partner",
-      date: "TBA"
-    }, {
-      type: "Syndicate Member Invitation",
-      title: "Digital Manufacturing Centre - Silverstone",
-      tag: "INVITE ONLY",
-      description: "Emersion in Additive Manufacturing at this bleeding edge manufacturing facility in the heart of motorsport",
-      date: "TBA"
-    }, {
-      type: "THE CARCROWD SYNDICATE GATHERING",
-      title: "Secret Meet 2026",
-      tag: "INVITE ONLY",
-      description: "",
-      date: "TBA"
-    }];
+    init_site_paN77MRt();
+    init_router_BhOLo_lT();
+    import_react49 = __toESM(require_react(), 1);
+    import_node_async_hooks14 = require("node:async_hooks");
+    init_production();
   }
 });
 
-// dist/server/assets/router-BcmlSFze.js
-var router_BcmlSFze_exports = {};
-__export(router_BcmlSFze_exports, {
-  getRouter: () => getRouter
+// dist/server/assets/router-BhOLo_lT.js
+var router_BhOLo_lT_exports = {};
+__export(router_BhOLo_lT_exports, {
+  R: () => Route$6,
+  a: () => Route$5,
+  b: () => Route$4,
+  c: () => Route$3,
+  d: () => Route$2,
+  e: () => Route$1,
+  f: () => Route2,
+  r: () => router
 });
 function NotFoundComponent() {
-  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "max-w-md text-center", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("h2", { className: "mt-4 text-xl font-semibold text-foreground", children: "Page not found" }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("p", { className: "mt-2 text-sm text-muted-foreground", children: "The page you're looking for doesn't exist or has been moved." }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "mt-6", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "max-w-md text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h2", { className: "mt-4 text-xl font-semibold text-foreground", children: "Page not found" }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("p", { className: "mt-2 text-sm text-muted-foreground", children: "The page you're looking for doesn't exist or has been moved." }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: "mt-6", children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
       Link,
       {
         to: "/",
@@ -53484,23 +53862,23 @@ function NotFoundComponent() {
 }
 function ErrorComponent2({ error, reset }) {
   console.error(error);
-  const router = useRouter();
-  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "max-w-md text-center", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("h1", { className: "text-xl font-semibold tracking-tight text-foreground", children: "This page didn't load" }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("p", { className: "mt-2 text-sm text-muted-foreground", children: "Something went wrong on our end. You can try refreshing or head back home." }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "mt-6 flex flex-wrap justify-center gap-2", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+  const router2 = useRouter();
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "max-w-md text-center", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h1", { className: "text-xl font-semibold tracking-tight text-foreground", children: "This page didn't load" }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("p", { className: "mt-2 text-sm text-muted-foreground", children: "Something went wrong on our end. You can try refreshing or head back home." }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "mt-6 flex flex-wrap justify-center gap-2", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
         "button",
         {
           onClick: () => {
-            router.invalidate();
+            router2.invalidate();
             reset();
           },
           className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90",
           children: "Try again"
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
         "a",
         {
           href: "/",
@@ -53512,11 +53890,11 @@ function ErrorComponent2({ error, reset }) {
   ] }) });
 }
 function RootShell({ children }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("html", { lang: "en", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("head", { children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(HeadContent, {}) }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("body", { children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("html", { lang: "en", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("head", { children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(HeadContent, {}) }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("body", { children: [
       children,
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Scripts, {})
+      /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Scripts, {})
     ] })
   ] });
 }
@@ -53530,7 +53908,7 @@ function RootComponent() {
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -8 }
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(AnimatePresence, { mode: "wait", initial: false, children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(AnimatePresence, { mode: "wait", initial: false, children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
     motion.div,
     {
       variants,
@@ -53538,19 +53916,20 @@ function RootComponent() {
       animate: "animate",
       exit: "exit",
       transition,
-      children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Outlet, {})
+      children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Outlet, {})
     },
     pathname
   ) }) });
 }
-var import_jsx_runtime30, appCss, Route$7, $$splitComponentImporter$6, Route$6, $$splitComponentImporter$5, Route$5, $$splitComponentImporter$4, Route$4, $$splitComponentImporter$3, Route$3, $$splitComponentImporter$2, Route$2, $$splitComponentImporter$1, Route$1, $$splitComponentImporter, Route2, TheBuildRoute, EventsRoute, DesignGalleryRoute, ContactRoute, ApplyRoute, AboutRoute, IndexRoute, rootRouteChildren, routeTree, getRouter;
-var init_router_BcmlSFze = __esm({
-  "dist/server/assets/router-BcmlSFze.js"() {
+var import_jsx_runtime37, appCss, Route$7, createSsrRpc, getPhases2, getSpecs2, $$splitComponentImporter$6, Route$6, getPageEvents2, getFaqs2, $$splitComponentImporter$5, Route$5, getGalleryItems2, $$splitComponentImporter$4, Route$4, getDirectLines2, getWorkshopAddress2, $$splitComponentImporter$3, Route$3, getApplySteps2, $$splitComponentImporter$2, Route$2, getPrinciples2, getArchitects2, $$splitComponentImporter$1, Route$1, getLiveSyndicates2, getRecentlyFunded2, getEvents2, getPillars2, getProcess2, getPartners2, getSyndicateSteps2, getBenefits2, $$splitComponentImporter, Route2, TheBuildRoute, EventsRoute, DesignGalleryRoute, ContactRoute, ApplyRoute, AboutRoute, IndexRoute, rootRouteChildren, routeTree, getRouter, router;
+var init_router_BhOLo_lT = __esm({
+  "dist/server/assets/router-BhOLo_lT.js"() {
     "use strict";
     init_modern2();
     init_esm5();
-    import_jsx_runtime30 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime37 = __toESM(require_jsx_runtime(), 1);
     init_es3();
+    init_server_Z5_5AO7O();
     appCss = "/assets/styles-DolJQieJ.css";
     Route$7 = createRootRouteWithContext()({
       head: () => ({
@@ -53581,7 +53960,25 @@ var init_router_BcmlSFze = __esm({
       notFoundComponent: NotFoundComponent,
       errorComponent: ErrorComponent2
     });
-    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_JiGRFvjY(), the_build_JiGRFvjY_exports));
+    createSsrRpc = (functionId) => {
+      const url = "/_serverFn/" + functionId;
+      const serverFnMeta = { id: functionId };
+      const fn2 = async (...args) => {
+        return (await getServerFnById(functionId))(...args);
+      };
+      return Object.assign(fn2, {
+        url,
+        serverFnMeta,
+        [TSS_SERVER_FUNCTION]: true
+      });
+    };
+    getPhases2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("de1baaab6d9d6b32a851c3872eda95f609bc6ad63df410dcd14a814a4a6b8c7d"));
+    getSpecs2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("99b07c72264bd83f294bf8c190daadda04dd85ad1509ca79cec14ab8c32bf477"));
+    $$splitComponentImporter$6 = () => Promise.resolve().then(() => (init_the_build_D9506stp(), the_build_D9506stp_exports));
     Route$6 = createFileRoute("/the-build")({
       head: () => ({
         meta: [{
@@ -53597,9 +53994,23 @@ var init_router_BcmlSFze = __esm({
           content: "Engineered in the open. Every stage documented."
         }]
       }),
-      component: lazyRouteComponent($$splitComponentImporter$6, "component")
+      component: lazyRouteComponent($$splitComponentImporter$6, "component"),
+      loader: async () => {
+        const phases = await getPhases2();
+        const specs = await getSpecs2();
+        return {
+          phases,
+          specs
+        };
+      }
     });
-    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_C55AZNJO(), events_C55AZNJO_exports));
+    getPageEvents2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("32ebfdeb12c784e01d43e641321f48eb4b3a23b1017f01ba2e406f7461e63a7e"));
+    getFaqs2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("84ac47e88e92c0a102a5f22e093fc9253feb648bc5fb9abad64c673167143404"));
+    $$splitComponentImporter$5 = () => Promise.resolve().then(() => (init_events_B_nQOv9X(), events_B_nQOv9X_exports));
     Route$5 = createFileRoute("/events")({
       head: () => ({
         meta: [{
@@ -53615,9 +54026,20 @@ var init_router_BcmlSFze = __esm({
           content: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions."
         }]
       }),
-      component: lazyRouteComponent($$splitComponentImporter$5, "component")
+      component: lazyRouteComponent($$splitComponentImporter$5, "component"),
+      loader: async () => {
+        const events = await getPageEvents2();
+        const faqs = await getFaqs2();
+        return {
+          events,
+          faqs
+        };
+      }
     });
-    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_b0W838Sq(), design_gallery_b0W838Sq_exports));
+    getGalleryItems2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("0f43699aa5c12fd7eccb86d3c89fc028b662ee26b58f0d02adfb484e9344adea"));
+    $$splitComponentImporter$4 = () => Promise.resolve().then(() => (init_design_gallery_V0yqGY0V(), design_gallery_V0yqGY0V_exports));
     Route$4 = createFileRoute("/design-gallery")({
       head: () => ({
         meta: [{
@@ -53633,9 +54055,16 @@ var init_router_BcmlSFze = __esm({
           content: "Renders, details, materials, process imagery."
         }]
       }),
-      component: lazyRouteComponent($$splitComponentImporter$4, "component")
+      component: lazyRouteComponent($$splitComponentImporter$4, "component"),
+      loader: () => getGalleryItems2()
     });
-    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_BVusgovq(), contact_BVusgovq_exports));
+    getDirectLines2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("9d5d90b80df1ece8b649303ca74c9d63692f0f226b382338d93d8d04399a1955"));
+    getWorkshopAddress2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("7ccf67c9f0168c6ac9157c05785d1dcd26d00c09dfaf8efac7d05f81052b726b"));
+    $$splitComponentImporter$3 = () => Promise.resolve().then(() => (init_contact_YaAxU4_t(), contact_YaAxU4_t_exports));
     Route$3 = createFileRoute("/contact")({
       head: () => ({
         meta: [{
@@ -53651,9 +54080,20 @@ var init_router_BcmlSFze = __esm({
           content: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome."
         }]
       }),
-      component: lazyRouteComponent($$splitComponentImporter$3, "component")
+      component: lazyRouteComponent($$splitComponentImporter$3, "component"),
+      loader: async () => {
+        const directLines = await getDirectLines2();
+        const workshopAddress = await getWorkshopAddress2();
+        return {
+          directLines,
+          workshopAddress
+        };
+      }
     });
-    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_DxfTk8mH(), apply_DxfTk8mH_exports));
+    getApplySteps2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("ebe8ef3d05a46c2d928d9d6319350dfb53ad6f290bd633e464e3550d615987e5"));
+    $$splitComponentImporter$2 = () => Promise.resolve().then(() => (init_apply_C1dS3vaz(), apply_C1dS3vaz_exports));
     Route$2 = createFileRoute("/apply")({
       head: () => ({
         meta: [{
@@ -53669,9 +54109,16 @@ var init_router_BcmlSFze = __esm({
           content: "Limited syndicate positions for the Syndicate RS500 build."
         }]
       }),
-      component: lazyRouteComponent($$splitComponentImporter$2, "component")
+      component: lazyRouteComponent($$splitComponentImporter$2, "component"),
+      loader: () => getApplySteps2()
     });
-    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_DmFS81c0(), about_DmFS81c0_exports));
+    getPrinciples2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("c3ab668dcbbf85177bcd1c92f3777bc61f78af3c447bb7cd1449451b613d7329"));
+    getArchitects2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("b6ec13c45afd3f3a4fc06cbfb77f797107faeaad290a546d85fda1f90d7de29b"));
+    $$splitComponentImporter$1 = () => Promise.resolve().then(() => (init_about_Dls_vIsa(), about_Dls_vIsa_exports));
     Route$1 = createFileRoute("/about")({
       head: () => ({
         meta: [{
@@ -53687,11 +54134,63 @@ var init_router_BcmlSFze = __esm({
           content: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners."
         }]
       }),
-      component: lazyRouteComponent($$splitComponentImporter$1, "component")
+      component: lazyRouteComponent($$splitComponentImporter$1, "component"),
+      loader: async () => {
+        const principles = await getPrinciples2();
+        const architects = await getArchitects2();
+        return {
+          principles,
+          architects
+        };
+      }
     });
-    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_B3e0A50V(), index_B3e0A50V_exports));
+    getLiveSyndicates2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("041b66f586895c402252b0a2ec4cbb187064b43fc562c382861f52f1fae90224"));
+    getRecentlyFunded2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("cdb6f24a000fe743889e66044e57b678ffab7c29ad8773078d041e94faab139b"));
+    getEvents2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("bcde8082d3369e5a7fc294219e3bc981a037f0fd2283bf641bde7a11feebf4b2"));
+    getPillars2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("4a4bed894e92b763e0483532a03ef3b66456933fb0cb0c1ddcb303b229de53eb"));
+    getProcess2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("598d1ce99a86ccdfcf29f22eb6720f9eea7fb410d8b2a1ed82f69f5877049988"));
+    getPartners2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("c196cb2e36758946b524ae3ac80190f8a985530bc850e44f1d9fb958cdafbb0e"));
+    getSyndicateSteps2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("ac52de4b35ea0c682573eb720be0c3dc0e938a370123a3490c4605b60ab0786c"));
+    getBenefits2 = createServerFn({
+      method: "GET"
+    }).handler(createSsrRpc("908d6378279f221ff138851f3efe8d5676afb43fba40f140c2cfa0b0dd888628"));
+    $$splitComponentImporter = () => Promise.resolve().then(() => (init_index_DoNLU0Z3(), index_DoNLU0Z3_exports));
     Route2 = createFileRoute("/")({
-      component: lazyRouteComponent($$splitComponentImporter, "component")
+      component: lazyRouteComponent($$splitComponentImporter, "component"),
+      loader: async () => {
+        const syndicates = await getLiveSyndicates2();
+        const events = await getEvents2();
+        const recentlyFunded = await getRecentlyFunded2();
+        const pillars = await getPillars2();
+        const process2 = await getProcess2();
+        const partners = await getPartners2();
+        const syndicateSteps = await getSyndicateSteps2();
+        const benefits = await getBenefits2();
+        return {
+          syndicates,
+          events,
+          recentlyFunded,
+          pillars,
+          process: process2,
+          partners,
+          syndicateSteps,
+          benefits
+        };
+      }
     });
     TheBuildRoute = Route$6.update({
       id: "/the-build",
@@ -53740,20 +54239,24 @@ var init_router_BcmlSFze = __esm({
     routeTree = Route$7._addFileChildren(rootRouteChildren)._addFileTypes();
     getRouter = () => {
       const queryClient = new QueryClient();
-      const router = createRouter2({
+      const router2 = createRouter2({
         routeTree,
         context: { queryClient },
         scrollRestoration: true,
         defaultPreloadStaleTime: 0
       });
-      return router;
+      return router2;
     };
+    router = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+      __proto__: null,
+      getRouter
+    }, Symbol.toStringTag, { value: "Module" }));
   }
 });
 
-// dist/server/assets/start-B44JgS6u.js
-var start_B44JgS6u_exports = {};
-__export(start_B44JgS6u_exports, {
+// dist/server/assets/start-Dyv37hTi.js
+var start_Dyv37hTi_exports = {};
+__export(start_Dyv37hTi_exports, {
   startInstance: () => startInstance
 });
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
@@ -53765,16 +54268,16 @@ function dedupeSerializationAdapters(deduped, serializationAdapters) {
     }
   }
 }
-var import_node_async_hooks, import_react43, import_jsx_runtime31, createStart, errorMiddleware, startInstance;
-var init_start_B44JgS6u = __esm({
-  "dist/server/assets/start-B44JgS6u.js"() {
+var import_node_async_hooks15, import_react50, import_jsx_runtime38, createStart, errorMiddleware, startInstance;
+var init_start_Dyv37hTi = __esm({
+  "dist/server/assets/start-Dyv37hTi.js"() {
     "use strict";
-    init_server_BOP1_qvk();
+    init_server_Z5_5AO7O();
     init_server5();
-    import_node_async_hooks = require("node:async_hooks");
+    import_node_async_hooks15 = require("node:async_hooks");
     init_production();
-    import_react43 = __toESM(require_react(), 1);
-    import_jsx_runtime31 = __toESM(require_jsx_runtime(), 1);
+    import_react50 = __toESM(require_react(), 1);
+    import_jsx_runtime38 = __toESM(require_jsx_runtime(), 1);
     createStart = (getOptions) => {
       return {
         getOptions: async () => {
@@ -53824,14 +54327,17 @@ var init_empty_plugin_adapters_BFgPZ6_d = __esm({
   }
 });
 
-// dist/server/assets/server-BOP1_qvk.js
-var server_BOP1_qvk_exports = {};
-__export(server_BOP1_qvk_exports, {
+// dist/server/assets/server-Z5-5AO7O.js
+var server_Z5_5AO7O_exports = {};
+__export(server_Z5_5AO7O_exports, {
+  T: () => TSS_SERVER_FUNCTION,
+  a: () => createServerFn,
   c: () => createMiddleware,
+  g: () => getServerFnById,
   s: () => server
 });
 function StartServer(props) {
-  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RouterProvider, { router: props.router });
+  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(RouterProvider, { router: props.router });
 }
 function isPromiseLike(value) {
   return typeof value.then === "function";
@@ -53883,7 +54389,7 @@ function getResponse() {
   return getH3Event().res;
 }
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_Cj3Mk0Iw(), tanstack_start_manifest_v_Cj3Mk0Iw_exports));
+  const { tsrStartManifest: tsrStartManifest2 } = await Promise.resolve().then(() => (init_tanstack_start_manifest_v_D_a0zMx(), tanstack_start_manifest_v_D_a0zMx_exports));
   const startManifest = tsrStartManifest2();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -53947,6 +54453,68 @@ function getStartContext(opts) {
   if (!context && opts?.throwIfNotFound !== false) throw new Error(`No Start context found in AsyncLocalStorage. Make sure you are using the function within the server runtime.`);
   return context;
 }
+async function executeMiddleware$1(middlewares, env, opts) {
+  let flattenedMiddlewares = flattenMiddlewares([...getStartOptions()?.functionMiddleware || [], ...middlewares]);
+  if (env === "server") {
+    const startContext = getStartContextServerOnly({ throwIfNotFound: false });
+    if (startContext?.executedRequestMiddlewares) flattenedMiddlewares = flattenedMiddlewares.filter((m3) => !startContext.executedRequestMiddlewares.has(m3));
+  }
+  const callNextMiddleware = async (ctx) => {
+    const nextMiddleware = flattenedMiddlewares.shift();
+    if (!nextMiddleware) return ctx;
+    try {
+      if ("inputValidator" in nextMiddleware.options && nextMiddleware.options.inputValidator && env === "server") ctx.data = await execValidator(nextMiddleware.options.inputValidator, ctx.data);
+      let middlewareFn = void 0;
+      if (env === "client") {
+        if ("client" in nextMiddleware.options) middlewareFn = nextMiddleware.options.client;
+      } else if ("server" in nextMiddleware.options) middlewareFn = nextMiddleware.options.server;
+      if (middlewareFn) {
+        const userNext = async (userCtx = {}) => {
+          const result2 = await callNextMiddleware({
+            ...ctx,
+            ...userCtx,
+            context: safeObjectMerge(ctx.context, userCtx.context),
+            sendContext: safeObjectMerge(ctx.sendContext, userCtx.sendContext),
+            headers: mergeHeaders(ctx.headers, userCtx.headers),
+            _callSiteFetch: ctx._callSiteFetch,
+            fetch: ctx._callSiteFetch ?? userCtx.fetch ?? ctx.fetch,
+            result: userCtx.result !== void 0 ? userCtx.result : userCtx instanceof Response ? userCtx : ctx.result,
+            error: userCtx.error ?? ctx.error
+          });
+          if (result2.error) throw result2.error;
+          return result2;
+        };
+        const result = await middlewareFn({
+          ...ctx,
+          next: userNext
+        });
+        if (isRedirect(result)) return {
+          ...ctx,
+          error: result
+        };
+        if (result instanceof Response) return {
+          ...ctx,
+          result
+        };
+        if (!result) throw new Error("User middleware returned undefined. You must call next() or return a result in your middlewares.");
+        return result;
+      }
+      return callNextMiddleware(ctx);
+    } catch (error) {
+      return {
+        ...ctx,
+        error
+      };
+    }
+  };
+  return callNextMiddleware({
+    ...opts,
+    headers: opts.headers || {},
+    sendContext: opts.sendContext || {},
+    context: opts.context || createNullProtoObject(),
+    _callSiteFetch: opts.fetch
+  });
+}
 function flattenMiddlewares(middlewares, maxDepth2 = 100) {
   const seen = /* @__PURE__ */ new Set();
   const flattened = [];
@@ -53962,6 +54530,40 @@ function flattenMiddlewares(middlewares, maxDepth2 = 100) {
   };
   recurse(middlewares, 0);
   return flattened;
+}
+async function execValidator(validator, input) {
+  if (validator == null) return {};
+  if ("~standard" in validator) {
+    const result = await validator["~standard"].validate(input);
+    if (result.issues) throw new Error(JSON.stringify(result.issues, void 0, 2));
+    return result.value;
+  }
+  if ("parse" in validator) return validator.parse(input);
+  if (typeof validator === "function") return validator(input);
+  throw new Error("Invalid validator type!");
+}
+function serverFnBaseToMiddleware(options) {
+  return {
+    "~types": void 0,
+    options: {
+      inputValidator: options.inputValidator,
+      client: async ({ next, sendContext, fetch: fetch22, ...ctx }) => {
+        const payload = {
+          ...ctx,
+          context: sendContext,
+          fetch: fetch22
+        };
+        return next(await options.extractedFn?.(payload));
+      },
+      server: async ({ next, ...ctx }) => {
+        const result = await options.serverFn?.(ctx);
+        return next({
+          ...ctx,
+          result
+        });
+      }
+    }
+  };
 }
 async function isCsrfRequestAllowed(opts, ctx) {
   const result = await getCsrfRequestValidationResult(opts, ctx);
@@ -54702,8 +55304,8 @@ function getStartResponseHeaders(opts) {
 }
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    Promise.resolve().then(() => (init_router_BcmlSFze(), router_BcmlSFze_exports)),
-    Promise.resolve().then(() => (init_start_B44JgS6u(), start_B44JgS6u_exports)),
+    Promise.resolve().then(() => (init_router_BhOLo_lT(), router_BhOLo_lT_exports)).then((n2) => n2.r),
+    Promise.resolve().then(() => (init_start_Dyv37hTi(), start_Dyv37hTi_exports)),
     Promise.resolve().then(() => (init_empty_plugin_adapters_BFgPZ6_d(), empty_plugin_adapters_BFgPZ6_d_exports))
   ]);
   return {
@@ -54781,7 +55383,7 @@ function createStartHandler(cbOrOptions) {
   const resolveManifestForRequest = finalManifestResolver.resolveCached;
   finalManifestResolver.warmup({ getBaseManifest: () => getBaseManifest() });
   const startRequestResolver = async (request, requestOpts) => {
-    let router = null;
+    let router2 = null;
     let cbWillCleanup = false;
     try {
       const { url, handledProtocolRelativeURL } = getNormalizedURL(request.url);
@@ -54805,21 +55407,21 @@ function createStartHandler(cbOrOptions) {
       const flattenedRequestMiddlewares = requestStartOptions.requestMiddleware ? flattenMiddlewares(requestStartOptions.requestMiddleware) : [];
       const executedRequestMiddlewares = new Set(flattenedRequestMiddlewares);
       const getRouter2 = async () => {
-        if (router) return router;
-        router = await entries.routerEntry.getRouter();
+        if (router2) return router2;
+        router2 = await entries.routerEntry.getRouter();
         let isShell = IS_SHELL_ENV;
         if (IS_PRERENDERING && !isShell) isShell = request.headers.get(HEADERS.TSS_SHELL) === "true";
         const history2 = createMemoryHistory({ initialEntries: [href] });
-        router.update({
+        router2.update({
           history: history2,
           isShell,
           isPrerendering: IS_PRERENDERING,
-          origin: router.options.origin ?? origin,
+          origin: router2.options.origin ?? origin,
           defaultSsr: requestStartOptions.defaultSsr,
-          serializationAdapters: [...requestStartOptions.serializationAdapters, ...router.options.serializationAdapters || []],
+          serializationAdapters: [...requestStartOptions.serializationAdapters, ...router2.options.serializationAdapters || []],
           basepath: ROUTER_BASEPATH
         });
-        return router;
+        return router2;
       };
       if (SERVER_FN_BASE && url.pathname.startsWith(SERVER_FN_BASE)) {
         if (false) ;
@@ -54914,8 +55516,8 @@ function createStartHandler(cbOrOptions) {
         context: createNullProtoObject(requestOpts?.context)
       })).response, request, getRouter2);
     } finally {
-      if (router && !cbWillCleanup) router.serverSsr?.cleanup();
-      router = null;
+      if (router2 && !cbWillCleanup) router2.serverSsr?.cleanup();
+      router2 = null;
     }
   };
   return requestHandler(startRequestResolver);
@@ -54944,9 +55546,9 @@ async function handleRedirectResponse(response, request, getRouter2) {
   return redirect3;
 }
 async function handleServerRoutes({ getRouter: getRouter2, request, url, executeRouter, context, executedRequestMiddlewares }) {
-  const router = await getRouter2();
-  const pathname = executeRewriteInput(router.rewrite, url).pathname;
-  const { matchedRoutes, foundRoute, routeParams } = router.getMatchedRoutes(pathname);
+  const router2 = await getRouter2();
+  const pathname = executeRewriteInput(router2.rewrite, url).pathname;
+  const { matchedRoutes, foundRoute, routeParams } = router2.getMatchedRoutes(pathname);
   const isExactMatch = foundRoute && routeParams["**"] === void 0;
   const routeMiddlewares = [];
   for (const route of matchedRoutes) {
@@ -54995,35 +55597,109 @@ function createServerEntry(entry) {
     return await entry.fetch(...args);
   } };
 }
-var import_node_async_hooks2, import_react44, import_jsx_runtime32, defaultStreamHandler, GLOBAL_EVENT_STORAGE_KEY, globalObj$1, eventStorage, HEADERS, manifest, TSS_FORMDATA_CONTEXT, TSS_SERVER_FUNCTION, X_TSS_SERIALIZED, X_TSS_RAW_RESPONSE, TSS_CONTENT_TYPE_FRAMED, FrameType, FRAME_HEADER_SIZE, TSS_CONTENT_TYPE_FRAMED_VERSIONED, GLOBAL_STORAGE_KEY, globalObj, startStorage, getStartOptions, createMiddleware, innerCreateCsrfMiddleware, createCsrfMiddleware, textEncoder2, EMPTY_PAYLOAD, serovalPlugins, FORM_DATA_CONTENT_TYPES, MAX_PAYLOAD_SIZE, handleServerAction, LINK_PARAM_TOKEN_RE, PRELOAD_AS_VALUES, ServerFunctionSerializationAdapter, entriesPromise, defaultCsrfMiddleware, getCachedBaseManifest, getProdBaseManifest, getBaseManifest, createEarlyHintsForRequest, ROUTER_BASEPATH, SERVER_FN_BASE, IS_PRERENDERING, IS_SHELL_ENV, ERR_NO_RESPONSE, ERR_NO_DEFER, fetch2, server_default, server;
-var init_server_BOP1_qvk = __esm({
-  "dist/server/assets/server-BOP1_qvk.js"() {
+var import_node_async_hooks16, import_react51, import_jsx_runtime39, defaultStreamHandler, GLOBAL_EVENT_STORAGE_KEY, globalObj$1, eventStorage, HEADERS, manifest, TSS_FORMDATA_CONTEXT, TSS_SERVER_FUNCTION, TSS_SERVER_FUNCTION_FACTORY, X_TSS_SERIALIZED, X_TSS_RAW_RESPONSE, TSS_CONTENT_TYPE_FRAMED, FrameType, FRAME_HEADER_SIZE, TSS_CONTENT_TYPE_FRAMED_VERSIONED, GLOBAL_STORAGE_KEY, globalObj, startStorage, getStartOptions, getStartContextServerOnly, createServerFn, createMiddleware, innerCreateCsrfMiddleware, createCsrfMiddleware, textEncoder2, EMPTY_PAYLOAD, serovalPlugins, FORM_DATA_CONTENT_TYPES, MAX_PAYLOAD_SIZE, handleServerAction, LINK_PARAM_TOKEN_RE, PRELOAD_AS_VALUES, ServerFunctionSerializationAdapter, entriesPromise, defaultCsrfMiddleware, getCachedBaseManifest, getProdBaseManifest, getBaseManifest, createEarlyHintsForRequest, ROUTER_BASEPATH, SERVER_FN_BASE, IS_PRERENDERING, IS_SHELL_ENV, ERR_NO_RESPONSE, ERR_NO_DEFER, fetch2, server_default, server;
+var init_server_Z5_5AO7O = __esm({
+  "dist/server/assets/server-Z5-5AO7O.js"() {
     "use strict";
-    import_node_async_hooks2 = require("node:async_hooks");
+    import_node_async_hooks16 = require("node:async_hooks");
     init_node2();
     init_esm2();
     init_production();
     init_esm();
     init_client();
     init_server2();
-    import_react44 = __toESM(require_react(), 1);
+    import_react51 = __toESM(require_react(), 1);
     init_esm5();
-    import_jsx_runtime32 = __toESM(require_jsx_runtime(), 1);
+    import_jsx_runtime39 = __toESM(require_jsx_runtime(), 1);
     init_server4();
-    defaultStreamHandler = defineHandlerCallback(({ request, router, responseHeaders }) => renderRouterToStream({
+    defaultStreamHandler = defineHandlerCallback(({ request, router: router2, responseHeaders }) => renderRouterToStream({
       request,
-      router,
+      router: router2,
       responseHeaders,
-      children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(StartServer, { router })
+      children: /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(StartServer, { router: router2 })
     }));
     GLOBAL_EVENT_STORAGE_KEY = /* @__PURE__ */ Symbol.for("tanstack-start:event-storage");
     globalObj$1 = globalThis;
-    if (!globalObj$1[GLOBAL_EVENT_STORAGE_KEY]) globalObj$1[GLOBAL_EVENT_STORAGE_KEY] = new import_node_async_hooks2.AsyncLocalStorage();
+    if (!globalObj$1[GLOBAL_EVENT_STORAGE_KEY]) globalObj$1[GLOBAL_EVENT_STORAGE_KEY] = new import_node_async_hooks16.AsyncLocalStorage();
     eventStorage = globalObj$1[GLOBAL_EVENT_STORAGE_KEY];
     HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
-    manifest = {};
+    manifest = {
+      "041b66f586895c402252b0a2ec4cbb187064b43fc562c382861f52f1fae90224": {
+        functionName: "getLiveSyndicates_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "0f43699aa5c12fd7eccb86d3c89fc028b662ee26b58f0d02adfb484e9344adea": {
+        functionName: "getGalleryItems_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_gallery_DCNTZseF(), gallery_DCNTZseF_exports))
+      },
+      "32ebfdeb12c784e01d43e641321f48eb4b3a23b1017f01ba2e406f7461e63a7e": {
+        functionName: "getPageEvents_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_events_uZCst0a2(), events_uZCst0a2_exports))
+      },
+      "4a4bed894e92b763e0483532a03ef3b66456933fb0cb0c1ddcb303b229de53eb": {
+        functionName: "getPillars_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "598d1ce99a86ccdfcf29f22eb6720f9eea7fb410d8b2a1ed82f69f5877049988": {
+        functionName: "getProcess_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "7ccf67c9f0168c6ac9157c05785d1dcd26d00c09dfaf8efac7d05f81052b726b": {
+        functionName: "getWorkshopAddress_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_contact_Bc0_yUrY(), contact_Bc0_yUrY_exports))
+      },
+      "84ac47e88e92c0a102a5f22e093fc9253feb648bc5fb9abad64c673167143404": {
+        functionName: "getFaqs_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_events_uZCst0a2(), events_uZCst0a2_exports))
+      },
+      "908d6378279f221ff138851f3efe8d5676afb43fba40f140c2cfa0b0dd888628": {
+        functionName: "getBenefits_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "99b07c72264bd83f294bf8c190daadda04dd85ad1509ca79cec14ab8c32bf477": {
+        functionName: "getSpecs_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_build_BUOr1TJ3(), build_BUOr1TJ3_exports))
+      },
+      "9d5d90b80df1ece8b649303ca74c9d63692f0f226b382338d93d8d04399a1955": {
+        functionName: "getDirectLines_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_contact_Bc0_yUrY(), contact_Bc0_yUrY_exports))
+      },
+      "ac52de4b35ea0c682573eb720be0c3dc0e938a370123a3490c4605b60ab0786c": {
+        functionName: "getSyndicateSteps_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "b6ec13c45afd3f3a4fc06cbfb77f797107faeaad290a546d85fda1f90d7de29b": {
+        functionName: "getArchitects_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_about_Va2MKswd(), about_Va2MKswd_exports))
+      },
+      "bcde8082d3369e5a7fc294219e3bc981a037f0fd2283bf641bde7a11feebf4b2": {
+        functionName: "getEvents_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "c196cb2e36758946b524ae3ac80190f8a985530bc850e44f1d9fb958cdafbb0e": {
+        functionName: "getPartners_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "c3ab668dcbbf85177bcd1c92f3777bc61f78af3c447bb7cd1449451b613d7329": {
+        functionName: "getPrinciples_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_about_Va2MKswd(), about_Va2MKswd_exports))
+      },
+      "cdb6f24a000fe743889e66044e57b678ffab7c29ad8773078d041e94faab139b": {
+        functionName: "getRecentlyFunded_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_syndicates_D_B8VaQZ(), syndicates_D_B8VaQZ_exports))
+      },
+      "de1baaab6d9d6b32a851c3872eda95f609bc6ad63df410dcd14a814a4a6b8c7d": {
+        functionName: "getPhases_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_build_BUOr1TJ3(), build_BUOr1TJ3_exports))
+      },
+      "ebe8ef3d05a46c2d928d9d6319350dfb53ad6f290bd633e464e3550d615987e5": {
+        functionName: "getApplySteps_createServerFn_handler",
+        importer: () => Promise.resolve().then(() => (init_apply_BQ8LwNfo(), apply_BQ8LwNfo_exports))
+      }
+    };
     TSS_FORMDATA_CONTEXT = "__TSS_CONTEXT";
     TSS_SERVER_FUNCTION = /* @__PURE__ */ Symbol.for("TSS_SERVER_FUNCTION");
+    TSS_SERVER_FUNCTION_FACTORY = /* @__PURE__ */ Symbol.for("TSS_SERVER_FUNCTION_FACTORY");
     X_TSS_SERIALIZED = "x-tss-serialized";
     X_TSS_RAW_RESPONSE = "x-tss-raw";
     TSS_CONTENT_TYPE_FRAMED = "application/x-tss-framed";
@@ -55041,9 +55717,87 @@ var init_server_BOP1_qvk = __esm({
     TSS_CONTENT_TYPE_FRAMED_VERSIONED = `${TSS_CONTENT_TYPE_FRAMED}; v=1`;
     GLOBAL_STORAGE_KEY = /* @__PURE__ */ Symbol.for("tanstack-start:start-storage-context");
     globalObj = globalThis;
-    if (!globalObj[GLOBAL_STORAGE_KEY]) globalObj[GLOBAL_STORAGE_KEY] = new import_node_async_hooks2.AsyncLocalStorage();
+    if (!globalObj[GLOBAL_STORAGE_KEY]) globalObj[GLOBAL_STORAGE_KEY] = new import_node_async_hooks16.AsyncLocalStorage();
     startStorage = globalObj[GLOBAL_STORAGE_KEY];
     getStartOptions = () => getStartContext().startOptions;
+    getStartContextServerOnly = getStartContext;
+    createServerFn = (options, __opts) => {
+      const resolvedOptions = __opts || options || {};
+      if (typeof resolvedOptions.method === "undefined") resolvedOptions.method = "GET";
+      const res = {
+        options: resolvedOptions,
+        middleware: (middleware) => {
+          const newMiddleware = [...resolvedOptions.middleware || []];
+          middleware.map((m3) => {
+            if (TSS_SERVER_FUNCTION_FACTORY in m3) {
+              if (m3.options.middleware) newMiddleware.push(...m3.options.middleware);
+            } else newMiddleware.push(m3);
+          });
+          const res2 = createServerFn(void 0, {
+            ...resolvedOptions,
+            middleware: newMiddleware
+          });
+          res2[TSS_SERVER_FUNCTION_FACTORY] = true;
+          return res2;
+        },
+        inputValidator: (inputValidator) => {
+          return createServerFn(void 0, {
+            ...resolvedOptions,
+            inputValidator
+          });
+        },
+        handler: (...args) => {
+          const [extractedFn, serverFn] = args;
+          const newOptions = {
+            ...resolvedOptions,
+            extractedFn,
+            serverFn
+          };
+          const resolvedMiddleware = [...newOptions.middleware || [], serverFnBaseToMiddleware(newOptions)];
+          extractedFn.method = resolvedOptions.method;
+          return Object.assign(async (opts) => {
+            const result = await executeMiddleware$1(resolvedMiddleware, "client", {
+              ...extractedFn,
+              ...newOptions,
+              data: opts?.data,
+              headers: opts?.headers,
+              signal: opts?.signal,
+              fetch: opts?.fetch,
+              context: createNullProtoObject()
+            });
+            const redirect3 = parseRedirect(result.error);
+            if (redirect3) throw redirect3;
+            if (result.error) throw result.error;
+            return result.result;
+          }, {
+            ...extractedFn,
+            method: resolvedOptions.method,
+            __executeServer: async (opts) => {
+              const startContext = getStartContextServerOnly();
+              const serverContextAfterGlobalMiddlewares = startContext.contextAfterGlobalMiddlewares;
+              return await executeMiddleware$1(resolvedMiddleware, "server", {
+                ...extractedFn,
+                ...opts,
+                serverFnMeta: extractedFn.serverFnMeta,
+                context: safeObjectMerge(opts.context, serverContextAfterGlobalMiddlewares),
+                request: startContext.request
+              }).then((d2) => ({
+                result: d2.result,
+                error: d2.error,
+                context: d2.sendContext
+              }));
+            }
+          });
+        }
+      };
+      const fun = (options2) => {
+        return createServerFn(void 0, {
+          ...resolvedOptions,
+          ...options2
+        });
+      };
+      return Object.assign(fun, res);
+    };
     createMiddleware = (options, __opts) => {
       const resolvedOptions = {
         type: "request",
@@ -55387,7 +56141,7 @@ function renderErrorPage(error) {
 }
 async function getServerEntry() {
   if (!serverEntryPromise) {
-    serverEntryPromise = Promise.resolve().then(() => (init_server_BOP1_qvk(), server_BOP1_qvk_exports)).then((n2) => n2.s).then(
+    serverEntryPromise = Promise.resolve().then(() => (init_server_Z5_5AO7O(), server_Z5_5AO7O_exports)).then((n2) => n2.s).then(
       (m3) => m3.default ?? m3
     );
   }

@@ -4,6 +4,9 @@ import contactHero from "../assets/contact-hero.jpg";
 import { useState } from "react";
 import heroVideo from "../assets/video.mp4";
 
+import { getDirectLines, getWorkshopAddress } from "../lib/contact";
+import { useLoaderData } from "@tanstack/react-router";
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -14,10 +17,16 @@ export const Route = createFileRoute("/contact")({
     ],
   }),
   component: ContactPage,
+  loader: async () => {
+    const directLines = await getDirectLines();
+    const workshopAddress = await getWorkshopAddress();
+    return { directLines, workshopAddress };
+  },
 });
 
 function ContactPage() {
   useReveal();
+  const { directLines, workshopAddress } = Route.useLoaderData();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -50,31 +59,23 @@ function ContactPage() {
             <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">01 — Direct Lines</div>
             <h2 className="font-display text-4xl md:text-5xl leading-[1.05] mb-8">Reach The Team</h2>
             <div className="space-y-8">
-              <div>
-                <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">General Inquiries</div>
-                <a href="mailto:hello@synmod.build" className="text-lg text-bone hover:text-acid transition-colors">hello@synmod.build</a>
-              </div>
-              <div>
-                <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">Syndicate Applications</div>
-                <a href="mailto:apply@synmod.build" className="text-lg text-bone hover:text-acid transition-colors">apply@synmod.build</a>
-              </div>
-              <div>
-                <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">Press & Media</div>
-                <a href="mailto:press@synmod.build" className="text-lg text-bone hover:text-acid transition-colors">press@synmod.build</a>
-              </div>
-              <div>
-                <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">Partnerships</div>
-                <a href="mailto:partners@synmod.build" className="text-lg text-bone hover:text-acid transition-colors">partners@synmod.build</a>
-              </div>
+              {directLines.map((line, i) => (
+                <div key={i}>
+                  <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">{line.label}</div>
+                  <a href={`mailto:${line.email}`} className="text-lg text-bone hover:text-acid transition-colors">{line.email}</a>
+                </div>
+              ))}
             </div>
 
             <div className="mt-12 pt-8 border-t border-white/10">
               <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-3">Workshop</div>
               <p className="text-bone/70 leading-relaxed">
-                Syndicate Build Facility<br />
-                Unit 7, Silverstone Park<br />
-                Northamptonshire, NN12 8TN<br />
-                United Kingdom
+                {workshopAddress.map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
               </p>
             </div>
           </div>

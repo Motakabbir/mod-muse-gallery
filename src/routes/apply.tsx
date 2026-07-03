@@ -4,6 +4,9 @@ import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import heroImg from "../assets/rs500-hero.jpg";
 import heroVideo from "../assets/video.mp4";
 
+import { getApplySteps } from "../lib/apply";
+import { useLoaderData } from "@tanstack/react-router";
+
 export const Route = createFileRoute("/apply")({
   head: () => ({
     meta: [
@@ -14,17 +17,14 @@ export const Route = createFileRoute("/apply")({
     ],
   }),
   component: ApplyPage,
+  loader: () => getApplySteps(),
 });
 
-const STEPS = [
-  { n: "01", t: "Register Interest", b: "Submit the form below. We respond within 48 hours." },
-  { n: "02", t: "Discovery Call", b: "A 30-min call to walk through the syndicate model and answer questions." },
-  { n: "03", t: "Allocation Offer", b: "Receive a formal allocation document outlining cost, structure, and timeline." },
-  { n: "04", t: "Secure Position", b: "Sign and fund. You're in. Welcome to Syndicate." },
-];
+// STEPS moved to API/Loader
 
 function ApplyPage() {
   useReveal();
+  const steps = Route.useLoaderData();
   const [submitted, setSubmitted] = useState(false);
 
   return (
@@ -41,7 +41,7 @@ function ApplyPage() {
         <div className="mx-auto max-w-7xl">
           <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-12 reveal">How It Works</div>
           <div className="grid md:grid-cols-4 gap-px bg-white/10 border border-white/10">
-            {STEPS.map((s) => (
+            {steps.map((s) => (
               <div key={s.n} className="reveal bg-carbon p-8 hover:bg-steel transition-colors">
                 <div className="font-display text-5xl text-acid mb-6">{s.n}</div>
                 <h3 className="font-display text-xl mb-3">{s.t}</h3>
