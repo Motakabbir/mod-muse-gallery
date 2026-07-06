@@ -100,6 +100,7 @@ export const getPillars = createServerFn({ method: 'GET' }).handler(async () => 
     {
       n: "02",
       title: "World-Class Build Partners",
+      video: "/src/assets/PILLAR_03_WROLD_CLASS.mp4",
       img: "/src/assets/pillar-partners.jpg",
       body: "The very best in innovative manufacturing and artisan craft — from coachbuilding to bleeding-edge additive manufacturing.",
     },
