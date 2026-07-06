@@ -77,12 +77,24 @@ function GalleryPage() {
                   onClick={() => setSelectedIdx(i)}
                   className="relative h-full w-full overflow-hidden border border-white/10 group bg-ink cursor-pointer"
                 >
-                  <img
-                    src={it.img}
-                    alt={it.t}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                  {it.video ? (
+                    <video
+                      src={it.video}
+                      poster={it.img}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <img
+                      src={it.img}
+                      alt={it.t}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                   <figcaption className="absolute bottom-0 left-0 right-0 p-5">
                     <div className="font-mono text-[10px] tracking-[0.3em] uppercase text-acid mb-1">
@@ -126,13 +138,25 @@ function GalleryPage() {
                 <X className="w-5 h-5" />
               </button>
 
-              {/* Left Side: Image Container */}
+              {/* Left Side: Media Container */}
               <div className="lg:col-span-7 relative bg-ink/50 flex items-center justify-center h-[40vh] sm:h-[50vh] lg:h-[75vh] border-b lg:border-b-0 lg:border-r border-white/10 group/img">
-                <img
-                  src={currentItem.img}
-                  alt={currentItem.t}
-                  className="w-full h-full object-contain"
-                />
+                {currentItem.video ? (
+                  <video
+                    src={currentItem.video}
+                    poster={currentItem.img}
+                    controls
+                    autoPlay
+                    loop
+                    playsInline
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <img
+                    src={currentItem.img}
+                    alt={currentItem.t}
+                    className="w-full h-full object-contain"
+                  />
+                )}
 
                 {/* Left/Right Navigation Buttons */}
                 <button

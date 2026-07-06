@@ -1,9 +1,20 @@
 import { createServerFn } from '@tanstack/react-start';
 
-export const getGalleryItems = createServerFn({ method: 'GET' }).handler(async () => {
+export interface GalleryItem {
+  img?: string;
+  video?: string;
+  t: string;
+  tag: string;
+  span?: string;
+  desc: string;
+  details?: { label: string; value: string }[];
+}
+
+export const getGalleryItems = createServerFn({ method: 'GET' }).handler(async (): Promise<GalleryItem[]> => {
   return [
     {
-      img: "/src/assets/gallery-1.jpg",
+      video: "/src/assets/RS500_REIMAGINED_MORPHING.mp4",
+      img: "/src/assets/rs500-hero.jpg",
       t: "RS500 Reimagined",
       tag: "Render",
       span: "md:col-span-2 md:row-span-2",
@@ -60,7 +71,7 @@ export const getGalleryItems = createServerFn({ method: 'GET' }).handler(async (
       ]
     },
     {
-      img: "/src/assets/build-print.jpg",
+      img: "/src/assets/CAD_AND_DESIGN.jpg",
       t: "CAD & DESIGN ",
       tag: "Manufacturing",
       desc: "The complete digital assembly of the restomod. Engineering models verify clearances for the dry-sump oil system, custom suspension kinematics, and internal cockpit cooling channels before any physical fabrication begins.",
@@ -83,7 +94,7 @@ export const getGalleryItems = createServerFn({ method: 'GET' }).handler(async (
       ]
     },
     {
-      img: "/src/assets/pillar-one-of-one.jpg",
+      img: "/src/assets/HAND_FABRICATION.JPG",
       t: "Hand Fabrication",
       tag: "Coachbuilding",
       desc: "Master coachbuilders shaping and preparing custom aluminum wheel arches and internal panels. Hand-forming is blended with CAD accuracy to maintain the traditional handcrafted soul of the vehicle.",

@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { u as useReveal, N as Nav, P as PageHero, F as Footer } from "./site-paN77MRt.mjs";
-import { b as Route$4 } from "./router-CCJXtYGR.mjs";
+import { b as Route$4 } from "./router-Cuxds2qW.mjs";
 import "../_libs/seroval.mjs";
 import { A as AnimatePresence, m as motion } from "../_libs/framer-motion.mjs";
 import { X, a as ChevronLeft, b as ChevronRight } from "../_libs/lucide-react.mjs";
@@ -20,7 +20,7 @@ import "../_libs/isbot.mjs";
 import "./logo-4-ISZutHRh.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
-import "./server-DBYqdG6E.mjs";
+import "./server-CR71_7B5.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -58,7 +58,7 @@ function GalleryPage() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-acid", children: "Intent." })
     ] }), subtitle: "Renders, scans, details, materials, and process imagery from the Syndicate design phase — a living archive of the build as it develops.", video: videoCarSection }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-24 px-6 bg-carbon", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-4 grid-cols-2 auto-rows-[16rem] gap-4", children: items.map((it, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `reveal ${it.span ?? ""}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("figure", { onClick: () => setSelectedIdx(i), className: "relative h-full w-full overflow-hidden border border-white/10 group bg-ink cursor-pointer", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: it.img, alt: it.t, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
+      it.video ? /* @__PURE__ */ jsxRuntimeExports.jsx("video", { src: it.video, poster: it.img, autoPlay: true, muted: true, loop: true, playsInline: true, className: "absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: it.img, alt: it.t, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("figcaption", { className: "absolute bottom-0 left-0 right-0 p-5", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[10px] tracking-[0.3em] uppercase text-acid mb-1", children: it.tag }),
@@ -88,7 +88,7 @@ function GalleryPage() {
       }, className: "relative w-full max-w-6xl max-h-[90vh] bg-carbon border border-white/10 rounded-2xl overflow-hidden grid lg:grid-cols-12 shadow-2xl z-10", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setSelectedIdx(null), "aria-label": "Close details", className: "absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-5 h-5" }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-7 relative bg-ink/50 flex items-center justify-center h-[40vh] sm:h-[50vh] lg:h-[75vh] border-b lg:border-b-0 lg:border-r border-white/10 group/img", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: currentItem.img, alt: currentItem.t, className: "w-full h-full object-contain" }),
+          currentItem.video ? /* @__PURE__ */ jsxRuntimeExports.jsx("video", { src: currentItem.video, poster: currentItem.img, controls: true, autoPlay: true, loop: true, playsInline: true, className: "w-full h-full object-contain" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: currentItem.img, alt: currentItem.t, className: "w-full h-full object-contain" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: (e) => {
             e.stopPropagation();
             setSelectedIdx((prev) => prev !== null && prev > 0 ? prev - 1 : items.length - 1);
