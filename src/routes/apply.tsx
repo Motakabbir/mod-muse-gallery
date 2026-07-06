@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
-import heroImg from "../assets/rs500-hero.jpg";
 import heroVideo from "../assets/Hero_001.mp4";
 
 import { getApplySteps } from "../lib/apply";

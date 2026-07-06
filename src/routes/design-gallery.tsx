@@ -1,13 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
-import g1 from "../assets/gallery-1.jpg";
-import g2 from "../assets/gallery-2.jpg";
-import g3 from "../assets/gallery-3.jpg";
-import g4 from "../assets/gallery-4.jpg";
-import g5 from "../assets/build-finish.jpg";
-import g6 from "../assets/build-print.jpg";
-import g7 from "../assets/rs500-hero.jpg";
-import g8 from "../assets/pillar-one-of-one.jpg";
 import videoCarSection from "../assets/LIBRARY_OF_INTENT.mp4";
 
 import { getGalleryItems } from "../lib/gallery";

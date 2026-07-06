@@ -51,7 +51,7 @@ export const Route = createFileRoute("/")({
 
 // EVENTS moved to API/Loader
 
-const rs500HeroUrl = "https://thecarcrowd.uk/wp-content/uploads/2026/02/1764953707_1-min.webp";
+
 
 function Hero() {
   return (

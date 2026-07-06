@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
-import aboutHero from "../assets/about-hero.jpg";
 import aboutDetail from "../assets/01_MISSION .png";
 import videoPillarOne from "../assets/OUR_STORY.mp4";
 
