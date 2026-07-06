@@ -4,7 +4,7 @@ import placeholderLogo from "../assets/logo/logo-4.jpeg";
 export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async () => {
   // Simulate network delay and DB fetch
   await new Promise(resolve => setTimeout(resolve, 300));
-  
+
   return [
     {
       title: "Vision148 Sierra Cosworth RS500",
@@ -93,7 +93,7 @@ export const getPillars = createServerFn({ method: 'GET' }).handler(async () => 
     {
       n: "01",
       title: "One of One Build",
-      video: "/src/assets/10825391-hd_1920_1080_24fps.mp4",
+      video: "/src/assets/PILLAR_01_ONE_OF_ONE_BUILD.mp4",
       img: "/src/assets/pillar-one-of-one.jpg",
       body: "There will never be another. Car #148 — the 148th of 500 RS500s ever built — reborn as a unique, documented, investment-grade restomod.",
     },
@@ -106,7 +106,7 @@ export const getPillars = createServerFn({ method: 'GET' }).handler(async () => 
     {
       n: "03",
       title: "Exclusive Access & Experience",
-      video: "/src/assets/14209297_3840_2160_24fps.mp4",
+      video: "/src/assets/PILLAR_03_EXCLUSIVE_ACCESS.mp4",
       img: "/src/assets/pillar-experience.jpg",
       body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations.",
     },

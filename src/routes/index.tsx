@@ -1,14 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import pillarOne from "../assets/pillar-one-of-one.jpg";
-import pillarPartners from "../assets/pillar-partners.jpg";
-import pillarExperience from "../assets/pillar-experience.jpg";
 import carbonTexture from "../assets/carbon-texture.jpg";
-import buildProcess from "../assets/build-process.jpg";
-import placeholderLogo from "../assets/logo/logo-4.jpeg";
-import heroVideo from "../assets/video.mp4";
-import videoPillarOne from "../assets/10825391-hd_1920_1080_24fps.mp4";
+import heroVideo from "../assets/Hero_001.mp4";
 import videoCarSection from "../assets/RS500_REIMAGINED_MORPHING.mp4";
-import videoPillarThree from "../assets/14209297_3840_2160_24fps.mp4";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal } from "@/components/site";
 
@@ -197,7 +190,7 @@ function Pillars({ pillars }: { pillars: any[] }) {
                   <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-                <div className="absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-acid">PILLAR {p.n}</div>
+                <div className="absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-bone">PILLAR {p.n}</div>
               </div>
               <div className="p-8 -mt-16 relative">
                 <h3 className="font-display text-2xl mb-4 text-gradient-bone">{p.title}</h3>

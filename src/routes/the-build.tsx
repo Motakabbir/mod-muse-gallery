@@ -1,12 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import { BuildGallery } from "@/components/build-gallery";
-import buildStrip from "../assets/build-strip.jpg";
-import buildScan from "../assets/build-scan.jpg";
-import buildPrint from "../assets/build-print.jpg";
-import buildFinish from "../assets/build-finish.jpg";
-import heroImg from "../assets/build-process.jpg";
-import videoCarSection from "../assets/video.mp4";
+import videoCarSection from "../assets/Hero_002.mp4";
 
 import { getPhases, getSpecs } from "../lib/build";
 import { useLoaderData } from "@tanstack/react-router";
