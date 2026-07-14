@@ -3,7 +3,7 @@ import { createServerFn } from '@tanstack/react-start';
 export const getPageEvents = createServerFn({ method: 'GET' }).handler(async () => {
   return [
     {
-      date: "MAR 2026",
+      date: "October 2026",
       title: "Build Facility Open Day",
       desc: "Exclusive behind-the-scenes access for confirmed syndicate members. See the chassis in progress, meet the fabrication team, and review panel fitment firsthand.",
       location: "Silverstone Park, UK",
@@ -21,7 +21,7 @@ export const getPageEvents = createServerFn({ method: 'GET' }).handler(async () 
       requirements: "Active membership required. Closed-toe footwear is mandatory for the workshop floor."
     },
     {
-      date: "JUN 2026",
+      date: "July 2027",
       title: "Goodwood Members' Meeting",
       desc: "Syndicate will have a dedicated paddock presence. Syndicate members receive hospitality passes and grid walk access.",
       location: "Goodwood Circuit, UK",
@@ -57,10 +57,10 @@ export const getPageEvents = createServerFn({ method: 'GET' }).handler(async () 
       requirements: "Member portal authentication required for voting."
     },
     {
-      date: "NOV 2026",
-      title: "Track Day — Anglesey Circuit",
+      date: "Nov 2027",
+      title: "Track Day Silverstone Anglesey Circuit",
       desc: "First shakedown and member track experience. Professional instruction provided. Photography and videography included.",
-      location: "Anglesey, Wales",
+      location: "Silverstone, UK",
       status: "Members Only",
       longDesc: "The first official driving event for the Syndicate RS500. This Anglesey track day will serve as the initial high-speed shakedown. Members will have the opportunity to ride alongside our professional test drivers, experience the YB turbo engine at full throttle, and receive track driving instruction on the iconic coastal circuit. Full media coverage (photo/video) is included for all attendees.",
       schedule: [
@@ -85,7 +85,7 @@ export const getFaqs = createServerFn({ method: 'GET' }).handler(async () => {
     },
     {
       q: "How much does allocation cost?",
-      a: "Syndicate slots start at £48,000 per share for the Syndicate RS500 build. This covers your proportional build cost, insurance, storage, maintenance, and event access for the first 24 months.",
+      a: "There are 10 Platinum Syndicate Slots at £25,000 and 20 Silver Syndicate Members at £5000.",
     },
     {
       q: "How many shares are available?",

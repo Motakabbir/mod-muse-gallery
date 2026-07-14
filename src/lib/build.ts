@@ -33,7 +33,7 @@ export const getPhases = createServerFn({ method: 'GET' }).handler(async () => {
       video: "/src/assets/FINSHING_AND_VALIDATION_001.mp4",
       body: "The Vision148 build is designed to showcase the bleeding edge technology at our disposal through our manufacturing partners to deliver rapid prototyping to the build efficiency as well as the use of polymer and specialist metals.",
       bullets: ["Polymer plastics printing ", "Titanium alloy printing", "Interior & Exterior parts and components", "Rapid development"],
-      partner: "Group • DMC",
+      partner: "DMC",
     },
   ];
 });

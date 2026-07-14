@@ -75,7 +75,7 @@ const MEDIA: MediaItem[] = [
     kind: "image",
     src: '/src/assets/Bare_Shell_Disamantling.jpg',
     title: "Fabrication & Coachbuilding",
-    caption: "Composite tooling printed in-house at DMC Silverstone.",
+    caption: "Panel & component tooling",
     phase: "Phase 03",
     longDesc: "Large-format 3D printing of composite tooling. This allows the fabrication team to lay up carbon fiber parts with extreme precision and speed.",
     details: [
@@ -99,7 +99,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: gallery2,
+    src: '/src/assets/yb_engine.png',
     title: "Block Assembly",
     caption: "MAHLE rebuild of the YB inline-four.",
     phase: "Phase 04",
@@ -112,7 +112,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: buildFinish,
+    src: '/src/assets/ps500_Studio_showcase.png',
     title: "Paint Shop",
     caption: "Heritage livery, modern finish process.",
     phase: "Phase 04",
@@ -125,7 +125,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: gallery3,
+    src: '/src/assets/suspension.png',
     title: "Suspension Geometry",
     caption: "Modern damping under classic bodywork.",
     phase: "Phase 04",
@@ -138,7 +138,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: gallery4,
+    src: '/src/assets/testing_validation.jpeg',
     title: "Track Validation",
     caption: "First shakedown laps at Silverstone.",
     phase: "Validation",
