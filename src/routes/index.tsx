@@ -268,7 +268,7 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
                   src={s.img}
                   alt={s.title}
                   loading="lazy"
-                  className={`h-full w-full object-cover transition-transform duration-700 ${s.isPlaceholder ? 'blur-md opacity-30 grayscale scale-110' : 'group-hover:scale-105'}`}
+                  className={`h-full w-full transition-transform duration-700 ${s.containImg ? 'object-contain p-6' : 'object-cover'} ${s.isPlaceholder ? 'blur-md opacity-30 grayscale scale-110' : 'group-hover:scale-105'}`}
                 />
                 {!s.isPlaceholder && (
                   <div className="absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold">

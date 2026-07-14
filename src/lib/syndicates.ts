@@ -23,6 +23,7 @@ export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async
       return: "TBD",
       isPlaceholder: false,
       waitlist: true,
+      containImg: true,
     },
     {
       title: "Something special in the longterm pipeline",
@@ -32,6 +33,7 @@ export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async
       return: "TBD",
       isPlaceholder: false,
       waitlist: true,
+      containImg: true,
     },
   ];
 });
@@ -127,8 +129,8 @@ export const getPartners = createServerFn({ method: 'GET' }).handler(async () =>
   return [
     { name: "T3DMC", role: "3D Scanning & Digital Twin" },
     { name: "ASM Auto Recycling", role: "Chassis Dismantling & Cataloguing" },
-    { name: "Coventry Metalcraft", role: "Precision Coachbuilding" },
-    { name: "DMC Silverstone", role: "Assembly & Digital Manufacturing" },
+    { name: "Coventry Metalcraft", role: "Chassis prep, alignment & Precision Coach building" },
+    { name: "Digital Manufacturing Centre - Silverstone", role: "Assembly & Additive Manufacturing" },
     { name: "BAMD Composites", role: "Composite Structures" },
     { name: "MAHLE Group", role: "Engine Rebuild & Performance" },
     { name: "Cornerstone Technologies", role: "Non-structural Skillsets" },

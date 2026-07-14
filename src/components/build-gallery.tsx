@@ -15,13 +15,13 @@ import heroVideo from "../assets/SYNDICATE_TEASER_REAL.mp4";
 
 type MediaItem =
   | { kind: "image"; src: string; title: string; caption: string; phase: string; longDesc: string; details: { label: string; value: string }[] }
-  | { kind: "video"; src: string; poster: string; title: string; caption: string; phase: string; longDesc: string; details: { label: string; value: string }[] };
+  | { kind: "video"; src: string; poster?: string | boolean; title: string; caption: string; phase: string; longDesc: string; details: { label: string; value: string }[] };
 
 const MEDIA: MediaItem[] = [
   {
     kind: "video",
-    src: heroVideo,
-    poster: rs500Hero,
+    src: '/src/assets/SYNDICATE_TEASER_REAL.mp4',
+    poster: false,
     title: "Syndicate — Teaser Reel",
     caption: "First glimpse of the RS500 reborn.",
     phase: "Reveal",
@@ -34,9 +34,9 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: buildStrip,
-    title: "Bare Shell",
-    caption: "Car #148 stripped to bare metal. Every component catalogued.",
+    src: '/src/assets/Sketches.jpeg',
+    title: "1st Sketches & Digital Modeling",
+    caption: "The art of design begins",
     phase: "Phase 01",
     longDesc: "Chassis #148 stripped down completely to bare metal. Every original spot weld was inspected, and the chassis was cataloged to prepare for structural reinforcement.",
     details: [
@@ -47,10 +47,10 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: buildScan,
-    title: "Digital Twin",
+    src: '/src/assets/Digital_Twin.png',
+    title: "Digital Modelling",
     caption: "Sub-millimetre 3D scan of the original shell.",
-    phase: "Phase 02",
+    phase: "Phase 01",
     longDesc: "High-precision 3D scan of the bare chassis. This scan provides a sub-millimetre accurate digital model, allowing our engineers to design CAD components that fit flawlessly.",
     details: [
       { label: "Scan Res", value: "0.05 mm" },
@@ -60,8 +60,8 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: gallery1,
-    title: "CAD Surfacing",
+    src: '/src/assets/Dismantling.JPG',
+    title: "Digital & CAD Modelling",
     caption: "Aero and structural geometry refined in CAD.",
     phase: "Phase 02",
     longDesc: "Refining the exterior body lines and custom aerodynamic elements in CAD. The styling respects the classic Group A touring car design while optimizing underbody airflow.",
@@ -73,8 +73,8 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: buildPrint,
-    title: "Additive Tooling",
+    src: '/src/assets/Bare_Shell_Disamantling.jpg',
+    title: "Fabrication & Coachbuilding",
     caption: "Composite tooling printed in-house at DMC Silverstone.",
     phase: "Phase 03",
     longDesc: "Large-format 3D printing of composite tooling. This allows the fabrication team to lay up carbon fiber parts with extreme precision and speed.",
@@ -86,9 +86,9 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: carbonTexture,
-    title: "Carbon Layup",
-    caption: "BAMD composite panels — weave inspection.",
+    src: '/src/assets/Fabrication.JPG',
+    title: "Fabrication & Tooling",
+    caption: "Coventry Metalcraft & DMC ",
     phase: "Phase 03",
     longDesc: "A close-up inspection of the autoclaved-cured carbon fiber weave. Using high-grade prepreg carbon ensures the panels are both incredibly lightweight and stiff.",
     details: [
@@ -240,12 +240,21 @@ export function BuildGallery() {
                   onClick={() => setOpenIndex(i)}
                   className="relative w-full h-full group overflow-hidden rounded-xl border border-white/10 bg-ink hover-lift text-left"
                 >
-                  <img
-                    src={m.kind === "video" ? m.poster : m.src}
-                    alt={m.title}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                  />
+                  {m.kind === "video" && !m.poster ? (
+                    <video
+                      src={m.src}
+                      muted
+                      playsInline
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000 pointer-events-none"
+                    />
+                  ) : (
+                    <img
+                      src={m.kind === "video" ? (m.poster as string) : m.src}
+                      alt={m.title}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                   {m.kind === "video" && (
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -296,7 +305,7 @@ export function BuildGallery() {
                 <video
                   key={active.src}
                   src={active.src}
-                  poster={active.poster}
+                  poster={typeof active.poster === 'string' ? active.poster : undefined}
                   controls
                   autoPlay
                   className="w-full h-full object-contain bg-black"
