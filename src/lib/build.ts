@@ -4,7 +4,7 @@ export const getPhases = createServerFn({ method: 'GET' }).handler(async () => {
   return [
     {
       n: "01",
-      t: "Acquisition & Strip",
+      t: "Acquisition & Strip - Complete",
 
       video: "/src/assets/AQUISITION_001.mp4",
       body: "Car #148 — the 148th of 500 RS500s ever built — sourced, authenticated, and fully stripped to bare metal. Every component is catalogued and inspected.",
@@ -21,19 +21,19 @@ export const getPhases = createServerFn({ method: 'GET' }).handler(async () => {
     },
     {
       n: "03",
-      t: "Manufacturing",
+      t: "Coach Building",
       video: "/src/assets/Manufacturing_001.mp4",
-      body: "Additive manufacturing meets traditional coachbuilding. Carbon-composite panels and billet components are produced alongside hand-formed steelwork.",
-      bullets: ["Fabrication", "Additive manufacturing", "Composite layup", "Precision assembly"],
-      partner: "Coventry Metalcraft • DMC Silverstone",
+      body: "At the heart of the Vision148 build is to create a coach built Aluminium body  to showcase the artisan skills of our build partners.",
+      bullets: ["Hand formed bodywork", "Lightweight aluminium", "Coach built techniques", "Hand built by craftsmen"],
+      partner: "Coventry Metalcraft • Silverstone",
     },
     {
       n: "04",
-      t: "Finishing & Validation",
+      t: "Additive Manufacturing",
       video: "/src/assets/FINSHING_AND_VALIDATION_001.mp4",
-      body: "Engine rebuild, paint, and final assembly come together. The car is validated on road and track before final sign-off and the first syndicate drive day.",
-      bullets: ["Engine rebuild", "Paint & livery", "Road & track testing", "Final sign-off"],
-      partner: "MAHLE Group • DMC",
+      body: "The Vision148 build is designed to showcase the bleeding edge technology at our disposal through our manufacturing partners to deliver rapid prototyping to the build efficiency as well as the use of polymer and specialist metals.",
+      bullets: ["Polymer plastics printing ", "Titanium alloy printing", "Interior & Exterior parts and components", "Rapid development"],
+      partner: "Group • DMC",
     },
   ];
 });

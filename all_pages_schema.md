@@ -1,22 +1,130 @@
-# Syndicate Sub-Pages Dynamic Schema
+# Syndicate Pages Dynamic Schema
 
-This document outlines the required schema fields (text, booleans, images, videos, arrays) to make all secondary pages in the Syndicate platform dynamic. It acts as a blueprint for the CMS or backend database tables.
+This document outlines the required schema fields (text, booleans, images, videos, arrays) to make all pages (including the home page and sub-pages) in the Syndicate platform dynamic. It acts as a blueprint for the CMS or backend database tables.
 
 ---
 
-## 1. About Page (`about.tsx`)
+## 1. Home Page (`index.tsx`)
 
 ### Hero Section
 - `hero_video_url` (Video URL)
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String, potentially containing HTML/spans)
+- `subtitle` (Text)
+- `stats` (Array of Objects - *currently hardcoded*):
+  - `k` (String, Label e.g., "Car")
+  - `v` (String, Value e.g., "#148 / 500")
+
+### Intro Section
+- `kicker_text` (String)
+- `title` (String)
+- `paragraph_1` (Text)
+- `paragraph_2` (Text)
+
+### Stats Section
+- `kicker_text` (String)
+- `stats` (Array of Objects - *currently hardcoded*):
+  - `n` (String/Number)
+  - `label` (String)
+
+### Pillars Section
+- `kicker_text` (String)
+- `title` (String)
+- `pillars` (Array of Objects via `getPillars`):
+  - `n` (String)
+  - `title` (String)
+  - `video` (Video URL, optional)
+  - `img` (Image URL)
+  - `body` (Text)
+
+### The Car Section
+- `video_url` (Video URL)
+- `kicker_text` (String)
+- `title` (String)
+- `description` (Text)
+- `highlights` (Array of Strings - *currently hardcoded*)
+
+### Live Syndicates Section
+- `kicker_text` (String)
+- `title` (String)
+- `syndicates` (Array of Objects via `getLiveSyndicates`):
+  - `title` (String)
+  - `img` (Image URL)
+  - `allocation` (String)
+  - `stats` (String)
+  - `return` (String)
+  - `isPlaceholder` (Boolean)
+  - `waitlist` (Boolean)
+
+### Partnership Section
+- `kicker_text` (String)
+- `title` (String)
+- `steps` (Array of Objects via `getSyndicateSteps`):
+  - `n` (Number)
+  - `title` (String)
+  - `body` (Text)
+
+### Build Process Section
+- `kicker_text` (String)
+- `title` (String)
+- `process` (Array of Objects via `getProcess`):
+  - `n` (String)
+  - `title` (String)
+  - `items` (Array of Strings)
+
+### Events Section (Home)
+- `kicker_text` (String)
+- `title` (String)
+- `events` (Array of Objects via `getEvents`):
+  - `type` (String)
+  - `title` (String)
+  - `tag` (String)
+  - `description` (Text, optional)
+  - `date` (String)
+
+### Partners Section
+- `kicker_text` (String)
+- `title` (String)
+- `description` (Text)
+- `partners` (Array of Objects via `getPartners`):
+  - `name` (String)
+  - `role` (String)
+
+### Benefits Section
+- `kicker_text` (String)
+- `title` (String)
+- `benefits` (Array of Objects via `getBenefits`):
+  - `icon` (String)
+  - `title` (String)
+  - `items` (Array of Strings)
+
+### Value Proposition Section
+- `kicker_text` (String)
+- `title` (String)
+- `quote` (Text)
+- `values` (Array of Objects - *currently hardcoded*):
+  - `t` (String, Title)
+  - `b` (String, Body)
+
+### Apply CTA Section
+- `kicker_text` (String)
+- `title` (String)
+- `bullets` (Array of Strings - *currently hardcoded*)
+- `note` (String)
+
+---
+
+## 2. About Page (`about.tsx`)
+
+### Hero Section
+- `hero_video_url` (Video URL)
+- `kicker_text` (String)
+- `title` (String, potentially containing HTML/spans)
 - `subtitle` (Text)
 
 ### Mission Section
 - `kicker_text` (String, e.g., *"01 — Mission"*)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `paragraph_1` (Text)
 - `paragraph_2` (Text)
 - `detail_image_url` (Image URL)
@@ -24,85 +132,89 @@ This document outlines the required schema fields (text, booleans, images, video
 ### Principles Section
 - `kicker_text` (String)
 - `title` (String)
-- `principles` (Array of Objects):
-  - `number` (String, e.g., *"01"*)
+- `principles` (Array of Objects via `getPrinciples`):
+  - `num` (String, e.g., *"01"*)
   - `title` (String, e.g., *"Analog Soul"*)
   - `text` (Text)
 
 ### Leadership (Architects) Section
 - `kicker_text` (String)
 - `title` (String)
-- `architects` (Array of Objects):
+- `architects` (Array of Objects via `getArchitects`):
   - `name` (String)
   - `role` (String)
   - `bio` (Text)
-  - `avatar_url` (Image URL - *Currently uses initials fallback*)
+  - `img` (Image URL - optional, uses initials fallback if empty)
 
 ### CTA Section
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `description` (Text)
 - `cta_label` (String)
 - `cta_url` (String)
 
 ---
 
-## 2. Events Page (`events.tsx`)
+## 3. Events Page (`events.tsx`)
 
 ### Hero Section
 - `hero_video_url` (Video URL)
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `subtitle` (Text)
 
 ### Upcoming Events Calendar
 - `kicker_text` (String)
 - `title` (String)
 - `description` (Text)
-- `events` (Array of Objects):
-  - `date_string` (String, e.g., *"MAR 2026"*)
-  - `access_status` (String, e.g., *"Members Only"*)
+- `events` (Array of Objects via `getPageEvents`):
+  - `date` (String, e.g., *"MAR 2026"*)
+  - `status` (String, e.g., *"Members Only"*)
   - `title` (String)
-  - `description` (Text)
+  - `desc` (Text, short description)
+  - `longDesc` (Text, long description for details modal)
   - `location` (String, e.g., *"Silverstone Park, UK"*)
+  - `capacity` (String, optional)
+  - `schedule` (Array of Strings, e.g., *"10:00 - Arrival"*)
+  - `requirements` (Text, optional)
 
 ### FAQ Section
 - `kicker_text` (String)
 - `title` (String)
-- `faqs` (Array of Objects):
-  - `question` (String)
-  - `answer` (Text)
+- `faqs` (Array of Objects via `getFaqs`):
+  - `q` (String, question)
+  - `a` (Text, answer)
 
 ### CTA Section
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `description` (Text)
 - `cta_label` (String)
 - `cta_url` (String)
 
 ---
 
-## 3. Design Gallery Page (`design-gallery.tsx`)
+## 4. Design Gallery Page (`design-gallery.tsx`)
 
 ### Hero Section
 - `hero_video_url` (Video URL)
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `subtitle` (Text)
 
 ### Gallery Grid
-- `gallery_items` (Array of Objects):
-  - `image_url` (Image URL)
-  - `title` (String, e.g., *"RS500 Reimagined"*)
+- `items` (Array of Objects via `getGalleryItems`):
+  - `img` (Image URL, optional)
+  - `video` (Video URL, optional)
+  - `t` (String, Title)
   - `tag` (String, e.g., *"Render"*)
-  - `span_classes` (String, e.g., *"md:col-span-2 md:row-span-2"* - Optional layout hints)
+  - `desc` (Text, description for details modal)
+  - `span` (String, optional layout hints e.g., *"md:col-span-2 md:row-span-2"*)
+  - `details` (Array of Objects, optional):
+    - `label` (String)
+    - `value` (String)
 
 ### CTA Section
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `description` (Text)
 - `primary_cta_label` (String)
 - `primary_cta_url` (String)
@@ -111,89 +223,86 @@ This document outlines the required schema fields (text, booleans, images, video
 
 ---
 
-## 4. The Build Page (`the-build.tsx`)
+## 5. The Build Page (`the-build.tsx`)
 
 ### Hero Section
 - `hero_video_url` (Video URL)
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `subtitle` (Text)
 
 ### Build Phases Section
-- `phases` (Array of Objects):
-  - `phase_number` (String, e.g., *"01"*)
-  - `title` (String, e.g., *"Acquisition & Strip"*)
-  - `image_url` (Image URL)
-  - `body_text` (Text)
+- `phases` (Array of Objects via `getPhases`):
+  - `n` (String, Phase Number, e.g., *"01"*)
+  - `t` (String, Title)
+  - `img` (Image URL, optional)
+  - `video` (Video URL, optional)
+  - `body` (Text)
   - `bullets` (Array of Strings)
-  - `partner_name` (String, e.g., *"ASM Auto Recycling"*)
+  - `partner` (String)
 
 ### Specification Section
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
-- `specs` (Array of Objects):
-  - `label` (String, e.g., *"Engine"*)
-  - `value` (String, e.g., *"550+ bhp"*)
+- `title` (String)
+- `specs` (Array of Objects via `getSpecs`):
+  - `l` (String, Label e.g., *"Engine"*)
+  - `v` (String, Value e.g., *"550+ bhp"*)
 
 ### CTA Section
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `description` (Text)
 - `cta_label` (String)
 - `cta_url` (String)
 
 ---
 
-## 5. Apply Page (`apply.tsx`)
+## 6. Apply Page (`apply.tsx`)
 
 ### Hero Section
 - `hero_video_url` (Video URL)
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `subtitle` (Text)
 
 ### How It Works Section
 - `kicker_text` (String)
-- `steps` (Array of Objects):
-  - `step_number` (String, e.g., *"01"*)
-  - `title` (String, e.g., *"Register Interest"*)
-  - `description` (Text)
+- `steps` (Array of Objects via `getApplySteps`):
+  - `n` (String, Step Number)
+  - `t` (String, Title)
+  - `b` (Text, Body/Description)
 
-### Form Configuration (Optional Backend Management)
+### Application Form Section
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `allocation_interest_options` (Array of Strings - for the dropdown)
-- `success_message_title` (String, e.g., *"Application Received"*)
+- `success_message_title` (String)
 - `success_message_body` (Text)
 
 ---
 
-## 6. Contact Page (`contact.tsx`)
+## 7. Contact Page (`contact.tsx`)
 
 ### Hero Section
 - `hero_video_url` (Video URL)
 - `kicker_text` (String)
-- `title_part_1` (String)
-- `title_part_2` (String)
+- `title` (String)
 - `subtitle` (Text)
 
 ### Direct Lines Section
 - `kicker_text` (String)
 - `title` (String)
-- `direct_lines` (Array of Objects):
-  - `department_name` (String, e.g., *"General Inquiries"*)
-  - `email_address` (String)
+- `directLines` (Array of Objects via `getDirectLines`):
+  - `label` (String, e.g., *"General Inquiries"*)
+  - `email` (String)
 - `workshop_kicker` (String)
-- `workshop_address_text` (Text, supporting multi-line)
+- `workshopAddress` (Array of Strings via `getWorkshopAddress`, representing multi-line address)
 
 ### Contact Form 
 - `kicker_text` (String)
 - `title` (String)
 - `subject_dropdown_options` (Array of Strings)
+- `success_message_title` (String)
+- `success_message_body` (Text)
 
 ### FAQ Preview Section
 - `kicker_text` (String)

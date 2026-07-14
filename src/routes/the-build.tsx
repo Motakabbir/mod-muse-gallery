@@ -38,6 +38,8 @@ function TheBuildPage() {
         title={<>Engineered <span className="text-acid">In The Open.</span></>}
         subtitle="Every stage documented. Every decision visible. From bare shell to first ignition, syndicate members travel with the build from day one."
         video={videoCarSection}
+        videoClassName="opacity-60"
+        overlayClassName="bg-gradient-to-b from-ink/30 via-ink/50 to-ink"
       />
 
       <section className="py-32 px-6">

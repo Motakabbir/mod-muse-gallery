@@ -8,30 +8,30 @@ export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async
   return [
     {
       title: "Vision148 Sierra Cosworth RS500",
-      img: placeholderLogo, // In a real DB, this would be a URL
-      allocation: "£5,000 per allocation",
+      img: '/src/assets/RS500_Studio_showcase.png', // In a real DB, this would be a URL
+      allocation: "£25,000 allocation",
       stats: "25 Allocations • 10 remaining",
-      return: "Potential Returns 77.1%*",
+      return: "Potential Investment 77.1%*",
       isPlaceholder: false,
       waitlist: false,
     },
     {
       title: "Next Build being assessed for Syndication",
       img: placeholderLogo,
-      allocation: "£2,000 per allocation",
-      stats: "31 Allocations • 17 remaining",
+      allocation: "TBD",
+      stats: "TBD",
       return: "Potential Returns 63.90%*",
       isPlaceholder: true,
       waitlist: true,
     },
     {
-      title: "Mercedes SLS AMG",
+      title: "Something special in the longterm pipeline",
       img: placeholderLogo,
-      allocation: "£5,000 per allocation",
-      stats: "39 Allocations • 32 remaining",
+      allocation: "TBD",
+      stats: "TBD",
       return: "Potential Returns 87.2%*",
-      isPlaceholder: false,
-      waitlist: false,
+      isPlaceholder: true,
+      waitlist: true,
     },
   ];
 });

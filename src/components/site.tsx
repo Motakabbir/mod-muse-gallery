@@ -164,12 +164,16 @@ export function PageHero({
   subtitle,
   image,
   video,
+  videoClassName = "opacity-30",
+  overlayClassName = "bg-gradient-to-b from-ink/70 via-ink/80 to-ink",
 }: {
   kicker: string;
   title: React.ReactNode;
   subtitle?: string;
   image?: string;
   video?: string;
+  videoClassName?: string;
+  overlayClassName?: string;
 }) {
   return (
     <section className="relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10">
@@ -180,7 +184,7 @@ export function PageHero({
           muted
           loop
           playsInline
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
+          className={`absolute inset-0 h-full w-full object-cover ${videoClassName}`}
         />
       ) : image ? (
         <img
@@ -190,7 +194,7 @@ export function PageHero({
           loading="eager"
         />
       ) : null}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/80 to-ink" />
+      <div className={`absolute inset-0 ${overlayClassName}`} />
       <div className="absolute inset-0 noise-bg" />
       <div className="absolute top-1/3 right-10 h-72 w-72 rounded-full bg-acid/10 blur-[120px] float-slow" />
       <div className="relative mx-auto max-w-7xl">
