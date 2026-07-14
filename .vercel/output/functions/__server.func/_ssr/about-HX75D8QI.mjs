@@ -1,5 +1,5 @@
-import { c as createServerRpc } from "./createServerRpc-EbRzDRkK.mjs";
-import { b as createServerFn } from "./server-BUMPnHDz.mjs";
+import { c as createServerRpc } from "./createServerRpc-oA0flvCm.mjs";
+import { b as createServerFn } from "./server-DlmSafZR.mjs";
 import "../_libs/seroval.mjs";
 import "../_libs/react.mjs";
 import "node:async_hooks";
@@ -67,7 +67,7 @@ const getArchitects = createServerFn({
   }, {
     name: "Stuart Peach",
     role: "Project Co Founder",
-    bio: "PARTNER IN THE VISION148 PROJECT AND ORIGINAL CUSTODIAN OF #148",
+    bio: "Partner in the vision148 project and original custodian of #148",
     img: "/src/assets/Stuart-Peach.png"
   }];
 });

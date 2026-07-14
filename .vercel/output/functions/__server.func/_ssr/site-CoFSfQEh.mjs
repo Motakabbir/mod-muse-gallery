@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { l as logo } from "./logo-4-ISZutHRh.mjs";
+const logo = "/assets/logo-4-BrrnFFbn.jpeg";
 const NAV = [
   { label: "Syndicate", to: "/", hash: "intro" },
   { label: "The Car", to: "/", hash: "car" },

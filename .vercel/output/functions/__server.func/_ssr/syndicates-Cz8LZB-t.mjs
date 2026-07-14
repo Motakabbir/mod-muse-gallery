@@ -1,6 +1,5 @@
-import { c as createServerRpc } from "./createServerRpc-EbRzDRkK.mjs";
-import { b as createServerFn } from "./server-BUMPnHDz.mjs";
-import { l as logo } from "./logo-4-ISZutHRh.mjs";
+import { c as createServerRpc } from "./createServerRpc-oA0flvCm.mjs";
+import { b as createServerFn } from "./server-DlmSafZR.mjs";
 import "../_libs/seroval.mjs";
 import "../_libs/react.mjs";
 import "node:async_hooks";
@@ -40,19 +39,19 @@ const getLiveSyndicates = createServerFn({
     waitlist: false
   }, {
     title: "Next Build being assessed for Syndication",
-    img: logo,
+    img: "/src/assets/SynModBuild-Round-WEB.png",
     allocation: "TBD",
     stats: "TBD",
-    return: "Potential Returns 63.90%*",
-    isPlaceholder: true,
+    return: "TBD",
+    isPlaceholder: false,
     waitlist: true
   }, {
     title: "Something special in the longterm pipeline",
-    img: logo,
+    img: "/src/assets/SynModBuild-Round-WEB.png",
     allocation: "TBD",
     stats: "TBD",
-    return: "Potential Returns 87.2%*",
-    isPlaceholder: true,
+    return: "TBD",
+    isPlaceholder: false,
     waitlist: true
   }];
 });
