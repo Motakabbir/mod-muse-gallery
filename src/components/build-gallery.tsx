@@ -61,7 +61,7 @@ const MEDIA: MediaItem[] = [
   {
     kind: "image",
     src: '/src/assets/Dismantling.JPG',
-    title: "Digital & CAD Modelling",
+    title: "3D scanning & Desktop Design",
     caption: "Aero and structural geometry refined in CAD.",
     phase: "Phase 02",
     longDesc: "Refining the exterior body lines and custom aerodynamic elements in CAD. The styling respects the classic Group A touring car design while optimizing underbody airflow.",

@@ -2,7 +2,7 @@ import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { u as useReveal, N as Nav, P as PageHero, F as Footer } from "./site-CoFSfQEh.mjs";
 import { h as heroVideo } from "./Hero_002-BDf_P1XZ.mjs";
-import { R as Route$6 } from "./router-D6gkI43S.mjs";
+import { R as Route$6 } from "./router-OzdOAmZK.mjs";
 import "../_libs/seroval.mjs";
 import { P as Play, X, a as ChevronLeft, b as ChevronRight } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -19,7 +19,7 @@ import "stream";
 import "../_libs/isbot.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
-import "./server-D7_jbsHF.mjs";
+import "./server-DRBEWLnp.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -72,7 +72,7 @@ const MEDIA = [
   {
     kind: "image",
     src: "/src/assets/Dismantling.JPG",
-    title: "Digital & CAD Modelling",
+    title: "3D scanning & Desktop Design",
     caption: "Aero and structural geometry refined in CAD.",
     phase: "Phase 02",
     longDesc: "Refining the exterior body lines and custom aerodynamic elements in CAD. The styling respects the classic Group A touring car design while optimizing underbody airflow.",
