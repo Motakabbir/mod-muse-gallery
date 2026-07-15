@@ -286,7 +286,11 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
               <div className="p-8 flex-1 flex flex-col justify-between">
                 <div>
                   <h3 className="font-display text-2xl mb-2">{s.title}</h3>
-                  <div className="font-mono text-sm text-acid mb-6">{s.allocation}</div>
+                  <div className="font-mono text-sm text-acid mb-6">
+                    {(Array.isArray(s.allocation) ? s.allocation : [s.allocation]).map((line: string, i: number) => (
+                      <span key={i} className="block">{line}</span>
+                    ))}
+                  </div>
                   <ul className="space-y-2 text-bone/60 text-sm border-t border-white/5 pt-4">
                     <li>{s.stats}</li>
                     <li className="text-bone/80 font-semibold">{s.return}</li>

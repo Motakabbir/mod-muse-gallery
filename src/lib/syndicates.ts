@@ -9,16 +9,19 @@ export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async
     {
       title: "Vision148 Sierra Cosworth RS500",
       img: '/src/assets/RS500_Studio_showcase.png', // In a real DB, this would be a URL
-      allocation: "£25,000 allocation",
-      stats: "25 Allocations • 10 remaining",
-      return: "Potential Investment 77.1%*",
+      allocation: [
+        "£25,000 Platinum Allocation",
+        "£5,000 Silver Allocation"
+      ],
+      stats: "10 Platinum Allocations • 20 Silver Allocations",
+      return: "Potential Return: 77.1%*",
       isPlaceholder: false,
       waitlist: false,
     },
     {
       title: "Next Build being assessed for Syndication",
       img: '/src/assets/SynModBuild-Round-WEB.png',
-      allocation: "TBD",
+      allocation: ["TBD"],
       stats: "TBD",
       return: "TBD",
       isPlaceholder: false,
@@ -28,7 +31,7 @@ export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async
     {
       title: "Something special in the longterm pipeline",
       img: '/src/assets/SynModBuild-Round-WEB.png',
-      allocation: "TBD",
+      allocation: ["TBD"],
       stats: "TBD",
       return: "TBD",
       isPlaceholder: false,
