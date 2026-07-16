@@ -2,7 +2,7 @@ import { Q as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { Q as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { b as createRouter, a as createRootRouteWithContext, u as useRouter, L as Link, d as useRouterState, O as Outlet, H as HeadContent, S as Scripts, c as createFileRoute, l as lazyRouteComponent } from "../_libs/tanstack__react-router.mjs";
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { b as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-BlDQUrVc.mjs";
+import { b as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-CPL9GJbh.mjs";
 import { u as useReducedMotion, A as AnimatePresence, m as motion } from "../_libs/framer-motion.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -147,7 +147,7 @@ const getPhases = createServerFn({
 const getSpecs = createServerFn({
   method: "GET"
 }).handler(createSsrRpc("99b07c72264bd83f294bf8c190daadda04dd85ad1509ca79cec14ab8c32bf477"));
-const $$splitComponentImporter$6 = () => import("./the-build-CD8kyzZb.mjs");
+const $$splitComponentImporter$6 = () => import("./the-build-DkSK8Wzf.mjs");
 const Route$6 = createFileRoute("/the-build")({
   head: () => ({
     meta: [{
@@ -179,7 +179,7 @@ const getPageEvents = createServerFn({
 const getFaqs = createServerFn({
   method: "GET"
 }).handler(createSsrRpc("84ac47e88e92c0a102a5f22e093fc9253feb648bc5fb9abad64c673167143404"));
-const $$splitComponentImporter$5 = () => import("./events-Bl2D15lM.mjs");
+const $$splitComponentImporter$5 = () => import("./events-DbScu_d4.mjs");
 const Route$5 = createFileRoute("/events")({
   head: () => ({
     meta: [{
@@ -208,7 +208,7 @@ const Route$5 = createFileRoute("/events")({
 const getGalleryItems = createServerFn({
   method: "GET"
 }).handler(createSsrRpc("0f43699aa5c12fd7eccb86d3c89fc028b662ee26b58f0d02adfb484e9344adea"));
-const $$splitComponentImporter$4 = () => import("./design-gallery-3eLJxktc.mjs");
+const $$splitComponentImporter$4 = () => import("./design-gallery-CNF2EOJ6.mjs");
 const Route$4 = createFileRoute("/design-gallery")({
   head: () => ({
     meta: [{
@@ -233,7 +233,7 @@ const getDirectLines = createServerFn({
 const getWorkshopAddress = createServerFn({
   method: "GET"
 }).handler(createSsrRpc("7ccf67c9f0168c6ac9157c05785d1dcd26d00c09dfaf8efac7d05f81052b726b"));
-const $$splitComponentImporter$3 = () => import("./contact-CZ3eDpVy.mjs");
+const $$splitComponentImporter$3 = () => import("./contact-DcMMKFX8.mjs");
 const Route$3 = createFileRoute("/contact")({
   head: () => ({
     meta: [{
@@ -262,7 +262,7 @@ const Route$3 = createFileRoute("/contact")({
 const getApplySteps = createServerFn({
   method: "GET"
 }).handler(createSsrRpc("ebe8ef3d05a46c2d928d9d6319350dfb53ad6f290bd633e464e3550d615987e5"));
-const $$splitComponentImporter$2 = () => import("./apply-qV6dEfBw.mjs");
+const $$splitComponentImporter$2 = () => import("./apply-DbOUhIo4.mjs");
 const Route$2 = createFileRoute("/apply")({
   head: () => ({
     meta: [{
@@ -287,7 +287,7 @@ const getPrinciples = createServerFn({
 const getArchitects = createServerFn({
   method: "GET"
 }).handler(createSsrRpc("b6ec13c45afd3f3a4fc06cbfb77f797107faeaad290a546d85fda1f90d7de29b"));
-const $$splitComponentImporter$1 = () => import("./about-CyErCNpL.mjs");
+const $$splitComponentImporter$1 = () => import("./about-CRXRbmza.mjs");
 const Route$1 = createFileRoute("/about")({
   head: () => ({
     meta: [{
@@ -337,7 +337,7 @@ const getSyndicateSteps = createServerFn({
 const getBenefits = createServerFn({
   method: "GET"
 }).handler(createSsrRpc("908d6378279f221ff138851f3efe8d5676afb43fba40f140c2cfa0b0dd888628"));
-const $$splitComponentImporter = () => import("./index-CL91rPR1.mjs");
+const $$splitComponentImporter = () => import("./index-D6FZ0S26.mjs");
 const Route = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter, "component"),
   loader: async () => {

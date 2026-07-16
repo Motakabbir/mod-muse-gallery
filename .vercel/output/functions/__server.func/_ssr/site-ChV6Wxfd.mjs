@@ -46,24 +46,18 @@ function Nav() {
               "Restomod"
             ] })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "hidden lg:flex items-center gap-8", children: [
-            NAV.map((n) => {
-              const href = n.hash ? `/#${n.hash}` : n.to;
-              return /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "a",
-                {
-                  href,
-                  className: "relative text-xs text-bone/70 hover:text-acid transition-colors uppercase tracking-[0.25em] font-medium after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:h-px after:w-0 after:bg-acid hover:after:w-full after:transition-all after:duration-300",
-                  children: n.label
-                },
-                n.label
-              );
-            }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/apply", className: "btn-acid !py-2.5 !px-5 !text-[11px]", children: [
-              "Apply ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": true, children: "→" })
-            ] })
-          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "hidden lg:flex items-center gap-8", children: NAV.map((n) => {
+            const href = n.hash ? `/#${n.hash}` : n.to;
+            return /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "a",
+              {
+                href,
+                className: "relative text-xs text-bone/70 hover:text-acid transition-colors uppercase tracking-[0.25em] font-medium after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:h-px after:w-0 after:bg-acid hover:after:w-full after:transition-all after:duration-300",
+                children: n.label
+              },
+              n.label
+            );
+          }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "button",
             {
