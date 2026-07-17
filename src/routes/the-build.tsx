@@ -6,21 +6,36 @@ import videoCarSection from "../assets/Hero_002.mp4";
 import { getPhases, getSpecs } from "../lib/build";
 import { useLoaderData } from "@tanstack/react-router";
 
+import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+
 export const Route = createFileRoute("/the-build")({
-  head: () => ({
-    meta: [
-      { title: "The Build | Syndicate RS500 Restomod" },
-      { name: "description", content: "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open." },
-      { property: "og:title", content: "The Build | Syndicate" },
-      { property: "og:description", content: "Engineered in the open. Every stage documented." },
-    ],
+  loader: async () => {
+    const seoPromise = fetchSeoMetadata("the-build", {
+      title: "The Build | Syndicate RS500 Restomod",
+      description: "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open.",
+      og_title: "The Build | Syndicate",
+      og_description: "Engineered in the open. Every stage documented.",
+    });
+    const phasesPromise = getPhases();
+    const specsPromise = getSpecs();
+
+    const [seo, phases, specs] = await Promise.all([
+      seoPromise,
+      phasesPromise,
+      specsPromise,
+    ]);
+
+    return { seo, phases, specs };
+  },
+  head: ({ loaderData }) => ({
+    meta: mapSeoToMeta(loaderData?.seo || {
+      title: "The Build | Syndicate RS500 Restomod",
+      description: "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open.",
+      og_title: "The Build | Syndicate",
+      og_description: "Engineered in the open. Every stage documented.",
+    }),
   }),
   component: TheBuildPage,
-  loader: async () => {
-    const phases = await getPhases();
-    const specs = await getSpecs();
-    return { phases, specs };
-  },
 });
 
 // PHASES moved to API/Loader

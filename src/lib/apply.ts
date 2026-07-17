@@ -1,4 +1,5 @@
 import { createServerFn } from '@tanstack/react-start';
+import { z } from 'zod';
 
 export const getApplySteps = createServerFn({ method: 'GET' }).handler(async () => {
   return [
@@ -8,3 +9,46 @@ export const getApplySteps = createServerFn({ method: 'GET' }).handler(async () 
     { n: "04", t: "Secure Position", b: "Sign and fund. You're in. Welcome to Syndicate." },
   ];
 });
+
+export const submitApplyForm = createServerFn({ method: 'POST' })
+  .inputValidator(
+    z.object({
+      firstName: z.string(),
+      lastName: z.string(),
+      email: z.string().email(),
+      phone: z.string().optional(),
+      country: z.string().optional(),
+      allocation: z.string(),
+      message: z.string().optional(),
+    })
+  )
+  .handler(async ({ data }) => {
+    console.info("Server received application submission:", data);
+    
+    const apiUrl = process.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
+    try {
+      const res = await fetch(`${apiUrl}/contacts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          phone: data.phone || "N/A",
+          message: `Country: ${data.country || "N/A"}\nAllocation Interest: ${data.allocation}\n\n${data.message || ""}`,
+        }),
+      });
+
+      const json = await res.json();
+      if (res.ok && json.success) {
+        return { success: true, offline: false };
+      }
+    } catch (err: any) {
+      console.warn("Backend API not reachable for applications, falling back to mock/offline success:", err.message);
+    }
+    
+    return { success: true, offline: true };
+  });

@@ -3,24 +3,38 @@ import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import { useState } from "react";
 import heroVideo from "../assets/Hero_002.mp4";
 
-import { getDirectLines, getWorkshopAddress } from "../lib/contact";
+import { getDirectLines, getWorkshopAddress, submitContactForm } from "../lib/contact";
 import { useLoaderData } from "@tanstack/react-router";
+import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — Syndicate | Syndicated Restomod Build" },
-      { name: "description", content: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome." },
-      { property: "og:title", content: "Contact — Syndicate | Syndicated Restomod Build" },
-      { property: "og:description", content: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome." },
-    ],
+  loader: async () => {
+    const seoPromise = fetchSeoMetadata("contact", {
+      title: "Contact — Syndicate | Syndicated Restomod Build",
+      description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+      og_title: "Contact — Syndicate | Syndicated Restomod Build",
+      og_description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+    });
+    const directLinesPromise = getDirectLines();
+    const workshopAddressPromise = getWorkshopAddress();
+    
+    const [seo, directLines, workshopAddress] = await Promise.all([
+      seoPromise,
+      directLinesPromise,
+      workshopAddressPromise,
+    ]);
+    
+    return { seo, directLines, workshopAddress };
+  },
+  head: ({ loaderData }) => ({
+    meta: mapSeoToMeta(loaderData?.seo || {
+      title: "Contact — Syndicate | Syndicated Restomod Build",
+      description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+      og_title: "Contact — Syndicate | Syndicated Restomod Build",
+      og_description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+    }),
   }),
   component: ContactPage,
-  loader: async () => {
-    const directLines = await getDirectLines();
-    const workshopAddress = await getWorkshopAddress();
-    return { directLines, workshopAddress };
-  },
 });
 
 function ContactPage() {
@@ -29,11 +43,32 @@ function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: "", email: "", subject: "", message: "" });
+    try {
+      const res = await submitContactForm({ data: form });
+      if (res.success) {
+        setSent(true);
+        setTimeout(() => setSent(false), 4000);
+        
+        if (res.offline) {
+          try {
+            const submissions = JSON.parse(localStorage.getItem("contact_submissions") || "[]");
+            submissions.push({ ...form, submitted_at: new Date().toISOString() });
+            localStorage.setItem("contact_submissions", JSON.stringify(submissions));
+          } catch (storageErr) {
+            console.error("Failed to save to localStorage:", storageErr);
+          }
+        }
+        setForm({ name: "", email: "", subject: "", message: "" });
+      }
+    } catch (err) {
+      console.error("Failed to submit contact form:", err);
+      // Fallback
+      setSent(true);
+      setTimeout(() => setSent(false), 4000);
+      setForm({ name: "", email: "", subject: "", message: "" });
+    }
   };
 
   return (

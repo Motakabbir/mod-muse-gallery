@@ -7,21 +7,36 @@ import { getPageEvents, getFaqs } from "../lib/events";
 import { useLoaderData, createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 
+import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+
 export const Route = createFileRoute("/events")({
-  head: () => ({
-    meta: [
-      { title: "Events & FAQ — Syndicate | Syndicated Restomod Build" },
-      { name: "description", content: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions." },
-      { property: "og:title", content: "Events & FAQ — Syndicate | Syndicated Restomod Build" },
-      { property: "og:description", content: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions." },
-    ],
+  loader: async () => {
+    const seoPromise = fetchSeoMetadata("events", {
+      title: "Events & FAQ — Syndicate | Syndicated Restomod Build",
+      description: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions.",
+      og_title: "Events & FAQ — Syndicate | Syndicated Restomod Build",
+      og_description: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions.",
+    });
+    const eventsPromise = getPageEvents();
+    const faqsPromise = getFaqs();
+
+    const [seo, events, faqs] = await Promise.all([
+      seoPromise,
+      eventsPromise,
+      faqsPromise,
+    ]);
+
+    return { seo, events, faqs };
+  },
+  head: ({ loaderData }) => ({
+    meta: mapSeoToMeta(loaderData?.seo || {
+      title: "Events & FAQ — Syndicate | Syndicated Restomod Build",
+      description: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions.",
+      og_title: "Events & FAQ — Syndicate | Syndicated Restomod Build",
+      og_description: "Upcoming Syndicate syndicate events, track days, build open-days, and answers to frequently asked questions.",
+    }),
   }),
   component: EventsPage,
-  loader: async () => {
-    const events = await getPageEvents();
-    const faqs = await getFaqs();
-    return { events, faqs };
-  },
 });
 
 // EVENTS moved to API/Loader

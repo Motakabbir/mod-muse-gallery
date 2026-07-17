@@ -18,19 +18,50 @@ import {
 } from "../lib/syndicates";
 import { useLoaderData } from "@tanstack/react-router";
 
+import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+
 export const Route = createFileRoute("/")({
-  component: Index,
   loader: async () => {
-    const syndicates = await getLiveSyndicates();
-    const events = await getEvents();
-    const recentlyFunded = await getRecentlyFunded();
-    const pillars = await getPillars();
-    const process = await getProcess();
-    const partners = await getPartners();
-    const syndicateSteps = await getSyndicateSteps();
-    const benefits = await getBenefits();
+    const seoPromise = fetchSeoMetadata("home", {
+      title: "Syndicate | Syndicated Restomod Build",
+      description: "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open.",
+      og_title: "Syndicate | Syndicated Restomod Build",
+      og_description: "Syndicated restomod builds powered by TheCarCrowd.",
+    });
+    
+    const syndicatesPromise = getLiveSyndicates();
+    const eventsPromise = getEvents();
+    const recentlyFundedPromise = getRecentlyFunded();
+    const pillarsPromise = getPillars();
+    const processPromise = getProcess();
+    const partnersPromise = getPartners();
+    const syndicateStepsPromise = getSyndicateSteps();
+    const benefitsPromise = getBenefits();
+
+    const [
+      seo,
+      syndicates,
+      events,
+      recentlyFunded,
+      pillars,
+      process,
+      partners,
+      syndicateSteps,
+      benefits
+    ] = await Promise.all([
+      seoPromise,
+      syndicatesPromise,
+      eventsPromise,
+      recentlyFundedPromise,
+      pillarsPromise,
+      processPromise,
+      partnersPromise,
+      syndicateStepsPromise,
+      benefitsPromise
+    ]);
 
     return {
+      seo,
       syndicates,
       events,
       recentlyFunded,
@@ -41,6 +72,15 @@ export const Route = createFileRoute("/")({
       benefits
     };
   },
+  head: ({ loaderData }) => ({
+    meta: mapSeoToMeta(loaderData?.seo || {
+      title: "Syndicate | Syndicated Restomod Build",
+      description: "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open.",
+      og_title: "Syndicate | Syndicated Restomod Build",
+      og_description: "Syndicated restomod builds powered by TheCarCrowd.",
+    }),
+  }),
+  component: Index,
 });
 
 // Dynamic arrays moved to API/Loader

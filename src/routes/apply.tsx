@@ -3,27 +3,38 @@ import { useState } from "react";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import heroVideo from "../assets/Hero_001.mp4";
 
-import { getApplySteps } from "../lib/apply";
+import { getApplySteps, submitApplyForm } from "../lib/apply";
 import { useLoaderData } from "@tanstack/react-router";
+import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
 
 export const Route = createFileRoute("/apply")({
-  head: () => ({
-    meta: [
-      { title: "Apply for Allocation | Syndicate" },
-      { name: "description", content: "Apply for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available." },
-      { property: "og:title", content: "Apply for Allocation | Syndicate" },
-      { property: "og:description", content: "Limited syndicate positions for the Syndicate RS500 build." },
-    ],
+  loader: async () => {
+    const seoPromise = fetchSeoMetadata("apply", {
+      title: "Apply for Allocation | Syndicate",
+      description: "Apply for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
+      og_title: "Apply for Allocation | Syndicate",
+      og_description: "Limited syndicate positions for the Syndicate RS500 build.",
+    });
+    const stepsPromise = getApplySteps();
+    const [seo, steps] = await Promise.all([seoPromise, stepsPromise]);
+    return { seo, steps };
+  },
+  head: ({ loaderData }) => ({
+    meta: mapSeoToMeta(loaderData?.seo || {
+      title: "Apply for Allocation | Syndicate",
+      description: "Apply for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
+      og_title: "Apply for Allocation | Syndicate",
+      og_description: "Limited syndicate positions for the Syndicate RS500 build.",
+    }),
   }),
   component: ApplyPage,
-  loader: () => getApplySteps(),
 });
 
 // STEPS moved to API/Loader
 
 function ApplyPage() {
   useReveal();
-  const steps = Route.useLoaderData();
+  const { steps } = Route.useLoaderData();
   const [submitted, setSubmitted] = useState(false);
 
   return (
@@ -70,9 +81,38 @@ function ApplyPage() {
             </div>
           ) : (
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                setSubmitted(true);
+                const formData = new FormData(e.currentTarget);
+                const data = {
+                  firstName: formData.get("firstName") as string,
+                  lastName: formData.get("lastName") as string,
+                  email: formData.get("email") as string,
+                  phone: (formData.get("phone") as string) || "",
+                  country: (formData.get("country") as string) || "",
+                  allocation: formData.get("allocation") as string,
+                  message: (formData.get("message") as string) || "",
+                };
+                
+                try {
+                  const res = await submitApplyForm({ data });
+                  if (res.success) {
+                    setSubmitted(true);
+                    
+                    if (res.offline) {
+                      try {
+                        const submissions = JSON.parse(localStorage.getItem("apply_submissions") || "[]");
+                        submissions.push({ ...data, submitted_at: new Date().toISOString() });
+                        localStorage.setItem("apply_submissions", JSON.stringify(submissions));
+                      } catch (storageErr) {
+                        console.error("Failed to save application to localStorage:", storageErr);
+                      }
+                    }
+                  }
+                } catch (err) {
+                  console.error("Failed to submit application form:", err);
+                  setSubmitted(true);
+                }
               }}
               className="reveal space-y-6 border border-white/10 bg-carbon p-8 md:p-12"
             >

@@ -5,17 +5,29 @@ import videoCarSection from "../assets/LIBRARY_OF_INTENT.mp4";
 import { getGalleryItems } from "../lib/gallery";
 import { useLoaderData } from "@tanstack/react-router";
 
+import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+
 export const Route = createFileRoute("/design-gallery")({
-  head: () => ({
-    meta: [
-      { title: "Design Gallery | Syndicate RS500" },
-      { name: "description", content: "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery." },
-      { property: "og:title", content: "Design Gallery | Syndicate" },
-      { property: "og:description", content: "Renders, details, materials, process imagery." },
-    ],
+  loader: async () => {
+    const seoPromise = fetchSeoMetadata("design-gallery", {
+      title: "Design Gallery | Syndicate RS500",
+      description: "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery.",
+      og_title: "Design Gallery | Syndicate",
+      og_description: "Renders, details, materials, process imagery.",
+    });
+    const itemsPromise = getGalleryItems();
+    const [seo, items] = await Promise.all([seoPromise, itemsPromise]);
+    return { seo, items };
+  },
+  head: ({ loaderData }) => ({
+    meta: mapSeoToMeta(loaderData?.seo || {
+      title: "Design Gallery | Syndicate RS500",
+      description: "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery.",
+      og_title: "Design Gallery | Syndicate",
+      og_description: "Renders, details, materials, process imagery.",
+    }),
   }),
   component: GalleryPage,
-  loader: () => getGalleryItems(),
 });
 
 // ITEMS moved to API/Loader
@@ -26,7 +38,7 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 function GalleryPage() {
   useReveal();
-  const items = Route.useLoaderData();
+  const { items } = Route.useLoaderData();
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   useEffect(() => {

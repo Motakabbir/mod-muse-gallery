@@ -7,21 +7,36 @@ import videoPillarOne from "../assets/OUR_STORY.mp4";
 import { getPrinciples, getArchitects } from "../lib/about";
 import { useLoaderData } from "@tanstack/react-router";
 
+import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Us — Syndicate | Syndicated Restomod Build" },
-      { name: "description", content: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners." },
-      { property: "og:title", content: "About Us — Syndicate | Syndicated Restomod Build" },
-      { property: "og:description", content: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners." },
-    ],
+  loader: async () => {
+    const seoPromise = fetchSeoMetadata("about", {
+      title: "About Us — Syndicate | Syndicated Restomod Build",
+      description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+      og_title: "About Us — Syndicate | Syndicated Restomod Build",
+      og_description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+    });
+    const principlesPromise = getPrinciples();
+    const architectsPromise = getArchitects();
+
+    const [seo, principles, architects] = await Promise.all([
+      seoPromise,
+      principlesPromise,
+      architectsPromise,
+    ]);
+
+    return { seo, principles, architects };
+  },
+  head: ({ loaderData }) => ({
+    meta: mapSeoToMeta(loaderData?.seo || {
+      title: "About Us — Syndicate | Syndicated Restomod Build",
+      description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+      og_title: "About Us — Syndicate | Syndicated Restomod Build",
+      og_description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+    }),
   }),
   component: AboutPage,
-  loader: async () => {
-    const principles = await getPrinciples();
-    const architects = await getArchitects();
-    return { principles, architects };
-  },
 });
 
 function AboutPage() {
