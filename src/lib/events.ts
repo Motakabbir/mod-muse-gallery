@@ -44,7 +44,7 @@ export const getPageEvents = createServerFn({ method: 'GET' }).handler(async () 
       desc: "Final design sign-off event. Members vote on remaining specification choices: wheel finish, interior stitch colour, and livery details.",
       location: "Silverstone Park, UK",
       status: "Members Only",
-      longDesc: "A critical milestone in the Vision148 project. This weekend, members gather at Silverstone to review the finalized exterior surface scan, touch material samples, and cast votes on final customization choices. Make your mark on the build: vote on wheel finishes, interior leather stitching patterns, and custom livery details.",
+      longDesc: "A critical milestone in the syndicatedrestomod project. This weekend, members gather at Silverstone to review the finalized exterior surface scan, touch material samples, and cast votes on final customization choices. Make your mark on the build: vote on wheel finishes, interior leather stitching patterns, and custom livery details.",
       schedule: [
         "10:00 AM - Morning Briefing & CAD Twin Showcase",
         "11:00 AM - Material Samples Touch & Feel Session",

@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
       og_title: "Syndicate | Syndicated Restomod Build",
       og_description: "Syndicated restomod builds powered by TheCarCrowd.",
     });
-    
+
     const syndicatesPromise = getLiveSyndicates();
     const eventsPromise = getEvents();
     const recentlyFundedPromise = getRecentlyFunded();
@@ -671,7 +671,7 @@ function Index() {
       <Pillars pillars={pillars} />
       <TheCar />
       <LiveSyndicates syndicates={syndicates} />
-      {/* <RecentlyFunded recentlyFunded={recentlyFunded} /> Disabled until Vision148 momentum */}
+      {/* <RecentlyFunded recentlyFunded={recentlyFunded} /> Disabled until syndicatedrestomod momentum */}
       <Partnership steps={syndicateSteps} />
       <BuildProcess process={process} />
       <Events events={events} />

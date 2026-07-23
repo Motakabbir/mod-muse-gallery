@@ -25,7 +25,7 @@ const MEDIA: MediaItem[] = [
     title: "Syndicate — Teaser Reel",
     caption: "First glimpse of the RS500 reborn.",
     phase: "Reveal",
-    longDesc: "The official debut teaser for the Syndicate Vision148 project. Highlighting the historic pedigree of the Ford Sierra Cosworth RS500 and the engineering team behind its modern rebirth.",
+    longDesc: "The official debut teaser for the Syndicate syndicatedrestomod project. Highlighting the historic pedigree of the Ford Sierra Cosworth RS500 and the engineering team behind its modern rebirth.",
     details: [
       { label: "Production", value: "Syndicate Media" },
       { label: "Format", value: "4K ProRes" },

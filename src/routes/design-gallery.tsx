@@ -228,7 +228,7 @@ function GalleryPage() {
 
                 {/* Footer status inside details */}
                 <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-bone/40 font-mono text-[10px] uppercase tracking-[0.25em]">
-                  <span>Syndicate Vision148</span>
+                  <span>Syndicate syndicatedrestomod</span>
                   <span>{selectedIdx + 1} / {items.length}</span>
                 </div>
               </div>

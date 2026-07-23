@@ -7,7 +7,7 @@ export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async
 
   return [
     {
-      title: "Vision148 Sierra Cosworth RS500",
+      title: "syndicatedrestomod Sierra Cosworth RS500",
       img: '/src/assets/RS500_Studio_showcase.png', // In a real DB, this would be a URL
       allocation: [
         "£25,000 Platinum Allocation",
@@ -73,7 +73,7 @@ export const getEvents = createServerFn({ method: 'GET' }).handler(async () => {
       type: "Syndicate Member Invitation",
       title: "Coventry Metalcraft",
       tag: "INVITE ONLY",
-      description: "An opportunity to meet the UK's leading coach building company and Vision148 build partner",
+      description: "An opportunity to meet the UK's leading coach building company and syndicatedrestomod build partner",
       date: "TBA",
     },
     {
