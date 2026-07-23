@@ -8,7 +8,7 @@
  * saves it as static files.
  */
 import { spawn } from "child_process";
-import { writeFileSync, mkdirSync, existsSync, cpSync, readdirSync, statSync } from "fs";
+import { writeFileSync, mkdirSync, existsSync, cpSync, readdirSync, statSync, rmSync, renameSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { createServer } from "net";
 
@@ -218,6 +218,38 @@ async function main() {
   }
 
   server.kill();
+
+  // Move files from dist/client/ to dist/ and remove dist/client and dist/server
+  console.log("Cleaning up build folders...");
+  const serverDir = resolve("dist/server");
+  const distDir = resolve("dist");
+
+  if (existsSync(CLIENT_DIR)) {
+    console.log("Moving client files to dist root...");
+    const files = readdirSync(CLIENT_DIR);
+    for (const file of files) {
+      const srcPath = join(CLIENT_DIR, file);
+      const destPath = join(distDir, file);
+      
+      if (existsSync(destPath)) {
+        rmSync(destPath, { recursive: true, force: true });
+      }
+      renameSync(srcPath, destPath);
+    }
+    rmSync(CLIENT_DIR, { recursive: true, force: true });
+  }
+
+  if (existsSync(serverDir)) {
+    console.log("Removing server folder...");
+    rmSync(serverDir, { recursive: true, force: true });
+  }
+
+  const nitroJson = join(distDir, "nitro.json");
+  if (existsSync(nitroJson)) {
+    rmSync(nitroJson);
+  }
+  console.log("✓ Cleanup completed. All static files are now directly inside 'dist/'.");
+
   console.log(`\nDone: ${success} pages generated, ${failed} skipped.`);
 
   if (success === 0) {
