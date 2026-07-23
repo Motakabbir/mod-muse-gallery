@@ -1,6 +1,4 @@
-import { createServerFn } from '@tanstack/react-start';
-
-export const getPhases = createServerFn({ method: 'GET' }).handler(async () => {
+export const getPhases = async () => {
   return [
     {
       n: "01",
@@ -36,9 +34,9 @@ export const getPhases = createServerFn({ method: 'GET' }).handler(async () => {
       partner: "DMC",
     },
   ];
-});
+};
 
-export const getSpecs = createServerFn({ method: 'GET' }).handler(async () => {
+export const getSpecs = async () => {
   return [
     { l: "Base", v: "1987 Ford Sierra Cosworth RS500 #148" },
     { l: "Engine", v: "Reworked YB 2.0L turbocharged inline-4" },
@@ -47,4 +45,4 @@ export const getSpecs = createServerFn({ method: 'GET' }).handler(async () => {
     { l: "Chassis", v: "Reinforced shell, modern suspension geometry" },
     { l: "Production", v: "1 of 1" },
   ];
-});
+};

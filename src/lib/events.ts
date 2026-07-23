@@ -1,6 +1,4 @@
-import { createServerFn } from '@tanstack/react-start';
-
-export const getPageEvents = createServerFn({ method: 'GET' }).handler(async () => {
+export const getPageEvents = async () => {
   return [
     {
       date: "October 2026",
@@ -75,9 +73,9 @@ export const getPageEvents = createServerFn({ method: 'GET' }).handler(async () 
       requirements: "Valid driving license required for track instruction. Helmets provided."
     }
   ];
-});
+};
 
-export const getFaqs = createServerFn({ method: 'GET' }).handler(async () => {
+export const getFaqs = async () => {
   return [
     {
       q: "What is a syndicated restomod?",
@@ -112,4 +110,4 @@ export const getFaqs = createServerFn({ method: 'GET' }).handler(async () => {
       a: "Submit an application through our Apply page. We review every application personally and aim to respond within 7 business days. A brief phone call is part of the process.",
     },
   ];
-});
+};

@@ -1,5 +1,3 @@
-import { createServerFn } from '@tanstack/react-start';
-
 export interface GalleryItem {
   img?: string;
   video?: string;
@@ -10,7 +8,7 @@ export interface GalleryItem {
   details?: { label: string; value: string }[];
 }
 
-export const getGalleryItems = createServerFn({ method: 'GET' }).handler(async (): Promise<GalleryItem[]> => {
+export const getGalleryItems = async (): Promise<GalleryItem[]> => {
   return [
     {
       video: "/src/assets/RS500_REIMAGINED_MORPHING.mp4",
@@ -105,4 +103,4 @@ export const getGalleryItems = createServerFn({ method: 'GET' }).handler(async (
       ]
     },
   ];
-});
+};

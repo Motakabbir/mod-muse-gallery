@@ -662,7 +662,7 @@ function BuildGallery() {
   ] });
 }
 const heroVideo$1 = "/assets/Hero_002-CVqSQ5jk.mp4";
-const getPhases = createServerFn({ method: "GET" }).handler(async () => {
+const getPhases = async () => {
   return [
     {
       n: "01",
@@ -697,8 +697,8 @@ const getPhases = createServerFn({ method: "GET" }).handler(async () => {
       partner: "DMC"
     }
   ];
-});
-const getSpecs = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getSpecs = async () => {
   return [
     { l: "Base", v: "1987 Ford Sierra Cosworth RS500 #148" },
     { l: "Engine", v: "Reworked YB 2.0L turbocharged inline-4" },
@@ -707,7 +707,7 @@ const getSpecs = createServerFn({ method: "GET" }).handler(async () => {
     { l: "Chassis", v: "Reinforced shell, modern suspension geometry" },
     { l: "Production", v: "1 of 1" }
   ];
-});
+};
 async function fetchSeoMetadata(slug, fallback) {
   const apiUrl = typeof process !== "undefined" && process.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
   try {
@@ -870,7 +870,7 @@ function TheBuildPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
-const getPageEvents = createServerFn({ method: "GET" }).handler(async () => {
+const getPageEvents = async () => {
   return [
     {
       date: "October 2026",
@@ -945,8 +945,8 @@ const getPageEvents = createServerFn({ method: "GET" }).handler(async () => {
       requirements: "Valid driving license required for track instruction. Helmets provided."
     }
   ];
-});
-const getFaqs = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getFaqs = async () => {
   return [
     {
       q: "What is a syndicated restomod?",
@@ -981,7 +981,7 @@ const getFaqs = createServerFn({ method: "GET" }).handler(async () => {
       a: "Submit an application through our Apply page. We review every application personally and aim to respond within 7 business days. A brief phone call is part of the process."
     }
   ];
-});
+};
 const Route$5 = createFileRoute("/events")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("events", {
@@ -1262,7 +1262,7 @@ function EventsPage() {
   ] });
 }
 const videoCarSection$1 = "/assets/LIBRARY_OF_INTENT-CcxMx2Ke.mp4";
-const getGalleryItems = createServerFn({ method: "GET" }).handler(async () => {
+const getGalleryItems = async () => {
   return [
     {
       video: "/src/assets/RS500_REIMAGINED_MORPHING.mp4",
@@ -1357,7 +1357,7 @@ const getGalleryItems = createServerFn({ method: "GET" }).handler(async () => {
       ]
     }
   ];
-});
+};
 const Route$4 = createFileRoute("/design-gallery")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("design-gallery", {
@@ -1589,22 +1589,22 @@ function GalleryPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
-const getDirectLines = createServerFn({ method: "GET" }).handler(async () => {
+const getDirectLines = async () => {
   return [
     { label: "General Inquiries", email: "hello@synmod.build" },
     { label: "Syndicate Applications", email: "apply@synmod.build" },
     { label: "Press & Media", email: "press@synmod.build" },
     { label: "Partnerships", email: "partners@synmod.build" }
   ];
-});
-const getWorkshopAddress = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getWorkshopAddress = async () => {
   return [
     "Syndicate Build Facility",
     "Unit 7, Silverstone Park",
     "Northamptonshire, NN12 8TN",
     "United Kingdom"
   ];
-});
+};
 const submitContactForm = createServerFn({ method: "POST" }).inputValidator(
   objectType({
     name: stringType(),
@@ -1825,14 +1825,14 @@ function ContactPage() {
   ] });
 }
 const heroVideo = "/assets/Hero_001-B52X2wuK.mp4";
-const getApplySteps = createServerFn({ method: "GET" }).handler(async () => {
+const getApplySteps = async () => {
   return [
     { n: "01", t: "Register Interest", b: "Submit the form below. We respond within 48 hours." },
     { n: "02", t: "Discovery Call", b: "A 30-min call to walk through the syndicate model and answer questions." },
     { n: "03", t: "Allocation Offer", b: "Receive a formal allocation document outlining cost, structure, and timeline." },
     { n: "04", t: "Secure Position", b: "Sign and fund. You're in. Welcome to Syndicate." }
   ];
-});
+};
 const submitApplyForm = createServerFn({ method: "POST" }).inputValidator(
   objectType({
     firstName: stringType(),
@@ -2045,7 +2045,7 @@ function Field({
 }
 const aboutDetail = "/assets/01_MISSION%20-Cu3ME3dV.png";
 const videoPillarOne = "/assets/OUR_STORY-0mupV783.mp4";
-const getPrinciples = createServerFn({ method: "GET" }).handler(async () => {
+const getPrinciples = async () => {
   return [
     {
       num: "01",
@@ -2063,15 +2063,15 @@ const getPrinciples = createServerFn({ method: "GET" }).handler(async () => {
       text: "The syndicate model means owners are participants, not spectators. From design votes to build-week visits, transparency is our default."
     }
   ];
-});
-const getArchitects = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getArchitects = async () => {
   return [
     { name: "IAN HOWE ", role: "Founder & Build Director", bio: "30 years experience in automotive & Fintech business", img: "/src/assets/Ian-Howe.png" },
     { name: "Simon Kiero Watson", role: "Commercial & Finance Oversight", bio: "Highly experienced Corporate Finance and Exchange Expert.", img: "/src/assets/Simon-KW.png" },
     { name: "Al Yasid Oozeear", role: "Digital Visualisor & Designer", bio: "Independent Automotive designer specialising in bespoke car design", img: "/src/assets/Al-Yasid.png" },
     { name: "Stuart Peach", role: "Project Co Founder", bio: "Partner in the syndicatedrestomod project and original custodian of #148", img: "/src/assets/Stuart-Peach.png" }
   ];
-});
+};
 const Route$1 = createFileRoute("/about")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("about", {
@@ -2188,8 +2188,8 @@ function AboutPage() {
 }
 const carbonTexture = "/assets/build-process-BNSHI9Rh.jpg";
 const videoCarSection = "/assets/RS500_REIMAGINED_MORPHING-y9t4xghZ.mp4";
-const getLiveSyndicates = createServerFn({ method: "GET" }).handler(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 300));
+const getLiveSyndicates = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 100));
   return [
     {
       title: "syndicatedrestomod Sierra Cosworth RS500",
@@ -2225,8 +2225,8 @@ const getLiveSyndicates = createServerFn({ method: "GET" }).handler(async () => 
       containImg: true
     }
   ];
-});
-const getRecentlyFunded = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getRecentlyFunded = async () => {
   return [
     {
       title: "Lamborghini Gallardo SE",
@@ -2251,8 +2251,8 @@ const getRecentlyFunded = createServerFn({ method: "GET" }).handler(async () => 
       members: "Syndicate Members — 22"
     }
   ];
-});
-const getEvents = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getEvents = async () => {
   return [
     {
       type: "Syndicate Member Invitation",
@@ -2276,8 +2276,8 @@ const getEvents = createServerFn({ method: "GET" }).handler(async () => {
       date: "TBA"
     }
   ];
-});
-const getPillars = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getPillars = async () => {
   return [
     {
       n: "01",
@@ -2301,16 +2301,16 @@ const getPillars = createServerFn({ method: "GET" }).handler(async () => {
       body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations."
     }
   ];
-});
-const getProcess = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getProcess = async () => {
   return [
     { n: "01", title: "Acquisition & Strip", items: ["Base vehicle selection", "Full teardown", "Digital scanning"] },
     { n: "02", title: "Design & Engineering", items: ["CAD modelling", "Structural optimisation", "Performance upgrades"] },
     { n: "03", title: "Manufacturing", items: ["Fabrication", "Additive manufacturing", "Precision assembly"] },
     { n: "04", title: "Finishing & Validation", items: ["Paint & livery", "Road & track testing", "Final sign-off"] }
   ];
-});
-const getPartners = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getPartners = async () => {
   return [
     { name: "T3DMC", role: "3D Scanning & Digital Twin" },
     { name: "ASM Auto Recycling", role: "Chassis Dismantling & Cataloguing" },
@@ -2321,23 +2321,23 @@ const getPartners = createServerFn({ method: "GET" }).handler(async () => {
     { name: "Cornerstone Technologies", role: "Non-structural Skillsets" },
     { name: "HGL / VenueServe", role: "Membership Platform & Fan Portal" }
   ];
-});
-const getSyndicateSteps = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getSyndicateSteps = async () => {
   return [
     { n: 1, title: "Syndicate Formation", body: "A fixed number of participants secure allocation." },
     { n: 2, title: "Build Phase", body: "Full transparency through content and direct access." },
     { n: 3, title: "Experience Phase", body: "Driving events, track days, private access." },
     { n: 4, title: "Exit Opportunity", body: "Potential sale of the asset at premium." }
   ];
-});
-const getBenefits = createServerFn({ method: "GET" }).handler(async () => {
+};
+const getBenefits = async () => {
   return [
     { icon: "⬡", title: "Build Access", items: ["Workshop visits", "Engineering insight"] },
     { icon: "◎", title: "Driving Access", items: ["Road drives", "Track sessions"] },
     { icon: "✦", title: "Events", items: ["Launch", "Private experiences"] },
     { icon: "◈", title: "Knowledge", items: ["Learn the build", "Understand the engineering"] }
   ];
-});
+};
 const Route = createFileRoute("/")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("home", {

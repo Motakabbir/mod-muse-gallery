@@ -1,9 +1,8 @@
-import { createServerFn } from '@tanstack/react-start';
 import placeholderLogo from "../assets/logo/logo-4.jpeg";
 
-export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async () => {
+export const getLiveSyndicates = async () => {
   // Simulate network delay and DB fetch
-  await new Promise(resolve => setTimeout(resolve, 300));
+  await new Promise(resolve => setTimeout(resolve, 100));
 
   return [
     {
@@ -39,9 +38,9 @@ export const getLiveSyndicates = createServerFn({ method: 'GET' }).handler(async
       containImg: true,
     },
   ];
-});
+};
 
-export const getRecentlyFunded = createServerFn({ method: 'GET' }).handler(async () => {
+export const getRecentlyFunded = async () => {
   return [
     {
       title: "Lamborghini Gallardo SE",
@@ -65,9 +64,9 @@ export const getRecentlyFunded = createServerFn({ method: 'GET' }).handler(async
       members: "Syndicate Members — 22",
     },
   ];
-});
+};
 
-export const getEvents = createServerFn({ method: 'GET' }).handler(async () => {
+export const getEvents = async () => {
   return [
     {
       type: "Syndicate Member Invitation",
@@ -91,9 +90,9 @@ export const getEvents = createServerFn({ method: 'GET' }).handler(async () => {
       date: "TBA",
     },
   ];
-});
+};
 
-export const getPillars = createServerFn({ method: 'GET' }).handler(async () => {
+export const getPillars = async () => {
   return [
     {
       n: "01",
@@ -117,18 +116,18 @@ export const getPillars = createServerFn({ method: 'GET' }).handler(async () => 
       body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations.",
     },
   ];
-});
+};
 
-export const getProcess = createServerFn({ method: 'GET' }).handler(async () => {
+export const getProcess = async () => {
   return [
     { n: "01", title: "Acquisition & Strip", items: ["Base vehicle selection", "Full teardown", "Digital scanning"] },
     { n: "02", title: "Design & Engineering", items: ["CAD modelling", "Structural optimisation", "Performance upgrades"] },
     { n: "03", title: "Manufacturing", items: ["Fabrication", "Additive manufacturing", "Precision assembly"] },
     { n: "04", title: "Finishing & Validation", items: ["Paint & livery", "Road & track testing", "Final sign-off"] },
   ];
-});
+};
 
-export const getPartners = createServerFn({ method: 'GET' }).handler(async () => {
+export const getPartners = async () => {
   return [
     { name: "T3DMC", role: "3D Scanning & Digital Twin" },
     { name: "ASM Auto Recycling", role: "Chassis Dismantling & Cataloguing" },
@@ -139,22 +138,22 @@ export const getPartners = createServerFn({ method: 'GET' }).handler(async () =>
     { name: "Cornerstone Technologies", role: "Non-structural Skillsets" },
     { name: "HGL / VenueServe", role: "Membership Platform & Fan Portal" },
   ];
-});
+};
 
-export const getSyndicateSteps = createServerFn({ method: 'GET' }).handler(async () => {
+export const getSyndicateSteps = async () => {
   return [
     { n: 1, title: "Syndicate Formation", body: "A fixed number of participants secure allocation." },
     { n: 2, title: "Build Phase", body: "Full transparency through content and direct access." },
     { n: 3, title: "Experience Phase", body: "Driving events, track days, private access." },
     { n: 4, title: "Exit Opportunity", body: "Potential sale of the asset at premium." },
   ];
-});
+};
 
-export const getBenefits = createServerFn({ method: 'GET' }).handler(async () => {
+export const getBenefits = async () => {
   return [
     { icon: "⬡", title: "Build Access", items: ["Workshop visits", "Engineering insight"] },
     { icon: "◎", title: "Driving Access", items: ["Road drives", "Track sessions"] },
     { icon: "✦", title: "Events", items: ["Launch", "Private experiences"] },
     { icon: "◈", title: "Knowledge", items: ["Learn the build", "Understand the engineering"] },
   ];
-});
+};

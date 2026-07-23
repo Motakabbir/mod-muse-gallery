@@ -123,6 +123,15 @@ async function main() {
     console.log(`✓ Created 200.html and 404.html SPA fallbacks`);
   }
 
+  // Copy raw src/assets to dist/client/src/assets to support un-bundled static paths
+  const srcAssets = resolve("src/assets");
+  const destSrcAssets = join(CLIENT_DIR, "src/assets");
+  if (existsSync(srcAssets)) {
+    console.log("Copying src/assets to dist/client/src/assets...");
+    cpSync(srcAssets, destSrcAssets, { recursive: true });
+    console.log("✓ Copy completed successfully");
+  }
+
   server.kill();
   console.log(`\nDone: ${success} pages generated, ${failed} skipped.`);
 
