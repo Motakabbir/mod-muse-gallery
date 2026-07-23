@@ -8,6 +8,6 @@
 
   # Route all requests to the static client directory
   RewriteCond %{REQUEST_URI} !^/dist/client/
-  RewriteRule ^(.*)$ /dist/client/$1 [L]
+  RewriteRule ^(.*)$ /dist/$1 [L]
 </IfModule>
 
