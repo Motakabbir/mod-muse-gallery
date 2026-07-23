@@ -8,7 +8,7 @@
  * saves it as static files.
  */
 import { spawn } from "child_process";
-import { writeFileSync, mkdirSync, existsSync, cpSync } from "fs";
+import { writeFileSync, mkdirSync, existsSync, cpSync, readdirSync, statSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { createServer } from "net";
 
@@ -47,6 +47,88 @@ async function waitForServer(url, maxAttempts = 30) {
   return false;
 }
 
+function patchManifest() {
+  const assetsDir = join(CLIENT_DIR, "assets");
+  if (!existsSync(assetsDir)) {
+    console.warn("Assets directory not found at:", assetsDir);
+    return;
+  }
+
+  const files = readdirSync(assetsDir);
+  const jsFiles = files.filter(f => f.endsWith(".js"));
+
+  // Find the main client entry (the largest index-*.js file)
+  const indexFiles = jsFiles.filter(f => f.startsWith("index-")).map(f => ({
+    name: f,
+    size: statSync(join(assetsDir, f)).size
+  })).sort((a, b) => b.size - a.size);
+
+  if (indexFiles.length === 0) {
+    console.warn("No index-*.js files found in assets.");
+    return;
+  }
+
+  const clientEntryFile = indexFiles[0].name;
+  const homePageRouteFile = indexFiles[1] ? indexFiles[1].name : clientEntryFile;
+
+  const manifest = {
+    routes: {
+      "__root__": {
+        "preloads": [
+          `/assets/${clientEntryFile}`
+        ],
+        "scripts": [
+          {
+            "attrs": {
+              "type": "module",
+              "async": true,
+              "src": `/assets/${clientEntryFile}`
+            }
+          }
+        ]
+      }
+    },
+    clientEntry: `/assets/${clientEntryFile}`
+  };
+
+  const routeMap = {
+    "/about": "about-",
+    "/apply": "apply-",
+    "/contact": "contact-",
+    "/design-gallery": "design-gallery-",
+    "/events": "events-",
+    "/the-build": "the-build-",
+  };
+
+  for (const [route, prefix] of Object.entries(routeMap)) {
+    const routeFile = jsFiles.find(f => f.startsWith(prefix));
+    if (routeFile) {
+      manifest.routes[route] = {
+        "preloads": [
+          `/assets/${routeFile}`
+        ]
+      };
+    }
+  }
+
+  manifest.routes["/"] = {
+    "preloads": [
+      `/assets/${homePageRouteFile}`
+    ]
+  };
+
+  const manifestPath = resolve("dist/server/_tanstack-start-manifest_v.mjs");
+  if (existsSync(manifestPath)) {
+    writeFileSync(
+      manifestPath,
+      `export const tsrStartManifest = () => (${JSON.stringify(manifest, null, 2)});\n`
+    );
+    console.log("✓ Corrected server manifest with production asset paths successfully.");
+  } else {
+    console.warn("Server manifest not found at:", manifestPath);
+  }
+}
+
 async function main() {
   const PORT = await getFreePort().catch(() => 4174);
   const BASE_URL = `http://localhost:${PORT}`;
@@ -55,6 +137,9 @@ async function main() {
   if (existsSync(join(SERVER_DIR, "index.mjs")) && !existsSync(join(SERVER_DIR, "server.js"))) {
     writeFileSync(join(SERVER_DIR, "server.js"), 'export { default } from "./index.mjs";\n');
   }
+
+  // Patch the server manifest with actual production client assets before starting prerender server
+  patchManifest();
 
   console.log(`Starting preview server on port ${PORT} to capture SSR output...`);
 
