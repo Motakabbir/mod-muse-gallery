@@ -6,6 +6,12 @@
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+  # Enforce trailing slash to prevent mod_dir from exposing dist/client in the URL
+  # Only redirect if it is not a physical file and doesn't look like a file with an extension
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]{2,4}$
+  RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
+
   # Route all requests to the static client directory
   RewriteCond %{REQUEST_URI} !^/dist/client/
   RewriteRule ^(.*)$ /dist/client/$1 [L]
