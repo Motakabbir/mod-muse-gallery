@@ -2,24 +2,12 @@
   RewriteEngine On
   RewriteBase /
 
-  # Redirect HTTP to HTTPS
+  # Redirect HTTP to HTTPS (Recommended)
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # Don't rewrite if the request is already for the dist directory
-  RewriteCond %{REQUEST_URI} ^/dist/ [OR]
-  RewriteCond %{REQUEST_URI} ^/dist$
-  RewriteRule ^ - [L]
-
-  # If request is for a path that has an index.html inside dist/ (e.g. /the-build)
-  RewriteCond %{DOCUMENT_ROOT}/dist/$1/index.html -f
-  RewriteRule ^(.*)$ /dist/$1/index.html [L]
-
-  # If request is for a file that exists inside dist/ (e.g. assets or media)
-  RewriteCond %{DOCUMENT_ROOT}/dist/$1 -f
-  RewriteRule ^(.*)$ /dist/$1 [L]
-
-  # Fallback for client-side routing
-  RewriteRule ^(.*)$ /dist/index.html [L]
+  # Route all requests to the static client directory
+  RewriteCond %{REQUEST_URI} !^/dist/client/
+  RewriteRule ^(.*)$ /dist/client/$1 [L]
 </IfModule>
 

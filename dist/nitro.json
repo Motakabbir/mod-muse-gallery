@@ -1,0 +1,17 @@
+{
+  "date": "2026-07-24T02:36:30.279Z",
+  "preset": "static",
+  "framework": {
+    "name": "nitro",
+    "version": "3.0.260429-beta"
+  },
+  "versions": {
+    "nitro": "3.0.260429-beta"
+  },
+  "serverEntry": "server/index.mjs",
+  "publicDir": "client",
+  "commands": {
+    "preview": "npx serve ./public"
+  },
+  "config": {}
+}
