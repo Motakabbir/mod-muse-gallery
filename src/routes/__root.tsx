@@ -12,6 +12,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Transition } from "framer-motion";
 
 import appCss from "../styles.css?url";
+import faviconUrl from "../assets/logo/logo-4.jpeg";
 
 function NotFoundComponent() {
   return (
@@ -92,6 +93,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        type: "image/jpeg",
+        href: faviconUrl,
       },
     ],
   }),
