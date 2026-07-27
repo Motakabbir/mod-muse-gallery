@@ -25,6 +25,7 @@ import "../_libs/tanstack__start-fn-stubs.mjs";
 import "../_libs/@tanstack/start-storage-context+[...].mjs";
 import "node:async_hooks";
 const appCss = "/assets/styles-CJ9Wao-e.css";
+const logo = "/assets/logo-4-BrrnFFbn.jpeg";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -90,6 +91,11 @@ const Route$7 = createRootRouteWithContext()({
       {
         rel: "stylesheet",
         href: appCss
+      },
+      {
+        rel: "icon",
+        type: "image/jpeg",
+        href: logo
       }
     ]
   }),
@@ -130,7 +136,6 @@ function RootComponent() {
     pathname
   ) }) });
 }
-const logo = "/assets/logo-4-BrrnFFbn.jpeg";
 const NAV = [
   { label: "Syndicate", to: "/", hash: "intro" },
   { label: "The Car", to: "/", hash: "car" },
