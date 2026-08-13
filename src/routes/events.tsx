@@ -8,6 +8,8 @@ import { useLoaderData, createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 
 import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
+import { Dialog, DialogContent, DialogTitle } from "../components/ui/dialog";
 
 export const Route = createFileRoute("/events")({
   loader: async () => {
@@ -128,35 +130,22 @@ function EventsPage() {
       </section>
 
       {/* Event Details Lightbox Modal */}
-      <AnimatePresence>
-        {selectedEventIdx !== null && currentEvent && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-ink/95 backdrop-blur-2xl"
-          >
-            {/* Backdrop click to close */}
-            <div className="absolute inset-0" onClick={() => setSelectedEventIdx(null)} />
+      <Dialog open={selectedEventIdx !== null} onOpenChange={(open) => { if (!open) setSelectedEventIdx(null) }}>
+        <DialogContent className="max-w-4xl p-0 bg-carbon border-white/10 rounded-2xl overflow-hidden shadow-2xl gap-0 sm:rounded-2xl [&>button:last-child]:hidden">
+          <DialogTitle className="sr-only">Event Details</DialogTitle>
+          <div className="grid md:grid-cols-12 w-full h-full max-h-[90vh]">
+            {selectedEventIdx !== null && currentEvent && (
+              <>
+                {/* Close Button */}
+                <button
+                  onClick={() => setSelectedEventIdx(null)}
+                  aria-label="Close details"
+                  className="absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300"
+                >
+                  <X className="w-5 h-5" />
+                </button>
 
-            {/* Modal Card */}
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-4xl max-h-[90vh] bg-carbon border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-10 grid md:grid-cols-12"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedEventIdx(null)}
-                aria-label="Close details"
-                className="absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Left Column: Summary & Meta */}
+                {/* Left Column: Summary & Meta */}
               <div className="md:col-span-5 p-8 bg-ink/40 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between max-h-[40vh] md:max-h-[85vh] overflow-y-auto">
                 <div className="space-y-6">
                   <div>
@@ -264,11 +253,12 @@ function EventsPage() {
                     Request Invite →
                   </Link>
                 </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                </div>
+              </>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* FAQ */}
       <section className="py-24 px-6 grain relative">
@@ -278,33 +268,19 @@ function EventsPage() {
             <h2 className="font-display text-4xl md:text-5xl">Common Questions</h2>
           </div>
 
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <div key={i} className="reveal">
-                <div
-                  className={`bg-carbon border rounded-lg transition-colors duration-300 ${openFaq === i ? "border-acid/40" : "border-white/10 hover:border-white/20"}`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between p-6 text-left"
-                  >
-                    <span className="font-display text-lg pr-4">{faq.q}</span>
-                    <span
-                      className={`shrink-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${openFaq === i ? "bg-acid border-acid text-ink rotate-45" : "text-bone/60"}`}
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                      </svg>
-                    </span>
-                  </button>
-                  {openFaq === i && (
-                    <div className="px-6 pb-6">
-                      <p className="text-bone/70 leading-relaxed">{faq.a}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+          <div className="space-y-4 reveal">
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqs.map((faq, i) => (
+                <AccordionItem key={i} value={`item-${i}`} className="bg-carbon border border-white/10 rounded-lg px-6 data-[state=open]:border-acid/40 transition-colors duration-300">
+                  <AccordionTrigger className="font-display text-lg py-6 hover:no-underline [&[data-state=open]>svg]:text-ink [&[data-state=open]>svg]:bg-acid [&[data-state=open]>svg]:border-acid">
+                    <span className="text-left pr-4">{faq.q}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-bone/70 text-sm leading-relaxed pb-6">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

@@ -2,7 +2,11 @@ import { a as createRootRouteWithContext, u as useRouter, L as Link, d as useRou
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { Q as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { u as useReducedMotion, A as AnimatePresence, m as motion } from "../_libs/framer-motion.mjs";
-import { P as Play, X, a as ChevronLeft, b as ChevronRight, C as Calendar, M as MapPin, U as Users, S as ShieldAlert } from "../_libs/lucide-react.mjs";
+import { P as Play, X, b as ChevronLeft, c as ChevronRight, a as ChevronDown, C as Calendar, M as MapPin, U as Users, S as ShieldAlert } from "../_libs/lucide-react.mjs";
+import { c as clsx } from "../_libs/clsx.mjs";
+import { t as twMerge } from "../_libs/tailwind-merge.mjs";
+import { R as Root2, I as Item, H as Header, T as Trigger2, C as Content2 } from "../_libs/radix-ui__react-accordion.mjs";
+import { R as Root, P as Portal, a as Content, C as Close, T as Title, O as Overlay, D as Description } from "../_libs/radix-ui__react-dialog.mjs";
 import { h as createServerFn } from "../_libs/tanstack__start-client-core.mjs";
 import { o as objectType, s as stringType } from "../_libs/zod.mjs";
 import { Q as QueryClient } from "../_libs/tanstack__query-core.mjs";
@@ -21,10 +25,36 @@ import "stream";
 import "../_libs/isbot.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
+import "../_libs/radix-ui__react-context.mjs";
+import "../_libs/radix-ui__react-collection.mjs";
+import "../_libs/radix-ui__react-compose-refs.mjs";
+import "../_libs/radix-ui__react-slot.mjs";
+import "../_libs/radix-ui__primitive.mjs";
+import "../_libs/@radix-ui/react-use-controllable-state+[...].mjs";
+import "../_libs/@radix-ui/react-use-layout-effect+[...].mjs";
+import "../_libs/radix-ui__react-primitive.mjs";
+import "../_libs/radix-ui__react-collapsible.mjs";
+import "../_libs/radix-ui__react-presence.mjs";
+import "../_libs/radix-ui__react-id.mjs";
+import "../_libs/radix-ui__react-direction.mjs";
+import "../_libs/@radix-ui/react-dismissable-layer+[...].mjs";
+import "../_libs/@radix-ui/react-use-callback-ref+[...].mjs";
+import "../_libs/@radix-ui/react-use-escape-keydown+[...].mjs";
+import "../_libs/radix-ui__react-focus-scope.mjs";
+import "../_libs/radix-ui__react-portal.mjs";
+import "../_libs/radix-ui__react-focus-guards.mjs";
+import "../_libs/react-remove-scroll.mjs";
+import "tslib";
+import "../_libs/react-remove-scroll-bar.mjs";
+import "../_libs/react-style-singleton.mjs";
+import "../_libs/get-nonce.mjs";
+import "../_libs/use-sidecar.mjs";
+import "../_libs/use-callback-ref.mjs";
+import "../_libs/aria-hidden.mjs";
 import "../_libs/tanstack__start-fn-stubs.mjs";
 import "../_libs/@tanstack/start-storage-context+[...].mjs";
 import "node:async_hooks";
-const appCss = "/assets/styles-DskOENO_.css";
+const appCss = "/assets/styles-Cuk-K9W4.css";
 const logo = "/assets/logo-4-BrrnFFbn.jpeg";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
@@ -714,6 +744,9 @@ const getSpecs = async () => {
     { l: "Production", v: "1 of 1" }
   ];
 };
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
 async function fetchSeoMetadata(slug, fallback) {
   const apiUrl = typeof process !== "undefined" && process.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
   try {
@@ -989,6 +1022,89 @@ const getFaqs = async () => {
     }
   ];
 };
+const Accordion = Root2;
+const AccordionItem = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(Item, { ref, className: cn("border-b", className), ...props }));
+AccordionItem.displayName = "AccordionItem";
+const AccordionTrigger = reactExports.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(Header, { className: "flex", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  Trigger2,
+  {
+    ref,
+    className: cn(
+      "flex flex-1 items-center justify-between py-4 text-sm font-medium cursor-pointer transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180",
+      className
+    ),
+    ...props,
+    children: [
+      children,
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" })
+    ]
+  }
+) }));
+AccordionTrigger.displayName = Trigger2.displayName;
+const AccordionContent = reactExports.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Content2,
+  {
+    ref,
+    className: "overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+    ...props,
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn("pb-4 pt-0", className), children })
+  }
+));
+AccordionContent.displayName = Content2.displayName;
+const Dialog = Root;
+const DialogPortal = Portal;
+const DialogOverlay = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Overlay,
+  {
+    ref,
+    className: cn(
+      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className
+    ),
+    ...props
+  }
+));
+DialogOverlay.displayName = Overlay.displayName;
+const DialogContent = reactExports.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
+  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    Content,
+    {
+      ref,
+      className: cn(
+        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+        className
+      ),
+      ...props,
+      children: [
+        children,
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Close, { className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "h-4 w-4" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
+        ] })
+      ]
+    }
+  )
+] }));
+DialogContent.displayName = Content.displayName;
+const DialogTitle = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Title,
+  {
+    ref,
+    className: cn("text-lg font-semibold leading-none tracking-tight", className),
+    ...props
+  }
+));
+DialogTitle.displayName = Title.displayName;
+const DialogDescription = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Description,
+  {
+    ref,
+    className: cn("text-sm text-muted-foreground", className),
+    ...props
+  }
+));
+DialogDescription.displayName = Description.displayName;
 const Route$5 = createFileRoute("/events")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("events", {
@@ -1088,166 +1204,127 @@ function EventsPage() {
         }
       ) }, i)) })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: selectedEventIdx !== null && currentEvent && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      motion.div,
-      {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        className: "fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-ink/95 backdrop-blur-2xl",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0", onClick: () => setSelectedEventIdx(null) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.div,
-            {
-              initial: { scale: 0.95, y: 20 },
-              animate: { scale: 1, y: 0 },
-              exit: { scale: 0.95, y: 20 },
-              transition: { type: "spring", duration: 0.5 },
-              className: "relative w-full max-w-4xl max-h-[90vh] bg-carbon border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-10 grid md:grid-cols-12",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "button",
-                  {
-                    onClick: () => setSelectedEventIdx(null),
-                    "aria-label": "Close details",
-                    className: "absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-5 h-5" })
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-5 p-8 bg-ink/40 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between max-h-[40vh] md:max-h-[85vh] overflow-y-auto", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-acid/10 border border-acid/20 text-acid font-mono text-[10px] uppercase tracking-wider mb-4", children: currentEvent.status }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl md:text-3xl text-gradient-bone leading-tight", children: currentEvent.title })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 border-t border-white/10 pt-6", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[9px] uppercase tracking-widest text-bone/40", children: "Date & Time" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-semibold text-bone", children: currentEvent.date })
-                        ] })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[9px] uppercase tracking-widest text-bone/40", children: "Location" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-semibold text-bone", children: currentEvent.location })
-                        ] })
-                      ] }),
-                      currentEvent.capacity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[9px] uppercase tracking-widest text-bone/40", children: "Attendance" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-bone/80", children: currentEvent.capacity })
-                        ] })
-                      ] })
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-bone/40 font-mono text-[10px] uppercase tracking-[0.25em]", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      "button",
-                      {
-                        onClick: () => setSelectedEventIdx((prev) => prev !== null && prev > 0 ? prev - 1 : events.length - 1),
-                        className: "hover:text-acid flex items-center gap-1 transition-colors",
-                        children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { className: "w-3.5 h-3.5" }),
-                          " Prev"
-                        ]
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                      selectedEventIdx + 1,
-                      " / ",
-                      events.length
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      "button",
-                      {
-                        onClick: () => setSelectedEventIdx((prev) => prev !== null && prev < events.length - 1 ? prev + 1 : 0),
-                        className: "hover:text-acid flex items-center gap-1 transition-colors",
-                        children: [
-                          "Next ",
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-3.5 h-3.5" })
-                        ]
-                      }
-                    )
-                  ] })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-7 p-8 flex flex-col justify-between max-h-[50vh] md:max-h-[85vh] overflow-y-auto", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-8", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-3", children: "About the Event" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-sm md:text-base leading-relaxed", children: currentEvent.longDesc || currentEvent.desc })
-                    ] }),
-                    currentEvent.schedule && currentEvent.schedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4", children: "Event Schedule" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "relative border-l border-white/10 ml-2 space-y-4", children: currentEvent.schedule.map((item, idx) => {
-                        const [time, ...rest] = item.split(" - ");
-                        const text = rest.join(" - ");
-                        return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "relative pl-6", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-[-4.5px] top-[6px] h-2 w-2 rounded-full bg-acid" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[10px] text-acid uppercase tracking-wider mb-0.5", children: time }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-bone/70", children: text })
-                        ] }, idx);
-                      }) })
-                    ] }),
-                    currentEvent.requirements && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-ink/30 border border-white/5 p-4 flex gap-3 items-start", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldAlert, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("h5", { className: "font-mono text-[10px] uppercase tracking-wider text-acid mb-1", children: "Key Requirements" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-bone/60 leading-relaxed", children: currentEvent.requirements })
-                      ] })
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 pt-6 border-t border-white/10 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    Link,
-                    {
-                      to: "/apply",
-                      onClick: () => setSelectedEventIdx(null),
-                      className: "px-6 py-2.5 bg-acid text-ink font-semibold uppercase tracking-widest text-[10px] rounded-full hover:bg-bone transition-colors",
-                      children: "Request Invite →"
-                    }
-                  ) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open: selectedEventIdx !== null, onOpenChange: (open) => {
+      if (!open) setSelectedEventIdx(null);
+    }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "max-w-4xl p-0 bg-carbon border-white/10 rounded-2xl overflow-hidden shadow-2xl gap-0 sm:rounded-2xl [&>button:last-child]:hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { className: "sr-only", children: "Event Details" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-12 w-full h-full max-h-[90vh]", children: selectedEventIdx !== null && currentEvent && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: () => setSelectedEventIdx(null),
+            "aria-label": "Close details",
+            className: "absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-5 h-5" })
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-5 p-8 bg-ink/40 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between max-h-[40vh] md:max-h-[85vh] overflow-y-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-acid/10 border border-acid/20 text-acid font-mono text-[10px] uppercase tracking-wider mb-4", children: currentEvent.status }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl md:text-3xl text-gradient-bone leading-tight", children: currentEvent.title })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 border-t border-white/10 pt-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[9px] uppercase tracking-widest text-bone/40", children: "Date & Time" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-semibold text-bone", children: currentEvent.date })
                 ] })
-              ]
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[9px] uppercase tracking-widest text-bone/40", children: "Location" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-semibold text-bone", children: currentEvent.location })
+                ] })
+              ] }),
+              currentEvent.capacity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[9px] uppercase tracking-widest text-bone/40", children: "Attendance" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-bone/80", children: currentEvent.capacity })
+                ] })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-bone/40 font-mono text-[10px] uppercase tracking-[0.25em]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                onClick: () => setSelectedEventIdx((prev) => prev !== null && prev > 0 ? prev - 1 : events.length - 1),
+                className: "hover:text-acid flex items-center gap-1 transition-colors",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { className: "w-3.5 h-3.5" }),
+                  " Prev"
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              selectedEventIdx + 1,
+              " / ",
+              events.length
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                onClick: () => setSelectedEventIdx((prev) => prev !== null && prev < events.length - 1 ? prev + 1 : 0),
+                className: "hover:text-acid flex items-center gap-1 transition-colors",
+                children: [
+                  "Next ",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-3.5 h-3.5" })
+                ]
+              }
+            )
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-7 p-8 flex flex-col justify-between max-h-[50vh] md:max-h-[85vh] overflow-y-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-8", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-3", children: "About the Event" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-sm md:text-base leading-relaxed", children: currentEvent.longDesc || currentEvent.desc })
+            ] }),
+            currentEvent.schedule && currentEvent.schedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4", children: "Event Schedule" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "relative border-l border-white/10 ml-2 space-y-4", children: currentEvent.schedule.map((item, idx) => {
+                const [time, ...rest] = item.split(" - ");
+                const text = rest.join(" - ");
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "relative pl-6", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-[-4.5px] top-[6px] h-2 w-2 rounded-full bg-acid" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-[10px] text-acid uppercase tracking-wider mb-0.5", children: time }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-bone/70", children: text })
+                ] }, idx);
+              }) })
+            ] }),
+            currentEvent.requirements && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-ink/30 border border-white/5 p-4 flex gap-3 items-start", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldAlert, { className: "w-4 h-4 text-acid shrink-0 mt-0.5" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h5", { className: "font-mono text-[10px] uppercase tracking-wider text-acid mb-1", children: "Key Requirements" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-bone/60 leading-relaxed", children: currentEvent.requirements })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 pt-6 border-t border-white/10 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Link,
+            {
+              to: "/apply",
+              onClick: () => setSelectedEventIdx(null),
+              className: "px-6 py-2.5 bg-acid text-ink font-semibold uppercase tracking-widest text-[10px] rounded-full hover:bg-bone transition-colors",
+              children: "Request Invite →"
             }
-          )
-        ]
-      }
-    ) }),
+          ) })
+        ] })
+      ] }) })
+    ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-24 px-6 grain relative", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-4xl", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "reveal text-center mb-16", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "02 — FAQ" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl md:text-5xl", children: "Common Questions" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: faqs.map((faq, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "reveal", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "div",
-        {
-          className: `bg-carbon border rounded-lg transition-colors duration-300 ${openFaq === i ? "border-acid/40" : "border-white/10 hover:border-white/20"}`,
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "button",
-              {
-                onClick: () => setOpenFaq(openFaq === i ? null : i),
-                className: "w-full flex items-center justify-between p-6 text-left",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-lg pr-4", children: faq.q }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "span",
-                    {
-                      className: `shrink-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${openFaq === i ? "bg-acid border-acid text-ink rotate-45" : "text-bone/60"}`,
-                      children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-4 h-4", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2.5, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4v16m8-8H4" }) })
-                    }
-                  )
-                ]
-              }
-            ),
-            openFaq === i && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-6 pb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 leading-relaxed", children: faq.a }) })
-          ]
-        }
-      ) }, i)) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4 reveal", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Accordion, { type: "single", collapsible: true, className: "w-full space-y-4", children: faqs.map((faq, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(AccordionItem, { value: `item-${i}`, className: "bg-carbon border border-white/10 rounded-lg px-6 data-[state=open]:border-acid/40 transition-colors duration-300", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionTrigger, { className: "font-display text-lg py-6 hover:no-underline [&[data-state=open]>svg]:text-ink [&[data-state=open]>svg]:bg-acid [&[data-state=open]>svg]:border-acid", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-left pr-4", children: faq.q }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionContent, { className: "text-bone/70 text-sm leading-relaxed pb-6", children: faq.a })
+      ] }, i)) }) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-24 px-6 text-center border-t border-white/10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "reveal mx-auto max-w-3xl", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "font-display text-4xl md:text-6xl leading-[0.95] mb-6", children: [
@@ -1458,115 +1535,98 @@ function GalleryPage() {
         ]
       }
     ) }, i)) }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: selectedIdx !== null && currentItem && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      motion.div,
-      {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        className: "fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-ink/95 backdrop-blur-2xl",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0", onClick: () => setSelectedIdx(null) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.div,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Dialog, { open: selectedIdx !== null, onOpenChange: (open) => {
+      if (!open) setSelectedIdx(null);
+    }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "max-w-6xl p-0 bg-carbon border-white/10 rounded-2xl overflow-hidden shadow-2xl gap-0 sm:rounded-2xl [&>button:last-child]:hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { className: "sr-only", children: "Gallery Item" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid lg:grid-cols-12 w-full h-full max-h-[90vh]", children: selectedIdx !== null && currentItem && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: () => setSelectedIdx(null),
+            "aria-label": "Close details",
+            className: "absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-5 h-5" })
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-7 relative bg-ink/50 flex items-center justify-center h-[40vh] sm:h-[50vh] lg:h-[75vh] border-b lg:border-b-0 lg:border-r border-white/10 group/img", children: [
+          currentItem.video ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "video",
             {
-              initial: { scale: 0.95, y: 20 },
-              animate: { scale: 1, y: 0 },
-              exit: { scale: 0.95, y: 20 },
-              transition: { type: "spring", duration: 0.5 },
-              className: "relative w-full max-w-6xl max-h-[90vh] bg-carbon border border-white/10 rounded-2xl overflow-hidden grid lg:grid-cols-12 shadow-2xl z-10",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "button",
-                  {
-                    onClick: () => setSelectedIdx(null),
-                    "aria-label": "Close details",
-                    className: "absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-5 h-5" })
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-7 relative bg-ink/50 flex items-center justify-center h-[40vh] sm:h-[50vh] lg:h-[75vh] border-b lg:border-b-0 lg:border-r border-white/10 group/img", children: [
-                  currentItem.video ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "video",
-                    {
-                      src: currentItem.video,
-                      poster: currentItem.img,
-                      controls: true,
-                      autoPlay: true,
-                      loop: true,
-                      playsInline: true,
-                      className: "w-full h-full object-contain"
-                    }
-                  ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "img",
-                    {
-                      src: currentItem.img,
-                      alt: currentItem.t,
-                      className: "w-full h-full object-contain"
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "button",
-                    {
-                      onClick: (e) => {
-                        e.stopPropagation();
-                        setSelectedIdx((prev) => prev !== null && prev > 0 ? prev - 1 : items.length - 1);
-                      },
-                      "aria-label": "Previous item",
-                      className: "absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100",
-                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { className: "w-5 h-5" })
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "button",
-                    {
-                      onClick: (e) => {
-                        e.stopPropagation();
-                        setSelectedIdx((prev) => prev !== null && prev < items.length - 1 ? prev + 1 : 0);
-                      },
-                      "aria-label": "Next item",
-                      className: "absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100",
-                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-5 h-5" })
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-5 p-8 flex flex-col justify-between overflow-y-auto max-h-[45vh] lg:max-h-[75vh]", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-xs text-acid tracking-[0.2em] uppercase mb-2", children: currentItem.tag }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-3xl text-gradient-bone leading-tight", children: currentItem.t })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-sm md:text-base leading-relaxed", children: currentItem.desc }),
-                    currentItem.details && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-t border-white/10 pt-6 space-y-4", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid", children: "Specifications & Details" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("dl", { className: "grid sm:grid-cols-2 gap-4", children: currentItem.details.map((d, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "div",
-                        {
-                          className: "bg-ink/30 border border-white/5 p-4 hover:border-white/10 transition-colors",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-wider text-bone/40 mb-1", children: d.label }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "font-display text-sm text-bone", children: d.value })
-                          ]
-                        },
-                        idx
-                      )) })
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-bone/40 font-mono text-[10px] uppercase tracking-[0.25em]", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Syndicate syndicatedrestomod" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                      selectedIdx + 1,
-                      " / ",
-                      items.length
-                    ] })
-                  ] })
-                ] })
-              ]
+              src: currentItem.video,
+              poster: currentItem.img,
+              controls: true,
+              autoPlay: true,
+              loop: true,
+              playsInline: true,
+              className: "w-full h-full object-contain"
+            }
+          ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: currentItem.img,
+              alt: currentItem.t,
+              className: "w-full h-full object-contain"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: (e) => {
+                e.stopPropagation();
+                setSelectedIdx((prev) => prev !== null && prev > 0 ? prev - 1 : items.length - 1);
+              },
+              "aria-label": "Previous item",
+              className: "absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { className: "w-5 h-5" })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: (e) => {
+                e.stopPropagation();
+                setSelectedIdx((prev) => prev !== null && prev < items.length - 1 ? prev + 1 : 0);
+              },
+              "aria-label": "Next item",
+              className: "absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "w-5 h-5" })
             }
           )
-        ]
-      }
-    ) }),
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-5 p-8 flex flex-col justify-between overflow-y-auto max-h-[45vh] lg:max-h-[75vh]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-xs text-acid tracking-[0.2em] uppercase mb-2", children: currentItem.tag }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-3xl text-gradient-bone leading-tight", children: currentItem.t })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-sm md:text-base leading-relaxed", children: currentItem.desc }),
+            currentItem.details && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-t border-white/10 pt-6 space-y-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-mono text-[10px] uppercase tracking-[0.25em] text-acid", children: "Specifications & Details" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("dl", { className: "grid sm:grid-cols-2 gap-4", children: currentItem.details.map((d, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "bg-ink/30 border border-white/5 p-4 hover:border-white/10 transition-colors",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "font-mono text-[10px] uppercase tracking-wider text-bone/40 mb-1", children: d.label }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "font-display text-sm text-bone", children: d.value })
+                  ]
+                },
+                idx
+              )) })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-bone/40 font-mono text-[10px] uppercase tracking-[0.25em]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Syndicate syndicatedrestomod" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              selectedIdx + 1,
+              " / ",
+              items.length
+            ] })
+          ] })
+        ] })
+      ] }) })
+    ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-32 px-6 text-center border-t border-white/10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-3xl", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal", children: "More Coming" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "reveal font-display text-4xl md:text-6xl leading-[1] mb-10", children: [

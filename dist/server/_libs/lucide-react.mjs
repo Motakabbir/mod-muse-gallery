@@ -75,13 +75,15 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$7 = [
+const __iconNode$8 = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
   ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const Calendar = createLucideIcon("calendar", __iconNode$7);
+const Calendar = createLucideIcon("calendar", __iconNode$8);
+const __iconNode$7 = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$7);
 const __iconNode$6 = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
 const ChevronLeft = createLucideIcon("chevron-left", __iconNode$6);
 const __iconNode$5 = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
@@ -138,6 +140,7 @@ export {
   ShieldAlert as S,
   Users as U,
   X,
-  ChevronLeft as a,
-  ChevronRight as b
+  ChevronDown as a,
+  ChevronLeft as b,
+  ChevronRight as c
 };

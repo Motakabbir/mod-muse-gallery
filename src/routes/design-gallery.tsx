@@ -33,8 +33,8 @@ export const Route = createFileRoute("/design-gallery")({
 // ITEMS moved to API/Loader
 
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Dialog, DialogContent, DialogOverlay, DialogTitle } from "@/components/ui/dialog";
 
 function GalleryPage() {
   useReveal();
@@ -114,36 +114,24 @@ function GalleryPage() {
       </section>
 
       {/* Details Lightbox Modal */}
-      <AnimatePresence>
-        {selectedIdx !== null && currentItem && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-ink/95 backdrop-blur-2xl"
-          >
-            {/* Backdrop click to close */}
-            <div className="absolute inset-0" onClick={() => setSelectedIdx(null)} />
+      <Dialog open={selectedIdx !== null} onOpenChange={(open) => { if (!open) setSelectedIdx(null) }}>
+        <DialogContent className="max-w-6xl p-0 bg-carbon border-white/10 rounded-2xl overflow-hidden shadow-2xl gap-0 sm:rounded-2xl [&>button:last-child]:hidden">
+          <DialogTitle className="sr-only">Gallery Item</DialogTitle>
+          <div className="grid lg:grid-cols-12 w-full h-full max-h-[90vh]">
+            {selectedIdx !== null && currentItem && (
+              <>
+                {/* Close Button is handled by DialogClose natively, but we can keep a custom one if we hide the native one, or just style the native one. 
+                    Actually, let's just use our custom button instead of DialogClose to match the design exactly, the native close is hidden via CSS or we can just let our button close it by calling setSelectedIdx(null) */}
+                <button
+                  onClick={() => setSelectedIdx(null)}
+                  aria-label="Close details"
+                  className="absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300"
+                >
+                  <X className="w-5 h-5" />
+                </button>
 
-            {/* Modal Card */}
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-6xl max-h-[90vh] bg-carbon border border-white/10 rounded-2xl overflow-hidden grid lg:grid-cols-12 shadow-2xl z-10"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedIdx(null)}
-                aria-label="Close details"
-                className="absolute top-4 right-4 z-50 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 transition-all duration-300"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Left Side: Media Container */}
-              <div className="lg:col-span-7 relative bg-ink/50 flex items-center justify-center h-[40vh] sm:h-[50vh] lg:h-[75vh] border-b lg:border-b-0 lg:border-r border-white/10 group/img">
+                {/* Left Side: Media Container */}
+                <div className="lg:col-span-7 relative bg-ink/50 flex items-center justify-center h-[40vh] sm:h-[50vh] lg:h-[75vh] border-b lg:border-b-0 lg:border-r border-white/10 group/img">
                 {currentItem.video ? (
                   <video
                     src={currentItem.video}
@@ -232,10 +220,11 @@ function GalleryPage() {
                   <span>{selectedIdx + 1} / {items.length}</span>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </>
+          )}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <section className="py-32 px-6 text-center border-t border-white/10">
         <div className="mx-auto max-w-3xl">
