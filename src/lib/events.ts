@@ -79,35 +79,35 @@ export const getFaqs = async () => {
   return [
     {
       q: "What is a syndicated restomod?",
-      a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset — all managed by Syndicate.",
+      a: "A dedicated and limited Syndicate is created with the purpose to support the build of a moderised version of a classic icon. The Syndicate members will gain access to a managed usage of the car when complete.  ",
     },
     {
       q: "How much does allocation cost?",
-      a: "There are 10 Platinum Syndicate Slots at £25,000 and 20 Silver Syndicate Members at £5000.",
+      a: "The Sydnicate has two entry levels",
     },
     {
       q: "How many shares are available?",
-      a: "Each build is strictly capped at 12 shares. This ensures meaningful access for every member while preserving the exclusivity that makes these cars special.",
+      a: "10 - Founder Members & 20 Associate Members",
     },
     {
       q: "Can I sell my share?",
-      a: "Yes. Shares can be transferred to approved buyers through Syndicate at any time. We handle the valuation, documentation, and introduction to the buyer pool.",
+      a: "Yes, you can sell the share should you wish to.",
     },
     {
       q: "What happens if the build goes over budget?",
-      a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Syndicate and our partner network. Your share price will not change post-commitment.",
+      a: "The build has been professionally costed and will be forensically managed to ensure no cost overrun, however if unforeseen circumstances additional funds are required the Trust will be informed and an action plan implemented.",
     },
     {
       q: "Do I get to drive the car?",
-      a: "Absolutely. Every member receives an annual allocation of drive days, track sessions, and road tours. The schedule is coordinated democratically through the member portal.",
+      a: "Founder Members receive 16 days per yer allocation to drive the car. Associate members will have the opportunity to have accompanied drives at the designated track days.",
     },
     {
       q: "Where is the car stored?",
-      a: "Vehicles are stored in a climate-controlled secure facility at Silverstone Park, maintained by our in-house team. Members can arrange visits by appointment.",
+      a: "The car will be  stored securely and maintained within the management agreement of the Trust.",
     },
     {
       q: "How do I apply?",
-      a: "Submit an application through our Apply page. We review every application personally and aim to respond within 7 business days. A brief phone call is part of the process.",
+      a: "You can apply directly through this website or at TheCarcrowd.co.uk",
     },
   ];
 };

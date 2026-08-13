@@ -24,7 +24,7 @@ import "../_libs/motion-utils.mjs";
 import "../_libs/tanstack__start-fn-stubs.mjs";
 import "../_libs/@tanstack/start-storage-context+[...].mjs";
 import "node:async_hooks";
-const appCss = "/assets/styles-CJ9Wao-e.css";
+const appCss = "/assets/styles-DskOENO_.css";
 const logo = "/assets/logo-4-BrrnFFbn.jpeg";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
@@ -287,8 +287,9 @@ function PageHero({
   subtitle,
   image,
   video,
-  videoClassName = "opacity-30",
-  overlayClassName = "bg-gradient-to-b from-ink/70 via-ink/80 to-ink"
+  videoClassName = "opacity-80",
+  imageClassName = "opacity-80 scale-110",
+  overlayClassName = "bg-gradient-to-b from-ink/10 via-ink/20 to-ink/90"
 }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10", children: [
     video ? /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -306,7 +307,7 @@ function PageHero({
       {
         src: image,
         alt: "",
-        className: "absolute inset-0 h-full w-full object-cover opacity-40 scale-110",
+        className: `absolute inset-0 h-full w-full object-cover ${imageClassName}`,
         loading: "eager"
       }
     ) : null,
@@ -331,7 +332,7 @@ const buildProcess = "/assets/build-process-BNSHI9Rh.jpg";
 const MEDIA = [
   {
     kind: "video",
-    src: "/src/assets/SYNDICATE_TEASER_REAL.mp4",
+    src: "/src/assets/video/syndicate-teaser-real.mp4",
     poster: false,
     title: "Syndicate — Teaser Reel",
     caption: "First glimpse of the RS500 reborn.",
@@ -345,7 +346,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/Sketches.jpeg",
+    src: "/src/assets/image/sketches.jpeg",
     title: "1st Sketches & Digital Modeling",
     caption: "The art of design begins",
     phase: "Phase 01",
@@ -358,7 +359,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/Digital_Twin.png",
+    src: "/src/assets/image/digital-twin.png",
     title: "Digital Modelling",
     caption: "Sub-millimetre 3D scan of the original shell.",
     phase: "Phase 01",
@@ -371,7 +372,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/Dismantling.JPG",
+    src: "/src/assets/image/dismantling.jpg",
     title: "3D scanning & Desktop Design",
     caption: "Aero and structural geometry refined in CAD.",
     phase: "Phase 02",
@@ -384,7 +385,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/Bare_Shell_Disamantling.jpg",
+    src: "/src/assets/image/bare-shell-disamantling.jpg",
     title: "Fabrication & Coachbuilding",
     caption: "Panel & component tooling",
     phase: "Phase 03",
@@ -397,7 +398,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/Fabrication.JPG",
+    src: "/src/assets/image/fabrication.jpg",
     title: "Fabrication & Tooling",
     caption: "Coventry Metalcraft & DMC ",
     phase: "Phase 03",
@@ -410,7 +411,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/yb_engine.png",
+    src: "/src/assets/image/yb-engine.png",
     title: "Block Assembly",
     caption: "MAHLE rebuild of the YB inline-four.",
     phase: "Phase 04",
@@ -423,7 +424,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/ps500_Studio_showcase.png",
+    src: "/src/assets/image/ps500-studio-showcase.png",
     title: "Paint Shop",
     caption: "Heritage livery, modern finish process.",
     phase: "Phase 04",
@@ -436,7 +437,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/suspension.png",
+    src: "/src/assets/image/suspension.png",
     title: "Suspension Geometry",
     caption: "Modern damping under classic bodywork.",
     phase: "Phase 04",
@@ -449,7 +450,7 @@ const MEDIA = [
   },
   {
     kind: "image",
-    src: "/src/assets/testing_validation.jpeg",
+    src: "/src/assets/image/testing-validation.jpeg",
     title: "Track Validation",
     caption: "First shakedown laps at Silverstone.",
     phase: "Validation",
@@ -666,13 +667,13 @@ function BuildGallery() {
     )
   ] });
 }
-const heroVideo$1 = "/assets/Hero_002-CVqSQ5jk.mp4";
+const heroVideo$1 = "/assets/hero-002-CVqSQ5jk.mp4";
 const getPhases = async () => {
   return [
     {
       n: "01",
       t: "Acquisition & Strip - Complete",
-      video: "/src/assets/AQUISITION_001.mp4",
+      video: "/src/assets/video/aquisition-001.mp4",
       body: "Car #148 — the 148th of 500 RS500s ever built — sourced, authenticated, and fully stripped to bare metal. Every component is catalogued and inspected.",
       bullets: ["Base vehicle selection", "Full teardown", "Component cataloguing", "Chassis inspection"],
       partner: "ASM Auto Recycling"
@@ -680,7 +681,7 @@ const getPhases = async () => {
     {
       n: "02",
       t: "Design & Engineering",
-      video: "/src/assets/DESIGN_ENGINEERING_001.mp4",
+      video: "/src/assets/video/design-engineering-001.mp4",
       body: "Body shell is 3D scanned to sub-millimetre accuracy, producing a complete digital twin. Engineers iterate CAD designs for structural optimisation and modern performance.",
       bullets: ["3D scanning & digital twin", "CAD modelling", "Structural optimisation", "Aero & thermal sims"],
       partner: "T3DMC • BAMD Composites"
@@ -688,7 +689,7 @@ const getPhases = async () => {
     {
       n: "03",
       t: "Coach Building",
-      video: "/src/assets/Manufacturing_001.mp4",
+      video: "/src/assets/video/manufacturing-001.mp4",
       body: "At the heart of the syndicatedrestomod build is to create a coach built Aluminium body  to showcase the artisan skills of our build partners.",
       bullets: ["Hand formed bodywork", "Lightweight aluminium", "Coach built techniques", "Hand built by craftsmen"],
       partner: "Coventry Metalcraft • Silverstone"
@@ -696,7 +697,7 @@ const getPhases = async () => {
     {
       n: "04",
       t: "Additive Manufacturing",
-      video: "/src/assets/FINSHING_AND_VALIDATION_001.mp4",
+      video: "/src/assets/video/finshing-and-validation-001.mp4",
       body: "The syndicatedrestomod build is designed to showcase the bleeding edge technology at our disposal through our manufacturing partners to deliver rapid prototyping to the build efficiency as well as the use of polymer and specialist metals.",
       bullets: ["Polymer plastics printing ", "Titanium alloy printing", "Interior & Exterior parts and components", "Rapid development"],
       partner: "DMC"
@@ -875,6 +876,7 @@ function TheBuildPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
+const videoPillarThree = "/assets/events-CydIvEp2.mp4";
 const getPageEvents = async () => {
   return [
     {
@@ -955,35 +957,35 @@ const getFaqs = async () => {
   return [
     {
       q: "What is a syndicated restomod?",
-      a: "Instead of one owner funding an entire build, a small group of enthusiasts co-invest in a single vehicle. Each member gets allocated drive time, event access, and equity in the appreciating asset — all managed by Syndicate."
+      a: "A dedicated and limited Syndicate is created with the purpose to support the build of a moderised version of a classic icon. The Syndicate members will gain access to a managed usage of the car when complete.  "
     },
     {
       q: "How much does allocation cost?",
-      a: "There are 10 Platinum Syndicate Slots at £25,000 and 20 Silver Syndicate Members at £5000."
+      a: "The Sydnicate has two entry levels"
     },
     {
       q: "How many shares are available?",
-      a: "Each build is strictly capped at 12 shares. This ensures meaningful access for every member while preserving the exclusivity that makes these cars special."
+      a: "10 - Founder Members & 20 Associate Members"
     },
     {
       q: "Can I sell my share?",
-      a: "Yes. Shares can be transferred to approved buyers through Syndicate at any time. We handle the valuation, documentation, and introduction to the buyer pool."
+      a: "Yes, you can sell the share should you wish to."
     },
     {
       q: "What happens if the build goes over budget?",
-      a: "Build costs are fixed at the point of allocation. Any overruns are absorbed by Syndicate and our partner network. Your share price will not change post-commitment."
+      a: "The build has been professionally costed and will be forensically managed to ensure no cost overrun, however if unforeseen circumstances additional funds are required the Trust will be informed and an action plan implemented."
     },
     {
       q: "Do I get to drive the car?",
-      a: "Absolutely. Every member receives an annual allocation of drive days, track sessions, and road tours. The schedule is coordinated democratically through the member portal."
+      a: "Founder Members receive 16 days per yer allocation to drive the car. Associate members will have the opportunity to have accompanied drives at the designated track days."
     },
     {
       q: "Where is the car stored?",
-      a: "Vehicles are stored in a climate-controlled secure facility at Silverstone Park, maintained by our in-house team. Members can arrange visits by appointment."
+      a: "The car will be  stored securely and maintained within the management agreement of the Trust."
     },
     {
       q: "How do I apply?",
-      a: "Submit an application through our Apply page. We review every application personally and aim to respond within 7 business days. A brief phone call is part of the process."
+      a: "You can apply directly through this website or at TheCarcrowd.co.uk"
     }
   ];
 };
@@ -1050,7 +1052,7 @@ function EventsPage() {
           "."
         ] }),
         subtitle: "Join us at the track, in the workshop, and everywhere in between. Every question answered below.",
-        video: heroVideo$1
+        video: videoPillarThree
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "py-24 px-6 border-b border-white/10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-7xl", children: [
@@ -1266,12 +1268,12 @@ function EventsPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
-const videoCarSection$1 = "/assets/LIBRARY_OF_INTENT-CcxMx2Ke.mp4";
+const videoCarSection$1 = "/assets/library-of-intent-CcxMx2Ke.mp4";
 const getGalleryItems = async () => {
   return [
     {
-      video: "/src/assets/RS500_REIMAGINED_MORPHING.mp4",
-      img: "/src/assets/rs500-hero.jpg",
+      video: "/src/assets/video/rs500_monaco_showcase.mp4",
+      img: "/src/assets/image/rs500-hero.jpg",
       t: "RS500 Reimagined",
       tag: "Render",
       span: "md:col-span-2 md:row-span-2",
@@ -1283,7 +1285,7 @@ const getGalleryItems = async () => {
       ]
     },
     {
-      img: "/src/assets/COMPOSITE.png",
+      img: "/src/assets/image/composite.png",
       t: "COMPOSITE PARTS",
       tag: "Detail",
       desc: "An in-depth look at the bespoke autoclave-cured carbon fiber wing and aerodynamic body panels. These components are developed in collaboration with BAMD Composites to ensure minimal weight and optimal downforce.",
@@ -1294,7 +1296,7 @@ const getGalleryItems = async () => {
       ]
     },
     {
-      img: "/src/assets/ENGINE.png",
+      img: "/src/assets/image/engine.png",
       t: "ENGINE & DRIVETRAIN ",
       tag: "Component",
       desc: "The legendary Cosworth YB 2.0L block, completely stripped and reworked. Featuring a custom billet block, modern motorsport-spec ECU, hybrid turbocharger, and a bespoke exhaust manifold engineered for high-RPM reliability.",
@@ -1305,7 +1307,7 @@ const getGalleryItems = async () => {
       ]
     },
     {
-      img: "/src/assets/DIGITAL_TWIN.JPG",
+      img: "/src/assets/image/digital-twin.jpg",
       t: "Digital Twin",
       tag: "Engineering",
       span: "md:col-span-2",
@@ -1317,7 +1319,7 @@ const getGalleryItems = async () => {
       ]
     },
     {
-      img: "/src/assets/additive_manufacturing .png",
+      img: "/src/assets/image/additive-manufacturing.png",
       t: "ADDITIVE MANUFACTURING",
       tag: "Process",
       desc: "Custom suspension uprights and cooling duct brackets produced via advanced selective laser melting (SLM) 3D printing. This allows us to create structurally optimized parts that are impossible to machine traditionally.",
@@ -1328,7 +1330,7 @@ const getGalleryItems = async () => {
       ]
     },
     {
-      img: "/src/assets/CAD_AND_DESIGN.jpg",
+      img: "/src/assets/image/cad-and-design.jpg",
       t: "CAD & DESIGN ",
       tag: "Manufacturing",
       desc: "The complete digital assembly of the restomod. Engineering models verify clearances for the dry-sump oil system, custom suspension kinematics, and internal cockpit cooling channels before any physical fabrication begins.",
@@ -1339,7 +1341,7 @@ const getGalleryItems = async () => {
       ]
     },
     {
-      img: "/src/assets/WORKSHOP_CAPTURE.JPG",
+      img: "/src/assets/image/workshop-capture.jpg",
       t: "Workshop Capture",
       tag: "On Set",
       span: "md:col-span-2",
@@ -1351,7 +1353,7 @@ const getGalleryItems = async () => {
       ]
     },
     {
-      img: "/src/assets/HAND_FABRICATION.JPG",
+      img: "/src/assets/image/hand-fabrication.jpg",
       t: "Hand Fabrication",
       tag: "Coachbuilding",
       desc: "Master coachbuilders shaping and preparing custom aluminum wheel arches and internal panels. Hand-forming is blended with CAD accuracy to maintain the traditional handcrafted soul of the vehicle.",
@@ -1829,7 +1831,7 @@ function ContactPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Footer, {})
   ] });
 }
-const heroVideo = "/assets/Hero_001-B52X2wuK.mp4";
+const heroVideo = "/assets/hero-001-B52X2wuK.mp4";
 const getApplySteps = async () => {
   return [
     { n: "01", t: "Register Interest", b: "Submit the form below. We respond within 48 hours." },
@@ -2048,8 +2050,8 @@ function Field({
     )
   ] });
 }
-const aboutDetail = "/assets/01_MISSION%20-Cu3ME3dV.png";
-const videoPillarOne = "/assets/OUR_STORY-0mupV783.mp4";
+const aboutDetail = "/assets/01-mission-Cu3ME3dV.png";
+const videoPillarOne = "/assets/our-story-0mupV783.mp4";
 const getPrinciples = async () => {
   return [
     {
@@ -2071,10 +2073,10 @@ const getPrinciples = async () => {
 };
 const getArchitects = async () => {
   return [
-    { name: "IAN HOWE ", role: "Founder & Build Director", bio: "30 years experience in automotive & Fintech business", img: "/src/assets/Ian-Howe.png" },
-    { name: "Simon Kiero Watson", role: "Commercial & Finance Oversight", bio: "Highly experienced Corporate Finance and Exchange Expert.", img: "/src/assets/Simon-KW.png" },
-    { name: "Al Yasid Oozeear", role: "Digital Visualisor & Designer", bio: "Independent Automotive designer specialising in bespoke car design", img: "/src/assets/Al-Yasid.png" },
-    { name: "Stuart Peach", role: "Project Co Founder", bio: "Partner in the syndicatedrestomod project and original custodian of #148", img: "/src/assets/Stuart-Peach.png" }
+    { name: "Ian Howe ", role: "Founder & Build Director", bio: "30 years experience in automotive & Fintech business", img: "/src/assets/image/ian-howe.png" },
+    { name: "Simon Kiero Watson", role: "Commercial & Finance Oversight", bio: "Highly experienced Corporate Finance and Exchange Expert.", img: "/src/assets/image/simon-kw.png" },
+    { name: "Al Yasid Oozeear", role: "Digital Visualisor & Designer", bio: "Independent Automotive designer specialising in bespoke car design", img: "/src/assets/image/al-yasid.png" },
+    { name: "Stuart Peach", role: "Project Co Founder", bio: "Partner in the syndicatedrestomod project and original custodian of #148", img: "/src/assets/image/stuart-peach.png" }
   ];
 };
 const Route$1 = createFileRoute("/about")({
@@ -2130,12 +2132,16 @@ function AboutPage() {
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "reveal", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4", children: "01 — Mission" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "font-display text-4xl md:text-5xl leading-[1.05] mb-6", children: [
-          "Reimagine What A",
+          "To Reimagine Iconic Cars &",
           /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-          "Restomod Can Be"
+          "To Share the Ownership"
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred silhouettes and infuse them with modern coach building engineering, additive manufacturing, and motorsport-grade safety — without losing the analog soul that makes these cars magical." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed", children: "Every weld, every panel, every line of code in the ECU is obsessively considered. The result is not a replica. It is a rebirth." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Traditional restorations preserve the past. Syndicate Restomod builds on it." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Our goal is to infuse modern coach building, engineering skills, additive manufacturing, and motorsport-grade technologies and exciting design language to create One-of-One cars without losing the analog soul that makes these cars magical." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "Ultimately these builds can be experienced by multiple ownership." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "The Launch Project is the RS500 number 148 visualised by Al Yasid Design." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed mb-6", children: "We will not build this car in a silo it will be a showcase of the best of the best skills and technologies at our disposal." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 text-lg leading-relaxed", children: "The result is not a replica. It is a rebirth." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "reveal", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
@@ -2192,26 +2198,26 @@ function AboutPage() {
   ] });
 }
 const carbonTexture = "/assets/build-process-BNSHI9Rh.jpg";
-const videoCarSection = "/assets/RS500_REIMAGINED_MORPHING-y9t4xghZ.mp4";
+const videoCarSection = "/assets/rs500-reimagined-morphing-y9t4xghZ.mp4";
 const getLiveSyndicates = async () => {
   await new Promise((resolve) => setTimeout(resolve, 100));
   return [
     {
       title: "syndicatedrestomod Sierra Cosworth RS500",
-      img: "/src/assets/RS500_Studio_showcase.png",
+      img: "/src/assets/image/rs500-studio-showcase.png",
       // In a real DB, this would be a URL
       allocation: [
-        "£25,000 Platinum Allocation",
-        "£5,000 Silver Allocation"
+        "£25,000 Founder Members",
+        "£5,000 Associate Members"
       ],
-      stats: "10 Platinum Allocations • 20 Silver Allocations",
-      return: "Potential Return: 77.1%*",
+      stats: "10 Founder Allocations • 20 Associate Allocations",
+      return: "Potential: 77.1%*",
       isPlaceholder: false,
       waitlist: false
     },
     {
       title: "Next Build being assessed for Syndication",
-      img: "/src/assets/SynModBuild-Round-WEB.png",
+      img: "/src/assets/image/syn-mod-build-round-web.png",
       allocation: ["TBD"],
       stats: "TBD",
       return: "TBD",
@@ -2221,7 +2227,7 @@ const getLiveSyndicates = async () => {
     },
     {
       title: "Something special in the longterm pipeline",
-      img: "/src/assets/SynModBuild-Round-WEB.png",
+      img: "/src/assets/image/syn-mod-build-round-web.png",
       allocation: ["TBD"],
       stats: "TBD",
       return: "TBD",
@@ -2235,7 +2241,7 @@ const getRecentlyFunded = async () => {
   return [
     {
       title: "Lamborghini Gallardo SE",
-      img: "/src/assets/build-process.jpg",
+      img: "/src/assets/image/build-process.jpg",
       // Representing a dynamic image path
       date: "Funded Date — Dec 25",
       val: "Funded Value — £82,000",
@@ -2243,14 +2249,14 @@ const getRecentlyFunded = async () => {
     },
     {
       title: "Aston Martin V12 Vantage",
-      img: "/src/assets/build-process.jpg",
+      img: "/src/assets/image/build-process.jpg",
       date: "Funded Date — Sep 25",
       val: "Funded Value — £66,000",
       members: "Syndicate Members — 21"
     },
     {
       title: "Porsche 996 GT3 RS",
-      img: "/src/assets/build-process.jpg",
+      img: "/src/assets/image/build-process.jpg",
       date: "Funded Date — May 25",
       val: "Funded Value — £165,000",
       members: "Syndicate Members — 22"
@@ -2287,22 +2293,22 @@ const getPillars = async () => {
     {
       n: "01",
       title: "One of One Build",
-      video: "/src/assets/PILLAR_01_ONE_OF_ONE_BUILD.mp4",
-      img: "/src/assets/pillar-one-of-one.jpg",
+      video: "/src/assets/video/pillar-01-one-of-one-build.mp4",
+      img: "/src/assets/image/pillar-one-of-one.jpg",
       body: "There will never be another. Car #148 — the 148th of 500 RS500s ever built — reborn as a unique, documented, investment-grade restomod."
     },
     {
       n: "02",
       title: "World-Class Build Partners",
-      video: "/src/assets/PILLAR_03_WROLD_CLASS.mp4",
-      img: "/src/assets/pillar-partners.jpg",
+      video: "/src/assets/video/partner-video-pillar-2.mp4",
+      img: "/src/assets/image/pillar-partners.jpg",
       body: "The very best in innovative manufacturing and artisan craft — from coachbuilding to bleeding-edge additive manufacturing."
     },
     {
       n: "03",
       title: "Exclusive Access & Experience",
-      video: "/src/assets/PILLAR_03_EXCLUSIVE_ACCESS.mp4",
-      img: "/src/assets/pillar-experience.jpg",
+      video: "/src/assets/video/pillar-03-exclusive-access.mp4",
+      img: "/src/assets/image/pillar-experience.jpg",
       body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations."
     }
   ];
@@ -2415,7 +2421,7 @@ function Hero() {
         className: "absolute inset-0 h-full w-full object-cover"
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/40 to-ink/90" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 noise-bg" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow", style: { animationDelay: "2s" } }),
@@ -2429,7 +2435,7 @@ function Hero() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gradient-acid", children: "Creation of an Icon" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200", children: "Syndicated Restomod Builds — engineered in the open, owned together, driven for life." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200", children: "Syndicated Restomod Builds — engineered in the open, built to be driven and collectively owned." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/apply", className: "btn-acid", children: "Apply for Allocation →" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#intro", className: "btn-ghost", children: "Explore Syndicate" })
@@ -2465,7 +2471,7 @@ function Intro() {
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-16", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "reveal space-y-6 text-bone/70 text-lg leading-relaxed", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is not a traditional restoration. This is not passive investment." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is not a traditional build, its a project designed to be an inclusive and open source showcase and built to be driven and experienced." }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
           "This is a ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-acid", children: "syndicated restomod build" }),
@@ -2473,7 +2479,7 @@ function Intro() {
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "reveal space-y-6 text-bone/60 leading-relaxed", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Syndicate members support the project from the earliest stage — funding the development of a one-of-one car, staying engaged with every phase of the build, and ultimately gaining firsthand access to the finished asset while sharing in the potential appreciation of its value over time." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Syndicate members will support and experience the  project through funding the development of this one-of-one car, staying engaged with every phase of the build, and ultimately gaining privileged access to the finished asset while sharing in the potential appreciation of its value over time." }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-bone text-xl pt-4 border-t border-white/10", children: "From strip-down to final drive — you are part of it." })
       ] })
     ] })
@@ -2553,7 +2559,7 @@ function TheCar() {
         "The Ford Sierra Cosworth RS500. ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-bone/40", children: "Reimagined." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 leading-relaxed mb-8", children: "One of the most dominant touring cars ever built and a fan-favourite road icon — reinterpreted through modern engineering, advanced materials, precision manufacturing, and performance optimisation." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-bone/70 leading-relaxed mb-8", children: "One of the most dominant touring cars ever built and a fan-favourite road icon — reinterpreted through modern engineering, coach building, advanced materials, precision manufacturing, and performance optimisation." }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-3 border-t border-white/10 pt-6", children: [
         "One-of-one build",
         "Engineering-led, not cosmetic",

@@ -9,10 +9,10 @@ export const getLiveSyndicates = async () => {
       title: "syndicatedrestomod Sierra Cosworth RS500",
       img: '/src/assets/image/rs500-studio-showcase.png', // In a real DB, this would be a URL
       allocation: [
-        "£25,000 Platinum Allocation",
-        "£5,000 Silver Allocation"
+        "£25,000 Founder Members",
+        "£5,000 Associate Members"
       ],
-      stats: "10 Platinum Allocations • 20 Silver Allocations",
+      stats: "10 Founder Allocations • 20 Associate Allocations",
       return: "Potential: 77.1%*",
       isPlaceholder: false,
       waitlist: false,

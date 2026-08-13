@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Calendar, MapPin, Users, ShieldAlert, ChevronLeft, ChevronRight } from "lucide-react";
-import videoPillarThree from "../assets/video/hero-002.mp4";
+import videoPillarThree from "../assets/video/events.mp4";
 
 import { getPageEvents, getFaqs } from "../lib/events";
 import { useLoaderData, createFileRoute, Link } from "@tanstack/react-router";

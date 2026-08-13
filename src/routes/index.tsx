@@ -119,7 +119,7 @@ function Hero() {
           <span className="text-gradient-acid">Creation of an Icon</span>
         </h1>
         <p className="mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200">
-          Syndicated Restomod Builds — engineered in the open, owned together, driven for life.
+          Syndicated Restomod Builds — engineered in the open, built to be driven and collectively owned.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
           <Link to="/apply" className="btn-acid">Apply for Allocation →</Link>
