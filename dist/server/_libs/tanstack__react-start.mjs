@@ -1,4 +1,4 @@
-import { c as createStartHandler } from "./tanstack__start-server-core.mjs";
+import { b as createStartHandler } from "./@tanstack/start-server-core.mjs";
 import { d as defaultStreamHandler } from "./tanstack__react-start-server.mjs";
 import "./react.mjs";
 import "node:async_hooks";
@@ -13,7 +13,6 @@ import "./seroval-plugins.mjs";
 import "./cookie-es.mjs";
 import "node:stream/web";
 import "./tanstack__start-client-core.mjs";
-import "./tanstack__start-fn-stubs.mjs";
 import "./@tanstack/start-storage-context+[...].mjs";
 import "./tanstack__react-router.mjs";
 import "./react-dom.mjs";

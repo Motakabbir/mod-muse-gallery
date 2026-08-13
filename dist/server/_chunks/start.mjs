@@ -1,6 +1,5 @@
 import { i as createStart, f as createMiddleware, e as createCsrfMiddleware } from "../_libs/tanstack__start-client-core.mjs";
 import { r as renderErrorPage } from "../index.mjs";
-import "../_libs/tanstack__start-fn-stubs.mjs";
 import "../_libs/@tanstack/start-storage-context+[...].mjs";
 import "node:async_hooks";
 import "../_libs/tanstack__router-core.mjs";

@@ -1,6 +1,5 @@
-import { c as createIsomorphicFn, a as createServerOnlyFn } from "./tanstack__start-fn-stubs.mjs";
 import { g as getStartContext } from "./@tanstack/start-storage-context+[...].mjs";
-import { F as parseRedirect, E as mergeHeaders, z as isRedirect, i as defaultSerovalPlugins, D as makeSerovalPlugin } from "./tanstack__router-core.mjs";
+import { G as parseRedirect, F as mergeHeaders, A as isRedirect, i as defaultSerovalPlugins, E as makeSerovalPlugin } from "./tanstack__router-core.mjs";
 import "./seroval.mjs";
 var TSS_FORMDATA_CONTEXT = "__TSS_CONTEXT";
 var TSS_SERVER_FUNCTION = /* @__PURE__ */ Symbol.for("TSS_SERVER_FUNCTION");
@@ -39,8 +38,8 @@ function createNullProtoObject(source) {
   for (const key of Object.keys(source)) if (isSafeKey(key)) obj[key] = source[key];
   return obj;
 }
-var getStartOptions = createIsomorphicFn().client(() => window.__TSS_START_OPTIONS__).server(() => getStartContext().startOptions);
-var getStartContextServerOnly = createServerOnlyFn(getStartContext);
+var getStartOptions = () => getStartContext().startOptions;
+var getStartContextServerOnly = getStartContext;
 var createServerFn = (options, __opts) => {
   const resolvedOptions = __opts || options || {};
   if (typeof resolvedOptions.method === "undefined") resolvedOptions.method = "GET";
@@ -260,7 +259,7 @@ var innerCreateCsrfMiddleware = (opts = {}) => {
   });
   return middleware;
 };
-var createCsrfMiddleware = createIsomorphicFn().server(innerCreateCsrfMiddleware);
+var createCsrfMiddleware = innerCreateCsrfMiddleware;
 async function isCsrfRequestAllowed(opts, ctx) {
   const result = await getCsrfRequestValidationResult(opts, ctx);
   return result === true || result === void 0 && opts.allowRequestsWithoutOriginCheck === true;
@@ -303,7 +302,9 @@ function isRefererSameOrigin(referer, requestOrigin) {
 }
 async function getFailureResponse(opts, ctx) {
   if (typeof opts.failureResponse === "function") return opts.failureResponse(ctx);
-  return opts.failureResponse?.clone() ?? new Response("Forbidden", { status: 403 });
+  return opts.failureResponse?.clone() ?? new Response("Forbidden", {
+    status: 403
+  });
 }
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
   for (let i = 0, len = serializationAdapters.length; i < len; i++) {

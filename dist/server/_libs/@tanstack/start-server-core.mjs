@@ -1,10 +1,10 @@
 import { AsyncLocalStorage } from "node:async_hooks";
-import { H as H3Event, t as toResponse } from "./h3-v2.mjs";
-import { J as rootRouteId, f as createRawStreamRPCPlugin, w as invariant, y as isNotFound, z as isRedirect, s as getScriptPreloadAttrs, u as getStylesheetHref, I as resolveManifestCssLink, H as resolveManifestAssetLink, p as getManifestScriptFormat, g as createSerializationAdapter, q as getNormalizedURL, r as getOrigin, c as attachRouterServerSsrUtils, A as isResolvedRedirect, E as mergeHeaders, m as executeRewriteInput } from "./tanstack__router-core.mjs";
-import { a as FrameType, F as FRAME_HEADER_SIZE, k as getDefaultSerovalPlugins, d as X_TSS_SERIALIZED, T as TSS_CONTENT_TYPE_FRAMED_VERSIONED, b as TSS_FORMDATA_CONTEXT, s as safeObjectMerge, X as X_TSS_RAW_RESPONSE, c as TSS_SERVER_FUNCTION, e as createCsrfMiddleware, j as flattenMiddlewares, g as createNullProtoObject } from "./tanstack__start-client-core.mjs";
-import { i as iu, P as Pu, s as su } from "./seroval.mjs";
-import { c as createMemoryHistory } from "./tanstack__history.mjs";
-import { r as runWithStartContext, g as getStartContext } from "./@tanstack/start-storage-context+[...].mjs";
+import { H as H3Event, t as toResponse } from "../h3-v2.mjs";
+import { K as rootRouteId, f as createRawStreamRPCPlugin, w as invariant, z as isNotFound, A as isRedirect, s as getScriptPreloadAttrs, u as getStylesheetHref, J as resolveManifestCssLink, I as resolveManifestAssetLink, p as getManifestScriptFormat, g as createSerializationAdapter, q as getNormalizedURL, r as getOrigin, c as attachRouterServerSsrUtils, C as isResolvedRedirect, F as mergeHeaders, m as executeRewriteInput } from "../tanstack__router-core.mjs";
+import { a as FrameType, F as FRAME_HEADER_SIZE, k as getDefaultSerovalPlugins, d as X_TSS_SERIALIZED, T as TSS_CONTENT_TYPE_FRAMED_VERSIONED, b as TSS_FORMDATA_CONTEXT, s as safeObjectMerge, X as X_TSS_RAW_RESPONSE, c as TSS_SERVER_FUNCTION, e as createCsrfMiddleware, j as flattenMiddlewares, g as createNullProtoObject } from "../tanstack__start-client-core.mjs";
+import { i as iu, P as Pu, s as su } from "../seroval.mjs";
+import { c as createMemoryHistory } from "../tanstack__history.mjs";
+import { r as runWithStartContext, g as getStartContext } from "./start-storage-context+[...].mjs";
 var GLOBAL_EVENT_STORAGE_KEY = /* @__PURE__ */ Symbol.for("tanstack-start:event-storage");
 var globalObj = globalThis;
 if (!globalObj[GLOBAL_EVENT_STORAGE_KEY]) globalObj[GLOBAL_EVENT_STORAGE_KEY] = new AsyncLocalStorage();
@@ -60,7 +60,7 @@ function getResponse() {
 }
 var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest } = await import("../_tanstack-start-manifest_v.mjs");
+  const { tsrStartManifest } = await import("../../_tanstack-start-manifest_v.mjs");
   const startManifest = tsrStartManifest();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -82,7 +82,30 @@ async function getStartManifest(matchedRoutes) {
     clientEntry: startManifest.clientEntry
   };
 }
-async function getServerFnById(_id, _access) {
+const manifest = {
+  "72c66bebe91d7d47494a86d50c6d4fb8b7472c948d4b635fd0d0d8ff97e1f04c": {
+    functionName: "submitApplyForm_createServerFn_handler",
+    importer: () => import("../../_chunks/apply.mjs")
+  },
+  "8361093590b5c9f67fb3a9ecd7f49f4e2177e3958ed2619c9723c49531e5d0f3": {
+    functionName: "submitContactForm_createServerFn_handler",
+    importer: () => import("../../_chunks/contact.mjs")
+  }
+};
+async function getServerFnById(id, access) {
+  const serverFnInfo = manifest[id];
+  if (!serverFnInfo) {
+    throw new Error("Server function info not found for " + id);
+  }
+  const fnModule = serverFnInfo.module ?? await serverFnInfo.importer();
+  if (!fnModule) {
+    throw new Error("Server function module not resolved for " + id);
+  }
+  const action = fnModule[serverFnInfo.functionName];
+  if (!action) {
+    throw new Error("Server function module export not resolved for serverFn ID: " + id);
+  }
+  return action;
 }
 var textEncoder = new TextEncoder();
 var EMPTY_PAYLOAD = new Uint8Array(0);
@@ -216,7 +239,7 @@ var MAX_PAYLOAD_SIZE = 1e6;
 var handleServerAction = async ({ request, context, serverFnId }) => {
   const methodUpper = request.method.toUpperCase();
   const url = new URL(request.url);
-  const action = await getServerFnById();
+  const action = await getServerFnById(serverFnId);
   if (action.method && methodUpper !== action.method) return new Response(`expected ${action.method} method. Got ${methodUpper}`, {
     status: 405,
     headers: { Allow: action.method }
@@ -498,13 +521,13 @@ function linkAttrsToEarlyHint(attrs) {
   addEarlyHintFetchAttrs(hint, attrs);
   return hint;
 }
-function collectStaticHintsFromManifest(manifest, matchedRoutes) {
+function collectStaticHintsFromManifest(manifest2, matchedRoutes) {
   const hints = [];
   for (const route of matchedRoutes) {
-    const routeManifest = manifest.routes[route.id];
+    const routeManifest = manifest2.routes[route.id];
     if (!routeManifest) continue;
     for (const link of routeManifest.preloads ?? []) {
-      const attrs = getScriptPreloadAttrs(manifest, link);
+      const attrs = getScriptPreloadAttrs(manifest2, link);
       const hint = {
         href: attrs.href,
         rel: attrs.rel,
@@ -515,7 +538,7 @@ function collectStaticHintsFromManifest(manifest, matchedRoutes) {
     }
     for (const link of routeManifest.css ?? []) {
       const stylesheetHref = getStylesheetHref(link);
-      if (manifest.inlineCss?.styles[stylesheetHref] !== void 0) continue;
+      if (manifest2.inlineCss?.styles[stylesheetHref] !== void 0) continue;
       const resolvedLink = resolveManifestCssLink(link);
       const hint = {
         href: stylesheetHref,
@@ -638,11 +661,11 @@ function createEarlyHintsCollector(opts) {
   const responseLinkHeaderEntries = opts.responseLinkHeader ? new Array() : void 0;
   const responseLinkHeaderFilter = getResponseLinkHeaderFilter(opts.responseLinkHeader);
   return {
-    collectStatic: ({ manifest, matchedRoutes }) => {
+    collectStatic: ({ manifest: manifest2, matchedRoutes }) => {
       if (!matchedRoutes?.length) return;
       collectEarlyHintsPhase({
         phase: "static",
-        hints: collectStaticHintsFromManifest(manifest, matchedRoutes),
+        hints: collectStaticHintsFromManifest(manifest2, matchedRoutes),
         sentLinks,
         sentHints,
         onEarlyHints: opts.onEarlyHints,
@@ -780,12 +803,12 @@ function appendUniqueManifestAssetLink(target, link) {
   }
   return [...target ?? [], link];
 }
-function addClientEntryToManifest(manifest, clientEntry) {
-  const rootRoute = manifest.routes.__root__ ?? {};
+function addClientEntryToManifest(manifest2, clientEntry) {
+  const rootRoute = manifest2.routes.__root__ ?? {};
   const rootScripts = rootRoute.scripts ?? [];
-  const scripts = rootScripts.some((script) => script.attrs?.src === clientEntry) ? rootScripts : [...rootScripts, buildClientEntryScriptTag(clientEntry, getManifestScriptFormat(manifest))];
-  manifest.routes = {
-    ...manifest.routes,
+  const scripts = rootScripts.some((script) => script.attrs?.src === clientEntry) ? rootScripts : [...rootScripts, buildClientEntryScriptTag(clientEntry, getManifestScriptFormat(manifest2))];
+  manifest2.routes = {
+    ...manifest2.routes,
     __root__: {
       ...rootRoute,
       preloads: appendUniqueManifestAssetLink(rootRoute.preloads, clientEntry),
@@ -794,7 +817,7 @@ function addClientEntryToManifest(manifest, clientEntry) {
   };
 }
 async function transformManifestAssets(source, transformFn, _opts) {
-  const manifest = structuredClone(source.manifest);
+  const manifest2 = structuredClone(source.manifest);
   const inlineCssEnabled = _opts?.inlineCss !== false;
   const scriptTransforms = /* @__PURE__ */ new Map();
   const transformScript = (url) => {
@@ -807,10 +830,10 @@ async function transformManifestAssets(source, transformFn, _opts) {
     scriptTransforms.set(url, transformed);
     return transformed;
   };
-  if (!inlineCssEnabled) delete manifest.inlineCss;
-  else if (manifest.inlineCss) manifest.inlineCss = await transformInlineCssStyles(manifest.inlineCss, transformFn);
-  addClientEntryToManifest(manifest, source.clientEntry);
-  for (const route of Object.values(manifest.routes)) {
+  if (!inlineCssEnabled) delete manifest2.inlineCss;
+  else if (manifest2.inlineCss) manifest2.inlineCss = await transformInlineCssStyles(manifest2.inlineCss, transformFn);
+  addClientEntryToManifest(manifest2, source.clientEntry);
+  for (const route of Object.values(manifest2.routes)) {
     if (route.preloads?.length) route.preloads = await Promise.all(route.preloads.map(async (link) => {
       const result = await transformScript(resolveManifestAssetLink(link).href);
       return assignManifestLink(link, {
@@ -818,7 +841,7 @@ async function transformManifestAssets(source, transformFn, _opts) {
         crossOrigin: result.crossOrigin
       });
     }));
-    if (route.css?.length && !manifest.inlineCss) route.css = await Promise.all(route.css.map(async (link) => {
+    if (route.css?.length && !manifest2.inlineCss) route.css = await Promise.all(route.css.map(async (link) => {
       const result = normalizeTransformAssetResult(await transformFn({
         url: resolveManifestCssLink(link).href,
         kind: "stylesheet"
@@ -840,16 +863,16 @@ async function transformManifestAssets(source, transformFn, _opts) {
       else delete script.attrs.crossOrigin;
     }
   }
-  return manifest;
+  return manifest2;
 }
 function buildManifestWithClientEntry(source, opts) {
-  const manifest = {
+  const manifest2 = {
     ...source.manifest.scriptFormat ? { scriptFormat: source.manifest.scriptFormat } : {},
     ...opts?.inlineCss !== false && source.manifest.inlineCss ? { inlineCss: structuredClone(source.manifest.inlineCss) } : {},
     routes: { ...source.manifest.routes }
   };
-  addClientEntryToManifest(manifest, source.clientEntry);
-  return manifest;
+  addClientEntryToManifest(manifest2, source.clientEntry);
+  return manifest2;
 }
 function getStaticHandlerInlineCssDefault(handlerInlineCss) {
   if (typeof handlerInlineCss === "function") return;
@@ -989,7 +1012,7 @@ var ServerFunctionSerializationAdapter = createSerializationAdapter({
   toSerializable: ({ serverFnMeta }) => ({ functionId: serverFnMeta.id }),
   fromSerializable: ({ functionId }) => {
     const fn = async (opts, signal) => {
-      return (await (await getServerFnById())(opts ?? {}, signal)).result;
+      return (await (await getServerFnById(functionId))(opts ?? {}, signal)).result;
     };
     return fn;
   }
@@ -1008,8 +1031,10 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    import("../_chunks/router.mjs"),
-    import("../_chunks/start.mjs"),
+    import("../../_chunks/router.mjs").then(function(n) {
+      return n.r;
+    }),
+    import("../../_chunks/start.mjs"),
     Promise.resolve().then(function() {
       return emptyPluginAdapters;
     })
@@ -1188,7 +1213,7 @@ function createStartHandler(cbOrOptions) {
       const executeRouter = async (serverContext, matchedRoutes) => {
         const acceptParts = (request.headers.get("Accept") || "*/*").split(",");
         if (!["*/*", "text/html"].some((mimeType) => acceptParts.some((part) => part.trim().startsWith(mimeType)))) return Response.json({ error: "Only HTML requests are supported here" }, { status: 500 });
-        const manifest = await resolveManifestForRequest({
+        const manifest2 = await resolveManifestForRequest({
           request,
           requestInlineCss: requestOpts?.inlineCss,
           getBaseManifest: () => getBaseManifest(matchedRoutes)
@@ -1198,13 +1223,13 @@ function createStartHandler(cbOrOptions) {
           responseLinkHeader: requestOpts?.responseLinkHeader
         });
         earlyHints?.collectStatic({
-          manifest,
+          manifest: manifest2,
           matchedRoutes
         });
         const routerInstance = await getRouter();
         attachRouterServerSsrUtils({
           router: routerInstance,
-          manifest,
+          manifest: manifest2,
           getRequestAssets: () => getStartContext({ throwIfNotFound: false })?.requestAssets
         });
         routerInstance.update({ additionalContext: { serverContext } });
@@ -1329,6 +1354,26 @@ async function handleServerRoutes({ getRouter, request, url, executeRouter, cont
   }
   return ctx.response;
 }
+var createServerRpc = (serverFnMeta, splitImportFn) => {
+  const url = "/_serverFn/" + serverFnMeta.id;
+  return Object.assign(splitImportFn, {
+    url,
+    serverFnMeta,
+    [TSS_SERVER_FUNCTION]: true
+  });
+};
+var createSsrRpc = (functionId) => {
+  const url = "/_serverFn/" + functionId;
+  const serverFnMeta = { id: functionId };
+  const fn = async (...args) => {
+    return (await getServerFnById(functionId))(...args);
+  };
+  return Object.assign(fn, {
+    url,
+    serverFnMeta,
+    [TSS_SERVER_FUNCTION]: true
+  });
+};
 var pluginSerializationAdapters = [];
 var hasPluginAdapters = false;
 const emptyPluginAdapters = /* @__PURE__ */ Object.freeze({
@@ -1337,5 +1382,7 @@ const emptyPluginAdapters = /* @__PURE__ */ Object.freeze({
   pluginSerializationAdapters
 });
 export {
-  createStartHandler as c
+  createSsrRpc as a,
+  createStartHandler as b,
+  createServerRpc as c
 };

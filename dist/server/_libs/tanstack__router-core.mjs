@@ -85,6 +85,10 @@ function createControlledPromise(onResolve) {
   };
   return controlledPromise;
 }
+function isModuleNotFoundError(error) {
+  if (typeof error?.message !== "string") return false;
+  return error.message.startsWith("Failed to fetch dynamically imported module") || error.message.startsWith("error loading dynamically imported module") || error.message.startsWith("Importing a module script failed");
+}
 function isPromise(value) {
   return Boolean(value && typeof value === "object" && typeof value.then === "function");
 }
@@ -4296,18 +4300,19 @@ function transformStreamWithRouter(router, appStream, opts) {
   return stream;
 }
 export {
-  isResolvedRedirect as A,
+  isRedirect as A,
   BaseRootRoute as B,
-  isServer as C,
-  makeSerovalPlugin as D,
-  mergeHeaders as E,
-  parseRedirect as F,
-  removeTrailingSlash as G,
-  resolveManifestAssetLink as H,
-  resolveManifestCssLink as I,
-  rootRouteId as J,
-  transformPipeableStreamWithRouter as K,
-  transformReadableStreamWithRouter as L,
+  isResolvedRedirect as C,
+  isServer as D,
+  makeSerovalPlugin as E,
+  mergeHeaders as F,
+  parseRedirect as G,
+  removeTrailingSlash as H,
+  resolveManifestAssetLink as I,
+  resolveManifestCssLink as J,
+  rootRouteId as K,
+  transformPipeableStreamWithRouter as L,
+  transformReadableStreamWithRouter as M,
   RouterCore as R,
   BaseRoute as a,
   appendUniqueUserTags as b,
@@ -4333,6 +4338,6 @@ export {
   hasKeys as v,
   invariant as w,
   isDangerousProtocol as x,
-  isNotFound as y,
-  isRedirect as z
+  isModuleNotFoundError as y,
+  isNotFound as z
 };
