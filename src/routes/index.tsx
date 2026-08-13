@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import carbonTexture from "../assets/carbon-texture.jpg";
-import heroVideo from "../assets/Hero_001.mp4";
-import videoCarSection from "../assets/RS500_REIMAGINED_MORPHING.mp4";
+import carbonTexture from "../assets/image/carbon-texture.jpg";
+import heroVideo from "../assets/video/hero-001.mp4";
+import videoCarSection from "../assets/video/rs500-reimagined-morphing.mp4";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal } from "@/components/site";
 
@@ -270,8 +270,7 @@ function TheCar() {
             The Ford Sierra Cosworth RS500. <span className="text-bone/40">Reimagined.</span>
           </h2>
           <p className="text-bone/70 leading-relaxed mb-8">
-            One of the most dominant touring cars ever built and a fan-favourite road icon — reinterpreted through modern
-            engineering, advanced materials, precision manufacturing, and performance optimisation.
+            One of the most dominant touring cars ever built and a fan-favourite road icon — reinterpreted through modern engineering, coach building, advanced materials, precision manufacturing, and performance optimisation.
           </p>
           <ul className="space-y-3 border-t border-white/10 pt-6">
             {[

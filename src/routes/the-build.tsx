@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import { BuildGallery } from "@/components/build-gallery";
-import videoCarSection from "../assets/Hero_002.mp4";
+import videoCarSection from "../assets/video/hero-002.mp4";
 
 import { getPhases, getSpecs } from "../lib/build";
 import { useLoaderData } from "@tanstack/react-router";

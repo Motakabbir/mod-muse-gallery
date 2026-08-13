@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
-import videoCarSection from "../assets/LIBRARY_OF_INTENT.mp4";
+import videoCarSection from "../assets/video/library-of-intent.mp4";
 
 import { getGalleryItems } from "../lib/gallery";
 import { useLoaderData } from "@tanstack/react-router";

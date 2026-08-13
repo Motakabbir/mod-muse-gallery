@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
-import buildStrip from "../assets/build-strip.jpg";
-import buildScan from "../assets/build-scan.jpg";
-import buildPrint from "../assets/build-print.jpg";
-import buildFinish from "../assets/build-finish.jpg";
-import buildProcess from "../assets/build-process.jpg";
-import carbonTexture from "../assets/carbon-texture.jpg";
-import rs500Hero from "../assets/rs500-hero.jpg";
-import gallery1 from "../assets/gallery-1.jpg";
-import gallery2 from "../assets/gallery-2.jpg";
-import gallery3 from "../assets/gallery-3.jpg";
-import gallery4 from "../assets/gallery-4.jpg";
-import heroVideo from "../assets/SYNDICATE_TEASER_REAL.mp4";
+import buildStrip from "../assets/image/build-strip.jpg";
+import buildScan from "../assets/image/build-scan.jpg";
+import buildPrint from "../assets/image/build-print.jpg";
+import buildFinish from "../assets/image/build-finish.jpg";
+import buildProcess from "../assets/image/build-process.jpg";
+import carbonTexture from "../assets/image/carbon-texture.jpg";
+import rs500Hero from "../assets/image/rs500-hero.jpg";
+import gallery1 from "../assets/image/gallery-1.jpg";
+import gallery2 from "../assets/image/gallery-2.jpg";
+import gallery3 from "../assets/image/gallery-3.jpg";
+import gallery4 from "../assets/image/gallery-4.jpg";
+import heroVideo from "../assets/video/syndicate-teaser-real.mp4";
 
 type MediaItem =
   | { kind: "image"; src: string; title: string; caption: string; phase: string; longDesc: string; details: { label: string; value: string }[] }
@@ -20,7 +20,7 @@ type MediaItem =
 const MEDIA: MediaItem[] = [
   {
     kind: "video",
-    src: '/src/assets/SYNDICATE_TEASER_REAL.mp4',
+    src: '/src/assets/video/syndicate-teaser-real.mp4',
     poster: false,
     title: "Syndicate — Teaser Reel",
     caption: "First glimpse of the RS500 reborn.",
@@ -34,7 +34,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/Sketches.jpeg',
+    src: '/src/assets/image/sketches.jpeg',
     title: "1st Sketches & Digital Modeling",
     caption: "The art of design begins",
     phase: "Phase 01",
@@ -47,7 +47,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/Digital_Twin.png',
+    src: '/src/assets/image/digital-twin.png',
     title: "Digital Modelling",
     caption: "Sub-millimetre 3D scan of the original shell.",
     phase: "Phase 01",
@@ -60,7 +60,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/Dismantling.JPG',
+    src: '/src/assets/image/dismantling.jpg',
     title: "3D scanning & Desktop Design",
     caption: "Aero and structural geometry refined in CAD.",
     phase: "Phase 02",
@@ -73,7 +73,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/Bare_Shell_Disamantling.jpg',
+    src: '/src/assets/image/bare-shell-disamantling.jpg',
     title: "Fabrication & Coachbuilding",
     caption: "Panel & component tooling",
     phase: "Phase 03",
@@ -86,7 +86,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/Fabrication.JPG',
+    src: '/src/assets/image/fabrication.jpg',
     title: "Fabrication & Tooling",
     caption: "Coventry Metalcraft & DMC ",
     phase: "Phase 03",
@@ -99,7 +99,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/yb_engine.png',
+    src: '/src/assets/image/yb-engine.png',
     title: "Block Assembly",
     caption: "MAHLE rebuild of the YB inline-four.",
     phase: "Phase 04",
@@ -112,7 +112,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/ps500_Studio_showcase.png',
+    src: '/src/assets/image/ps500-studio-showcase.png',
     title: "Paint Shop",
     caption: "Heritage livery, modern finish process.",
     phase: "Phase 04",
@@ -125,7 +125,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/suspension.png',
+    src: '/src/assets/image/suspension.png',
     title: "Suspension Geometry",
     caption: "Modern damping under classic bodywork.",
     phase: "Phase 04",
@@ -138,7 +138,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     kind: "image",
-    src: '/src/assets/testing_validation.jpeg',
+    src: '/src/assets/image/testing-validation.jpeg',
     title: "Track Validation",
     caption: "First shakedown laps at Silverstone.",
     phase: "Validation",

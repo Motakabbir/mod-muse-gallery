@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import { useState } from "react";
-import heroVideo from "../assets/Hero_002.mp4";
+import heroVideo from "../assets/video/hero-002.mp4";
 
 import { getDirectLines, getWorkshopAddress, submitContactForm } from "../lib/contact";
 import { useLoaderData } from "@tanstack/react-router";

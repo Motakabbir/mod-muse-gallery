@@ -7,19 +7,19 @@ export const getLiveSyndicates = async () => {
   return [
     {
       title: "syndicatedrestomod Sierra Cosworth RS500",
-      img: '/src/assets/RS500_Studio_showcase.png', // In a real DB, this would be a URL
+      img: '/src/assets/image/rs500-studio-showcase.png', // In a real DB, this would be a URL
       allocation: [
         "£25,000 Platinum Allocation",
         "£5,000 Silver Allocation"
       ],
       stats: "10 Platinum Allocations • 20 Silver Allocations",
-      return: "Potential Return: 77.1%*",
+      return: "Potential: 77.1%*",
       isPlaceholder: false,
       waitlist: false,
     },
     {
       title: "Next Build being assessed for Syndication",
-      img: '/src/assets/SynModBuild-Round-WEB.png',
+      img: '/src/assets/image/syn-mod-build-round-web.png',
       allocation: ["TBD"],
       stats: "TBD",
       return: "TBD",
@@ -29,7 +29,7 @@ export const getLiveSyndicates = async () => {
     },
     {
       title: "Something special in the longterm pipeline",
-      img: '/src/assets/SynModBuild-Round-WEB.png',
+      img: '/src/assets/image/syn-mod-build-round-web.png',
       allocation: ["TBD"],
       stats: "TBD",
       return: "TBD",
@@ -44,21 +44,21 @@ export const getRecentlyFunded = async () => {
   return [
     {
       title: "Lamborghini Gallardo SE",
-      img: "/src/assets/build-process.jpg", // Representing a dynamic image path
+      img: "/src/assets/image/build-process.jpg", // Representing a dynamic image path
       date: "Funded Date — Dec 25",
       val: "Funded Value — £82,000",
       members: "Syndicate Members — 14",
     },
     {
       title: "Aston Martin V12 Vantage",
-      img: "/src/assets/build-process.jpg",
+      img: "/src/assets/image/build-process.jpg",
       date: "Funded Date — Sep 25",
       val: "Funded Value — £66,000",
       members: "Syndicate Members — 21",
     },
     {
       title: "Porsche 996 GT3 RS",
-      img: "/src/assets/build-process.jpg",
+      img: "/src/assets/image/build-process.jpg",
       date: "Funded Date — May 25",
       val: "Funded Value — £165,000",
       members: "Syndicate Members — 22",
@@ -97,22 +97,22 @@ export const getPillars = async () => {
     {
       n: "01",
       title: "One of One Build",
-      video: "/src/assets/PILLAR_01_ONE_OF_ONE_BUILD.mp4",
-      img: "/src/assets/pillar-one-of-one.jpg",
+      video: "/src/assets/video/pillar-01-one-of-one-build.mp4",
+      img: "/src/assets/image/pillar-one-of-one.jpg",
       body: "There will never be another. Car #148 — the 148th of 500 RS500s ever built — reborn as a unique, documented, investment-grade restomod.",
     },
     {
       n: "02",
       title: "World-Class Build Partners",
-      video: "/src/assets/PILLAR_03_WROLD_CLASS.mp4",
-      img: "/src/assets/pillar-partners.jpg",
+      video: "/src/assets/video/partner-video-pillar-2.mp4",
+      img: "/src/assets/image/pillar-partners.jpg",
       body: "The very best in innovative manufacturing and artisan craft — from coachbuilding to bleeding-edge additive manufacturing.",
     },
     {
       n: "03",
       title: "Exclusive Access & Experience",
-      video: "/src/assets/PILLAR_03_EXCLUSIVE_ACCESS.mp4",
-      img: "/src/assets/pillar-experience.jpg",
+      video: "/src/assets/video/pillar-03-exclusive-access.mp4",
+      img: "/src/assets/image/pillar-experience.jpg",
       body: "Designed so syndicate members experience the finished car and the journey: build visits, drive events, private invitations.",
     },
   ];

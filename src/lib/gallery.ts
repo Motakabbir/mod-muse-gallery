@@ -11,8 +11,8 @@ export interface GalleryItem {
 export const getGalleryItems = async (): Promise<GalleryItem[]> => {
   return [
     {
-      video: "/src/assets/RS500_REIMAGINED_MORPHING.mp4",
-      img: "/src/assets/rs500-hero.jpg",
+      video: "/src/assets/video/rs500-reimagined-morphing.mp4",
+      img: "/src/assets/image/rs500-hero.jpg",
       t: "RS500 Reimagined",
       tag: "Render",
       span: "md:col-span-2 md:row-span-2",
@@ -24,7 +24,7 @@ export const getGalleryItems = async (): Promise<GalleryItem[]> => {
       ]
     },
     {
-      img: "/src/assets/COMPOSITE.png",
+      img: "/src/assets/image/composite.png",
       t: "COMPOSITE PARTS",
       tag: "Detail",
       desc: "An in-depth look at the bespoke autoclave-cured carbon fiber wing and aerodynamic body panels. These components are developed in collaboration with BAMD Composites to ensure minimal weight and optimal downforce.",
@@ -35,7 +35,7 @@ export const getGalleryItems = async (): Promise<GalleryItem[]> => {
       ]
     },
     {
-      img: "/src/assets/ENGINE.png",
+      img: "/src/assets/image/engine.png",
       t: "ENGINE & DRIVETRAIN ",
       tag: "Component",
       desc: "The legendary Cosworth YB 2.0L block, completely stripped and reworked. Featuring a custom billet block, modern motorsport-spec ECU, hybrid turbocharger, and a bespoke exhaust manifold engineered for high-RPM reliability.",
@@ -46,7 +46,7 @@ export const getGalleryItems = async (): Promise<GalleryItem[]> => {
       ]
     },
     {
-      img: "/src/assets/DIGITAL_TWIN.JPG",
+      img: "/src/assets/image/digital-twin.jpg",
       t: "Digital Twin",
       tag: "Engineering",
       span: "md:col-span-2",
@@ -58,7 +58,7 @@ export const getGalleryItems = async (): Promise<GalleryItem[]> => {
       ]
     },
     {
-      img: "/src/assets/additive_manufacturing .png",
+      img: "/src/assets/image/additive-manufacturing.png",
       t: "ADDITIVE MANUFACTURING",
       tag: "Process",
       desc: "Custom suspension uprights and cooling duct brackets produced via advanced selective laser melting (SLM) 3D printing. This allows us to create structurally optimized parts that are impossible to machine traditionally.",
@@ -69,7 +69,7 @@ export const getGalleryItems = async (): Promise<GalleryItem[]> => {
       ]
     },
     {
-      img: "/src/assets/CAD_AND_DESIGN.jpg",
+      img: "/src/assets/image/cad-and-design.jpg",
       t: "CAD & DESIGN ",
       tag: "Manufacturing",
       desc: "The complete digital assembly of the restomod. Engineering models verify clearances for the dry-sump oil system, custom suspension kinematics, and internal cockpit cooling channels before any physical fabrication begins.",
@@ -80,7 +80,7 @@ export const getGalleryItems = async (): Promise<GalleryItem[]> => {
       ]
     },
     {
-      img: "/src/assets/WORKSHOP_CAPTURE.JPG",
+      img: "/src/assets/image/workshop-capture.jpg",
       t: "Workshop Capture",
       tag: "On Set",
       span: "md:col-span-2",
@@ -92,7 +92,7 @@ export const getGalleryItems = async (): Promise<GalleryItem[]> => {
       ]
     },
     {
-      img: "/src/assets/HAND_FABRICATION.JPG",
+      img: "/src/assets/image/hand-fabrication.jpg",
       t: "Hand Fabrication",
       tag: "Coachbuilding",
       desc: "Master coachbuilders shaping and preparing custom aluminum wheel arches and internal panels. Hand-forming is blended with CAD accuracy to maintain the traditional handcrafted soul of the vehicle.",

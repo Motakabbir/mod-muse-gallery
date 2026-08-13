@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
-import aboutDetail from "../assets/01_MISSION .png";
-import videoPillarOne from "../assets/OUR_STORY.mp4";
+import aboutDetail from "../assets/image/01-mission.png";
+import videoPillarOne from "../assets/video/our-story.mp4";
 
 import { getPrinciples, getArchitects } from "../lib/about";
 import { useLoaderData } from "@tanstack/react-router";
