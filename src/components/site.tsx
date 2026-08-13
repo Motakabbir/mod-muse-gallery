@@ -164,8 +164,9 @@ export function PageHero({
   subtitle,
   image,
   video,
-  videoClassName = "opacity-30",
-  overlayClassName = "bg-gradient-to-b from-ink/70 via-ink/80 to-ink",
+  videoClassName = "opacity-60",
+  imageClassName = "opacity-60 scale-110",
+  overlayClassName = "bg-gradient-to-b from-ink/30 via-ink/50 to-ink/90",
 }: {
   kicker: string;
   title: React.ReactNode;
@@ -173,6 +174,7 @@ export function PageHero({
   image?: string;
   video?: string;
   videoClassName?: string;
+  imageClassName?: string;
   overlayClassName?: string;
 }) {
   return (
@@ -190,7 +192,7 @@ export function PageHero({
         <img
           src={image}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-40 scale-110"
+          className={`absolute inset-0 h-full w-full object-cover ${imageClassName}`}
           loading="eager"
         />
       ) : null}

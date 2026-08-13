@@ -161,14 +161,12 @@ function Intro() {
         <SectionLabel kicker="● Not Just Ownership" title={<>Not Just Ownership.<br /><span className="text-bone/40">Participation.</span></>} />
         <div className="grid md:grid-cols-2 gap-16">
           <div className="reveal space-y-6 text-bone/70 text-lg leading-relaxed">
-            <p>This is not a traditional restoration. This is not passive investment.</p>
+            <p>This is not a traditional build, its a project designed to be an inclusive and open source showcase and built to be driven and experienced.</p>
             <p>This is a <span className="text-acid">syndicated restomod build</span> where participants join the creation and future of a unique automotive asset.</p>
           </div>
           <div className="reveal space-y-6 text-bone/60 leading-relaxed">
             <p>
-              Syndicate members support the project from the earliest stage — funding the development of a one-of-one car,
-              staying engaged with every phase of the build, and ultimately gaining firsthand access to the finished asset
-              while sharing in the potential appreciation of its value over time.
+              Syndicate members will support and experience the  project through funding the development of this one-of-one car, staying engaged with every phase of the build, and ultimately gaining privileged access to the finished asset while sharing in the potential appreciation of its value over time.
             </p>
             <p className="font-display text-bone text-xl pt-4 border-t border-white/10">
               From strip-down to final drive — you are part of it.

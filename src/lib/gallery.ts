@@ -11,7 +11,7 @@ export interface GalleryItem {
 export const getGalleryItems = async (): Promise<GalleryItem[]> => {
   return [
     {
-      video: "/src/assets/video/rs500-reimagined-morphing.mp4",
+      video: "/src/assets/video/rs500_monaco_showcase.mp4",
       img: "/src/assets/image/rs500-hero.jpg",
       t: "RS500 Reimagined",
       tag: "Render",
