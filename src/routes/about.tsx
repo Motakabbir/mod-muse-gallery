@@ -63,16 +63,25 @@ function AboutPage() {
           <div className="reveal">
             <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">01 — Mission</div>
             <h2 className="font-display text-4xl md:text-5xl leading-[1.05] mb-6">
-              Reimagine What A<br />Restomod Can Be
+              To Reimagine Iconic Cars &<br />To Share the Ownership
             </h2>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
-              Traditional restorations preserve the past. Syndicate builds on it. We take iconic rally-bred
-              silhouettes and infuse them with modern coach building engineering, additive manufacturing, and
-              motorsport-grade safety — without losing the analog soul that makes these cars magical.
+              Traditional restorations preserve the past. Syndicate Restomod builds on it.
+            </p>
+            <p className="text-bone/70 text-lg leading-relaxed mb-6">
+              Our goal is to infuse modern coach building, engineering skills, additive manufacturing, and motorsport-grade technologies and exciting design language to create One-of-One cars without losing the analog soul that makes these cars magical.
+            </p>
+            <p className="text-bone/70 text-lg leading-relaxed mb-6">
+              Ultimately these builds can be experienced by multiple ownership.
+            </p>
+            <p className="text-bone/70 text-lg leading-relaxed mb-6">
+              The Launch Project is the RS500 number 148 visualised by Al Yasid Design.  
+            </p>
+            <p className="text-bone/70 text-lg leading-relaxed mb-6">
+              We will not build this car in a silo it will be a showcase of the best of the best skills and technologies at our disposal.
             </p>
             <p className="text-bone/70 text-lg leading-relaxed">
-              Every weld, every panel, every line of code in the ECU is obsessively considered. The result
-              is not a replica. It is a rebirth.
+              The result is not a replica. It is a rebirth.
             </p>
           </div>
           <div className="reveal">

@@ -164,9 +164,9 @@ export function PageHero({
   subtitle,
   image,
   video,
-  videoClassName = "opacity-60",
-  imageClassName = "opacity-60 scale-110",
-  overlayClassName = "bg-gradient-to-b from-ink/30 via-ink/50 to-ink/90",
+  videoClassName = "opacity-80",
+  imageClassName = "opacity-80 scale-110",
+  overlayClassName = "bg-gradient-to-b from-ink/10 via-ink/20 to-ink/90",
 }: {
   kicker: string;
   title: React.ReactNode;

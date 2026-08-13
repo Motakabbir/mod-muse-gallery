@@ -20,7 +20,7 @@ export const getPrinciples = async () => {
 
 export const getArchitects = async () => {
   return [
-    { name: "IAN HOWE ", role: "Founder & Build Director", bio: "30 years experience in automotive & Fintech business", img: "/src/assets/image/ian-howe.png" },
+    { name: "Ian Howe ", role: "Founder & Build Director", bio: "30 years experience in automotive & Fintech business", img: "/src/assets/image/ian-howe.png" },
     { name: "Simon Kiero Watson", role: "Commercial & Finance Oversight", bio: "Highly experienced Corporate Finance and Exchange Expert.", img: "/src/assets/image/simon-kw.png" },
     { name: "Al Yasid Oozeear", role: "Digital Visualisor & Designer", bio: "Independent Automotive designer specialising in bespoke car design", img: "/src/assets/image/al-yasid.png" },
     { name: "Stuart Peach", role: "Project Co Founder", bio: "Partner in the syndicatedrestomod project and original custodian of #148", img: "/src/assets/image/stuart-peach.png" },

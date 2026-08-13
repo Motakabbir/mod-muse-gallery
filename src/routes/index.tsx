@@ -104,7 +104,7 @@ function Hero() {
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/50 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/40 to-ink/90" />
       <div className="absolute inset-0 noise-bg" />
       <div className="absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" />
       <div className="absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow" style={{ animationDelay: "2s" }} />
