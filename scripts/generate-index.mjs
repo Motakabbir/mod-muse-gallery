@@ -58,7 +58,7 @@ async function main() {
 
   console.log(`Starting preview server on port ${PORT} to capture SSR output...`);
 
-  const server = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], {
+  const server = spawn("node", ["node_modules/vite/bin/vite.js", "preview", "--port", String(PORT), "--strictPort"], {
     cwd: process.cwd(),
     stdio: ["ignore", "pipe", "pipe"],
     env: { ...process.env, NODE_ENV: "production" },
