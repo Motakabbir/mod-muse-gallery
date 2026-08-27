@@ -12,10 +12,12 @@ echo "============================================"
 # 1. Load NVM if available
 export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
+    set +e  # Disable exit-on-error for NVM internal sourcing
     . "$NVM_DIR/nvm.sh"
     echo "NVM loaded. Using/Installing Node version from .nvmrc..."
-    nvm install || true
+    nvm install
     nvm use
+    set -e  # Re-enable exit-on-error
 else
     echo "NVM not found. Make sure Node.js >= 25 is installed."
 fi
