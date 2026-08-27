@@ -13,7 +13,7 @@ export default defineConfig({
     },
   },
   nitro: {
-    preset: "static",
+    preset: "node-server",
   },
   vite: {
     environments: {
