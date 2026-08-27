@@ -3,10 +3,10 @@ import { z } from 'zod';
 
 export const getDirectLines = async () => {
   return [
-    { label: "General Inquiries", email: "hello@synmod.build" },
-    { label: "Syndicate Applications", email: "apply@synmod.build" },
-    { label: "Press & Media", email: "press@synmod.build" },
-    { label: "Partnerships", email: "partners@synmod.build" },
+    { label: "General Inquiries", email: "hello@syndicatedrestomod.com" },
+    { label: "Syndicate Applications", email: "apply@syndicatedrestomod.com" },
+    { label: "Press & Media", email: "press@syndicatedrestomod.com" },
+    { label: "Partnerships", email: "partners@syndicatedrestomod.com" },
   ];
 };
 
@@ -31,29 +31,34 @@ export const submitContactForm = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     console.info("Server received contact submission:", data);
     
-    const apiUrl = process.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
     try {
-      const res = await fetch(`${apiUrl}/contacts`, {
+      const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          first_name: data.name.split(" ")[0] || "",
-          last_name: data.name.split(" ").slice(1).join(" ") || "",
-          email: data.email,
-          phone: "N/A",
-          message: `Subject: ${data.subject}\n\n${data.message}`,
+          from: "Syndicate Forms <forms@syndicatedrestomod.com>",
+          to: ["hello@syndicatedrestomod.com"],
+          reply_to: data.email,
+          subject: data.subject ? `Syndicate Contact Form: ${data.subject}` : "New Contact Form Submission",
+          html: `
+            <h3>New Contact Form Submission</h3>
+            <p><strong>Name:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Subject:</strong> ${data.subject}</p>
+            <p><strong>Message:</strong></p>
+            <p>${data.message.replace(/\n/g, '<br/>')}</p>
+          `,
         }),
       });
 
-      const json = await res.json();
-      if (res.ok && json.success) {
+      if (res.ok) {
         return { success: true, offline: false };
       }
     } catch (err: any) {
-      console.warn("Backend API not reachable, falling back to mock/offline success:", err.message);
+      console.warn("Failed to send email via Resend:", err.message);
     }
     
     return { success: true, offline: true };

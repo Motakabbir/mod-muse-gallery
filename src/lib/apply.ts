@@ -25,29 +25,36 @@ export const submitApplyForm = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     console.info("Server received application submission:", data);
     
-    const apiUrl = process.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
     try {
-      const res = await fetch(`${apiUrl}/contacts`, {
+      const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          first_name: data.firstName,
-          last_name: data.lastName,
-          email: data.email,
-          phone: data.phone || "N/A",
-          message: `Country: ${data.country || "N/A"}\nAllocation Interest: ${data.allocation}\n\n${data.message || ""}`,
+          from: "Syndicate Forms <forms@syndicatedrestomod.com>",
+          to: ["hello@syndicatedrestomod.com"],
+          reply_to: data.email,
+          subject: `New Syndicate Application from ${data.firstName} ${data.lastName}`,
+          html: `
+            <h3>New Syndicate Application</h3>
+            <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Phone:</strong> ${data.phone || "N/A"}</p>
+            <p><strong>Country:</strong> ${data.country || "N/A"}</p>
+            <p><strong>Allocation Interest:</strong> ${data.allocation}</p>
+            <p><strong>Message:</strong></p>
+            <p>${(data.message || "N/A").replace(/\n/g, '<br/>')}</p>
+          `,
         }),
       });
 
-      const json = await res.json();
-      if (res.ok && json.success) {
+      if (res.ok) {
         return { success: true, offline: false };
       }
     } catch (err: any) {
-      console.warn("Backend API not reachable for applications, falling back to mock/offline success:", err.message);
+      console.warn("Failed to send email via Resend:", err.message);
     }
     
     return { success: true, offline: true };

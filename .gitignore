@@ -11,7 +11,9 @@ node_modules
 .vinxi
 .tanstack/**
 .nitro
+dist
 *.local
+.env
 
 # Wrangler / Cloudflare
 .wrangler/
