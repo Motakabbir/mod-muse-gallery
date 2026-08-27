@@ -6,7 +6,7 @@ export const getLiveSyndicates = async () => {
 
   return [
     {
-      title: "syndicatedrestomod Sierra Cosworth RS500",
+      title: "Sierra Cosworth RS500",
       img: '/src/assets/image/rs500-studio-showcase.png', // In a real DB, this would be a URL
       allocation: [
         "£25,000 Founder Members",
