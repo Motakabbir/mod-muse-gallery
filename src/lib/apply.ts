@@ -25,6 +25,11 @@ export const submitApplyForm = createServerFn({ method: 'POST' })
   .handler(async ({ data }) => {
     console.info("Server received application submission:", data);
     
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Error: RESEND_API_KEY environment variable is not defined!");
+      return { success: true, offline: true };
+    }
+
     try {
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -51,10 +56,14 @@ export const submitApplyForm = createServerFn({ method: 'POST' })
       });
 
       if (res.ok) {
+        console.log("Email successfully sent via Resend.");
         return { success: true, offline: false };
+      } else {
+        const errText = await res.text();
+        console.error(`Resend API returned error status ${res.status}:`, errText);
       }
     } catch (err: any) {
-      console.warn("Failed to send email via Resend:", err.message);
+      console.error("Failed to send email via Resend (network error):", err.message);
     }
     
     return { success: true, offline: true };
