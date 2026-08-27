@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const getDirectLines = async () => {
   return [
     { label: "General Inquiries", email: "hello@syndicatedrestomod.com" },
-    { label: "Syndicate Applications", email: "apply@syndicatedrestomod.com" },
+    { label: "Syndicate Applications", email: "hello@syndicatedrestomod.com " },
     { label: "Press & Media", email: "press@syndicatedrestomod.com" },
     { label: "Partnerships", email: "partners@syndicatedrestomod.com" },
   ];
