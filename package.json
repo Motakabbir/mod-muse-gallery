@@ -7,8 +7,8 @@
     "dev": "vite dev",
     "build": "vite build && node scripts/generate-index.mjs",
     "build:dev": "vite build --mode development",
-    "start": "node dist/server/index.mjs",
-    "preview": "node dist/server/index.mjs",
+    "start": "node server-entry.mjs",
+    "preview": "node server-entry.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

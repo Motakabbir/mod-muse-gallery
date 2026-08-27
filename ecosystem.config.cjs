@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'syndicatedrestomod',
-      script: 'dist/server/index.mjs',
+      script: 'server-entry.mjs',
       cwd: '/var/www/syndicatedrestomod.com',
       exec_mode: 'fork',
       instances: 1,
