@@ -14,6 +14,7 @@ export default defineConfig({
   },
   nitro: {
     preset: "node-server",
+    plugins: ["src/nitro-plugin.ts"],
   },
   vite: {
     environments: {
