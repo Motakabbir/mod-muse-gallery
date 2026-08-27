@@ -63,8 +63,8 @@ export const submitContactForm = createServerFn({ method: 'POST' })
         console.log("Email successfully sent via Resend.");
         return { success: true, offline: false };
       } else {
-        const errText = await res.text();
-        console.error(`Resend API returned error status ${res.status}:`, errText);
+        const errorText = await res.text();
+        console.error(`Resend API returned error status ${res.status}:`, errorText);
       }
     } catch (err: any) {
       console.error("Failed to send email via Resend (network error):", err.message);
