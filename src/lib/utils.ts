@@ -21,7 +21,7 @@ export interface SeoMetadata {
 }
 
 export async function fetchSeoMetadata(slug: string, fallback: SeoMetadata): Promise<SeoMetadata> {
-  const apiUrl = (typeof process !== "undefined" && process.env.VITE_API_URL) || "http://localhost:8000/api/v1/cms";
+  const apiUrl = (typeof process !== "undefined" && process.env.VITE_API_URL) || import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
   try {
     const res = await fetch(`${apiUrl}/seos/slug/${slug}`, {
       method: "GET",

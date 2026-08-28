@@ -8,9 +8,34 @@
  * saves it as static files.
  */
 import { spawn } from "child_process";
-import { writeFileSync, mkdirSync, existsSync, cpSync } from "fs";
+import { writeFileSync, mkdirSync, existsSync, cpSync, readFileSync } from "fs";
 import { resolve, join } from "path";
 import { createServer } from "net";
+
+// Load environment variables from .env file if present
+const envPath = resolve(".env");
+if (existsSync(envPath)) {
+  try {
+    const envContent = readFileSync(envPath, "utf-8");
+    for (const line of envContent.split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith("#")) continue;
+      const firstEquals = trimmed.indexOf("=");
+      if (firstEquals === -1) continue;
+      const key = trimmed.substring(0, firstEquals).trim();
+      let val = trimmed.substring(firstEquals + 1).trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.substring(1, val.length - 1);
+      }
+      if (key && process.env[key] === undefined) {
+        process.env[key] = val;
+      }
+    }
+    console.log("Loaded environment variables from .env file for build-time prerendering");
+  } catch (err) {
+    console.error("Failed to read .env file:", err);
+  }
+}
 
 const CLIENT_DIR = resolve("dist/client");
 const ROUTES = [
@@ -132,7 +157,28 @@ async function main() {
     console.log("✓ Copy completed successfully");
   }
 
+  // Ensure public/assets/logo.jpeg exists by copying from src/assets/logo/logo-4.jpeg
+  const logoSrc = resolve("src/assets/logo/logo-4.jpeg");
+  const publicAssetsDir = resolve("public/assets");
+  const publicLogoDest = join(publicAssetsDir, "logo.jpeg");
+  const clientAssetsDir = join(CLIENT_DIR, "assets");
+  const clientLogoDest = join(clientAssetsDir, "logo.jpeg");
+
+  if (existsSync(logoSrc)) {
+    if (!existsSync(publicAssetsDir)) {
+      mkdirSync(publicAssetsDir, { recursive: true });
+    }
+    cpSync(logoSrc, publicLogoDest);
+    console.log(`✓ Copied logo from ${logoSrc} to ${publicLogoDest}`);
+
+    if (existsSync(clientAssetsDir)) {
+      cpSync(logoSrc, clientLogoDest);
+      console.log(`✓ Copied logo to ${clientLogoDest}`);
+    }
+  }
+
   server.kill();
+
   console.log(`\nDone: ${success} pages generated, ${failed} skipped.`);
 
   if (success === 0) {

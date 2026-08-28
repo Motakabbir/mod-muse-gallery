@@ -35,7 +35,7 @@ export const submitContactForm = createServerFn({ method: 'POST' })
     const firstName = nameParts[0] || "";
     const lastName = nameParts.slice(1).join(" ") || "";
 
-    const apiUrl = process.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
+    const apiUrl = process.env.VITE_API_URL || import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
 
     try {
       // 1. Authenticate with CMS

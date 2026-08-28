@@ -1,9 +1,35 @@
 import http from 'http';
-import { existsSync, lstatSync, createReadStream } from 'fs';
+import { existsSync, lstatSync, createReadStream, readFileSync } from 'fs';
 import { resolve, join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Load environment variables from .env file if present
+const envPath = resolve(__dirname, '.env');
+if (existsSync(envPath)) {
+  try {
+    const envContent = readFileSync(envPath, 'utf-8');
+    for (const line of envContent.split(/\r?\n/)) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const firstEquals = trimmed.indexOf('=');
+      if (firstEquals === -1) continue;
+      const key = trimmed.substring(0, firstEquals).trim();
+      let val = trimmed.substring(firstEquals + 1).trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.substring(1, val.length - 1);
+      }
+      if (key && process.env[key] === undefined) {
+        process.env[key] = val;
+      }
+    }
+    console.log('Loaded environment variables from .env file');
+  } catch (err) {
+    console.error('Failed to read .env file:', err);
+  }
+}
+
 const PORT = parseInt(process.env.PORT || '3020', 10);
 const HOST = process.env.HOST || '127.0.0.1';
 
