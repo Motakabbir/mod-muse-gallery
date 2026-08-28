@@ -24,9 +24,9 @@ if ! command -v node &> /dev/null; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     
-    nvm install 20 # Install Node.js v20 (LTS)
-    nvm use 20
-    nvm alias default 20
+    nvm install 25 # Install Node.js v25 (as required by engines)
+    nvm use 25
+    nvm alias default 25
 else
     echo "Node.js is already installed: $(node -v)"
 fi

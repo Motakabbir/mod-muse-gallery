@@ -81,6 +81,7 @@ export const submitContactForm = createServerFn({ method: 'POST' })
       });
 
       if (res.ok) {
+        console.log("Email successfully sent via Resend.");
         return { success: true, offline: false };
       } else {
         const errText = await res.text();

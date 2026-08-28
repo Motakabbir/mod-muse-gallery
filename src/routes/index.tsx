@@ -635,12 +635,11 @@ function Apply() {
         <p className="reveal text-bone/50 mb-10 font-mono uppercase tracking-[0.25em] text-xs">
           Once filled, the opportunity closes.
         </p>
-        <a
-          href="mailto:hello@syndicatedrestomod.com"
+        <Link to="/apply"
           className="reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors"
         >
           Apply for Allocation
-        </a>
+        </Link>
       </div>
     </section>
   );
