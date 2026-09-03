@@ -245,13 +245,13 @@ function EventsPage() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-white/10 flex justify-end">
-                  <Link
-                    to="/apply"
+                  <a
+                    href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
                     onClick={() => setSelectedEventIdx(null)}
                     className="px-6 py-2.5 bg-acid text-ink font-semibold uppercase tracking-widest text-[10px] rounded-full hover:bg-bone transition-colors"
                   >
                     Request Invite →
-                  </Link>
+                  </a>
                 </div>
                 </div>
               </>

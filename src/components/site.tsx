@@ -84,9 +84,9 @@ export function Nav() {
               </a>
             );
           })}
-          <Link to="/apply" onClick={() => setOpen(false)} className="btn-acid justify-center">
-            Apply Now →
-          </Link>
+          <a href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"} onClick={() => setOpen(false)} className="btn-acid justify-center">
+            Register →
+          </a>
         </div>
       )}
     </header>
@@ -138,7 +138,7 @@ export function Footer() {
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4">Connect</div>
           <div className="flex flex-col gap-3 text-sm text-bone/70">
             <Link to="/contact" className="hover:text-acid transition-colors">Contact</Link>
-            <Link to="/apply" className="hover:text-acid transition-colors">Apply</Link>
+            <a href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"} className="hover:text-acid transition-colors">Register</a>
             <a href="mailto:hello@syndicatedrestomod.com" className="hover:text-acid transition-colors">hello@syndicatedrestomod.com</a>
 
             <div className="h-px w-6 bg-white/10 my-1" />

@@ -136,12 +136,12 @@ function TheBuildPage() {
             Syndicate members receive build documentation, workshop access, and behind-the-scenes
             content at every milestone.
           </p>
-          <Link
-            to="/apply"
+          <a
+            href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
             className="reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors"
           >
-            Join Waitlist
-          </Link>
+            Register for Allocation
+          </a>
         </div>
       </section>
 

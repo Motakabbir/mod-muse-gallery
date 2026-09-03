@@ -123,7 +123,7 @@ function Hero() {
           Syndicated Restomod Builds — engineered in the open, built to be driven and collectively owned.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
-          <Link to="/apply" className="btn-acid">Join Waitlist →</Link>
+          <a href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"} className="btn-acid">Register for Allocation →</a>
           <a href="#intro" className="btn-ghost">Explore Syndicate</a>
         </div>
         <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500">
@@ -336,23 +336,15 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
                 </div>
                 <div className="mt-8">
                   {s.waitlist ? (
-                    <form className="flex flex-col gap-2" onSubmit={(e) => e.preventDefault()}>
-                      <input
-                        type="email"
-                        placeholder="Email for waitlist"
-                        required
-                        className="bg-carbon border border-white/10 px-4 py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full transition-colors text-xs text-center"
-                      />
-                      <button
-                        type="submit"
-                        className="w-full text-center py-3 border border-acid text-acid uppercase tracking-widest text-xs rounded-full hover:bg-acid/10 transition-all duration-300 font-semibold"
-                      >
-                        Join Waitlist
-                      </button>
-                    </form>
+                    <a
+                      href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
+                      className="w-full inline-block text-center py-3 border border-acid text-acid uppercase tracking-widest text-xs rounded-full hover:bg-acid/10 transition-all duration-300 font-semibold"
+                    >
+                      Register for Allocation
+                    </a>
                   ) : (
                     <a
-                      href="#apply"
+                      href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
                       className="w-full inline-block text-center py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid hover:bg-acid/5 transition-all duration-300"
                     >
                       Request Details
@@ -657,11 +649,11 @@ function Apply() {
         <p className="reveal text-bone/50 mb-10 font-mono uppercase tracking-[0.25em] text-xs">
           Once filled, the opportunity closes.
         </p>
-        <Link to="/apply"
+        <a href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
           className="reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors"
         >
-          Join Waitlist
-        </Link>
+          Register for Allocation
+        </a>
       </div>
     </section>
   );
