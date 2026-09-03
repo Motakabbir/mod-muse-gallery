@@ -155,7 +155,7 @@ function AboutPage() {
             to="/apply"
             className="inline-block px-10 py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300"
           >
-            Apply For Allocation
+            Join Waitlist
           </Link>
         </div>
       </section>

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import carbonTexture from "../assets/image/carbon-texture.jpg";
 import heroVideo from "../assets/video/hero-001.mp4";
 import videoCarSection from "../assets/video/rs500-reimagined-morphing.mp4";
+import brochurePdf from "../assets/pdf/SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal } from "@/components/site";
 
@@ -122,7 +123,7 @@ function Hero() {
           Syndicated Restomod Builds — engineered in the open, built to be driven and collectively owned.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
-          <Link to="/apply" className="btn-acid">Apply for Allocation →</Link>
+          <Link to="/apply" className="btn-acid">Join Waitlist →</Link>
           <a href="#intro" className="btn-ghost">Explore Syndicate</a>
         </div>
         <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500">
@@ -330,7 +331,7 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
                   </div>
                   <ul className="space-y-2 text-bone/60 text-sm border-t border-white/5 pt-4">
                     <li>{s.stats}</li>
-                    <li className="text-bone/80 font-semibold">{s.return}</li>
+                    {s.return && <li className="text-bone/80 font-semibold">{s.return}</li>}
                   </ul>
                 </div>
                 <div className="mt-8">
@@ -370,13 +371,34 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
             <div className="font-mono text-[10px] text-acid tracking-widest uppercase mb-3">Learn the process</div>
             <h3 className="font-display text-2xl md:text-3xl mb-3">Want the full picture?</h3>
             <p className="text-bone/60 text-sm md:text-base leading-relaxed">
-              Download our comprehensive Briefing Document to dive deeper into our acquisition strategy, engineering standards, and projected returns.
+              Download our Syndicate Membership Brochure to understand the benefits and experience levels associated with this build and car.
             </p>
           </div>
           <div className="relative z-10 w-full lg:w-auto flex-shrink-0">
-            <form className="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0">
+            <form className="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0" onSubmit={(e) => {
+              e.preventDefault();
+              const formData = new FormData(e.currentTarget);
+              const email = formData.get("brochure_email") as string;
+              // Store email for follow-up
+              try {
+                const leads = JSON.parse(localStorage.getItem("brochure_leads") || "[]");
+                leads.push({ email, requested_at: new Date().toISOString() });
+                localStorage.setItem("brochure_leads", JSON.stringify(leads));
+              } catch (err) {
+                console.error("Failed to save brochure lead:", err);
+              }
+              // Trigger PDF download
+              const link = document.createElement("a");
+              link.href = brochurePdf;
+              link.download = "SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              e.currentTarget.reset();
+            }}>
               <input
                 type="email"
+                name="brochure_email"
                 placeholder="Enter your email address"
                 required
                 className="bg-carbon border border-white/20 px-6 py-4 sm:py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full sm:min-w-[280px] transition-colors text-sm"
@@ -385,7 +407,7 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
                 type="submit"
                 className="bg-acid text-ink font-semibold uppercase tracking-widest text-xs px-8 py-4 sm:py-3 rounded-full hover:bg-bone transition-colors whitespace-nowrap"
               >
-                Get Briefing PDF
+                Get Brochure PDF
               </button>
             </form>
           </div>
@@ -638,7 +660,7 @@ function Apply() {
         <Link to="/apply"
           className="reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors"
         >
-          Apply for Allocation
+          Join Waitlist
         </Link>
       </div>
     </section>

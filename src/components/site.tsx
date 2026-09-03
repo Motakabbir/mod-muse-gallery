@@ -139,12 +139,13 @@ export function Footer() {
           <div className="flex flex-col gap-3 text-sm text-bone/70">
             <Link to="/contact" className="hover:text-acid transition-colors">Contact</Link>
             <Link to="/apply" className="hover:text-acid transition-colors">Apply</Link>
-            <a href="mailto:hello@Syndicate.com" className="hover:text-acid transition-colors">hello@Syndicate.com</a>
+            <a href="mailto:hello@syndicatedrestomod.com" className="hover:text-acid transition-colors">hello@syndicatedrestomod.com</a>
 
             <div className="h-px w-6 bg-white/10 my-1" />
 
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">Instagram</a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">LinkedIn</a>
+            <a href="https://www.instagram.com/syndicatedrestomod/" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">Instagram</a>
+            <a href="https://www.linkedin.com/company/102822553/" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">LinkedIn</a>
+            <a href="https://www.youtube.com/@Vision148TV" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">YouTube</a>
           </div>
         </div>
       </div>

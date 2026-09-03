@@ -140,7 +140,7 @@ function TheBuildPage() {
             to="/apply"
             className="reveal inline-block px-12 py-5 bg-acid text-ink font-semibold uppercase tracking-widest rounded-full hover:bg-bone transition-colors"
           >
-            Apply for Allocation
+            Join Waitlist
           </Link>
         </div>
       </section>

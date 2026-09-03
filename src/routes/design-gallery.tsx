@@ -249,7 +249,7 @@ function GalleryPage() {
               to="/apply"
               className="reveal px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors"
             >
-              Apply for Allocation
+              Join Waitlist
             </Link>
           </div>
         </div>

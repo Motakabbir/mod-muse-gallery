@@ -13,7 +13,7 @@ export const getLiveSyndicates = async () => {
         "£5,000 Associate Members"
       ],
       stats: "10 Founder Allocations • 20 Associate Allocations",
-      return: "Potential: 77.1%*",
+      return: "",
       isPlaceholder: false,
       waitlist: false,
     },

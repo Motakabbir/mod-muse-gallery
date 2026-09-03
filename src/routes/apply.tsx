@@ -65,9 +65,12 @@ function ApplyPage() {
       <section className="py-32 px-6">
         <div className="mx-auto max-w-3xl">
           <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">Application Form</div>
-          <h2 className="reveal font-display text-4xl md:text-5xl leading-[1] mb-12">
-            Register Your <span className="text-acid">Interest.</span>
+          <h2 className="reveal font-display text-4xl md:text-5xl leading-[1] mb-4">
+            Join <span className="text-acid">Waitlist.</span>
           </h2>
+          <p className="reveal text-bone/60 text-lg leading-relaxed mb-12">
+            Register to join our waitlist. Allocations will be limited but let us know your allocation preference.
+          </p>
 
           {submitted ? (
             <div className="reveal border border-acid bg-acid/5 p-10 text-center">

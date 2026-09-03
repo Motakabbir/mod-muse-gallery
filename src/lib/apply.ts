@@ -73,6 +73,7 @@ ${data.message || "N/A"}`;
           message: formattedMessage,
           subject: "Register Your Interest",
           source: "syndicatedrestomod",
+          logo: "public/assets/logo.jpeg",
         }),
       });
 
