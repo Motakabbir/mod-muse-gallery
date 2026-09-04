@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheBuildRouteImport } from './routes/the-build'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DesignGalleryRouteImport } from './routes/design-gallery'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -20,6 +22,16 @@ import { Route as IndexRouteImport } from './routes/index'
 const TheBuildRoute = TheBuildRouteImport.update({
   id: '/the-build',
   path: '/the-build',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRoute = EventsRouteImport.update({
@@ -60,6 +72,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/design-gallery': typeof DesignGalleryRoute
   '/events': typeof EventsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/the-build': typeof TheBuildRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +83,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/design-gallery': typeof DesignGalleryRoute
   '/events': typeof EventsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/the-build': typeof TheBuildRoute
 }
 export interface FileRoutesById {
@@ -79,6 +95,8 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/design-gallery': typeof DesignGalleryRoute
   '/events': typeof EventsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/the-build': typeof TheBuildRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +108,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/design-gallery'
     | '/events'
+    | '/privacy-policy'
+    | '/terms-of-service'
     | '/the-build'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +119,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/design-gallery'
     | '/events'
+    | '/privacy-policy'
+    | '/terms-of-service'
     | '/the-build'
   id:
     | '__root__'
@@ -108,6 +130,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/design-gallery'
     | '/events'
+    | '/privacy-policy'
+    | '/terms-of-service'
     | '/the-build'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +142,8 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DesignGalleryRoute: typeof DesignGalleryRoute
   EventsRoute: typeof EventsRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   TheBuildRoute: typeof TheBuildRoute
 }
 
@@ -128,6 +154,20 @@ declare module '@tanstack/react-router' {
       path: '/the-build'
       fullPath: '/the-build'
       preLoaderRoute: typeof TheBuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events': {
@@ -182,6 +222,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DesignGalleryRoute: DesignGalleryRoute,
   EventsRoute: EventsRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   TheBuildRoute: TheBuildRoute,
 }
 export const routeTree = rootRouteImport

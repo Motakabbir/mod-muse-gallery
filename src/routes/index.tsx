@@ -537,7 +537,7 @@ function Events({ events }: { events: any[] }) {
               </div>
               <div className="mt-8 pt-6 border-t border-white/5">
                 <a
-                  href="#apply"
+                  href={`mailto:hello@syndicatedrestomod.com?subject=Invite Request for ${e.title}`}
                   className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-acid hover:text-bone transition-colors"
                 >
                   Request Invite <span className="font-sans text-sm">→</span>

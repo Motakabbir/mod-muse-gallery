@@ -246,7 +246,7 @@ function EventsPage() {
 
                 <div className="mt-8 pt-6 border-t border-white/10 flex justify-end">
                   <a
-                    href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
+                    href={`mailto:hello@syndicatedrestomod.com?subject=Invite Request for ${currentEvent.title}`}
                     onClick={() => setSelectedEventIdx(null)}
                     className="px-6 py-2.5 bg-acid text-ink font-semibold uppercase tracking-widest text-[10px] rounded-full hover:bg-bone transition-colors"
                   >

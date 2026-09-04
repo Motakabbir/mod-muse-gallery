@@ -109,7 +109,7 @@ export function Footer() {
           ))}
         </div>
       </div>
-      <div className="relative mx-auto max-w-7xl px-6 py-16 grid lg:grid-cols-4 gap-10">
+      <div className="relative mx-auto max-w-7xl px-6 py-16 grid lg:grid-cols-5 gap-10">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-3 mb-6">
             <img src={logo} alt="Syn Mod Build" className="h-12 w-12" />
@@ -146,6 +146,13 @@ export function Footer() {
             <a href="https://www.instagram.com/syndicatedrestomod/" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">Instagram</a>
             <a href="https://www.linkedin.com/company/102822553/" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">LinkedIn</a>
             <a href="https://www.youtube.com/@Vision148TV" target="_blank" rel="noreferrer" className="hover:text-acid transition-colors">YouTube</a>
+          </div>
+        </div>
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4">Legal</div>
+          <div className="flex flex-col gap-3 text-sm text-bone/70">
+            <Link to="/privacy-policy" className="hover:text-acid transition-colors">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:text-acid transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
