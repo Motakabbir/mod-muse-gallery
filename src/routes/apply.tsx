@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import heroVideo from "../assets/video/hero-001.mp4";
 
@@ -10,10 +10,10 @@ import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
 export const Route = createFileRoute("/apply")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("apply", {
-      title: "Apply for Allocation | Syndicate",
-      description: "Apply for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
-      og_title: "Apply for Allocation | Syndicate",
-      og_description: "Limited syndicate positions for the Syndicate RS500 build.",
+      title: "Join Waitlist | Syndicate",
+      description: "Join the waitlist for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
+      og_title: "Join Waitlist | Syndicate",
+      og_description: "Join the waitlist for the limited Syndicate RS500 build.",
     });
     const stepsPromise = getApplySteps();
     const [seo, steps] = await Promise.all([seoPromise, stepsPromise]);
@@ -21,10 +21,10 @@ export const Route = createFileRoute("/apply")({
   },
   head: ({ loaderData }) => ({
     meta: mapSeoToMeta(loaderData?.seo || {
-      title: "Apply for Allocation | Syndicate",
-      description: "Apply for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
-      og_title: "Apply for Allocation | Syndicate",
-      og_description: "Limited syndicate positions for the Syndicate RS500 build.",
+      title: "Join Waitlist | Syndicate",
+      description: "Join the waitlist for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
+      og_title: "Join Waitlist | Syndicate",
+      og_description: "Join the waitlist for the limited Syndicate RS500 build.",
     }),
   }),
   component: ApplyPage,
@@ -37,15 +37,43 @@ function ApplyPage() {
   const { steps } = Route.useLoaderData();
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    const scrollToTarget = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    const timer = setTimeout(scrollToTarget, 100);
+    window.addEventListener("hashchange", scrollToTarget);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", scrollToTarget);
+    };
+  }, []);
+
   return (
     <main className="bg-ink text-bone overflow-x-hidden min-h-screen">
       <Nav />
       <PageHero
-        kicker="Syndicate Availability"
-        title={<>Apply for <span className="text-acid">Allocation.</span></>}
-        subtitle="A fixed number of syndicate positions. Strict allocation structure. Early applicants prioritised. Once filled, the opportunity closes."
+        kicker="Waitlist Registration"
+        title={<>Join <span className="text-acid">Waitlist.</span></>}
+        subtitle="A fixed number of syndicate positions. Strict allocation structure. Join the waitlist to receive priority access before allocations open."
         video={heroVideo}
-      />
+      >
+        <div className="mt-8">
+          <a
+            href="#waitlist-form"
+            className="btn-acid inline-flex items-center gap-2"
+          >
+            Go to Waitlist Form ↓
+          </a>
+        </div>
+      </PageHero>
 
       <section className="py-24 px-6 bg-carbon border-b border-white/10">
         <div className="mx-auto max-w-7xl">
@@ -62,9 +90,11 @@ function ApplyPage() {
         </div>
       </section>
 
-      <section className="py-32 px-6">
+      <section id="waitlist-form" className="py-32 px-6 scroll-mt-20">
+        <div id="waitlist" className="scroll-mt-24" />
+        <div id="form" className="scroll-mt-24" />
         <div className="mx-auto max-w-3xl">
-          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">Application Form</div>
+          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">Waitlist Form</div>
           <h2 className="reveal font-display text-4xl md:text-5xl leading-[1] mb-4">
             Join <span className="text-acid">Waitlist.</span>
           </h2>
@@ -74,7 +104,7 @@ function ApplyPage() {
 
           {submitted ? (
             <div className="reveal border border-acid bg-acid/5 p-10 text-center">
-              <div className="font-display text-3xl text-acid mb-4">Application Received</div>
+              <div className="font-display text-3xl text-acid mb-4">Waitlist Registration Received</div>
               <p className="text-bone/70 mb-8">
                 Thank you. A member of the syndicate team will be in touch within 48 hours.
               </p>
@@ -157,7 +187,7 @@ function ApplyPage() {
                 type="submit"
                 className="w-full px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors"
               >
-                Submit Application
+                Join Waitlist
               </button>
               <p className="text-bone/40 text-xs font-mono uppercase tracking-[0.2em] text-center">
                 Your information is handled confidentially.

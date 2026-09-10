@@ -245,12 +245,13 @@ function GalleryPage() {
             >
               See the Build →
             </Link>
-            <a
-              href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
+            <Link
+              to="/apply"
+              hash="waitlist-form"
               className="reveal px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors"
             >
-              Register for Allocation
-            </a>
+              Join Waitlist
+            </Link>
           </div>
         </div>
       </section>

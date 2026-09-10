@@ -60,9 +60,9 @@ export function Nav() {
               </a>
             );
           })}
-          {/* <Link to="/apply" className="btn-acid !py-2.5 !px-5 !text-[11px]">
-            Apply <span aria-hidden>→</span>
-          </Link> */}
+          <Link to="/apply" hash="waitlist-form" className="btn-acid !py-2.5 !px-5 !text-[11px]">
+            Join Waitlist <span aria-hidden>→</span>
+          </Link>
         </nav>
         <button
           onClick={() => setOpen(!open)}
@@ -84,9 +84,9 @@ export function Nav() {
               </a>
             );
           })}
-          <a href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"} onClick={() => setOpen(false)} className="btn-acid justify-center">
-            Register →
-          </a>
+          <Link to="/apply" hash="waitlist-form" onClick={() => setOpen(false)} className="btn-acid justify-center">
+            Join Waitlist →
+          </Link>
         </div>
       )}
     </header>
@@ -138,7 +138,7 @@ export function Footer() {
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-acid mb-4">Connect</div>
           <div className="flex flex-col gap-3 text-sm text-bone/70">
             <Link to="/contact" className="hover:text-acid transition-colors">Contact</Link>
-            <a href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"} className="hover:text-acid transition-colors">Register</a>
+            <Link to="/apply" hash="waitlist-form" className="hover:text-acid transition-colors">Join Waitlist</Link>
             <a href="mailto:hello@syndicatedrestomod.com" className="hover:text-acid transition-colors">hello@syndicatedrestomod.com</a>
 
             <div className="h-px w-6 bg-white/10 my-1" />
@@ -175,6 +175,7 @@ export function PageHero({
   videoClassName = "opacity-80",
   imageClassName = "opacity-80 scale-110",
   overlayClassName = "bg-gradient-to-b from-ink/10 via-ink/20 to-ink/90",
+  children,
 }: {
   kicker: string;
   title: React.ReactNode;
@@ -184,6 +185,7 @@ export function PageHero({
   videoClassName?: string;
   imageClassName?: string;
   overlayClassName?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <section className="relative pt-40 pb-28 px-6 overflow-hidden grain border-b border-white/10">
@@ -218,6 +220,7 @@ export function PageHero({
         {subtitle && (
           <p className="mt-8 text-bone/70 text-lg md:text-xl max-w-2xl leading-relaxed">{subtitle}</p>
         )}
+        {children}
         <div className="mt-12 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40">
           <div className="h-px w-12 bg-acid/60" />
           Scroll to explore
