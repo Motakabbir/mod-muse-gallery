@@ -151,12 +151,13 @@ function AboutPage() {
           <p className="text-bone/70 text-lg mb-10 max-w-xl mx-auto">
             Allocation is limited. Applications are reviewed personally by the build team.
           </p>
-          <a
-            href={import.meta.env.VITE_REGISTER_URL || "https://dev-vision.aptoro.ai/"}
+          <Link
+            to="/apply"
+            hash="waitlist-form"
             className="inline-block px-10 py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.25em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300"
           >
-            Register for Allocation
-          </a>
+            Join Waitlist
+          </Link>
         </div>
       </section>
 
