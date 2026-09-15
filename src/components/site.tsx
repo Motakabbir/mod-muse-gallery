@@ -43,9 +43,7 @@ export function Nav() {
             <div className="absolute inset-0 bg-acid/30 blur-xl group-hover:bg-acid/50 transition-all rounded-full" />
             <img src={logo} alt="Syn Mod Build" className="relative h-10 w-10" width={40} height={40} />
           </div>
-          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-bone/80 leading-tight hidden sm:block">
-            Syndicated<br />Restomod
-          </span>
+
         </Link>
         <nav className="hidden lg:flex items-center gap-8">
           {NAV.map((n) => {
