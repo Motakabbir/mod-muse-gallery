@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import { useState } from "react";
 import heroVideo from "../assets/video/hero-002.mp4";
+import hero002Poster from "../assets/image/posters/hero-002-poster.webp";
 
 import { getDirectLines, getWorkshopAddress, submitContactForm } from "../lib/contact";
 import { useLoaderData } from "@tanstack/react-router";
@@ -11,28 +12,34 @@ export const Route = createFileRoute("/contact")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("contact", {
       title: "Contact — Syndicate | Syndicated Restomod Build",
-      description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+      description:
+        "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
       og_title: "Contact — Syndicate | Syndicated Restomod Build",
-      og_description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+      og_description:
+        "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
     });
     const directLinesPromise = getDirectLines();
     const workshopAddressPromise = getWorkshopAddress();
-    
+
     const [seo, directLines, workshopAddress] = await Promise.all([
       seoPromise,
       directLinesPromise,
       workshopAddressPromise,
     ]);
-    
+
     return { seo, directLines, workshopAddress };
   },
   head: ({ loaderData }) => ({
-    meta: mapSeoToMeta(loaderData?.seo || {
-      title: "Contact — Syndicate | Syndicated Restomod Build",
-      description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
-      og_title: "Contact — Syndicate | Syndicated Restomod Build",
-      og_description: "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
-    }),
+    meta: mapSeoToMeta(
+      loaderData?.seo || {
+        title: "Contact — Syndicate | Syndicated Restomod Build",
+        description:
+          "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+        og_title: "Contact — Syndicate | Syndicated Restomod Build",
+        og_description:
+          "Get in touch with the Syndicate team. Press, partnership, and syndicate inquiries welcome.",
+      },
+    ),
   }),
   component: ContactPage,
 });
@@ -50,7 +57,7 @@ function ContactPage() {
       if (res.success) {
         setSent(true);
         setTimeout(() => setSent(false), 4000);
-        
+
         if (res.offline) {
           try {
             const submissions = JSON.parse(localStorage.getItem("contact_submissions") || "[]");
@@ -83,6 +90,7 @@ function ContactPage() {
         }
         subtitle="Press inquiries, partnership proposals, or questions about the syndicate — we read every message personally."
         video={heroVideo}
+        poster={hero002Poster}
       />
 
       {/* Contact Grid */}
@@ -90,19 +98,32 @@ function ContactPage() {
         <div className="mx-auto max-w-7xl grid md:grid-cols-2 gap-16">
           {/* Info */}
           <div className="reveal">
-            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">01 — Direct Lines</div>
-            <h2 className="font-display text-4xl md:text-5xl leading-[1.05] mb-8">Reach The Team</h2>
+            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
+              01 — Direct Lines
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl leading-[1.05] mb-8">
+              Reach The Team
+            </h2>
             <div className="space-y-8">
               {directLines.map((line, i) => (
                 <div key={i}>
-                  <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">{line.label}</div>
-                  <a href={`mailto:${line.email}`} className="text-lg text-bone hover:text-acid transition-colors">{line.email}</a>
+                  <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">
+                    {line.label}
+                  </div>
+                  <a
+                    href={`mailto:${line.email}`}
+                    className="text-lg text-bone hover:text-acid transition-colors"
+                  >
+                    {line.email}
+                  </a>
                 </div>
               ))}
             </div>
 
             <div className="mt-12 pt-8 border-t border-white/10">
-              <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-3">Workshop</div>
+              <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-3">
+                Workshop
+              </div>
               <p className="text-bone/70 leading-relaxed">
                 {workshopAddress.map((line, i) => (
                   <span key={i}>
@@ -116,12 +137,20 @@ function ContactPage() {
 
           {/* Form */}
           <div className="reveal bg-carbon border border-white/10 rounded-lg p-8 md:p-10">
-            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">02 — Send A Message</div>
+            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
+              02 — Send A Message
+            </div>
             <h3 className="font-display text-2xl mb-8">Write To Us</h3>
             {sent ? (
               <div className="text-center py-12">
                 <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-acid/10 border border-acid/30 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-acid" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg
+                    className="w-8 h-8 text-acid"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -131,7 +160,9 @@ function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">Name</label>
+                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
+                    Name
+                  </label>
                   <input
                     required
                     value={form.name}
@@ -141,7 +172,9 @@ function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">Email</label>
+                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
+                    Email
+                  </label>
                   <input
                     required
                     type="email"
@@ -152,7 +185,9 @@ function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">Subject</label>
+                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
+                    Subject
+                  </label>
                   <select
                     required
                     value={form.subject}
@@ -167,7 +202,9 @@ function ContactPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">Message</label>
+                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
+                    Message
+                  </label>
                   <textarea
                     required
                     rows={5}
@@ -192,10 +229,13 @@ function ContactPage() {
       {/* FAQ Preview */}
       <section className="py-24 px-6 grain relative">
         <div className="mx-auto max-w-7xl text-center reveal">
-          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">Questions?</div>
+          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
+            Questions?
+          </div>
           <h2 className="font-display text-4xl md:text-5xl mb-6">Common Questions</h2>
           <p className="text-bone/70 text-lg max-w-2xl mx-auto mb-10">
-            Everything you need to know about joining the Syndicate syndicate, from allocation to ownership structure.
+            Everything you need to know about joining the Syndicate syndicate, from allocation to
+            ownership structure.
           </p>
           <a
             href="/events"

@@ -30,3 +30,6 @@ dist/*
 *.njsproj
 *.sln
 *.sw?
+
+# Video Backups
+src/assets/video_backup/

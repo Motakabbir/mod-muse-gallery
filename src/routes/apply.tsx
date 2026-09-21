@@ -2,16 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import heroVideo from "../assets/video/hero-001.mp4";
+import heroPoster from "../assets/image/posters/hero-001-poster.webp";
 
 import { getApplySteps, submitApplyForm } from "../lib/apply";
-import { useLoaderData } from "@tanstack/react-router";
 import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
 
 export const Route = createFileRoute("/apply")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("apply", {
       title: "Join Waitlist | Syndicate",
-      description: "Join the waitlist for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
+      description:
+        "Join the waitlist for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
       og_title: "Join Waitlist | Syndicate",
       og_description: "Join the waitlist for the limited Syndicate RS500 build.",
     });
@@ -20,12 +21,15 @@ export const Route = createFileRoute("/apply")({
     return { seo, steps };
   },
   head: ({ loaderData }) => ({
-    meta: mapSeoToMeta(loaderData?.seo || {
-      title: "Join Waitlist | Syndicate",
-      description: "Join the waitlist for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
-      og_title: "Join Waitlist | Syndicate",
-      og_description: "Join the waitlist for the limited Syndicate RS500 build.",
-    }),
+    meta: mapSeoToMeta(
+      loaderData?.seo || {
+        title: "Join Waitlist | Syndicate",
+        description:
+          "Join the waitlist for a syndicate allocation in the Syndicate Ford Sierra Cosworth RS500 restomod build. Limited positions available.",
+        og_title: "Join Waitlist | Syndicate",
+        og_description: "Join the waitlist for the limited Syndicate RS500 build.",
+      },
+    ),
   }),
   component: ApplyPage,
 });
@@ -61,15 +65,17 @@ function ApplyPage() {
       <Nav />
       <PageHero
         kicker="Waitlist Registration"
-        title={<>Join <span className="text-acid">Waitlist.</span></>}
+        title={
+          <>
+            Join <span className="text-acid">Waitlist.</span>
+          </>
+        }
         subtitle="A fixed number of syndicate positions. Strict allocation structure. Join the waitlist to receive priority access before allocations open."
         video={heroVideo}
+        poster={heroPoster}
       >
         <div className="mt-8">
-          <a
-            href="#waitlist-form"
-            className="btn-acid inline-flex items-center gap-2"
-          >
+          <a href="#waitlist-form" className="btn-acid inline-flex items-center gap-2">
             Go to Waitlist Form ↓
           </a>
         </div>
@@ -77,7 +83,9 @@ function ApplyPage() {
 
       <section className="py-24 px-6 bg-carbon border-b border-white/10">
         <div className="mx-auto max-w-7xl">
-          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-12 reveal">How It Works</div>
+          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-12 reveal">
+            How It Works
+          </div>
           <div className="grid md:grid-cols-4 gap-px bg-white/10 border border-white/10">
             {steps.map((s) => (
               <div key={s.n} className="reveal bg-carbon p-8 hover:bg-steel transition-colors">
@@ -94,21 +102,29 @@ function ApplyPage() {
         <div id="waitlist" className="scroll-mt-24" />
         <div id="form" className="scroll-mt-24" />
         <div className="mx-auto max-w-3xl">
-          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">Waitlist Form</div>
+          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">
+            Waitlist Form
+          </div>
           <h2 className="reveal font-display text-4xl md:text-5xl leading-[1] mb-4">
             Join <span className="text-acid">Waitlist.</span>
           </h2>
           <p className="reveal text-bone/60 text-lg leading-relaxed mb-12">
-            Register to join our waitlist. Allocations will be limited but let us know your allocation preference.
+            Register to join our waitlist. Allocations will be limited but let us know your
+            allocation preference.
           </p>
 
           {submitted ? (
             <div className="reveal border border-acid bg-acid/5 p-10 text-center">
-              <div className="font-display text-3xl text-acid mb-4">Waitlist Registration Received</div>
+              <div className="font-display text-3xl text-acid mb-4">
+                Waitlist Registration Received
+              </div>
               <p className="text-bone/70 mb-8">
                 Thank you. A member of the syndicate team will be in touch within 48 hours.
               </p>
-              <Link to="/" className="inline-block px-8 py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid transition-all">
+              <Link
+                to="/"
+                className="inline-block px-8 py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid transition-all"
+              >
                 Back to Home
               </Link>
             </div>
@@ -126,15 +142,17 @@ function ApplyPage() {
                   allocation: formData.get("allocation") as string,
                   message: (formData.get("message") as string) || "",
                 };
-                
+
                 try {
                   const res = await submitApplyForm({ data });
                   if (res.success) {
                     setSubmitted(true);
-                    
+
                     if (res.offline) {
                       try {
-                        const submissions = JSON.parse(localStorage.getItem("apply_submissions") || "[]");
+                        const submissions = JSON.parse(
+                          localStorage.getItem("apply_submissions") || "[]",
+                        );
                         submissions.push({ ...data, submitted_at: new Date().toISOString() });
                         localStorage.setItem("apply_submissions", JSON.stringify(submissions));
                       } catch (storageErr) {

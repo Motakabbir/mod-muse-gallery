@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import videoCarSection from "../assets/video/library-of-intent.mp4";
+import galleryPoster from "../assets/image/posters/library-of-intent-poster.webp";
 
 import { getGalleryItems } from "../lib/gallery";
 import { useLoaderData } from "@tanstack/react-router";
@@ -11,7 +12,8 @@ export const Route = createFileRoute("/design-gallery")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("design-gallery", {
       title: "Design Gallery | Syndicate RS500",
-      description: "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery.",
+      description:
+        "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery.",
       og_title: "Design Gallery | Syndicate",
       og_description: "Renders, details, materials, process imagery.",
     });
@@ -20,12 +22,15 @@ export const Route = createFileRoute("/design-gallery")({
     return { seo, items };
   },
   head: ({ loaderData }) => ({
-    meta: mapSeoToMeta(loaderData?.seo || {
-      title: "Design Gallery | Syndicate RS500",
-      description: "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery.",
-      og_title: "Design Gallery | Syndicate",
-      og_description: "Renders, details, materials, process imagery.",
-    }),
+    meta: mapSeoToMeta(
+      loaderData?.seo || {
+        title: "Design Gallery | Syndicate RS500",
+        description:
+          "A visual reference library for the Syndicate RS500 build — renders, details, materials, and process imagery.",
+        og_title: "Design Gallery | Syndicate",
+        og_description: "Renders, details, materials, process imagery.",
+      },
+    ),
   }),
   component: GalleryPage,
 });
@@ -67,9 +72,14 @@ function GalleryPage() {
       <Nav />
       <PageHero
         kicker="Design Gallery"
-        title={<>A Library of <span className="text-acid">Intent.</span></>}
+        title={
+          <>
+            A Library of <span className="text-acid">Intent.</span>
+          </>
+        }
         subtitle="Renders, scans, details, materials, and process imagery from the Syndicate design phase — a living archive of the build as it develops."
         video={videoCarSection}
+        poster={galleryPoster}
       />
 
       <section className="py-24 px-6 bg-carbon">
@@ -114,7 +124,12 @@ function GalleryPage() {
       </section>
 
       {/* Details Lightbox Modal */}
-      <Dialog open={selectedIdx !== null} onOpenChange={(open) => { if (!open) setSelectedIdx(null) }}>
+      <Dialog
+        open={selectedIdx !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelectedIdx(null);
+        }}
+      >
         <DialogContent className="max-w-6xl p-0 bg-carbon border-white/10 rounded-2xl overflow-hidden shadow-2xl gap-0 sm:rounded-2xl [&>button:last-child]:hidden">
           <DialogTitle className="sr-only">Gallery Item</DialogTitle>
           <div className="grid lg:grid-cols-12 w-full h-full max-h-[90vh]">
@@ -132,96 +147,102 @@ function GalleryPage() {
 
                 {/* Left Side: Media Container */}
                 <div className="lg:col-span-7 relative bg-ink/50 flex items-center justify-center h-[40vh] sm:h-[50vh] lg:h-[75vh] border-b lg:border-b-0 lg:border-r border-white/10 group/img">
-                {currentItem.video ? (
-                  <video
-                    src={currentItem.video}
-                    poster={currentItem.img}
-                    controls
-                    autoPlay
-                    loop
-                    playsInline
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <img
-                    src={currentItem.img}
-                    alt={currentItem.t}
-                    className="w-full h-full object-contain"
-                  />
-                )}
+                  {currentItem.video ? (
+                    <video
+                      src={currentItem.video}
+                      poster={currentItem.img}
+                      controls
+                      autoPlay
+                      loop
+                      playsInline
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <img
+                      src={currentItem.img}
+                      alt={currentItem.t}
+                      className="w-full h-full object-contain"
+                    />
+                  )}
 
-                {/* Left/Right Navigation Buttons */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedIdx((prev) => (prev !== null && prev > 0 ? prev - 1 : items.length - 1));
-                  }}
-                  aria-label="Previous item"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedIdx((prev) => (prev !== null && prev < items.length - 1 ? prev + 1 : 0));
-                  }}
-                  aria-label="Next item"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
+                  {/* Left/Right Navigation Buttons */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedIdx((prev) =>
+                        prev !== null && prev > 0 ? prev - 1 : items.length - 1,
+                      );
+                    }}
+                    aria-label="Previous item"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedIdx((prev) =>
+                        prev !== null && prev < items.length - 1 ? prev + 1 : 0,
+                      );
+                    }}
+                    aria-label="Next item"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full border border-white/10 bg-carbon/80 text-bone hover:text-acid hover:border-acid/30 hover:scale-105 transition-all duration-300 opacity-0 group-hover/img:opacity-100 focus:opacity-100"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
 
-              {/* Right Side: Details Information */}
-              <div className="lg:col-span-5 p-8 flex flex-col justify-between overflow-y-auto max-h-[45vh] lg:max-h-[75vh]">
-                <div className="space-y-6">
-                  <div>
-                    <div className="font-mono text-xs text-acid tracking-[0.2em] uppercase mb-2">
-                      {currentItem.tag}
+                {/* Right Side: Details Information */}
+                <div className="lg:col-span-5 p-8 flex flex-col justify-between overflow-y-auto max-h-[45vh] lg:max-h-[75vh]">
+                  <div className="space-y-6">
+                    <div>
+                      <div className="font-mono text-xs text-acid tracking-[0.2em] uppercase mb-2">
+                        {currentItem.tag}
+                      </div>
+                      <h3 className="font-display text-3xl text-gradient-bone leading-tight">
+                        {currentItem.t}
+                      </h3>
                     </div>
-                    <h3 className="font-display text-3xl text-gradient-bone leading-tight">
-                      {currentItem.t}
-                    </h3>
+
+                    <p className="text-bone/70 text-sm md:text-base leading-relaxed">
+                      {currentItem.desc}
+                    </p>
+
+                    {/* Technical Metadata */}
+                    {currentItem.details && (
+                      <div className="border-t border-white/10 pt-6 space-y-4">
+                        <h4 className="font-mono text-[10px] uppercase tracking-[0.25em] text-acid">
+                          Specifications & Details
+                        </h4>
+                        <dl className="grid sm:grid-cols-2 gap-4">
+                          {currentItem.details.map(
+                            (d: { label: string; value: string }, idx: number) => (
+                              <div
+                                key={idx}
+                                className="bg-ink/30 border border-white/5 p-4 hover:border-white/10 transition-colors"
+                              >
+                                <dt className="font-mono text-[10px] uppercase tracking-wider text-bone/40 mb-1">
+                                  {d.label}
+                                </dt>
+                                <dd className="font-display text-sm text-bone">{d.value}</dd>
+                              </div>
+                            ),
+                          )}
+                        </dl>
+                      </div>
+                    )}
                   </div>
 
-                  <p className="text-bone/70 text-sm md:text-base leading-relaxed">
-                    {currentItem.desc}
-                  </p>
-
-                  {/* Technical Metadata */}
-                  {currentItem.details && (
-                    <div className="border-t border-white/10 pt-6 space-y-4">
-                      <h4 className="font-mono text-[10px] uppercase tracking-[0.25em] text-acid">
-                        Specifications & Details
-                      </h4>
-                      <dl className="grid sm:grid-cols-2 gap-4">
-                        {currentItem.details.map((d: any, idx: number) => (
-                          <div
-                            key={idx}
-                            className="bg-ink/30 border border-white/5 p-4 hover:border-white/10 transition-colors"
-                          >
-                            <dt className="font-mono text-[10px] uppercase tracking-wider text-bone/40 mb-1">
-                              {d.label}
-                            </dt>
-                            <dd className="font-display text-sm text-bone">
-                              {d.value}
-                            </dd>
-                          </div>
-                        ))}
-                      </dl>
-                    </div>
-                  )}
+                  {/* Footer status inside details */}
+                  <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-bone/40 font-mono text-[10px] uppercase tracking-[0.25em]">
+                    <span>Syndicate syndicatedrestomod</span>
+                    <span>
+                      {selectedIdx + 1} / {items.length}
+                    </span>
+                  </div>
                 </div>
-
-                {/* Footer status inside details */}
-                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-bone/40 font-mono text-[10px] uppercase tracking-[0.25em]">
-                  <span>Syndicate syndicatedrestomod</span>
-                  <span>{selectedIdx + 1} / {items.length}</span>
-                </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
           </div>
         </DialogContent>
       </Dialog>

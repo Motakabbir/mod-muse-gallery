@@ -175,6 +175,8 @@ export function PageHero({
   videoClassName = "opacity-80",
   imageClassName = "opacity-80 scale-110",
   overlayClassName = "bg-gradient-to-b from-ink/10 via-ink/20 to-ink/90",
+  poster,
+  preload = "auto",
   children,
 }: {
   kicker: string;
@@ -182,6 +184,8 @@ export function PageHero({
   subtitle?: string;
   image?: string;
   video?: string;
+  poster?: string;
+  preload?: "auto" | "metadata" | "none";
   videoClassName?: string;
   imageClassName?: string;
   overlayClassName?: string;
@@ -192,6 +196,8 @@ export function PageHero({
       {video ? (
         <video
           src={video}
+          poster={poster}
+          preload={preload}
           autoPlay
           muted
           loop

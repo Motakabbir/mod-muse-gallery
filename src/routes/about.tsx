@@ -1,11 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav, Footer, PageHero, useReveal } from "../components/site";
 import aboutDetail from "../assets/image/01-mission.png";
 import videoPillarOne from "../assets/video/our-story.mp4";
+import ourStoryPoster from "../assets/image/posters/our-story-poster.webp";
 
 import { getPrinciples, getArchitects } from "../lib/about";
-import { useLoaderData } from "@tanstack/react-router";
 
 import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
 
@@ -13,9 +12,11 @@ export const Route = createFileRoute("/about")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("about", {
       title: "About Us — Syndicate | Syndicated Restomod Build",
-      description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+      description:
+        "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
       og_title: "About Us — Syndicate | Syndicated Restomod Build",
-      og_description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+      og_description:
+        "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
     });
     const principlesPromise = getPrinciples();
     const architectsPromise = getArchitects();
@@ -29,12 +30,16 @@ export const Route = createFileRoute("/about")({
     return { seo, principles, architects };
   },
   head: ({ loaderData }) => ({
-    meta: mapSeoToMeta(loaderData?.seo || {
-      title: "About Us — Syndicate | Syndicated Restomod Build",
-      description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
-      og_title: "About Us — Syndicate | Syndicated Restomod Build",
-      og_description: "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
-    }),
+    meta: mapSeoToMeta(
+      loaderData?.seo || {
+        title: "About Us — Syndicate | Syndicated Restomod Build",
+        description:
+          "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+        og_title: "About Us — Syndicate | Syndicated Restomod Build",
+        og_description:
+          "Meet the team behind Syndicate. A syndicated restomod build powered by passion, precision engineering, and world-class partners.",
+      },
+    ),
   }),
   component: AboutPage,
 });
@@ -55,30 +60,37 @@ function AboutPage() {
         }
         subtitle="Syndicate is more than a car. It is a collective of engineers, designers, and enthusiasts who believe the golden era of motorsport deserves a modern encore."
         video={videoPillarOne}
+        poster={ourStoryPoster}
       />
 
       {/* Mission */}
       <section className="py-24 px-6 border-b border-white/10">
         <div className="mx-auto max-w-7xl grid md:grid-cols-2 gap-16 items-center">
           <div className="reveal">
-            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">01 — Mission</div>
+            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
+              01 — Mission
+            </div>
             <h2 className="font-display text-4xl md:text-5xl leading-[1.05] mb-6">
-              To Reimagine Iconic Cars &<br />To Share the Ownership
+              To Reimagine Iconic Cars &<br />
+              To Share the Ownership
             </h2>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
               Traditional restorations preserve the past. Syndicate Restomod builds on it.
             </p>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
-              Our goal is to infuse modern coach building, engineering skills, additive manufacturing, and motorsport-grade technologies and exciting design language to create One-of-One cars without losing the analog soul that makes these cars magical.
+              Our goal is to infuse modern coach building, engineering skills, additive
+              manufacturing, and motorsport-grade technologies and exciting design language to
+              create One-of-One cars without losing the analog soul that makes these cars magical.
             </p>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
               Ultimately these builds can be experienced by multiple ownership.
             </p>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
-              The Launch Project is the RS500 number 148 visualised by Al Yasid Design.  
+              The Launch Project is the RS500 number 148 visualised by Al Yasid Design.
             </p>
             <p className="text-bone/70 text-lg leading-relaxed mb-6">
-              We will not build this car in a silo it will be a showcase of the best of the best skills and technologies at our disposal.
+              We will not build this car in a silo it will be a showcase of the best of the best
+              skills and technologies at our disposal.
             </p>
             <p className="text-bone/70 text-lg leading-relaxed">
               The result is not a replica. It is a rebirth.
@@ -101,12 +113,17 @@ function AboutPage() {
       <section className="py-24 px-6 grain relative border-b border-white/10">
         <div className="mx-auto max-w-7xl">
           <div className="reveal text-center mb-16">
-            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">02 — Principles</div>
+            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
+              02 — Principles
+            </div>
             <h2 className="font-display text-4xl md:text-5xl">What Drives Us</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {principles.map((v) => (
-              <div key={v.num} className="reveal bg-carbon border border-white/10 rounded-lg p-8 hover:border-acid/30 transition-colors duration-500">
+              <div
+                key={v.num}
+                className="reveal bg-carbon border border-white/10 rounded-lg p-8 hover:border-acid/30 transition-colors duration-500"
+              >
                 <div className="font-mono text-5xl text-white/10 mb-6">{v.num}</div>
                 <h3 className="font-display text-2xl mb-4">{v.title}</h3>
                 <p className="text-bone/60 leading-relaxed">{v.text}</p>
@@ -120,12 +137,17 @@ function AboutPage() {
       <section className="py-24 px-6 border-b border-white/10">
         <div className="mx-auto max-w-7xl">
           <div className="reveal text-center mb-16">
-            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">03 — Leadership</div>
+            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
+              03 — Leadership
+            </div>
             <h2 className="font-display text-4xl md:text-5xl">The Architects</h2>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {architects.map((p) => (
-              <div key={p.name} className="reveal bg-carbon border border-white/10 rounded-lg p-6 text-center hover:border-acid/30 transition-colors duration-500">
+              <div
+                key={p.name}
+                className="reveal bg-carbon border border-white/10 rounded-lg p-6 text-center hover:border-acid/30 transition-colors duration-500"
+              >
                 <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-steel border border-white/10 flex items-center justify-center overflow-hidden">
                   {p.img ? (
                     <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
@@ -134,7 +156,9 @@ function AboutPage() {
                   )}
                 </div>
                 <h3 className="font-display text-lg mb-1">{p.name}</h3>
-                <div className="font-mono text-xs text-acid uppercase tracking-widest mb-3">{p.role}</div>
+                <div className="font-mono text-xs text-acid uppercase tracking-widest mb-3">
+                  {p.role}
+                </div>
                 <p className="text-bone/50 text-sm leading-relaxed">{p.bio}</p>
               </div>
             ))}

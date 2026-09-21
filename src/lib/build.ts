@@ -1,4 +1,14 @@
-export const getPhases = async () => {
+export interface BuildPhase {
+  n: string;
+  t: string;
+  video?: string;
+  img?: string;
+  body: string;
+  bullets: string[];
+  partner: string;
+}
+
+export const getPhases = async (): Promise<BuildPhase[]> => {
   return [
     {
       n: "01",

@@ -4,36 +4,34 @@ import { BuildGallery } from "@/components/build-gallery";
 import videoCarSection from "../assets/video/hero-002.mp4";
 
 import { getPhases, getSpecs } from "../lib/build";
-import { useLoaderData } from "@tanstack/react-router";
-
 import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
 
 export const Route = createFileRoute("/the-build")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("the-build", {
       title: "The Build | Syndicate RS500 Restomod",
-      description: "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open.",
+      description:
+        "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open.",
       og_title: "The Build | Syndicate",
       og_description: "Engineered in the open. Every stage documented.",
     });
     const phasesPromise = getPhases();
     const specsPromise = getSpecs();
 
-    const [seo, phases, specs] = await Promise.all([
-      seoPromise,
-      phasesPromise,
-      specsPromise,
-    ]);
+    const [seo, phases, specs] = await Promise.all([seoPromise, phasesPromise, specsPromise]);
 
     return { seo, phases, specs };
   },
   head: ({ loaderData }) => ({
-    meta: mapSeoToMeta(loaderData?.seo || {
-      title: "The Build | Syndicate RS500 Restomod",
-      description: "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open.",
-      og_title: "The Build | Syndicate",
-      og_description: "Engineered in the open. Every stage documented.",
-    }),
+    meta: mapSeoToMeta(
+      loaderData?.seo || {
+        title: "The Build | Syndicate RS500 Restomod",
+        description:
+          "Four phases of the Syndicate build: acquisition & strip, design & engineering, manufacturing, finishing & validation. Engineered in the open.",
+        og_title: "The Build | Syndicate",
+        og_description: "Engineered in the open. Every stage documented.",
+      },
+    ),
   }),
   component: TheBuildPage,
 });
@@ -50,7 +48,11 @@ function TheBuildPage() {
       <Nav />
       <PageHero
         kicker="The Build Process"
-        title={<>Engineered <span className="text-acid">In The Open.</span></>}
+        title={
+          <>
+            Engineered <span className="text-acid">In The Open.</span>
+          </>
+        }
         subtitle="Every stage documented. Every decision visible. From bare shell to first ignition, syndicate members travel with the build from day one."
         video={videoCarSection}
         videoClassName="opacity-60"
@@ -76,6 +78,7 @@ function TheBuildPage() {
                   ) : p.video ? (
                     <video
                       src={p.video}
+                      preload="none"
                       autoPlay
                       loop
                       muted
@@ -112,14 +115,18 @@ function TheBuildPage() {
 
       <section className="py-32 px-6 bg-carbon border-y border-white/10">
         <div className="mx-auto max-w-5xl">
-          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">Specification</div>
+          <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">
+            Specification
+          </div>
           <h2 className="reveal font-display text-4xl md:text-5xl leading-[1] mb-16">
             Technical <span className="text-acid">Snapshot.</span>
           </h2>
           <dl className="grid md:grid-cols-2 gap-px bg-white/10 border border-white/10">
             {specs.map((s) => (
               <div key={s.l} className="reveal bg-carbon p-8 hover:bg-steel transition-colors">
-                <dt className="font-mono text-xs uppercase tracking-[0.3em] text-acid mb-3">{s.l}</dt>
+                <dt className="font-mono text-xs uppercase tracking-[0.3em] text-acid mb-3">
+                  {s.l}
+                </dt>
                 <dd className="font-display text-xl text-bone">{s.v}</dd>
               </div>
             ))}

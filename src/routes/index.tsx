@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import carbonTexture from "../assets/image/carbon-texture.jpg";
 import heroVideo from "../assets/video/hero-001.mp4";
 import videoCarSection from "../assets/video/rs500-reimagined-morphing.mp4";
+import heroPoster from "../assets/image/posters/hero-001-poster.webp";
+import carPoster from "../assets/image/posters/rs500-reimagined-morphing-poster.webp";
 import brochurePdf from "../assets/pdf/SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal } from "@/components/site";
-
 
 import {
   getLiveSyndicates,
@@ -15,17 +16,26 @@ import {
   getProcess,
   getPartners,
   getSyndicateSteps,
-  getBenefits
+  getBenefits,
 } from "../lib/syndicates";
-import { useLoaderData } from "@tanstack/react-router";
 
 import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+
+type PillarsData = Awaited<ReturnType<typeof getPillars>>;
+type LiveSyndicatesData = Awaited<ReturnType<typeof getLiveSyndicates>>;
+type RecentlyFundedData = Awaited<ReturnType<typeof getRecentlyFunded>>;
+type SyndicateStepsData = Awaited<ReturnType<typeof getSyndicateSteps>>;
+type ProcessData = Awaited<ReturnType<typeof getProcess>>;
+type EventsData = Awaited<ReturnType<typeof getEvents>>;
+type PartnersData = Awaited<ReturnType<typeof getPartners>>;
+type BenefitsData = Awaited<ReturnType<typeof getBenefits>>;
 
 export const Route = createFileRoute("/")({
   loader: async () => {
     const seoPromise = fetchSeoMetadata("home", {
       title: "Syndicate | Syndicated Restomod Build",
-      description: "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open.",
+      description:
+        "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open.",
       og_title: "Syndicate | Syndicated Restomod Build",
       og_description: "Syndicated restomod builds powered by TheCarCrowd.",
     });
@@ -48,7 +58,7 @@ export const Route = createFileRoute("/")({
       process,
       partners,
       syndicateSteps,
-      benefits
+      benefits,
     ] = await Promise.all([
       seoPromise,
       syndicatesPromise,
@@ -58,7 +68,7 @@ export const Route = createFileRoute("/")({
       processPromise,
       partnersPromise,
       syndicateStepsPromise,
-      benefitsPromise
+      benefitsPromise,
     ]);
 
     return {
@@ -70,16 +80,19 @@ export const Route = createFileRoute("/")({
       process,
       partners,
       syndicateSteps,
-      benefits
+      benefits,
     };
   },
   head: ({ loaderData }) => ({
-    meta: mapSeoToMeta(loaderData?.seo || {
-      title: "Syndicate | Syndicated Restomod Build",
-      description: "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open.",
-      og_title: "Syndicate | Syndicated Restomod Build",
-      og_description: "Syndicated restomod builds powered by TheCarCrowd.",
-    }),
+    meta: mapSeoToMeta(
+      loaderData?.seo || {
+        title: "Syndicate | Syndicated Restomod Build",
+        description:
+          "Be part of the creation of an icon. A syndicated restomod build of the Ford Sierra Cosworth RS500, engineered in the open.",
+        og_title: "Syndicate | Syndicated Restomod Build",
+        og_description: "Syndicated restomod builds powered by TheCarCrowd.",
+      },
+    ),
   }),
   component: Index,
 });
@@ -92,13 +105,16 @@ export const Route = createFileRoute("/")({
 
 // EVENTS moved to API/Loader
 
-
-
 function Hero() {
   return (
-    <section id="top" className="relative min-h-screen w-full overflow-hidden grain flex items-center justify-center py-24 md:pt-28 md:pb-20">
+    <section
+      id="top"
+      className="relative min-h-screen w-full overflow-hidden grain flex items-center justify-center py-24 md:pt-28 md:pb-20"
+    >
       <video
         src={heroVideo}
+        poster={heroPoster}
+        preload="auto"
         autoPlay
         muted
         loop
@@ -108,11 +124,16 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/40 to-ink/90" />
       <div className="absolute inset-0 noise-bg" />
       <div className="absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-acid/15 blur-[140px] float-slow" />
-      <div className="absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow" style={{ animationDelay: "2s" }} />
+      <div
+        className="absolute bottom-1/4 -right-20 h-96 w-96 rounded-full bg-acid/10 blur-[140px] float-slow"
+        style={{ animationDelay: "2s" }}
+      />
       <div className="relative z-10 w-full flex flex-col items-center justify-center text-center px-6">
         <div className="inline-flex items-center gap-2 glass-acid rounded-full px-5 py-2 mb-8 animate-in fade-in slide-in-from-bottom duration-1000">
           <span className="h-1.5 w-1.5 rounded-full bg-acid animate-pulse" />
-          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">Syndicate · Now Forming</span>
+          <span className="font-mono text-xs tracking-[0.3em] uppercase text-acid">
+            Syndicate · Now Forming
+          </span>
         </div>
         <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.9] max-w-6xl animate-in fade-in slide-in-from-bottom duration-1000 delay-100">
           <span className="text-gradient-bone">Be Part of the</span>
@@ -120,11 +141,16 @@ function Hero() {
           <span className="text-gradient-acid">Creation of an Icon</span>
         </h1>
         <p className="mt-8 text-bone/70 text-lg md:text-xl max-w-xl animate-in fade-in slide-in-from-bottom duration-1000 delay-200">
-          Syndicated Restomod Builds — engineered in the open, built to be driven and collectively owned.
+          Syndicated Restomod Builds — engineered in the open, built to be driven and collectively
+          owned.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-300">
-          <Link to="/apply" hash="waitlist-form" className="btn-acid">Join Waitlist →</Link>
-          <a href="#intro" className="btn-ghost">Explore Syndicate</a>
+          <Link to="/apply" hash="waitlist-form" className="btn-acid">
+            Join Waitlist →
+          </Link>
+          <a href="#intro" className="btn-ghost">
+            Explore Syndicate
+          </a>
         </div>
         <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl animate-in fade-in duration-1000 delay-500">
           {[
@@ -133,14 +159,18 @@ function Hero() {
             { k: "Status", v: "Forming" },
           ].map((s) => (
             <div key={s.k} className="text-center">
-              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 mb-1">{s.k}</div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 mb-1">
+                {s.k}
+              </div>
               <div className="font-display text-sm md:text-base text-acid">{s.v}</div>
             </div>
           ))}
         </div>
       </div>
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 font-mono text-[10px] text-bone/40 tracking-[0.3em] uppercase">
-        <span className="h-px w-8 bg-acid/60" />Scroll<span className="h-px w-8 bg-acid/60" />
+        <span className="h-px w-8 bg-acid/60" />
+        Scroll
+        <span className="h-px w-8 bg-acid/60" />
       </div>
     </section>
   );
@@ -159,15 +189,33 @@ function Intro() {
   return (
     <section id="intro" className="relative py-32 px-6">
       <div className="mx-auto max-w-6xl">
-        <SectionLabel kicker="● Not Just Ownership" title={<>Not Just Ownership.<br /><span className="text-bone/40">Participation.</span></>} />
+        <SectionLabel
+          kicker="● Not Just Ownership"
+          title={
+            <>
+              Not Just Ownership.
+              <br />
+              <span className="text-bone/40">Participation.</span>
+            </>
+          }
+        />
         <div className="grid md:grid-cols-2 gap-16">
           <div className="reveal space-y-6 text-bone/70 text-lg leading-relaxed">
-            <p>This is not a traditional build, its a project designed to be an inclusive and open source showcase and built to be driven and experienced.</p>
-            <p>This is a <span className="text-acid">syndicated restomod build</span> where participants join the creation and future of a unique automotive asset.</p>
+            <p>
+              This is not a traditional build, its a project designed to be an inclusive and open
+              source showcase and built to be driven and experienced.
+            </p>
+            <p>
+              This is a <span className="text-acid">syndicated restomod build</span> where
+              participants join the creation and future of a unique automotive asset.
+            </p>
           </div>
           <div className="reveal space-y-6 text-bone/60 leading-relaxed">
             <p>
-              Syndicate members will support and experience the  project through funding the development of this one-of-one car, staying engaged with every phase of the build, and ultimately gaining privileged access to the finished asset while sharing in the potential appreciation of its value over time.
+              Syndicate members will support and experience the project through funding the
+              development of this one-of-one car, staying engaged with every phase of the build, and
+              ultimately gaining privileged access to the finished asset while sharing in the
+              potential appreciation of its value over time.
             </p>
             <p className="font-display text-bone text-xl pt-4 border-t border-white/10">
               From strip-down to final drive — you are part of it.
@@ -196,9 +244,16 @@ function Stats() {
           { n: "2020", label: "FIRST CAR LAUNCHED" },
           { n: "60", label: "YEARS OF EXPERIENCE" },
         ].map((st) => (
-          <div key={st.label} className="reveal text-center py-6 px-2 bg-ink/60 hover:bg-ink transition-colors group flex flex-col justify-center items-center">
-            <div className="font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform">{st.n}</div>
-            <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-bone/50 text-center">{st.label}</div>
+          <div
+            key={st.label}
+            className="reveal text-center py-6 px-2 bg-ink/60 hover:bg-ink transition-colors group flex flex-col justify-center items-center"
+          >
+            <div className="font-display text-4xl md:text-5xl lg:text-6xl text-gradient-acid mb-2 group-hover:scale-105 transition-transform">
+              {st.n}
+            </div>
+            <div className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-bone/50 text-center">
+              {st.label}
+            </div>
           </div>
         ))}
       </div>
@@ -206,7 +261,7 @@ function Stats() {
   );
 }
 
-function Pillars({ pillars }: { pillars: any[] }) {
+function Pillars({ pillars }: { pillars: PillarsData }) {
   return (
     <section className="relative py-32 px-6 bg-carbon overflow-hidden">
       <div className="absolute inset-0 noise-bg pointer-events-none" />
@@ -214,11 +269,16 @@ function Pillars({ pillars }: { pillars: any[] }) {
         <SectionLabel kicker="Why Syndicate" title={<>Built on three pillars.</>} />
         <div className="reveal-stagger grid md:grid-cols-3 gap-8">
           {pillars.map((p) => (
-            <article key={p.n} className="group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift">
+            <article
+              key={p.n}
+              className="group rounded-2xl border border-white/10 bg-ink overflow-hidden hover-lift"
+            >
               <div className="aspect-[4/5] overflow-hidden relative">
                 {p.video ? (
                   <video
                     src={p.video}
+                    poster={p.img}
+                    preload="none"
                     autoPlay
                     muted
                     loop
@@ -226,10 +286,17 @@ function Pillars({ pillars }: { pillars: any[] }) {
                     className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
                   />
                 ) : (
-                  <img src={p.img} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                  />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-                <div className="absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-bone">PILLAR {p.n}</div>
+                <div className="absolute top-4 left-4 glass-acid rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] text-bone">
+                  PILLAR {p.n}
+                </div>
               </div>
               <div className="p-8 -mt-16 relative">
                 <h3 className="font-display text-2xl mb-4 text-gradient-bone">{p.title}</h3>
@@ -252,6 +319,8 @@ function TheCar() {
           <div className="relative overflow-hidden border border-white/10 aspect-video">
             <video
               src={videoCarSection}
+              poster={carPoster}
+              preload="metadata"
               autoPlay
               muted
               loop
@@ -259,7 +328,9 @@ function TheCar() {
               className="w-full h-full object-cover hover:scale-102 transition-transform duration-700"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6">
-              <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid">RS500 Reimagined</div>
+              <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid">
+                RS500 Reimagined
+              </div>
             </div>
           </div>
         </div>
@@ -269,7 +340,9 @@ function TheCar() {
             The Ford Sierra Cosworth RS500. <span className="text-bone/40">Reimagined.</span>
           </h2>
           <p className="text-bone/70 leading-relaxed mb-8">
-            One of the most dominant touring cars ever built and a fan-favourite road icon — reinterpreted through modern engineering, coach building, advanced materials, precision manufacturing, and performance optimisation.
+            One of the most dominant touring cars ever built and a fan-favourite road icon —
+            reinterpreted through modern engineering, coach building, advanced materials, precision
+            manufacturing, and performance optimisation.
           </p>
           <ul className="space-y-3 border-t border-white/10 pt-6">
             {[
@@ -279,7 +352,9 @@ function TheCar() {
               "Built for road and track",
             ].map((h, i) => (
               <li key={h} className="flex gap-4 items-baseline">
-                <span className="font-mono text-xs text-acid">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-xs text-acid">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <span className="text-bone/90">{h}</span>
               </li>
             ))}
@@ -290,23 +365,30 @@ function TheCar() {
   );
 }
 
-function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
+function LiveSyndicates({ syndicates }: { syndicates: LiveSyndicatesData }) {
   return (
     <section id="syndicates" className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
         <SectionLabel
           kicker="Active Opportunities"
-          title={<>Live Syndicates. <span className="text-acid">Open Allocations.</span></>}
+          title={
+            <>
+              Live Syndicates. <span className="text-acid">Open Allocations.</span>
+            </>
+          }
         />
         <div className="reveal-stagger grid md:grid-cols-3 gap-8">
           {syndicates.map((s) => (
-            <article key={s.title} className={`group border ${s.isPlaceholder ? 'border-white/5' : 'border-white/10 hover:border-acid'} bg-ink overflow-hidden transition-all duration-300 flex flex-col justify-between`}>
+            <article
+              key={s.title}
+              className={`group border ${s.isPlaceholder ? "border-white/5" : "border-white/10 hover:border-acid"} bg-ink overflow-hidden transition-all duration-300 flex flex-col justify-between`}
+            >
               <div className="aspect-[16/10] overflow-hidden relative bg-carbon">
                 <img
                   src={s.img}
                   alt={s.title}
                   loading="lazy"
-                  className={`h-full w-full transition-transform duration-700 ${s.containImg ? 'object-contain p-6' : 'object-cover'} ${s.isPlaceholder ? 'blur-md opacity-30 grayscale scale-110' : 'group-hover:scale-105'}`}
+                  className={`h-full w-full transition-transform duration-700 ${s.containImg ? "object-contain p-6" : "object-cover"} ${s.isPlaceholder ? "blur-md opacity-30 grayscale scale-110" : "group-hover:scale-105"}`}
                 />
                 {!s.isPlaceholder && (
                   <div className="absolute top-4 right-4 bg-acid text-ink px-3 py-1 rounded-full font-mono text-[10px] tracking-widest uppercase font-semibold">
@@ -325,9 +407,13 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
                 <div>
                   <h3 className="font-display text-2xl mb-2">{s.title}</h3>
                   <div className="font-mono text-sm text-acid mb-6">
-                    {(Array.isArray(s.allocation) ? s.allocation : [s.allocation]).map((line: string, i: number) => (
-                      <span key={i} className="block">{line}</span>
-                    ))}
+                    {(Array.isArray(s.allocation) ? s.allocation : [s.allocation]).map(
+                      (line: string, i: number) => (
+                        <span key={i} className="block">
+                          {line}
+                        </span>
+                      ),
+                    )}
                   </div>
                   <ul className="space-y-2 text-bone/60 text-sm border-t border-white/5 pt-4">
                     <li>{s.stats}</li>
@@ -362,34 +448,40 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
         <div className="mt-20 reveal border border-white/10 bg-ink p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-acid/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           <div className="relative z-10 lg:max-w-xl text-center lg:text-left">
-            <div className="font-mono text-[10px] text-acid tracking-widest uppercase mb-3">Learn the process</div>
+            <div className="font-mono text-[10px] text-acid tracking-widest uppercase mb-3">
+              Learn the process
+            </div>
             <h3 className="font-display text-2xl md:text-3xl mb-3">Want the full picture?</h3>
             <p className="text-bone/60 text-sm md:text-base leading-relaxed">
-              Download our Syndicate Membership Brochure to understand the benefits and experience levels associated with this build and car.
+              Download our Syndicate Membership Brochure to understand the benefits and experience
+              levels associated with this build and car.
             </p>
           </div>
           <div className="relative z-10 w-full lg:w-auto flex-shrink-0">
-            <form className="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0" onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const email = formData.get("brochure_email") as string;
-              // Store email for follow-up
-              try {
-                const leads = JSON.parse(localStorage.getItem("brochure_leads") || "[]");
-                leads.push({ email, requested_at: new Date().toISOString() });
-                localStorage.setItem("brochure_leads", JSON.stringify(leads));
-              } catch (err) {
-                console.error("Failed to save brochure lead:", err);
-              }
-              // Trigger PDF download
-              const link = document.createElement("a");
-              link.href = brochurePdf;
-              link.download = "SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-              e.currentTarget.reset();
-            }}>
+            <form
+              className="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const email = formData.get("brochure_email") as string;
+                // Store email for follow-up
+                try {
+                  const leads = JSON.parse(localStorage.getItem("brochure_leads") || "[]");
+                  leads.push({ email, requested_at: new Date().toISOString() });
+                  localStorage.setItem("brochure_leads", JSON.stringify(leads));
+                } catch (err) {
+                  console.error("Failed to save brochure lead:", err);
+                }
+                // Trigger PDF download
+                const link = document.createElement("a");
+                link.href = brochurePdf;
+                link.download = "SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                e.currentTarget.reset();
+              }}
+            >
               <input
                 type="email"
                 name="brochure_email"
@@ -411,17 +503,24 @@ function LiveSyndicates({ syndicates }: { syndicates: any[] }) {
   );
 }
 
-function RecentlyFunded({ recentlyFunded }: { recentlyFunded: any[] }) {
+function RecentlyFunded({ recentlyFunded }: { recentlyFunded: RecentlyFundedData }) {
   return (
     <section className="relative py-32 px-6">
       <div className="mx-auto max-w-7xl">
         <SectionLabel
           kicker="Track Record"
-          title={<>Recently Funded <span className="text-acid">Syndicates.</span></>}
+          title={
+            <>
+              Recently Funded <span className="text-acid">Syndicates.</span>
+            </>
+          }
         />
         <div className="reveal-stagger grid md:grid-cols-3 gap-8">
           {recentlyFunded.map((rf) => (
-            <div key={rf.title} className="group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300">
+            <div
+              key={rf.title}
+              className="group border border-white/10 bg-carbon overflow-hidden hover:border-white/20 transition-all duration-300"
+            >
               <div className="aspect-[16/10] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
                 <img
                   src={rf.img}
@@ -449,13 +548,17 @@ function RecentlyFunded({ recentlyFunded }: { recentlyFunded: any[] }) {
   );
 }
 
-function Partnership({ steps }: { steps: any[] }) {
+function Partnership({ steps }: { steps: SyndicateStepsData }) {
   return (
     <section className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
         <SectionLabel
           kicker="Partnership"
-          title={<>A New Model of <span className="text-acid">Automotive Ownership.</span></>}
+          title={
+            <>
+              A New Model of <span className="text-acid">Automotive Ownership.</span>
+            </>
+          }
         />
         <div className="grid md:grid-cols-4 gap-px bg-white/10 border border-white/10">
           {steps.map((s) => (
@@ -469,18 +572,21 @@ function Partnership({ steps }: { steps: any[] }) {
         <div className="mt-12 reveal flex items-center gap-6 justify-center text-bone/50 text-sm">
           <span className="font-mono uppercase tracking-[0.3em] text-xs">Powered by Syndi</span>
           <span className="h-px w-12 bg-white/20" />
-          <span className="font-mono uppercase tracking-[0.3em] text-xs">In collaboration with The Car Crowd</span>
+          <span className="font-mono uppercase tracking-[0.3em] text-xs">
+            In collaboration with The Car Crowd
+          </span>
         </div>
       </div>
     </section>
   );
 }
 
-function BuildProcess({ process }: { process: any[] }) {
+function BuildProcess({ process }: { process: ProcessData }) {
   return (
     <section id="build" className="relative py-32 px-6 overflow-hidden">
       <video
         src={videoCarSection}
+        preload="none"
         autoPlay
         muted
         loop
@@ -489,15 +595,27 @@ function BuildProcess({ process }: { process: any[] }) {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-ink" />
       <div className="relative mx-auto max-w-7xl">
-        <SectionLabel kicker="The Build Process" title={<>Engineered <span className="text-acid">in the open.</span></>} />
+        <SectionLabel
+          kicker="The Build Process"
+          title={
+            <>
+              Engineered <span className="text-acid">in the open.</span>
+            </>
+          }
+        />
         <div className="reveal-stagger grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {process.map((p) => (
             <div key={p.n} className="border-t-2 border-acid pt-6">
-              <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-2">Phase {p.n}</div>
+              <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-2">
+                Phase {p.n}
+              </div>
               <h3 className="font-display text-xl mb-6 leading-tight">{p.title}</h3>
               <ul className="space-y-2 text-bone/70 text-sm">
                 {p.items.map((i) => (
-                  <li key={i} className="flex gap-2"><span className="text-acid">—</span>{i}</li>
+                  <li key={i} className="flex gap-2">
+                    <span className="text-acid">—</span>
+                    {i}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -511,20 +629,29 @@ function BuildProcess({ process }: { process: any[] }) {
   );
 }
 
-function Events({ events }: { events: any[] }) {
+function Events({ events }: { events: EventsData }) {
   return (
     <section id="events" className="relative py-32 px-6">
       <div className="mx-auto max-w-7xl">
         <SectionLabel
           kicker="Syndicate Community"
-          title={<>Upcoming Events & <span className="text-acid">Experiences.</span></>}
+          title={
+            <>
+              Upcoming Events & <span className="text-acid">Experiences.</span>
+            </>
+          }
         />
         <div className="grid md:grid-cols-3 gap-8">
           {events.map((e) => (
-            <div key={e.title} className="reveal border border-white/10 bg-carbon p-8 flex flex-col justify-between hover:border-acid transition-all duration-300">
+            <div
+              key={e.title}
+              className="reveal border border-white/10 bg-carbon p-8 flex flex-col justify-between hover:border-acid transition-all duration-300"
+            >
               <div>
                 <div className="flex justify-between items-start mb-6">
-                  <span className="font-mono text-xs text-acid tracking-widest uppercase">{e.type}</span>
+                  <span className="font-mono text-xs text-acid tracking-widest uppercase">
+                    {e.type}
+                  </span>
                   <span className="bg-white/5 border border-white/10 px-2 py-0.5 rounded font-mono text-[9px] text-bone/60 tracking-wider">
                     {e.tag}
                   </span>
@@ -532,9 +659,7 @@ function Events({ events }: { events: any[] }) {
                 <h3 className="font-display text-xl mb-2">{e.title}</h3>
                 <div className="font-mono text-xs text-bone/40">{e.date}</div>
                 {e.description && (
-                  <p className="mt-4 text-sm text-bone/60 leading-relaxed">
-                    {e.description}
-                  </p>
+                  <p className="mt-4 text-sm text-bone/60 leading-relaxed">{e.description}</p>
                 )}
               </div>
               <div className="mt-8 pt-6 border-t border-white/5">
@@ -553,14 +678,21 @@ function Events({ events }: { events: any[] }) {
   );
 }
 
-function Partners({ partners }: { partners: any[] }) {
+function Partners({ partners }: { partners: PartnersData }) {
   return (
     <section id="partners" className="relative py-32 px-6 bg-carbon">
       <div className="mx-auto max-w-7xl">
-        <SectionLabel kicker="Partners" title={<>Built with <span className="text-acid">specialists.</span></>} />
+        <SectionLabel
+          kicker="Partners"
+          title={
+            <>
+              Built with <span className="text-acid">specialists.</span>
+            </>
+          }
+        />
         <p className="reveal text-bone/70 max-w-2xl mb-16 -mt-8 leading-relaxed">
-          The Syndicate RS500 is created with leading experts in coachbuilding, digital engineering, additive manufacturing,
-          and specialist car builds.
+          The Syndicate RS500 is created with leading experts in coachbuilding, digital engineering,
+          additive manufacturing, and specialist car builds.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10">
           {partners.map((p, i) => (
@@ -578,18 +710,30 @@ function Partners({ partners }: { partners: any[] }) {
   );
 }
 
-function Benefits({ benefits }: { benefits: any[] }) {
+function Benefits({ benefits }: { benefits: BenefitsData }) {
   return (
     <section className="relative py-32 px-6">
       <div className="mx-auto max-w-7xl">
-        <SectionLabel kicker="Syndicate Benefits" title={<>More than an <span className="text-acid">investment.</span></>} />
+        <SectionLabel
+          kicker="Syndicate Benefits"
+          title={
+            <>
+              More than an <span className="text-acid">investment.</span>
+            </>
+          }
+        />
         <div className="grid md:grid-cols-4 gap-6">
           {benefits.map((b) => (
-            <div key={b.title} className="reveal border border-white/10 p-8 hover:border-acid transition-colors">
+            <div
+              key={b.title}
+              className="reveal border border-white/10 p-8 hover:border-acid transition-colors"
+            >
               <div className="text-acid text-4xl mb-6 font-mono">{b.icon}</div>
               <h3 className="font-display text-xl mb-4">{b.title}</h3>
               <ul className="space-y-2 text-bone/60 text-sm">
-                {b.items.map((i) => <li key={i}>— {i}</li>)}
+                {b.items.map((i) => (
+                  <li key={i}>— {i}</li>
+                ))}
               </ul>
             </div>
           ))}
@@ -605,10 +749,17 @@ function Benefits({ benefits }: { benefits: any[] }) {
 function Value() {
   return (
     <section className="relative py-32 px-6 overflow-hidden">
-      <img src={carbonTexture} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+      <img
+        src={carbonTexture}
+        alt=""
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover opacity-30"
+      />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/40" />
       <div className="relative mx-auto max-w-6xl">
-        <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">The Value Proposition</div>
+        <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4 reveal">
+          The Value Proposition
+        </div>
         <h2 className="reveal font-display text-4xl md:text-6xl leading-[1] mb-10 max-w-3xl">
           A Different Kind of <span className="text-acid">Return.</span>
         </h2>
@@ -639,7 +790,9 @@ function Apply() {
   return (
     <section id="apply" className="relative py-40 px-6 border-t border-white/10">
       <div className="mx-auto max-w-5xl text-center">
-        <div className="reveal font-mono text-xs tracking-[0.3em] uppercase text-acid mb-6">Syndicate Availability</div>
+        <div className="reveal font-mono text-xs tracking-[0.3em] uppercase text-acid mb-6">
+          Syndicate Availability
+        </div>
         <h2 className="reveal font-display text-5xl md:text-7xl leading-[0.95] mb-10">
           Limited <span className="text-acid">Allocation.</span>
         </h2>
@@ -673,7 +826,7 @@ function Index() {
     process,
     partners,
     syndicateSteps,
-    benefits
+    benefits,
   } = Route.useLoaderData();
 
   return (

@@ -114,11 +114,42 @@ if (typeof handler?.fetch === 'function') {
         try {
           const stat = lstatSync(filePath);
           if (stat.isFile()) {
+            const mimeType = getMimeType(filePath);
+            const cacheControl = pathname.startsWith('/assets/') 
+              ? 'public, max-age=31536000, immutable' 
+              : 'public, max-age=3600';
+
+            const range = req.headers.range;
+            if (range) {
+              const parts = range.replace(/bytes=/, '').split('-');
+              const start = parseInt(parts[0], 10);
+              const end = parts[1] ? parseInt(parts[1], 10) : stat.size - 1;
+
+              if (isNaN(start) || isNaN(end) || start > end || start >= stat.size) {
+                res.writeHead(416, {
+                  'Content-Range': `bytes */${stat.size}`,
+                });
+                res.end();
+                return;
+              }
+
+              const chunkSize = end - start + 1;
+              res.writeHead(206, {
+                'Content-Range': `bytes ${start}-${end}/${stat.size}`,
+                'Accept-Ranges': 'bytes',
+                'Content-Length': chunkSize,
+                'Content-Type': mimeType,
+                'Cache-Control': cacheControl,
+              });
+              createReadStream(filePath, { start, end }).pipe(res);
+              return;
+            }
+
             res.writeHead(200, {
-              'Content-Type': getMimeType(filePath),
-              'Cache-Control': pathname.startsWith('/assets/') 
-                ? 'public, max-age=31536000, immutable' 
-                : 'public, max-age=3600',
+              'Content-Type': mimeType,
+              'Content-Length': stat.size,
+              'Accept-Ranges': 'bytes',
+              'Cache-Control': cacheControl,
             });
             createReadStream(filePath).pipe(res);
             return;
