@@ -40,6 +40,7 @@ function ApplyPage() {
   useReveal();
   const { steps } = Route.useLoaderData();
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const scrollToTarget = () => {
@@ -132,6 +133,7 @@ function ApplyPage() {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
+                setIsSubmitting(true);
                 const formData = new FormData(e.currentTarget);
                 const data = {
                   firstName: formData.get("firstName") as string,
@@ -163,6 +165,8 @@ function ApplyPage() {
                 } catch (err) {
                   console.error("Failed to submit application form:", err);
                   setSubmitted(true);
+                } finally {
+                  setIsSubmitting(false);
                 }
               }}
               className="reveal space-y-6 border border-white/10 bg-carbon p-8 md:p-12"
@@ -203,9 +207,10 @@ function ApplyPage() {
               </div>
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors"
+                disabled={isSubmitting}
+                className="w-full px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
-                Join Waitlist
+                {isSubmitting ? "Submitting..." : "Join Waitlist"}
               </button>
               <p className="text-bone/40 text-xs font-mono uppercase tracking-[0.2em] text-center">
                 Your information is handled confidentially.

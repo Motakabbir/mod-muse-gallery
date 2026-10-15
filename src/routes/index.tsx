@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import carbonTexture from "../assets/image/carbon-texture.jpg";
 import heroVideo from "../assets/video/hero-001.mp4";
@@ -7,6 +8,7 @@ import carPoster from "../assets/image/posters/rs500-reimagined-morphing-poster.
 import brochurePdf from "../assets/pdf/SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
 import { Link } from "@tanstack/react-router";
 import { Nav, Footer, useReveal } from "@/components/site";
+import { submitBrochureForm } from "../lib/brochure";
 
 import {
   getLiveSyndicates,
@@ -445,61 +447,98 @@ function LiveSyndicates({ syndicates }: { syndicates: LiveSyndicatesData }) {
         </div>
 
         {/* Briefing PDF CTA */}
-        <div className="mt-20 reveal border border-white/10 bg-ink p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-r from-acid/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-          <div className="relative z-10 lg:max-w-xl text-center lg:text-left">
-            <div className="font-mono text-[10px] text-acid tracking-widest uppercase mb-3">
-              Learn the process
-            </div>
-            <h3 className="font-display text-2xl md:text-3xl mb-3">Want the full picture?</h3>
-            <p className="text-bone/60 text-sm md:text-base leading-relaxed">
-              Download our Syndicate Membership Brochure to understand the benefits and experience
-              levels associated with this build and car.
-            </p>
-          </div>
-          <div className="relative z-10 w-full lg:w-auto flex-shrink-0">
-            <form
-              className="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const formData = new FormData(e.currentTarget);
-                const email = formData.get("brochure_email") as string;
-                // Store email for follow-up
-                try {
-                  const leads = JSON.parse(localStorage.getItem("brochure_leads") || "[]");
-                  leads.push({ email, requested_at: new Date().toISOString() });
-                  localStorage.setItem("brochure_leads", JSON.stringify(leads));
-                } catch (err) {
-                  console.error("Failed to save brochure lead:", err);
-                }
-                // Trigger PDF download
-                const link = document.createElement("a");
-                link.href = brochurePdf;
-                link.download = "SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                e.currentTarget.reset();
-              }}
-            >
-              <input
-                type="email"
-                name="brochure_email"
-                placeholder="Enter your email address"
-                required
-                className="bg-carbon border border-white/20 px-6 py-4 sm:py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full sm:min-w-[280px] transition-colors text-sm"
-              />
-              <button
-                type="submit"
-                className="bg-acid text-ink font-semibold uppercase tracking-widest text-xs px-8 py-4 sm:py-3 rounded-full hover:bg-bone transition-colors whitespace-nowrap"
-              >
-                Get Brochure PDF
-              </button>
-            </form>
-          </div>
-        </div>
+        <BrochureDownloadSection />
       </div>
     </section>
+  );
+}
+
+function BrochureDownloadSection() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const email = (formData.get("brochure_email") as string)?.trim();
+    if (!email) return;
+
+    setStatus("submitting");
+
+    // Local storage backup
+    try {
+      const leads = JSON.parse(localStorage.getItem("brochure_leads") || "[]");
+      leads.push({ email, requested_at: new Date().toISOString() });
+      localStorage.setItem("brochure_leads", JSON.stringify(leads));
+    } catch (err) {
+      console.error("Failed to save brochure lead locally:", err);
+    }
+
+    // Trigger PDF download immediately
+    const link = document.createElement("a");
+    link.href = brochurePdf;
+    link.download = "SYNDICATE_MEMBERSHIP_BROCHURE.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    try {
+      // Submit lead to Vision API backend (stores in DB, sends emails, sends to GHL CRM)
+      await submitBrochureForm({ data: { email } });
+    } catch (err) {
+      console.warn("Vision API brochure submission error:", err);
+    } finally {
+      setStatus("success");
+      form.reset();
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
+  return (
+    <div className="mt-20 reveal border border-white/10 bg-ink p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-10 relative overflow-hidden group">
+      <div className="absolute inset-0 bg-gradient-to-r from-acid/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      <div className="relative z-10 lg:max-w-xl text-center lg:text-left">
+        <div className="font-mono text-[10px] text-acid tracking-widest uppercase mb-3">
+          Learn the process
+        </div>
+        <h3 className="font-display text-2xl md:text-3xl mb-3">Want the full picture?</h3>
+        <p className="text-bone/60 text-sm md:text-base leading-relaxed">
+          Download our Syndicate Membership Brochure to understand the benefits and experience
+          levels associated with this build and car.
+        </p>
+      </div>
+      <div className="relative z-10 w-full lg:w-auto flex-shrink-0">
+        <form
+          className="flex flex-col sm:flex-row gap-3 w-full max-w-lg mx-auto lg:mx-0"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="email"
+            name="brochure_email"
+            placeholder="Enter your email address"
+            required
+            disabled={status === "submitting"}
+            className="bg-carbon border border-white/20 px-6 py-4 sm:py-3 rounded-full text-bone placeholder:text-bone/40 focus:outline-none focus:border-acid w-full sm:min-w-[280px] transition-colors text-sm disabled:opacity-60"
+          />
+          <button
+            type="submit"
+            disabled={status === "submitting"}
+            className="bg-acid text-ink font-semibold uppercase tracking-widest text-xs px-8 py-4 sm:py-3 rounded-full hover:bg-bone transition-colors whitespace-nowrap disabled:opacity-60"
+          >
+            {status === "submitting"
+              ? "Processing..."
+              : status === "success"
+                ? "PDF Downloaded!"
+                : "Get Brochure PDF"}
+          </button>
+        </form>
+        {status === "success" && (
+          <p className="text-acid font-mono text-xs mt-3 text-center lg:text-left">
+            Brochure downloaded! A copy has also been sent to your email.
+          </p>
+        )}
+      </div>
+    </div>
   );
 }
 

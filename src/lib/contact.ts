@@ -1,10 +1,9 @@
-import { createServerFn } from '@tanstack/react-start';
-import { z } from 'zod';
+import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
+import { getCmsAuthToken } from "./cms-auth";
 
 export const getDirectLines = async () => {
-  return [
-    { label: "General Inquiries", email: "hello@syndicatedrestomod.com" },
-  ];
+  return [{ label: "General Inquiries", email: "hello@syndicatedrestomod.com" }];
 };
 
 export const getWorkshopAddress = async () => {
@@ -12,59 +11,42 @@ export const getWorkshopAddress = async () => {
     "Syndicate Build Facility",
     "Unit 7, Silverstone Park",
     "Northamptonshire, NN12 8TN",
-    "United Kingdom"
+    "United Kingdom",
   ];
 };
 
-export const submitContactForm = createServerFn({ method: 'POST' })
+export const submitContactForm = createServerFn({ method: "POST" })
   .inputValidator(
     z.object({
       name: z.string(),
       email: z.string().email(),
       subject: z.string(),
       message: z.string(),
-    })
+    }),
   )
   .handler(async ({ data }) => {
     console.info("Server received contact submission:", data);
-    
+
     const nameParts = data.name.trim().split(/\s+/);
     const firstName = nameParts[0] || "";
     const lastName = nameParts.slice(1).join(" ") || "";
 
-    const apiUrl = process.env.VITE_API_URL || import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
+    const apiUrl =
+      process.env.VITE_API_URL ||
+      import.meta.env.VITE_API_URL ||
+      "http://localhost:8000/api/v1/cms";
 
     try {
-      // 1. Authenticate with CMS
-      const loginRes = await fetch(`${apiUrl}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          email: process.env.CMS_AUTH_EMAIL || "",
-          password: process.env.CMS_AUTH_PASSWORD || "",
-        }),
-      });
+      const token = await getCmsAuthToken();
 
-      let token = "";
-      if (loginRes.ok) {
-        const loginJson = await loginRes.json();
-        if ((loginJson.status || loginJson.success) && loginJson.data && loginJson.data.token) {
-          token = loginJson.data.token;
-        }
-      } else {
-        console.warn("Failed to login to Vision API:", loginRes.status, await loginRes.text());
-      }
-
-      // 2. Submit Contact Form
+      // Submit Contact Form to Vision API contacts endpoint
+      // Vision API stores to DB, sends confirmation/admin emails, and pushes to GoHighLevel CRM form mMBQhJ1CQZbDVHHlPuXm
       const res = await fetch(`${apiUrl}/contacts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
-          ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+          Accept: "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({
           first_name: firstName,
@@ -74,12 +56,15 @@ export const submitContactForm = createServerFn({ method: 'POST' })
           message: data.message,
           subject: data.subject || "Contact Form Submission",
           source: "syndicatedrestomod",
+          form_type: "contact_us",
+          form_id: "mMBQhJ1CQZbDVHHlPuXm",
           logo: "public/assets/logo.jpeg",
         }),
       });
 
       if (res.ok) {
-        console.log("Email successfully sent via Resend.");
+        const resJson = await res.json();
+        console.log("Vision API processed contact message:", resJson);
         return { success: true, offline: false };
       } else {
         const errText = await res.text();
@@ -88,6 +73,6 @@ export const submitContactForm = createServerFn({ method: 'POST' })
     } catch (err: any) {
       console.warn("Failed to send contact via Vision API:", err.message);
     }
-    
+
     return { success: true, offline: true };
   });

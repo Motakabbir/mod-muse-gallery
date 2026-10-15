@@ -49,9 +49,11 @@ function ContactPage() {
   const { directLines, workshopAddress } = Route.useLoaderData();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const res = await submitContactForm({ data: form });
       if (res.success) {
@@ -75,6 +77,8 @@ function ContactPage() {
       setSent(true);
       setTimeout(() => setSent(false), 4000);
       setForm({ name: "", email: "", subject: "", message: "" });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -216,9 +220,10 @@ function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.2em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.2em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
             )}
