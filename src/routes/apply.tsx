@@ -4,8 +4,9 @@ import { Nav, Footer, useReveal, PageHero } from "@/components/site";
 import heroVideo from "../assets/video/hero-001.mp4";
 import heroPoster from "../assets/image/posters/hero-001-poster.webp";
 
-import { getApplySteps, submitApplyForm } from "../lib/apply";
+import { getApplySteps } from "../lib/apply";
 import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+import LeadConnectorWaitlistForm from "../components/LeadConnectorWaitlistForm";
 
 export const Route = createFileRoute("/apply")({
   loader: async () => {
@@ -114,139 +115,11 @@ function ApplyPage() {
             allocation preference.
           </p>
 
-          {submitted ? (
-            <div className="reveal border border-acid bg-acid/5 p-10 text-center">
-              <div className="font-display text-3xl text-acid mb-4">
-                Waitlist Registration Received
-              </div>
-              <p className="text-bone/70 mb-8">
-                Thank you. A member of the syndicate team will be in touch within 48 hours.
-              </p>
-              <Link
-                to="/"
-                className="inline-block px-8 py-3 border border-white/20 text-bone uppercase tracking-widest text-xs rounded-full hover:border-acid hover:text-acid transition-all"
-              >
-                Back to Home
-              </Link>
-            </div>
-          ) : (
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                setIsSubmitting(true);
-                const formData = new FormData(e.currentTarget);
-                const data = {
-                  firstName: formData.get("firstName") as string,
-                  lastName: formData.get("lastName") as string,
-                  email: formData.get("email") as string,
-                  phone: (formData.get("phone") as string) || "",
-                  country: (formData.get("country") as string) || "",
-                  allocation: formData.get("allocation") as string,
-                  message: (formData.get("message") as string) || "",
-                };
-
-                try {
-                  const res = await submitApplyForm({ data });
-                  if (res.success) {
-                    setSubmitted(true);
-
-                    if (res.offline) {
-                      try {
-                        const submissions = JSON.parse(
-                          localStorage.getItem("apply_submissions") || "[]",
-                        );
-                        submissions.push({ ...data, submitted_at: new Date().toISOString() });
-                        localStorage.setItem("apply_submissions", JSON.stringify(submissions));
-                      } catch (storageErr) {
-                        console.error("Failed to save application to localStorage:", storageErr);
-                      }
-                    }
-                  }
-                } catch (err) {
-                  console.error("Failed to submit application form:", err);
-                  setSubmitted(true);
-                } finally {
-                  setIsSubmitting(false);
-                }
-              }}
-              className="reveal space-y-6 border border-white/10 bg-carbon p-8 md:p-12"
-            >
-              <div className="grid md:grid-cols-2 gap-6">
-                <Field label="First Name" name="firstName" required />
-                <Field label="Last Name" name="lastName" required />
-              </div>
-              <Field label="Email" name="email" type="email" required />
-              <Field label="Phone" name="phone" type="tel" />
-              <Field label="Country of Residence" name="country" />
-              <div>
-                <label className="block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2">
-                  Allocation Interest
-                </label>
-                <select
-                  required
-                  name="allocation"
-                  className="w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors"
-                >
-                  <option value="">Select an option…</option>
-                  <option>Single allocation</option>
-                  <option>Multiple allocations</option>
-                  <option>Lead syndicate position</option>
-                  <option>Just exploring</option>
-                </select>
-              </div>
-              <div>
-                <label className="block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2">
-                  Tell Us About You
-                </label>
-                <textarea
-                  name="message"
-                  rows={5}
-                  className="w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors resize-none"
-                  placeholder="Your background, what drew you to Syndicate, any questions…"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-acid text-ink font-semibold uppercase tracking-widest text-sm rounded-full hover:bg-bone transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-              >
-                {isSubmitting ? "Submitting..." : "Join Waitlist"}
-              </button>
-              <p className="text-bone/40 text-xs font-mono uppercase tracking-[0.2em] text-center">
-                Your information is handled confidentially.
-              </p>
-            </form>
-          )}
+          <LeadConnectorWaitlistForm />
         </div>
       </section>
 
       <Footer />
     </main>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  required,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  required?: boolean;
-}) {
-  return (
-    <div>
-      <label className="block font-mono text-xs tracking-[0.3em] uppercase text-bone/60 mb-2">
-        {label} {required && <span className="text-acid">*</span>}
-      </label>
-      <input
-        type={type}
-        name={name}
-        required={required}
-        className="w-full bg-ink border border-white/10 px-4 py-3 text-bone focus:border-acid outline-none transition-colors"
-      />
-    </div>
   );
 }

@@ -20,8 +20,9 @@ export const submitContactForm = createServerFn({ method: "POST" })
     z.object({
       name: z.string(),
       email: z.string().email(),
-      subject: z.string(),
-      message: z.string(),
+      phone: z.string().optional(),
+      subject: z.string().optional(),
+      message: z.string().optional(),
     }),
   )
   .handler(async ({ data }) => {
@@ -52,8 +53,8 @@ export const submitContactForm = createServerFn({ method: "POST" })
           first_name: firstName,
           last_name: lastName,
           email: data.email,
-          phone: "",
-          message: data.message,
+          phone: data.phone || "",
+          message: data.message || "",
           subject: data.subject || "Contact Form Submission",
           source: "syndicatedrestomod",
           form_type: "contact_us",

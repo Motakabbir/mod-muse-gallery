@@ -1,0 +1,173 @@
+/* ==========================================================================
+   GOHIGHLEVEL (LEADCONNECTOR) FORM BUILDER CUSTOM CSS
+   
+   HOW TO USE:
+   1. Open GoHighLevel (LeadConnector).
+   2. Navigate to: Sites → Forms → Builder → Select your form ("Contact form").
+   3. In the right panel, go to: Styles → Custom CSS.
+   4. Paste this ENTIRE stylesheet into the Custom CSS box and click Save.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* 1. Reset root containers & remove the white glowing box-shadow */
+html,
+body,
+#_builder-form,
+.form-builder--wrap,
+.hl_form-builder--main,
+.hl_wrapper--inner {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+#_builder-form {
+  padding: 0 !important;
+  margin: 0 auto !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-shadow: none !important;
+}
+
+/* 2. Field Labels (Mono style matching Design 1) */
+#_builder-form label,
+.form-builder--item label,
+.form-field-container label {
+  color: rgba(245, 243, 238, 0.5) !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+
+/* 3. Input fields, dropdowns, textareas (Dark Steel styling) */
+#_builder-form input[type="text"],
+#_builder-form input[type="email"],
+#_builder-form input[type="tel"],
+#_builder-form input[type="number"],
+#_builder-form select,
+#_builder-form textarea,
+#_builder-form .form-control {
+  width: 100% !important;
+  background-color: #1f1f1f !important;
+  color: #f5f3ee !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 15px !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* 4. Placeholder styling */
+#_builder-form input::placeholder,
+#_builder-form textarea::placeholder {
+  color: rgba(245, 243, 238, 0.3) !important;
+  opacity: 1 !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
+
+/* 5. Input Focus State (Acid Yellow border) */
+#_builder-form input:focus,
+#_builder-form select:focus,
+#_builder-form textarea:focus,
+#_builder-form .form-control:focus {
+  outline: none !important;
+  border-color: rgba(250, 204, 21, 0.6) !important;
+  box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.4) !important;
+}
+
+/* 6. Phone input & country dropdown styling */
+.iti__country-list {
+  background-color: #1f1f1f !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #f5f3ee !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6) !important;
+}
+
+.iti__country.iti__highlight {
+  background-color: rgba(250, 204, 21, 0.15) !important;
+  color: #facc15 !important;
+}
+
+.iti__selected-flag {
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  background-color: transparent !important;
+}
+
+/* 7. Field Spacing */
+.form-field-wrapper,
+.form-builder--item {
+  margin-bottom: 20px !important;
+}
+
+/* 8. Validation Error Messages */
+.error-message,
+.text-danger,
+[class*="error-message"],
+.alert-danger,
+.form-builder--item .error {
+  color: #f87171 !important;
+  font-size: 12px !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  margin-top: 6px !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* 9. Submit Button (Pill with Acid Yellow border matching Design 1) */
+#_builder-form button[type="submit"],
+#_builder-form .button-element,
+.form-builder--btn-submit button {
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 14px 28px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 2px solid #facc15 !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 10px !important;
+}
+
+/* 10. Submit Button Text */
+#_builder-form button[type="submit"] *,
+#_builder-form .button-element *,
+.form-builder--btn-submit button * {
+  color: #facc15 !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  transition: color 0.3s ease !important;
+}
+
+/* 11. Submit Button Hover State */
+#_builder-form button[type="submit"]:hover,
+#_builder-form .button-element:hover,
+.form-builder--btn-submit button:hover {
+  background: #facc15 !important;
+  background-color: #facc15 !important;
+}
+
+#_builder-form button[type="submit"]:hover *,
+#_builder-form .button-element:hover *,
+.form-builder--btn-submit button:hover * {
+  color: #0a0a0a !important;
+}

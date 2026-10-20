@@ -4,9 +4,10 @@ import { useState } from "react";
 import heroVideo from "../assets/video/hero-002.mp4";
 import hero002Poster from "../assets/image/posters/hero-002-poster.webp";
 
-import { getDirectLines, getWorkshopAddress, submitContactForm } from "../lib/contact";
-import { useLoaderData } from "@tanstack/react-router";
+import { getDirectLines, getWorkshopAddress } from "../lib/contact";
 import { fetchSeoMetadata, mapSeoToMeta } from "../lib/utils";
+import LeadConnectorForm from "../components/LeadConnectorForm";
+import LeadConnectorBooking from "../components/LeadConnectorBooking";
 
 export const Route = createFileRoute("/contact")({
   loader: async () => {
@@ -47,40 +48,6 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   useReveal();
   const { directLines, workshopAddress } = Route.useLoaderData();
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-  const [sent, setSent] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const res = await submitContactForm({ data: form });
-      if (res.success) {
-        setSent(true);
-        setTimeout(() => setSent(false), 4000);
-
-        if (res.offline) {
-          try {
-            const submissions = JSON.parse(localStorage.getItem("contact_submissions") || "[]");
-            submissions.push({ ...form, submitted_at: new Date().toISOString() });
-            localStorage.setItem("contact_submissions", JSON.stringify(submissions));
-          } catch (storageErr) {
-            console.error("Failed to save to localStorage:", storageErr);
-          }
-        }
-        setForm({ name: "", email: "", subject: "", message: "" });
-      }
-    } catch (err) {
-      console.error("Failed to submit contact form:", err);
-      // Fallback
-      setSent(true);
-      setTimeout(() => setSent(false), 4000);
-      setForm({ name: "", email: "", subject: "", message: "" });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-ink text-bone">
@@ -138,98 +105,12 @@ function ContactPage() {
               </p>
             </div>
           </div>
-
-          {/* Form */}
-          <div className="reveal bg-carbon border border-white/10 rounded-lg p-8 md:p-10">
-            <div className="font-mono text-xs tracking-[0.3em] uppercase text-acid mb-4">
-              02 — Send A Message
-            </div>
-            <h3 className="font-display text-2xl mb-8">Write To Us</h3>
-            {sent ? (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-acid/10 border border-acid/30 flex items-center justify-center">
-                  <svg
-                    className="w-8 h-8 text-acid"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h4 className="font-display text-2xl mb-2">Message Sent</h4>
-                <p className="text-bone/60">We will be in touch within 48 hours.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
-                    Name
-                  </label>
-                  <input
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone placeholder:text-bone/30 focus:outline-none focus:border-acid/50 transition-colors"
-                    placeholder="Your full name"
-                  />
-                </div>
-                <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
-                    Email
-                  </label>
-                  <input
-                    required
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone placeholder:text-bone/30 focus:outline-none focus:border-acid/50 transition-colors"
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
-                    Subject
-                  </label>
-                  <select
-                    required
-                    value={form.subject}
-                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                    className="w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone focus:outline-none focus:border-acid/50 transition-colors"
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="syndicate">Syndicate Application Question</option>
-                    <option value="press">Press & Media</option>
-                    <option value="partnership">Partnership</option>
-                    <option value="general">General Inquiry</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block font-mono text-xs text-bone/50 uppercase tracking-widest mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    required
-                    rows={5}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full bg-steel border border-white/10 rounded-lg px-4 py-3 text-bone placeholder:text-bone/30 focus:outline-none focus:border-acid/50 transition-colors resize-none"
-                    placeholder="Tell us what is on your mind..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 border-2 border-acid text-acid text-sm uppercase tracking-[0.2em] font-semibold rounded-full hover:bg-acid hover:text-ink transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </button>
-              </form>
-            )}
-          </div>
+          <LeadConnectorForm />
         </div>
       </section>
+
+      {/* Booking Section */}
+      <LeadConnectorBooking />
 
       {/* FAQ Preview */}
       <section className="py-24 px-6 grain relative">

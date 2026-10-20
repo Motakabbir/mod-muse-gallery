@@ -60,8 +60,11 @@ export function Nav() {
               </a>
             );
           })}
-          <Link to="/apply" hash="waitlist-form" className="btn-acid !py-2.5 !px-5 !text-[11px]">
-            Join Waitlist <span aria-hidden>→</span>
+          <Link to="https://app.syndicatedrestomod.com/login" className="btn-acid !py-2.5 !px-5 !text-[11px]">
+            Login <span aria-hidden>→</span>
+          </Link>
+          <Link to="https://app.syndicatedrestomod.com/register" className="btn-acid !py-2.5 !px-5 !text-[11px]">
+            Register <span aria-hidden>→</span>
           </Link>
         </nav>
         <button
