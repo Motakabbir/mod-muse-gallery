@@ -5,12 +5,18 @@
  */
 export async function getCmsAuthToken(): Promise<string> {
   const apiUrl =
-    process.env.VITE_API_URL ||
-    import.meta.env.VITE_API_URL ||
-    "http://localhost:8000/api/v1/cms";
+    (typeof process !== "undefined" && process.env?.VITE_API_URL) ||
+    (typeof import.meta !== "undefined" && (import.meta as any)?.env?.VITE_API_URL) ||
+    "https://app-api.syndicatedrestomod.com/api/v1/cms";
 
-  const email = process.env.CMS_AUTH_EMAIL;
-  const password = process.env.CMS_AUTH_PASSWORD;
+  const email =
+    (typeof process !== "undefined" && process.env?.CMS_AUTH_EMAIL) ||
+    (typeof import.meta !== "undefined" && (import.meta as any)?.env?.CMS_AUTH_EMAIL) ||
+    "admin@example.com";
+  const password =
+    (typeof process !== "undefined" && process.env?.CMS_AUTH_PASSWORD) ||
+    (typeof import.meta !== "undefined" && (import.meta as any)?.env?.CMS_AUTH_PASSWORD) ||
+    "admin123@321";
 
   if (!email || !password) {
     return "";

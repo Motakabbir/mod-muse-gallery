@@ -41,9 +41,9 @@ Message:
 ${data.message || "N/A"}`;
 
     const apiUrl =
-      process.env.VITE_API_URL ||
-      import.meta.env.VITE_API_URL ||
-      "http://localhost:8000/api/v1/cms";
+      (typeof process !== "undefined" && process.env?.VITE_API_URL) ||
+      (typeof import.meta !== "undefined" && (import.meta as any)?.env?.VITE_API_URL) ||
+      "https://app-api.syndicatedrestomod.com/api/v1/cms";
 
     try {
       const token = await getCmsAuthToken();
@@ -76,7 +76,12 @@ ${data.message || "N/A"}`;
       if (res.ok) {
         const resJson = await res.json();
         console.log("Vision API processed application:", resJson);
-        return { success: true, offline: false };
+        return {
+          success: true,
+          offline: false,
+          ghl_response: resJson?.data?.ghl_response || null,
+          data: resJson?.data,
+        };
       } else {
         const errText = await res.text();
         console.warn("Vision API returned non-OK status:", res.status, errText);

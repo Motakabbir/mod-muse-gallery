@@ -21,7 +21,10 @@ export interface SeoMetadata {
 }
 
 export async function fetchSeoMetadata(slug: string, fallback: SeoMetadata): Promise<SeoMetadata> {
-  const apiUrl = (typeof process !== "undefined" && process.env.VITE_API_URL) || import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1/cms";
+  const apiUrl =
+    (typeof process !== "undefined" && process.env?.VITE_API_URL) ||
+    (typeof import.meta !== "undefined" && (import.meta as any)?.env?.VITE_API_URL) ||
+    "https://app-api.syndicatedrestomod.com/api/v1/cms";
   try {
     const res = await fetch(`${apiUrl}/seos/slug/${slug}`, {
       method: "GET",
