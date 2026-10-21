@@ -18,6 +18,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }} # Usually 22
           script: |
+            set -e
+
             # Navigate to your project directory on the server
             cd ${{ secrets.SERVER_TARGET_DIR }}
             
@@ -29,6 +31,6 @@ jobs:
             
             # Build the React/Vite project
             npm run build
-            
-            # (Optional) If you are using a process manager like PM2 to serve the app, restart it here:
-            # pm2 restart your-app-name
+
+            # Reload the SSR server so it references the assets from this build.
+            pm2 startOrReload ecosystem.config.cjs --update-env
