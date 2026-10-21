@@ -37,11 +37,18 @@ export const submitContactForm = createServerFn({ method: "POST" })
       (typeof import.meta !== "undefined" && (import.meta as any)?.env?.VITE_API_URL) ||
       "https://app-api.syndicatedrestomod.com/api/v1/cms";
 
+    const webhookUrl =
+      (typeof process !== "undefined" && process.env?.LEADCONNECTOR_CONTACT_WEBHOOK_URL) ||
+      "https://services.leadconnectorhq.com/hooks/PyZUPXw40Pe4lKnp8nfa/webhook-trigger/86fc6989-e868-4ed1-8371-ffc216148ffb";
+
+    let visionSuccess = false;
+    let ghlResponse: any = null;
+
     try {
       const token = await getCmsAuthToken();
 
       // Submit Contact Form to Vision API contacts endpoint
-      // Vision API stores to DB, sends confirmation/admin emails, and pushes to GoHighLevel CRM form mMBQhJ1CQZbDVHHlPuXm
+      // Vision API stores to DB, sends confirmation/admin emails, and pushes to GoHighLevel CRM via webhook-trigger/86fc6989-e868-4ed1-8371-ffc216148ffb
       const res = await fetch(`${apiUrl}/contacts`, {
         method: "POST",
         headers: {
@@ -66,10 +73,12 @@ export const submitContactForm = createServerFn({ method: "POST" })
       if (res.ok) {
         const resJson = await res.json();
         console.log("Vision API processed contact message:", resJson);
+        visionSuccess = true;
+        ghlResponse = resJson?.data?.ghl_response || null;
         return {
           success: true,
           offline: false,
-          ghl_response: resJson?.data?.ghl_response || null,
+          ghl_response: ghlResponse,
           data: resJson?.data,
         };
       } else {
@@ -78,6 +87,44 @@ export const submitContactForm = createServerFn({ method: "POST" })
       }
     } catch (err: any) {
       console.warn("Failed to send contact via Vision API:", err.message);
+    }
+
+    // Direct fallback to GoHighLevel webhook if Vision API was not reachable or failed
+    if (!visionSuccess && webhookUrl) {
+      try {
+        const ghlRes = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            first_name: firstName,
+            last_name: lastName,
+            full_name: data.name.trim(),
+            email: data.email,
+            phone: data.phone || "",
+            message: data.message || "",
+            subject: data.subject || "Contact Form Submission",
+            form_type: "contact_us",
+            form_id: "mMBQhJ1CQZbDVHHlPuXm",
+            formId: "mMBQhJ1CQZbDVHHlPuXm",
+            location_id: "PyZUPXw40Pe4lKnp8nfa",
+            source: "syndicatedrestomod",
+            submitted_at: new Date().toISOString(),
+            tags: ["syndicate-contact", "website-lead"],
+          }),
+        });
+
+        if (ghlRes.ok) {
+          const ghlJson = await ghlRes.json().catch(() => null);
+          console.log("Direct GoHighLevel contact webhook delivered:", ghlJson);
+          return {
+            success: true,
+            offline: true,
+            ghl_response: ghlJson,
+          };
+        }
+      } catch (ghlErr: any) {
+        console.warn("Direct GoHighLevel contact webhook fallback failed:", ghlErr.message);
+      }
     }
 
     return { success: true, offline: true };
